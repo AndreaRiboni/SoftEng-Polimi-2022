@@ -1,19 +1,41 @@
 package it.polimi.ingsw.model.entities.cards;
 
-public class CharacterDeck {
-    public static final int NOF_CHAR_CARDS = -1;
-    private CharacterCard[] cards;
+import it.polimi.ingsw.model.places.GameBoard;
 
-    public CharacterDeck(){
-        cards = new CharacterCard[NOF_CHAR_CARDS];
+import java.util.Arrays;
+
+public class CharacterDeck {
+    private final CharacterCard[] cards;
+
+    public CharacterDeck() {
+        cards = new CharacterCard[GameBoard.NOF_CHAR_CARDS];
         //inizializzare
     }
 
-    public CharacterCard getCard(){
+    public CharacterCard getCard() {
         throw new UnsupportedOperationException();
     }
 
-    public CharacterCard[] getActiveCards(){
-        throw new UnsupportedOperationException();
+    /**
+     * it returns the only active (or inactive) cards in the deck.
+     * Specify "true" for the active cards, "false" otherwise.
+     * A card is considered active whenever a player possesses it.
+     *
+     * @return (in)active cards
+     */
+    public CharacterCard[] getCardsByStatus(boolean status) {
+        return (CharacterCard[]) Arrays.stream(cards).filter(card -> card.isOnBoard()==status).toArray();
     }
+
+    public CharacterCard[] draw3Cards() {
+        CharacterCard[] picked = new CharacterCard[3];
+        for (int i = 0; i < 3; i++){
+            CharacterCard[] inactive_cards = getCardsByStatus(false);
+            int index = (int)(Math.random() * inactive_cards.length);
+            picked[i] = inactive_cards[index];
+        }
+        return picked;
+    }
+
+
 }

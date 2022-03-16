@@ -5,14 +5,18 @@ import it.polimi.ingsw.model.utils.Color;
 
 public class Professor {
     private final Color color;
-    private final School school;
+    private Player player;
 
     public Professor(Color color){
         this.color = color;
-        school = null;
+        player = null;
     }
 
     public Color getColor(){
         return color;
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
     }
 }

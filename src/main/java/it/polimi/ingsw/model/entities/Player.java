@@ -11,6 +11,7 @@ public class Player {
     private Wizard wizard;
     private final School school;
     private Player team_mate;
+    private CharacterCard[] cards;
 
     public Player(Color color, MotherNature mothernature){
         turn_value = 0;

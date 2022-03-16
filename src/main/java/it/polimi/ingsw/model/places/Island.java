@@ -7,17 +7,15 @@ import it.polimi.ingsw.model.utils.Color;
 public class Island implements StudentPlace, TowerPlace {
     private boolean locked;
     private Island next; //da usare quando si ha un gruppo di isole. Se l'isola è singola, viene settato a null
+    private Color tower;
 
     public Island(){
         locked = false;
         next = null;
+        tower = null;
     }
 
-    public int calculateInfluence(){
-        throw new UnsupportedOperationException();
-    }
-
-    public boolean setTower(Tower tower){
+    public Color calculateInfluence(){
         throw new UnsupportedOperationException();
     }
 
@@ -30,6 +28,10 @@ public class Island implements StudentPlace, TowerPlace {
     }
 
     public void merge(Island island){
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean hasTower(){
         throw new UnsupportedOperationException();
     }
 
