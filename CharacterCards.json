@@ -1,0 +1,98 @@
+{
+  "character_cards": [
+    {
+      "id": 0,
+      "type": "student",
+      "nof_student": 4,
+      "available_students": 1,
+      "exchange_students": 0,
+      "drop_student": 0
+    },
+    {
+      "id": 1,
+      "type": "prof"
+    },
+    {
+      "id": 2,
+      "type": "mothernature",
+      "extra_steps": 0,
+      "extra_points": 0,
+      "avoid_color": false,
+      "avoid_towers": false,
+      "pick_island" : true
+    },
+    {
+      "id": 3,
+      "type": "mothernature",
+      "extra_steps": 2,
+      "extra_points": 0,
+      "avoid_towers": false,
+      "avoid_color": false,
+      "pick_island" : false
+    },
+    {
+      "id": 4,
+      "type": "lock",
+      "nof_locks" : 4
+    },
+    {
+      "id": 5,
+      "type": "mothernature",
+      "extra_steps": 0,
+      "extra_points": 0,
+      "avoid_towers": true,
+      "avoid_color": false,
+      "pick_island" : false
+    },
+    {
+      "id": 6,
+      "type": "student",
+      "nof_student": 6,
+      "available_students": 3,
+      "exchange_students": 3,
+      "drop_student": 0
+    },
+    {
+      "id": 7,
+      "type": "mothernature",
+      "extra_steps": 0,
+      "extra_points": 2,
+      "avoid_towers": false,
+      "avoid_color": false,
+      "pick_island" : false
+    },
+    {
+      "id": 8,
+      "type": "mothernature",
+      "extra_steps": 0,
+      "extra_points": 0,
+      "avoid_towers": false,
+      "avoid_color": true,
+      "pick_island" : false
+    },
+    {
+      "id": 9,
+      "type": "student",
+      "nof_student": 0,
+      "available_students": 0,
+      "exchange_students": 2,
+      "drop_student": 0
+    },
+    {
+      "id": 10,
+      "type": "student",
+      "nof_student": 4,
+      "available_students": 1,
+      "exchange_students": 0,
+      "drop_student": 0
+    },
+    {
+      "id": 11,
+      "type": "student",
+      "nof_student": 0,
+      "available_students": 0,
+      "exchange_students": 0,
+      "drop_student": 3
+    }
+  ]
+}
