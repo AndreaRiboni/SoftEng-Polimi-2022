@@ -1,8 +1,29 @@
 package it.polimi.ingsw.model.utils;
 
-public class EriantysException extends Exception {
+import it.polimi.ingsw.model.entities.cards.AssistCard;
+import it.polimi.ingsw.model.places.GameBoard;
+
+public class EriantysException extends UnsupportedOperationException {
     public EriantysException(String msg){
         super(msg);
+    }
+
+    public static void throwUnsupportedOperation(){
+        throw new UnsupportedOperationException("Operation not supported");
+    }
+
+    public static void throwInvalidIslandIndex(int island_index) throws EriantysException {
+        if (island_index < 0 || island_index >= GameBoard.NOF_ISLAND)
+            throw new EriantysException(
+                    String.format(EriantysException.INVALID_ISLAND_INDEX, island_index)
+            );
+    }
+
+    public static void throwInvalidSteps(int steps) throws EriantysException {
+        if(steps <= 0 || steps > AssistCard.MAX_STEPS)
+            throw new EriantysException(
+                    String.format(EriantysException.INVALID_STEPS, steps)
+            );
     }
 
     /**

@@ -35,6 +35,10 @@ public class Island implements StudentPlace, TowerPlace {
         throw new UnsupportedOperationException();
     }
 
+    public boolean isLocked(){
+        throw new UnsupportedOperationException();
+    }
+
     @Override
     public void addStudent(Student student) {
         throw new UnsupportedOperationException();

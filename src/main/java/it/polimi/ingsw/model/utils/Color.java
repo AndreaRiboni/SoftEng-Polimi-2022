@@ -8,5 +8,9 @@ public enum Color {
     PINK,
     BLACK,
     GREY,
-    WHITE
+    WHITE;
+
+    public static Color getRandomColor(){
+        throw new UnsupportedOperationException();
+    }
 }

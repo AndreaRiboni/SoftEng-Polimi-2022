@@ -2,18 +2,19 @@ package it.polimi.ingsw.model.entities.cards;
 
 import it.polimi.ingsw.model.places.GameBoard;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.Arrays;
 
 public class CharacterDeck {
+    private final GameBoard gameboard;
     private final CharacterCard[] cards;
 
-    public CharacterDeck() {
+    public CharacterDeck(GameBoard gameboard) {
+        this.gameboard = gameboard;
         cards = new CharacterCard[GameBoard.NOF_CHAR_CARDS];
         //inizializzare
-    }
-
-    public CharacterCard getCard() {
-        throw new UnsupportedOperationException();
     }
 
     /**
@@ -35,6 +36,10 @@ public class CharacterDeck {
             picked[i] = inactive_cards[index];
         }
         return picked;
+    }
+
+    private void createDeck(){
+        //load from json
     }
 
 
