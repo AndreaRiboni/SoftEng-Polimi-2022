@@ -12,8 +12,8 @@ public abstract class CardBehavior {
     protected int island_index, available_students;
     protected final int id, exchange_students, drop_students, nof_students, extra_steps, extra_points, nof_locks;
     protected final boolean avoid_color, pick_island, avoid_towers;
-    private final Student[] students;
-    private final LockCard[] lock_cards;
+    protected final Student[] students;
+    protected final LockCard[] lock_cards;
 
     public CardBehavior(GameBoard gameboard, int id, int exchange_students, int drop_students, int nof_students, int extra_steps, int extra_points, int nof_locks, boolean pick_island, boolean avoid_towers, boolean avoid_color) {
         this.gameboard = gameboard;
@@ -40,7 +40,7 @@ public abstract class CardBehavior {
     public abstract int getAvailableLocks();
     public abstract boolean getStudent(Color color);
     public abstract boolean getLock();
-    public abstract void addStudent(Student student);
+    public abstract boolean exchangeStudent(Student student1, Student student2);
     public abstract void preTurnEffect();
     public abstract void postTurnEffect();
 

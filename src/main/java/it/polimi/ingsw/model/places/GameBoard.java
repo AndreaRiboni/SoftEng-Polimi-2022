@@ -49,4 +49,8 @@ public class GameBoard {
         EriantysException.throwInvalidIslandIndex(island_index);
         getIsland(island_index).addTower(tower);
     }
+
+    public void playTurn(){
+
+    }
 }

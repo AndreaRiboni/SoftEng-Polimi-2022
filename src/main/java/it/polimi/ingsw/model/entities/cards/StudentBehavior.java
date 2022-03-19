@@ -1,31 +1,37 @@
 package it.polimi.ingsw.model.entities.cards;
 
 import it.polimi.ingsw.model.entities.Student;
+import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
-import it.polimi.ingsw.model.utils.EriantysException;
+
+import java.util.Arrays;
 
 public class StudentBehavior extends CardBehavior {
 
     public StudentBehavior(GameBoard gameboard, int id, int nof_student, int available_students, int exchange_students, int drop_student) {
         super(gameboard, id, exchange_students, drop_student, nof_student, 0, 0, 0, false, false, false);
+
     }
 
     @Override
     public Student[] getAvailableStudents() {
-        EriantysException.throwUnsupportedOperation();
-        return null;
+        return students;
     }
 
     @Override
     public int getAvailableLocks() {
-        EriantysException.throwUnsupportedOperation();
-        return 0;
+        return lock_cards.length;
     }
 
     @Override
     public boolean getStudent(Color color) {
-        EriantysException.throwUnsupportedOperation();
+        for(int i = 0; i < nof_students; i++){
+            if(students[i].getColor().equals(color)){
+                students[i] = Bag.getRandomStudent();
+                return true;
+            }
+        }
         return false;
     }
 
@@ -35,13 +41,19 @@ public class StudentBehavior extends CardBehavior {
     }
 
     @Override
-    public void addStudent(Student student) {
-        EriantysException.throwUnsupportedOperation();
+    public boolean exchangeStudent(Student student1, Student student2) {
+        for(int i = 0; i < nof_students; i++){
+            if(students[i].getColor().equals(color)){
+                students[i] = student2;
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void preTurnEffect() {
-        //todo
+        //no special effect is needed
     }
 
     @Override

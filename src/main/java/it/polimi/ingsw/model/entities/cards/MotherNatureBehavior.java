@@ -35,8 +35,9 @@ public class MotherNatureBehavior extends CardBehavior{
     }
 
     @Override
-    public void addStudent(Student student) {
+    public boolean exchangeStudent(Student student1, Student student2) {
         EriantysException.throwUnsupportedOperation();
+        return false;
     }
 
     @Override
