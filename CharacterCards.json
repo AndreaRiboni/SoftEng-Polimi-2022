@@ -17,18 +17,18 @@
       "type": "mothernature",
       "extra_steps": 0,
       "extra_points": 0,
-      "avoid_color": false,
-      "avoid_towers": false,
-      "pick_island" : true
+      "avoid_color": 0,
+      "avoid_towers": 0,
+      "pick_island" : 1
     },
     {
       "id": 3,
       "type": "mothernature",
       "extra_steps": 2,
       "extra_points": 0,
-      "avoid_towers": false,
-      "avoid_color": false,
-      "pick_island" : false
+      "avoid_towers": 0,
+      "avoid_color": 0,
+      "pick_island" : 0
     },
     {
       "id": 4,
@@ -40,9 +40,9 @@
       "type": "mothernature",
       "extra_steps": 0,
       "extra_points": 0,
-      "avoid_towers": true,
-      "avoid_color": false,
-      "pick_island" : false
+      "avoid_towers": 1,
+      "avoid_color": 0,
+      "pick_island" : 0
     },
     {
       "id": 6,
@@ -57,18 +57,18 @@
       "type": "mothernature",
       "extra_steps": 0,
       "extra_points": 2,
-      "avoid_towers": false,
-      "avoid_color": false,
-      "pick_island" : false
+      "avoid_towers": 0,
+      "avoid_color": 0,
+      "pick_island" : 0
     },
     {
       "id": 8,
       "type": "mothernature",
       "extra_steps": 0,
       "extra_points": 0,
-      "avoid_towers": false,
-      "avoid_color": true,
-      "pick_island" : false
+      "avoid_towers": 0,
+      "avoid_color": 1,
+      "pick_island" : 0
     },
     {
       "id": 9,
