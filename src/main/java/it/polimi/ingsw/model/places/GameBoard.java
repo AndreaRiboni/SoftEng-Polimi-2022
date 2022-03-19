@@ -18,6 +18,11 @@ public class GameBoard {
     public static final int NOF_CHAR_CARDS = 12;
 
     public GameBoard(int nof_players) {
+        if(nof_players <= 0 || nof_players > 4){
+            throw new EriantysException(
+                    String.format(EriantysException.INVALID_NOF_PLAYER, nof_players)
+            );
+        }
         clouds = new Cloud[NOF_CLOUD];
         players = new Player[nof_players];
         islands = new Island[NOF_ISLAND];

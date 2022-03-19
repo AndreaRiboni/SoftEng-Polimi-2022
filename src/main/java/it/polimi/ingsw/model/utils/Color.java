@@ -11,6 +11,6 @@ public enum Color {
     WHITE;
 
     public static Color getRandomColor(){
-        throw new UnsupportedOperationException();
+        return YELLOW;
     }
 }
