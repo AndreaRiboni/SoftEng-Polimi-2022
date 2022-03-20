@@ -29,7 +29,7 @@ public class School {
         for(;;){
             if(Student.color.equals(col)) count++;
         }
-        if(count == 3){
+        if(count == 3 && flag == 0){
             Player.addCoins(1);
             flag = 1;
         }
