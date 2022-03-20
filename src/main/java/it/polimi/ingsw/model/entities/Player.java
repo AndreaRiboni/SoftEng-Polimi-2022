@@ -7,7 +7,8 @@ import it.polimi.ingsw.model.places.*;
 import it.polimi.ingsw.model.utils.Color;
 
 public class Player {
-    private int turn_value, coins;
+    private static int coins;
+    private int turn_value;
     private final Color color;
     private final MotherNature mothernature;
     private Wizard wizard;
@@ -23,7 +24,7 @@ public class Player {
         this.mothernature = mothernature;
         school = new School();
         wizard = new Wizard();
-        team_mate = new Player(color, mothernature);
+        team_mate = new Player(this.color, mothernature);
     }
 
     public void moveStudentInDiningHall(Student student){
@@ -56,7 +57,7 @@ public class Player {
         }
     }
 
-    public void addCoins(int qty){
+    public static void addCoins(int qty){
         coins = coins + qty;
     }
 
@@ -65,7 +66,7 @@ public class Player {
     }
 
     public void removeCoins(int qty){
-        if(coins - qty>=0){
+        if(coins - qty >= 0){
             coins = coins - qty;
         }
         else{
