@@ -6,13 +6,17 @@ import it.polimi.ingsw.model.entities.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cloud implements StudentPlace {
+public class Cloud extends StudentPlace {
     public static final boolean SIDE_2_4 = true, SIDE_3 = false;
+    public static final int MAX_STUDENTS_2_4 = 4, MAX_STUDENTS_3 = 3;
+    private final int MAX_STUDENTS;
     private final boolean side;
     private final List<Student> students;
 
     private Cloud(boolean side){
+        super(0);
         this.side = side;
+        MAX_STUDENTS = side == SIDE_2_4 ? MAX_STUDENTS_2_4 : MAX_STUDENTS_3;
         students = new ArrayList<>();
     }
 
@@ -29,12 +33,16 @@ public class Cloud implements StudentPlace {
     }
 
     @Override
-    public void addStudent(Student student) {
-        students.add(student);
+    public boolean addStudent(Student student) {
+        if(students.size() < MAX_STUDENTS){
+            students.add(student);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean getStudent(Color color) {
+    public boolean popStudent(Color color) {
         int to_remove = -1;
         for(int i = 0; i < students.size() && to_remove==-1; i++){
             if(students.get(i).getColor().equals(color)){

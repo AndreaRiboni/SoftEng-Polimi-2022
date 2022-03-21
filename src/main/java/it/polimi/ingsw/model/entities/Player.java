@@ -2,154 +2,107 @@ package it.polimi.ingsw.model.entities;
 
 import it.polimi.ingsw.model.entities.cards.AssistCard;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
-import it.polimi.ingsw.model.entities.cards.CharacterDeck;
-import it.polimi.ingsw.model.places.*;
+import it.polimi.ingsw.model.places.Bag;
+import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.places.Places;
+import it.polimi.ingsw.model.places.School;
 import it.polimi.ingsw.model.utils.Color;
 
 public class Player {
-    private static int coins;
-    private int turn_value;
+    private int turn_value, coins;
     private final Color color;
     private final MotherNature mothernature;
     private Wizard wizard;
     private final School school;
     private Player team_mate;
     private CharacterCard[] cards;
+    private GameBoard gameboard;
 
-
-    public Player(Color color, MotherNature mothernature){
+    public Player(GameBoard gameboard, Color color, MotherNature mothernature, boolean three_players){
         turn_value = 0;
         coins = 0;
+        this.gameboard = gameboard;
         this.color = color;
         this.mothernature = mothernature;
-        school = new School();
+        //istanziare school, wizard, team_mate
+        school = new School(color, three_players);
         wizard = new Wizard();
-        team_mate = new Player(this.color, mothernature);
+        team_mate = null;
     }
 
-    public void moveStudentInDiningHall(Student student){
-        try{
-            Entrance.remove(student);
-            DiningHall.addStudent(student);
-        }
-        catch (UnsupportedOperationException e) {
-            throw new UnsupportedOperationException();
-        }
+    public void playAssistCard(int card_index){
+        AssistCard card = wizard.getCards()[card_index];
+        //TODO
+    }
+
+    public void moveMotherNature(int steps){
+        mothernature.stepForward(steps);
+        mothernature.calculateInfluence();
+    }
+
+    public boolean moveStudentInDiningHall(Student student){
+        return school.addStudent(student, Places.DINING_HALL);
     }
 
     public boolean moveStudentInIsland(int island_index, Student student){
-        try{
-            Entrance.remove(student);
-            return Island[island_index].addStudent(student);
-        }
-        catch (UnsupportedOperationException e) {
-            throw new UnsupportedOperationException();
-        }
+        return gameboard.getIsland(island_index).addStudent(student);
     }
 
-    public void moveStudentInEntrance(Student student){
-        try{
-            Entrance.addStudent(student);
-            Cloud.removeStudent(student);
+    public boolean moveStudentInEntrance(int nof_students){
+        for(int i = 0; i < nof_students; i++){
+            if(!school.addStudent(Bag.getRandomStudent(), Places.ENTRANCE)) return false;
         }
-        catch (UnsupportedOperationException e) {
-            throw new UnsupportedOperationException();
-        }
+        return true;
     }
 
-    public static void addCoins(int qty){
-        coins = coins + qty;
+    public boolean moveTowerInIsland(int island_index){
+        if(school.removeTower()){
+            Tower tower = new Tower(color);
+            return gameboard.getIsland(island_index).addTower(tower);
+        }
+        return false;
+    }
+
+    public int getNumberOfProf(){
+        return school.getNumberOfProfs();
+    }
+
+    public int getNumberOfPlacedTowers(){
+        return school.getNumberOfTowers();
+    }
+
+    public void addCoins(int qty){
+        if(qty > 0)
+            coins += qty;
+    }
+
+    public boolean removeCoins(int qty){
+        if(coins - qty >= 0){
+            coins -= qty;
+            return true;
+        }
+        return false;
     }
 
     public int getCoins(){
         return coins;
     }
 
-    public void removeCoins(int qty){
-        if(coins - qty >= 0){
-            coins = coins - qty;
-        }
-        else{
-            throw new UnsupportedOperationException();
-        }
+    public void useCharacterCard(CharacterCard card){
+        card.performAction(); //TODO
     }
 
-    public Student drawStudent(){
-        if(Bag.size() > 0){
-            Bag.shuffle();
-            Student StudentDrawn = Bag.get(Bag.size()-1);
-            Bag.removeStudent(Bag.size() - 1);
-            return StudentDrawn;
-        }
-        else{
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    public CharacterCard drawCharacterCard(){
-        if(CharacterDeck.size() > 0){
-            CharacterDeck.shuffle();
-            CharacterCard CharacterDrawn = CharacterDeck.get(CharacterDeck.size()-1);
-            CharacterDeck.remove(CharacterDeck.size() - 1);
-            return CharacterDrawn;
-        }
-        else{
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    public boolean moveTowerInIsland(int island_index, Tower tower){
-        try{
-            School.TowerRemove(tower);
-            return Island[island_index].addTower();
-        }
-        catch (UnsupportedOperationException e) {
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    public void moveMotherNature(){
-        int steps_chose;
-        System.out.println("How many steps?");
-        steps_chose = Input.readInt();
-        if(steps_chose < 1 || steps_chose > AssistCard.MAX_STEPS){
-            throw new UnsupportedOperationException();
-        } else{
-            MotherNature.stepForward(steps_chose);
-        }
-    }
-
-    public int getNumberOfPlacedTowers(Color color){
-        int total = 0;
-        for(int i = 0; i < 12; i++){
-            if(Island[i].getTower(color)==true) {
-                total = total + 1;
-            }
-        }
-        return total;
+    public void drawStudent(){
+        Bag.getRandomStudent(); //why
     }
 
     public void cooperate(Player player){
-        throw new UnsupportedOperationException();
-    }
-
-    public void playAssistCard(){
-        int AssistCardChose;
-        System.out.println("Choose a card");
-        AssistCardChose = input.readint();
-        if(AssistCardChose >0 && AssistCardChose < Wizard.size()){
-            //prendila dall'array deck in posizione AssistCardChose
-            Wizard.remove(AssistCardChose);
-        }else {
-            throw new UnsupportedOperationException();
-        }
+        team_mate = player;
     }
 
     public void setWizard(Wizard wizard){
         this.wizard = wizard;
     }
 
-    public boolean useCharacterCard(CharacterCard card){
-        throw new UnsupportedOperationException();
-    }
+
 }

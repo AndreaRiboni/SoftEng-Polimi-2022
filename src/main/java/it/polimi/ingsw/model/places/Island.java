@@ -4,12 +4,13 @@ import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 
-public class Island implements StudentPlace, TowerPlace {
+public class Island extends StudentPlace implements TowerPlace {
     private boolean locked;
     private Island next; //da usare quando si ha un gruppo di isole. Se l'isola è singola, viene settato a null
     private Color tower;
 
     public Island(){
+        super(0);
         locked = false;
         next = null;
         tower = null;
@@ -40,12 +41,12 @@ public class Island implements StudentPlace, TowerPlace {
     }
 
     @Override
-    public void addStudent(Student student) {
+    public boolean addStudent(Student student) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean getStudent(Color color) {
+    public boolean popStudent(Color color) {
         throw new UnsupportedOperationException();
     }
 

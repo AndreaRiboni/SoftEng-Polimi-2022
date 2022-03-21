@@ -4,70 +4,43 @@ import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TowerHall implements StudentPlace, TowerPlace {
-    private static List<Tower> towers;
-    private final List<Student> students;
+public class TowerHall implements TowerPlace {
+    private List<Tower> towers;
+    private final Color color;
+    private final boolean three_players;
+    private static final int MAX_TOWERS_2_4 = 8, MAX_TOWERS_3 = 6;
+    private final int MAX_TOWERS;
 
-    public TowerHall(List<Student> students) {
-        this.students = students;
-    }
-
-    @Override
-    public boolean getTower(Color color) {
-        int to_remove = -1;
-        for(int i = 0; i < towers.size() && to_remove==-1; i++){
-            if(towers.get(i).getColor().equals(color)){
-                to_remove = i;
-            }
-        }
-        towers.remove(to_remove);
-        return true;
-    }
-
-
-
-    @Override
-    public boolean getStudent(Color color) {
-        int to_remove = -1;
-        for(int i = 0; i < students.size() && to_remove==-1; i++){
-            if(students.get(i).getColor().equals(color)){
-                to_remove = i;
-            }
-        }
-        students.remove(to_remove);
-        return true;
-    }
-
-    @Override
-    public void addStudent(Student student) {
-        students.add(student);
+    public TowerHall(Color color, boolean three_players){
+        this.color = color;
+        this.three_players = three_players;
+        MAX_TOWERS = three_players ? MAX_TOWERS_3 : MAX_TOWERS_2_4;
+        towers = new ArrayList<>();
     }
 
     @Override
     public boolean addTower(Tower tower) {
-        if(towers.size() < 8){
-            return towers.add(tower);
+        if(towers.size() < MAX_TOWERS && tower.getColor().equals(color)){
+            towers.add(tower);
+            return true;
         }
-        else{
-            throw new UnsupportedOperationException();
-        }
-    }
-
-    public static void remove(Tower tower){
-        if(towers.size() > 0){
-            towers.remove(tower);
-        }
-        else{throw new UnsupportedOperationException();}
+        return false;
     }
 
     @Override
-    public Student getRandomStudent() {
-        int index = (int)(Math.random() * students.size());
-        Student student = students.get(index);
-        students.remove(student);
-        return student;
+    public boolean getTower(Color color) {
+        if (color.equals(this.color) && towers.size() > 0) {
+            Tower tower = towers.get(0);
+            towers.remove(0);
+            return true;
+        }
+        return false;
     }
 
+    public int getNumberOfTowers(){
+        return towers.size();
+    }
 }

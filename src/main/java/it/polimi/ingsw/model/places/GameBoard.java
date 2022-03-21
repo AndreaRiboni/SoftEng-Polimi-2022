@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.MotherNature;
 import it.polimi.ingsw.model.entities.Player;
+import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
 import it.polimi.ingsw.model.utils.EriantysException;
@@ -48,6 +49,10 @@ public class GameBoard {
     public void setTowerOn(int island_index, Tower tower) throws EriantysException {
         EriantysException.throwInvalidIslandIndex(island_index);
         getIsland(island_index).addTower(tower);
+    }
+
+    public void putOnCloud(Student student, int cloud_index){
+        clouds[cloud_index].addStudent(student);
     }
 
     public void playTurn(){

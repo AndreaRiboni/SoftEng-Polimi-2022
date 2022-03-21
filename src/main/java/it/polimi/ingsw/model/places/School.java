@@ -1,46 +1,98 @@
 package it.polimi.ingsw.model.places;
 
-import it.polimi.ingsw.model.entities.Player;
+import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.entities.Student;
-import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class School {
-    private Entrance entrance;
-    private DiningHall dining_hall;
-    private TowerHall tower_hall;
+    private final Entrance entrance;
+    private final DiningHall dining_hall;
+    private final TowerHall tower_hall;
+    private final Color tower_color;
+    private final List<Professor> professors;
 
+    public School(Color color, boolean three_players){
+        tower_color = color;
+        entrance = new Entrance();
+        dining_hall = new DiningHall();
+        tower_hall = new TowerHall(tower_color, three_players);
+        professors = new ArrayList<>();
+    }
 
-    public void addStudent(Student student, StudentPlace place){
-        if(place.equals("Dining")) {DiningHall.addStudent(student);}
-        else if(place.equals("Entrance")){Entrance.addStudent(student);}
-        else {
-            throw new UnsupportedOperationException();
+    public boolean addStudent(Student student, Places place){
+        switch(place) {
+            case DINING_HALL: //TODO: coins
+                return dining_hall.addStudent(student);
+            case ENTRANCE:
+                return entrance.addStudent(student);
+            default:
+                return false;
         }
     }
 
-    public static void TowerRemove(Tower tower){
-        TowerHall.remove(tower);
+    public int getNumberOfStudents(Color col, Places place){
+        StudentPlace sp = null;
+        switch(place) {
+        case DINING_HALL:
+            sp = dining_hall;
+            break;
+        case ENTRANCE:
+            sp = entrance;
+            break;
+        default:
+            return -1;
+        }
+        return (int)sp.getStudents().stream().filter(stud->stud.getColor().equals(col)).count();
     }
 
-    public int getNumberOfStudents(Color col){
-        int count = 0;
-        int flag = 0;
-        for(;;){
-            if(Student.color.equals(col)) count++;
+    public boolean removeStudent(Color color, Places place){
+        StudentPlace sp = null;
+        switch(place) {
+            case DINING_HALL:
+                sp = dining_hall;
+                break;
+            case ENTRANCE:
+                sp = entrance;
+                break;
+            default:
+                return false;
         }
-        if(count == 3 && flag == 0){
-            Player.addCoins(1);
-            flag = 1;
+        for(int i = 0; i < sp.getStudents().size(); i++){
+            if(sp.getStudents().get(i).getColor().equals(color)){
+                sp.getStudents().remove(i);
+                return true;
+            }
         }
-        if(count == 6 && flag==1){
-            Player.addCoins(1);
-            flag = 2;
-        }
-        if(count == 9 && flag == 2){
-            Player.addCoins(1);
-            flag = 3;
-        }
-        return count;
+        return false;
     }
+
+    public boolean removeTower(){
+        return tower_hall.getTower(tower_color);
+    }
+
+    public boolean addProfessor(Professor prof){
+        return professors.add(prof); //TODO: checks
+    }
+
+    public boolean popProfessor(Color col){
+        for(int i = 0; i < professors.size(); i++){
+            if(professors.get(i).getColor().equals(col)){
+                professors.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getNumberOfProfs(){
+        return professors.size();
+    }
+
+    public int getNumberOfTowers(){
+        return tower_hall.getNumberOfTowers();
+    }
+
 }

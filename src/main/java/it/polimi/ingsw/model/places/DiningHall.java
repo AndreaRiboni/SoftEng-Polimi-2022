@@ -3,34 +3,19 @@ package it.polimi.ingsw.model.places;
 import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.utils.Color;
 
-import java.util.List;
+public class DiningHall extends StudentPlace {
+    public static final int STUDENTS_PER_COLOR = 10;
 
-public class DiningHall implements StudentPlace {
-    private static List<Student> DiningStudents;
-
-    @Override
-    public static void addStudent(Student student) {
-        Color col = Student.getColor(student);
-        if(DiningHall.getStudent(col) < 10){
-            DiningStudents.add(student);
-        }
-        else{throw new UnsupportedOperationException();}
-    }
-
-   @Override
-    public static int getStudent(Color color) {
-        int count = 0;
-        for(;;){
-            if(Student.color == col) count++;
-        }
-        return count;
+    public DiningHall(){
+        super(0);
     }
 
     @Override
-    public Student getRandomStudent() {
-        int index = (int)(Math.random() * DiningStudents.size());
-        Student student = DiningStudents.get(index);
-        DiningStudents.remove(student);
-        return student;
+    public boolean addStudent(Student student) {
+        if(students.stream().filter(stud -> stud.getColor().equals(student.getColor())).count() < STUDENTS_PER_COLOR) {
+            students.add(student);
+            return true;
+        }
+        return false;
     }
 }
