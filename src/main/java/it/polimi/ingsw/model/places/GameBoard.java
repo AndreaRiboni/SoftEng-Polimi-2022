@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model.places;
 
-import it.polimi.ingsw.model.entities.MotherNature;
-import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.Student;
-import it.polimi.ingsw.model.entities.Tower;
+import it.polimi.ingsw.model.entities.*;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
 import it.polimi.ingsw.model.utils.EriantysException;
 
@@ -18,6 +15,7 @@ public class GameBoard {
     public static final int NOF_CLOUD = 2;
     public static final int NOF_STUDENT_COLOR = 5;
     public static final int NOF_CHAR_CARDS = 12;
+    public static final int NOF_PROFS = 5;
 
     public GameBoard(int nof_players) {
         if(nof_players <= 0 || nof_players > 4){
@@ -28,6 +26,7 @@ public class GameBoard {
         clouds = new Cloud[NOF_CLOUD];
         players = new Player[nof_players];
         islands = new Island[NOF_ISLAND];
+        professors = new Professor[NOF_PROFS];
         character_cards = null;
         mother_nature = null;
     }

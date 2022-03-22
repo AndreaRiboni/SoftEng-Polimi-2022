@@ -37,6 +37,7 @@ public class LockBehavior extends CardBehavior{
     @Override
     public boolean exchangeStudent(Student student1, Student student2) {
         EriantysException.throwUnsupportedOperation();
+        return false;
     }
 
     @Override

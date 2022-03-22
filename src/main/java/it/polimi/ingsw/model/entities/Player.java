@@ -17,7 +17,7 @@ public class Player {
     private Player team_mate;
     private CharacterCard[] cards;
     private GameBoard gameboard;
-    private int final ID;
+    private final int ID;
 
     public Player(GameBoard gameboard, int ID, Color color, MotherNature mothernature, boolean three_players){
         turn_value = 0;

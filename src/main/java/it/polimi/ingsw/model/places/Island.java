@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.places;
 
+import it.polimi.ingsw.model.entities.Player;
+import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
@@ -43,7 +45,7 @@ public class Island extends StudentPlace implements TowerPlace {
             //considero il colore c del prof
             Color c = p.getColor();
             //aggiungo al giocatore g tanti punti quanto è il numero di studenti di colore c su quest'isola
-            player_points[p.getID()]+=getStudentsByColor(c);
+            player_points[g.getID()]+=getStudentsByColor(c);
         }
         //ritorno il colore della torre del giocatore con maggior punti
         int index = 0;
@@ -104,6 +106,6 @@ public class Island extends StudentPlace implements TowerPlace {
     }
 
     private int getStudentsByColor(Color color){
-        return students.stream().filter(s->s.getColor().equals(color)).count();
+        return (int) students.stream().filter(s->s.getColor().equals(color)).count();
     }
 }
