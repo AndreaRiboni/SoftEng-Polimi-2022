@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.utils.EriantysException;
 public class GameBoard {
     private final Cloud[] clouds;
     private final Player[] players;
+    private final Professor[] professors;
     private final Island[] islands;
     private CharacterDeck character_cards;
     private MotherNature mother_nature;
@@ -57,5 +58,13 @@ public class GameBoard {
 
     public void playTurn(){
 
+    }
+
+    public Player[] getPlayers(){
+        return players;
+    }
+
+    public Professor[] getProfessors(){
+        return professors;
     }
 }

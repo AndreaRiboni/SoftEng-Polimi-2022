@@ -17,13 +17,15 @@ public class Player {
     private Player team_mate;
     private CharacterCard[] cards;
     private GameBoard gameboard;
+    private int final ID;
 
-    public Player(GameBoard gameboard, Color color, MotherNature mothernature, boolean three_players){
+    public Player(GameBoard gameboard, int ID, Color color, MotherNature mothernature, boolean three_players){
         turn_value = 0;
         coins = 0;
         this.gameboard = gameboard;
         this.color = color;
         this.mothernature = mothernature;
+        this.ID = ID;
         //istanziare school, wizard, team_mate
         school = new School(color, three_players);
         wizard = new Wizard();
@@ -104,5 +106,11 @@ public class Player {
         this.wizard = wizard;
     }
 
+    public Color getColor() {
+        return color;
+    }
 
+    public int getID(){
+        return ID;
+    }
 }
