@@ -4,7 +4,9 @@ import it.polimi.ingsw.model.entities.*;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
 import it.polimi.ingsw.model.utils.EriantysException;
 
-public class GameBoard {
+import java.util.Observable;
+
+public class GameBoard extends Observable {
     private final Cloud[] clouds;
     private final Player[] players;
     private final Professor[] professors;
