@@ -13,6 +13,7 @@ public class Player {
     private final Color color;
     private final MotherNature mothernature;
     private Wizard wizard;
+    private int played_assistcard;
     private final School school;
     private Player team_mate;
     private CharacterCard[] cards;
@@ -29,12 +30,20 @@ public class Player {
         //istanziare school, wizard, team_mate
         school = new School(color, three_players);
         wizard = new Wizard();
+        played_assistcard = -1;
         team_mate = null;
     }
 
+    public int getTurnValue() {
+        return turn_value;
+    }
+
+    public void setTurnValue(int turn_value) {
+        this.turn_value = turn_value;
+    }
+
     public void playAssistCard(int card_index){
-        AssistCard card = wizard.getCards()[card_index];
-        //TODO
+        played_assistcard = card_index;
     }
 
     public void moveMotherNature(int steps){
@@ -112,5 +121,10 @@ public class Player {
 
     public int getID(){
         return ID;
+    }
+
+    public AssistCard getLastPlayedCard(){
+        if(played_assistcard == -1) return null;
+        return wizard.getCards()[played_assistcard];
     }
 }

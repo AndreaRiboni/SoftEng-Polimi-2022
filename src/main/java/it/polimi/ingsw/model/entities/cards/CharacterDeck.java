@@ -94,7 +94,7 @@ public class CharacterDeck {
                         price,
                         behavior
                 );
-                System.out.println(id + " " + behavior + "\n");
+                //System.out.println(id + " " + behavior + "\n");
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();

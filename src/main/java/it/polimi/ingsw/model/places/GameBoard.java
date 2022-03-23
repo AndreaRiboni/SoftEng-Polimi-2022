@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.*;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
+import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
 import java.util.Observable;
@@ -38,6 +39,17 @@ public class GameBoard extends Observable {
         mother_nature = new MotherNature(this, island_index);
     }
 
+    public void initalizePlayers(){
+        if(players.length == 3){
+            //TODO
+        } else {
+            for(int i = 0; i < players.length; i++){
+                Color col = i < players.length / 2 ? Color.WHITE : Color.BLACK;
+                players[i] = new Player(this, i, col, mother_nature, false);
+            }
+        }
+    }
+
     public void initializeCharacterDeck(){
         character_cards = new CharacterDeck(this);
     }
@@ -53,12 +65,12 @@ public class GameBoard extends Observable {
         getIsland(island_index).addTower(tower);
     }
 
-    public void putOnCloud(Student student, int cloud_index){
-        clouds[cloud_index].addStudent(student);
+    public Student drawFromBag(){
+        return Bag.getRandomStudent();
     }
 
-    public void playTurn(){
-
+    public void putOnCloud(Student student, int cloud_index){
+        clouds[cloud_index].addStudent(student);
     }
 
     public Player[] getPlayers(){
