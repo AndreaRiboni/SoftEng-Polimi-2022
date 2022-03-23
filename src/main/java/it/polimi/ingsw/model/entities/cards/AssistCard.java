@@ -1,8 +1,7 @@
 package it.polimi.ingsw.model.entities.cards;
 
 public class AssistCard {
-    private int value, steps;
-    private CardBehavior behavior;
+    private final int value, steps;
     public static final int MAX_STEPS = 5;
 
     public AssistCard(int value, int steps){
@@ -10,11 +9,11 @@ public class AssistCard {
         this.steps = steps;
     }
 
-    public void setBehavior(CardBehavior behavior){
-        this.behavior = behavior;
+    public int getValue() {
+        return value;
     }
 
-    public static void createCard(){
-
+    public int getSteps() {
+        return steps;
     }
 }
