@@ -55,6 +55,10 @@ public class Player {
         return school.addStudent(student, Places.DINING_HALL);
     }
 
+    public boolean moveStudentInDiningHall(Student student, Player player){
+        return school.addStudent(student, Places.DINING_HALL);
+    }
+
     public boolean moveStudentInIsland(int island_index, Student student){
         return gameboard.getIsland(island_index).addStudent(student);
     }
