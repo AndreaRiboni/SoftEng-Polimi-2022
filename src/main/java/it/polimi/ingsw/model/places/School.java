@@ -95,4 +95,7 @@ public class School {
         return tower_hall.getNumberOfTowers();
     }
 
+    public List<Student> getEntranceStudents(){
+        return entrance.getStudents();
+    }
 }

@@ -1,34 +1,41 @@
 package it.polimi.ingsw.model.utils;
 
+import it.polimi.ingsw.model.places.Places;
+import it.polimi.ingsw.model.places.StudentPlace;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Action {
     private GamePhase game_phase;
-    private int nof_players, mothernature_increment, player_order, assist_card_index, player_id;
+    private final Map<GameParameter, Object> param;
 
     public Action(){
+        param = new HashMap<>();
     }
 
     public int getPlayerID() {
-        return player_id;
+        return (int)param.get(GameParameter.PLAYER_ID);
     }
 
     public void setPlayer_id(int player_id) {
-        this.player_id = player_id;
+        param.put(GameParameter.PLAYER_ID, player_id);
     }
 
     public int getAssistCardIndex() {
-        return assist_card_index;
+        return (int)param.get(GameParameter.ASSISTCARD_INDEX);
     }
 
     public void setAssistCardIndex(int assist_card_index) {
-        this.assist_card_index = assist_card_index;
+        param.put(GameParameter.ASSISTCARD_INDEX, assist_card_index);
     }
 
     public int getMothernatureIncrement() {
-        return mothernature_increment;
+        return (int)param.get(GameParameter.MOTHERNATURE_INCREMENT);
     }
 
     public void setMothernatureIncrement(int mothernature_increment) {
-        this.mothernature_increment = mothernature_increment;
+        param.put(GameParameter.MOTHERNATURE_INCREMENT, mothernature_increment);
     }
 
     public void setGamePhase(GamePhase game_phase) {
@@ -40,18 +47,43 @@ public class Action {
     }
 
     public int getNOfPlayers() {
-        return nof_players;
+        return (int)param.get(GameParameter.NOF_PLAYERS);
     }
 
     public void setNOfPlayers(int nof_players) {
-        this.nof_players = nof_players;
+        param.put(GameParameter.NOF_PLAYERS, nof_players);
     }
 
     public int getPlayerOrder(){
-        return player_order;
+        return (int)param.get(GameParameter.PLAYER_ORDER);
     }
 
     public void setPlayerOrder(int player_order){
-        this.player_order = player_order;
+        param.put(GameParameter.PLAYER_ORDER, player_order);
     }
+
+    public void setThreeStudents(int[] index){
+        param.put(GameParameter.THREE_STUDENTS_INDEXES, index);
+    }
+
+    public int[] getThreeStudents(){
+        return (int[])param.get(GameParameter.THREE_STUDENTS_INDEXES);
+    }
+
+    public Places[] getThreeStudentPlaces(){
+        return (Places[])param.get(GameParameter.THREE_STUDENTS_PLACES);
+    }
+
+    public void setThreeStudentPlaces(Places[] sp){
+        param.put(GameParameter.THREE_STUDENTS_PLACES, sp);
+    }
+
+    public void setIslandIndexes(int[] index){
+        param.put(GameParameter.ISLAND_INDEXES, index);
+    }
+
+    public int[] getIslandIndexes(){
+        return (int[])param.get(GameParameter.ISLAND_INDEXES);
+    }
+
 }

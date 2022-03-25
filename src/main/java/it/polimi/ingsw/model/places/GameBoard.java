@@ -80,4 +80,8 @@ public class GameBoard extends Observable {
     public Professor[] getProfessors(){
         return professors;
     }
+
+    public int getNofPlayers(){
+        return players.length;
+    }
 }

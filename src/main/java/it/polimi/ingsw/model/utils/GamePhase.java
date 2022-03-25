@@ -4,5 +4,5 @@ public enum GamePhase {
     START,
     PUT_ON_CLOUDS,
     DRAW_ASSIST_CARD,
-    NEW_TURN
+    MOVE_3_STUDENTS
 }

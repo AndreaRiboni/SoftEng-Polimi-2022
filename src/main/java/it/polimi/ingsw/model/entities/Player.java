@@ -8,6 +8,8 @@ import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.places.School;
 import it.polimi.ingsw.model.utils.Color;
 
+import java.util.List;
+
 public class Player {
     private int turn_value, coins;
     private final Color color;
@@ -130,5 +132,18 @@ public class Player {
     public AssistCard getLastPlayedCard(){
         if(played_assistcard == -1) return null;
         return wizard.getCards()[played_assistcard];
+    }
+
+    public List<Student> getEntranceStudents(){
+        return school.getEntranceStudents();
+    }
+
+    public void removeEntranceStudent(int index){
+        school.getEntranceStudents().remove(index);
+        //TODO: checks
+    }
+
+    public void removeEntranceStudent(Student student){
+        school.getEntranceStudents().remove(student);
     }
 }

@@ -32,5 +32,7 @@ public class EriantysException extends UnsupportedOperationException {
     public static final String
             INVALID_ISLAND_INDEX = "Invalid island index: %d",
             INVALID_STEPS = "Invalid number of steps: %d",
-            INVALID_NOF_PLAYER = "Invalid number of players: %d";
+            INVALID_NOF_PLAYER = "Invalid number of players: %d",
+            INVALID_GAMEFLOW = "Invalid flow",
+            INVALID_PLACE = "Invalid place";
 }
