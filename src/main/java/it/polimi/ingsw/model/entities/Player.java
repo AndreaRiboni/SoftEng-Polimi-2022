@@ -17,7 +17,6 @@ public class Player {
     private int played_assistcard;
     private final School school;
     private Player team_mate;
-    private CharacterCard[] cards;
     private GameBoard gameboard;
     private final int ID;
 
@@ -138,5 +137,10 @@ public class Player {
 
     public void removeEntranceStudent(Student student){
         school.getEntranceStudents().remove(student);
+    }
+
+    public void addEntranceStudent(Student... stud){
+        for(Student s : stud)
+            school.getEntranceStudents().add(s);
     }
 }

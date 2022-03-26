@@ -4,6 +4,7 @@ import it.polimi.ingsw.global.Observable;
 import it.polimi.ingsw.global.Observer;
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Student;
+import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.places.*;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
@@ -12,15 +13,21 @@ import it.polimi.ingsw.view.View;
 
 import java.util.List;
 
+/*
+TODO: we should avoid accessing directly to the data structures (i.e. the students list)
+--> create the related interface functions to improve the code quality
+ */
 public class Controller implements Observer {
     private GameBoard model;
     private final View view;
     private final FlowChecker flow;
+    private final CharacterCardController cc_controller;
 
     public Controller(GameBoard model, View view) {
         this.model = model;
         this.view = view;
         flow = new FlowChecker();
+        cc_controller = new CharacterCardController(model);
     }
 
     @Override
@@ -28,6 +35,7 @@ public class Controller implements Observer {
         if(o != view || !(arg instanceof Action)){
             throw new IllegalArgumentException();
         }
+        int nof_players = model.getNofPlayers();
         Action action = (Action)arg;
         /*
          * A better approach for the flow control could be based on a check based on both the current game-phase and
@@ -39,16 +47,16 @@ public class Controller implements Observer {
                 initializeGame(action); //action
                 flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS); //set the accepted next phases
                 break;
-            case PUT_ON_CLOUDS:
-                putOnClouds(action);
+            case PUT_ON_CLOUDS: //new turn
+                putOnCloud();
+                flow.resetSubCount("player-turn");
                 flow.setAcceptedPhases(GamePhase.DRAW_ASSIST_CARD);
-                break;
             case DRAW_ASSIST_CARD:
                 flow.addSubCountIfNotPresent("assistcard-draw");
                 drawAssistCard(action);
                 flow.incrementSubCount("assistcard-draw");
-                if(flow.getSubCount("assistcard-draw") == model.getNofPlayers()){ //everyone has played
-                    flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS);
+                if(flow.getSubCount("assistcard-draw") == nof_players){ //everyone has played
+                    flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD);
                     flow.deleteSubCount("assistcard-draw");
                     calculateOrder();
                 } else {
@@ -56,11 +64,31 @@ public class Controller implements Observer {
                 }
                 break;
             case MOVE_3_STUDENTS:
+                flow.addSubCountIfNotPresent("player-turn");
                 move3Studs(action);
                 flow.setAcceptedPhases(GamePhase.MOVE_MOTHERNATURE);
                 break;
             case MOVE_MOTHERNATURE:
-                moveMotherNature(action);
+                moveMotherNature(action); //includes the tower-placing and the island-merging
+                flow.setAcceptedPhases(GamePhase.DRAIN_CLOUD);
+                break;
+            case DRAIN_CLOUD:
+                drainCloud(action);
+                flow.incrementSubCount("player-turn");
+                if(flow.getSubCount("player-turn") == nof_players){
+                    flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS, GamePhase.USE_CHARACTER_CARD);
+                } else {
+                    flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD);
+                }
+                checkForEnd();
+                break;
+            case USE_CHARACTER_CARD:
+                useCharacterCard(action);
+                if(flow.getSubCount("player-turn") == nof_players){
+                    flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS);
+                } else {
+                    flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS);
+                }
                 break;
         }
     }
@@ -72,16 +100,10 @@ public class Controller implements Observer {
         model.initalizePlayers();
     }
 
-    private void putOnClouds(Action action){
-        //the first player draws 3 students from the bag and he puts them into the first cloud
-        //repeat for the second cloud
-        if(action.getPlayerOrder() == 0){
-            for(int i = 0; i < GameBoard.NOF_CLOUD; i++){
-                int cloud_index = i < GameBoard.NOF_CLOUD / 2 ? 0 : 1;
-                model.putOnCloud(
-                        model.drawFromBag(),
-                        cloud_index
-                );
+    private void putOnCloud(){
+        for(int nof_stud = 0; nof_stud < 3; nof_stud++) {
+            for(int nof_cloud = 0; nof_cloud < 2; nof_cloud++) {
+                model.getCloud(nof_cloud).addStudent(Bag.getRandomStudent());
             }
         }
     }
@@ -93,6 +115,7 @@ public class Controller implements Observer {
         this doesn't need any additional control since we're searching the player with the lower turn_value
         from id 0 to id 3*/
         //TODO: has this card already been played? then throw the exception
+        //TODO: a check on the turn's order could be useful
         model.getPlayers()[action.getPlayerID()].playAssistCard(action.getAssistCardIndex()); //code to actually play the card
     }
 
@@ -151,5 +174,24 @@ public class Controller implements Observer {
 
     private void moveMotherNature(Action action){
         model.moveMotherNature(action.getMothernatureIncrement());
+    }
+
+    private void drainCloud(Action action){
+        //get every student from a cloud and take them to your entrance
+        int cloud_index = action.getCloudIndex();
+        Player player = model.getPlayers()[action.getPlayerID()];
+        for(Student stud : model.getCloud(cloud_index).getStudents())
+            player.addEntranceStudent(stud);
+        model.getCloud(cloud_index).empty();
+        //TODO: check that the cloud index is valid, since it can be used only once (2 players mode)
+    }
+
+    private void useCharacterCard(Action action) throws EriantysException {
+        cc_controller.setAction(action);
+        cc_controller.manage();
+    }
+
+    private void checkForEnd(){
+        //TODO: has the game ended?
     }
 }

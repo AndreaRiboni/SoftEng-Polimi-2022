@@ -45,4 +45,8 @@ public abstract class StudentPlace {
     public List<Student> getStudents(){
         return students;
     }
+
+    public void empty(){
+        students.clear();
+    }
 }

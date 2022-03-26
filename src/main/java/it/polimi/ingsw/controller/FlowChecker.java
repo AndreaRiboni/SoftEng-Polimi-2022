@@ -19,7 +19,7 @@ public class FlowChecker {
     }
 
     public int getSubCount(String name){
-        return count.get(name);
+        return count.getOrDefault(name, -1);
     }
 
     public void addSubCountIfNotPresent(String name){
@@ -35,6 +35,13 @@ public class FlowChecker {
 
     public void deleteSubCount(String name){
         count.remove(name);
+    }
+
+    public void resetSubCount(String name){
+        if(count.containsKey(name)){
+            count.remove(name);
+            count.put(name, 0);
+        }
     }
 
     public void assertSubCount(String name, int value) throws EriantysException {

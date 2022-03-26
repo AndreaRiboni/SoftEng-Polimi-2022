@@ -10,7 +10,7 @@ public class ProvaFinale_IngSw_GC51 {
         View view = new View();
         Controller controller = new Controller(model, view);
         view.addObserver(controller);
-        model.addObserver(view);
+        //model.addObserver(view); it could be easier doing it manually (?)
         view.run();
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.utils;
 
+import it.polimi.ingsw.model.places.Cloud;
 import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.places.StudentPlace;
 
@@ -84,6 +85,22 @@ public class Action {
 
     public int[] getIslandIndexes(){
         return (int[])param.get(GameParameter.ISLAND_INDEXES);
+    }
+
+    public void setCloudIndex(int index){
+        param.put(GameParameter.CLOUD_INDEX, index);
+    }
+
+    public int getCloudIndex(){
+        return (int)param.get(GameParameter.CLOUD_INDEX);
+    }
+
+    public void setCharacterCardIndex(int index){
+        param.put(GameParameter.CHARACTER_CARD_INDEX, index);
+    }
+
+    public int getCharacterCardIndex(){
+        return (int)param.get(GameParameter.CHARACTER_CARD_INDEX);
     }
 
 }

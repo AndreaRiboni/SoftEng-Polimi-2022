@@ -34,5 +34,6 @@ public class EriantysException extends UnsupportedOperationException {
             INVALID_STEPS = "Invalid number of steps: %d",
             INVALID_NOF_PLAYER = "Invalid number of players: %d",
             INVALID_GAMEFLOW = "Invalid flow",
-            INVALID_PLACE = "Invalid place";
+            INVALID_PLACE = "Invalid place",
+            NOT_ENOUGH_MONEY = "Unable to use the character card: not enough money";
 }

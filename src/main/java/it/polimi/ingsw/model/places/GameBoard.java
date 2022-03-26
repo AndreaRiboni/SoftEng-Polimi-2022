@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.*;
+import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
@@ -52,6 +53,8 @@ public class GameBoard extends Observable {
 
     public void initializeCharacterDeck(){
         character_cards = new CharacterDeck(this);
+        //TODO: the game needs only three cards: we could avoid instantiating the whole deck
+        //and we need to specify which 3 cards anyway
     }
 
     //metodi di interfaccia
@@ -88,5 +91,14 @@ public class GameBoard extends Observable {
     public void moveMotherNature(int steps){
         mother_nature.stepForward(steps);
         mother_nature.calculateInfluence();
+    }
+
+    public Cloud getCloud(int index){
+        return clouds[index];
+    }
+
+    public CharacterCard getActiveCharacterCard(int index){
+        CharacterCard[] cards = character_cards.getCardsByStatus(true);
+        return cards[index];
     }
 }

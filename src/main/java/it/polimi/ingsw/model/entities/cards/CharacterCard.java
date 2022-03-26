@@ -5,9 +5,9 @@ import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
 
 public class CharacterCard {
-    private boolean onBoard;
+    private final boolean onBoard;
     private int price;
-    private CardBehavior behavior;
+    private final CardBehavior behavior;
     private final GameBoard gameboard;
 
     public CharacterCard(GameBoard gameboard, int price, CardBehavior behavior){
@@ -28,7 +28,10 @@ public class CharacterCard {
     public int getPrice(){
         return price;
     }
-    //Factory method
+
+    public void incrementPrice(){
+        price++;
+    }
 
 
 }
