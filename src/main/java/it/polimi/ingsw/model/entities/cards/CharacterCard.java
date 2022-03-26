@@ -1,12 +1,11 @@
 package it.polimi.ingsw.model.entities.cards;
 
-import it.polimi.ingsw.model.entities.Student;
-import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
 
 public class CharacterCard {
-    private final boolean onBoard;
+    private boolean onBoard;
     private int price;
+    //private final int id;
     private final CardBehavior behavior;
     private final GameBoard gameboard;
 
@@ -15,10 +14,7 @@ public class CharacterCard {
         onBoard = false;
         this.price = price;
         this.behavior = behavior;
-    }
-
-    public void performAction(){
-        throw new UnsupportedOperationException();
+        //this.id = id;
     }
 
     public boolean isOnBoard(){
@@ -33,5 +29,23 @@ public class CharacterCard {
         price++;
     }
 
+    public void setActive(){
+        onBoard = true;
+    }
 
+    public void setInactive(){
+        onBoard = false;
+    }
+
+    /*public int getID(){
+        return id;
+    }*/
+
+    public CardBehavior getBehavior(){
+        return behavior;
+    }
+
+    public Behaviors getBehaviorName(){
+        return behavior.getBehaviorName();
+    }
 }

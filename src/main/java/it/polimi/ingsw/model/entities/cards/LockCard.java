@@ -10,6 +10,7 @@ public class LockCard {
 
     public LockCard(GameBoard gameboard){
         this.gameboard = gameboard;
+        island_index = -1;
     }
 
     public void lockIsland(){
@@ -20,4 +21,13 @@ public class LockCard {
         EriantysException.throwInvalidIslandIndex(island_index);
         this.island_index = island_index;
     }
+
+    public boolean isOnIsland(){
+        return island_index != -1;
+    }
+
+    public void removeFromIsland(){
+        island_index = -1;
+    }
+
 }

@@ -14,8 +14,9 @@ public abstract class CardBehavior {
     protected final boolean avoid_color, pick_island, avoid_towers;
     protected final Student[] students;
     protected final LockCard[] lock_cards;
+    protected Behaviors behavior_name;
 
-    public CardBehavior(GameBoard gameboard, int id, int exchange_students, int drop_students, int nof_students, int extra_steps, int extra_points, int nof_locks, boolean pick_island, boolean avoid_towers, boolean avoid_color) {
+    public CardBehavior(GameBoard gameboard, int id, int exchange_students, int drop_students, int nof_students, int extra_steps, int extra_points, int nof_locks, boolean pick_island, boolean avoid_towers, boolean avoid_color, Behaviors behavior_name) {
         this.gameboard = gameboard;
         color = null;
         island_index = -1;
@@ -34,12 +35,13 @@ public abstract class CardBehavior {
         fillStudents(nof_students);
         lock_cards = new LockCard[nof_locks];
         fillLocks(nof_locks);
+        this.behavior_name = behavior_name;
     }
 
     public abstract Student[] getAvailableStudents();
     public abstract int getAvailableLocks();
     public abstract boolean getStudent(Color color);
-    public abstract boolean getLock();
+    public abstract LockCard getLock();
     public abstract boolean exchangeStudent(Student student1, Student student2);
     public abstract void preTurnEffect();
     public abstract void postTurnEffect();
@@ -64,16 +66,11 @@ public abstract class CardBehavior {
             lock_cards[i] = new LockCard(gameboard);
         }
     }
-    /*
 
-    protected GameBoard gameboard;
-    protected Color color;
-    protected int island_index, available_students;
-    protected final int exchange_students, drop_students, nof_students, extra_steps, extra_points, nof_locks;
-    protected final boolean avoid_color, pick_island, avoid_towers;
-    private final Student[] students;
-    private final LockCard[] lock_cards;
-     */
+    public Behaviors getBehaviorName(){
+        return behavior_name;
+    }
+
     public String toString(){
         return String.format(
                 "CardBehavior info:\n\texchange students: %d,\n\tdrop students: %d,\n\tnof students: %d,\n\textra steps: %d,\n\textra points: %d,\n\tnof locks: %d\n\tavoid color: %b,\n\tpick island: %b,\n\tavoid tower: %b",

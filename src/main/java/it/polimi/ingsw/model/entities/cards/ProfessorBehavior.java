@@ -6,8 +6,8 @@ import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
 public class ProfessorBehavior extends CardBehavior {
-    public ProfessorBehavior(GameBoard gameboard, int id) {
-        super(gameboard, id,0, 0, 0, 0, 0, 0, false, false, false);
+    public ProfessorBehavior(GameBoard gameboard, int id, Behaviors behavior_name) {
+        super(gameboard, id,0, 0, 0, 0, 0, 0, false, false, false, behavior_name);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ProfessorBehavior extends CardBehavior {
     }
 
     @Override
-    public boolean getLock() {
+    public LockCard getLock() {
         return false;
     }
 

@@ -95,6 +95,14 @@ public class Action {
         return (int)param.get(GameParameter.CLOUD_INDEX);
     }
 
+    public void setIslandIndex(int index){
+        param.put(GameParameter.ISLAND_INDEX, index);
+    }
+
+    public int getIslandIndex(){
+        return (int)param.get(GameParameter.ISLAND_INDEX);
+    }
+
     public void setCharacterCardIndex(int index){
         param.put(GameParameter.CHARACTER_CARD_INDEX, index);
     }

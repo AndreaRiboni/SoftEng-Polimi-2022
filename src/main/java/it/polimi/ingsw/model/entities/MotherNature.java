@@ -25,6 +25,7 @@ public class MotherNature {
             Island current = gameboard.getIsland(island_index);
             if(current.isLocked()){
                 current.unlock();
+                current.getLock().removeFromIsland();
                 return null;
                 //return gameboard.getIsland(island_index).getInfluent(); //da definire
             } else {

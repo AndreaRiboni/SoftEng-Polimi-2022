@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
+import it.polimi.ingsw.model.entities.cards.LockCard;
 import it.polimi.ingsw.model.utils.Color;
 
 public class Island extends StudentPlace implements TowerPlace {
@@ -12,6 +13,7 @@ public class Island extends StudentPlace implements TowerPlace {
     private Tower tower;
     private final int index;
     private final GameBoard gameboard;
+    private LockCard lock;
 
     public Island(GameBoard gameboard, int index){
         super(Integer.MAX_VALUE);
@@ -107,5 +109,13 @@ public class Island extends StudentPlace implements TowerPlace {
 
     private int getStudentsByColor(Color color){
         return (int) students.stream().filter(s->s.getColor().equals(color)).count();
+    }
+
+    public LockCard getLock(){
+        return lock;
+    }
+
+    public void setLockCard(LockCard lock){
+        this.lock = lock;
     }
 }

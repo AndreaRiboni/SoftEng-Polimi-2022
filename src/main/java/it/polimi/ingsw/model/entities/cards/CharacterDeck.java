@@ -28,7 +28,15 @@ public class CharacterDeck {
      * @return (in)active cards
      */
     public CharacterCard[] getCardsByStatus(boolean status) {
-        return (CharacterCard[]) Arrays.stream(cards).filter(card -> card.isOnBoard()==status).toArray();
+        int count = (int)Arrays.stream(cards).filter(card -> card.isOnBoard()==status).count();
+        CharacterCard[] subdeck = new CharacterCard[count];
+        count = 0;
+        for(int i = 0; i < subdeck.length; i++){
+            if(cards[i].isOnBoard() == status){
+                subdeck[count++] = cards[i];
+            }
+        }
+        return subdeck;
     }
 
     public CharacterCard[] draw3Cards() {
@@ -52,6 +60,7 @@ public class CharacterDeck {
             // loop array
             JSONArray card_list = (JSONArray) jsonObject.get("character_cards");
             CardBehavior behavior = null;
+            Behaviors behavior_name = null;
             for (Object o : card_list) {
                 JSONObject card = (JSONObject)o;
                 int id = (int)(long)card.get("id");
@@ -64,11 +73,12 @@ public class CharacterDeck {
                                 (int)(long)card.get("nof_student"),
                                 (int)(long)card.get("available_students"),
                                 (int)(long)card.get("exchange_students"),
-                                (int)(long)card.get("drop_student")
+                                (int)(long)card.get("drop_student"),
+                                Behaviors.STUDENT
                         );
                         break;
                     case "prof":
-                        behavior = new ProfessorBehavior(gameboard, id);
+                        behavior = new ProfessorBehavior(gameboard, id, Behaviors.PROFESSOR);
                         break;
                     case "mothernature":
                         behavior = new MotherNatureBehavior(
@@ -78,14 +88,16 @@ public class CharacterDeck {
                                 (int)(long)card.get("extra_points"),
                                 ((int)(long)card.get("avoid_color")) != 0,
                                 ((int)(long)card.get("avoid_towers")) != 0,
-                                ((int)(long)card.get("pick_island")) != 0
+                                ((int)(long)card.get("pick_island")) != 0,
+                                Behaviors.MOTHER_NATURE
                         );
                         break;
                     case "lock":
                         behavior = new LockBehavior(
                                 gameboard,
                                 id,
-                                (int)(long)card.get("nof_locks")
+                                (int)(long)card.get("nof_locks"),
+                                Behaviors.LOCK
                         );
                         break;
                 }

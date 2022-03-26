@@ -7,8 +7,8 @@ import it.polimi.ingsw.model.utils.EriantysException;
 
 public class LockBehavior extends CardBehavior{
 
-    public LockBehavior(GameBoard gameboard, int id, int nof_locks) {
-        super(gameboard, id, 0, 0, 0, 0, 0, nof_locks, false, false, false);
+    public LockBehavior(GameBoard gameboard, int id, int nof_locks, Behaviors behavior_name) {
+        super(gameboard, id, 0, 0, 0, 0, 0, nof_locks, false, false, false, behavior_name);
     }
 
     @Override
@@ -19,7 +19,6 @@ public class LockBehavior extends CardBehavior{
 
     @Override
     public int getAvailableLocks() {
-        EriantysException.throwUnsupportedOperation();
         return 0;
     }
 
@@ -30,8 +29,12 @@ public class LockBehavior extends CardBehavior{
     }
 
     @Override
-    public boolean getLock() {
-        return false;
+    public LockCard getLock() {
+        //returns a usable lock
+        for(int i = 0; i < lock_cards.length; i++){
+            if(!lock_cards[i].isOnIsland()) return lock_cards[i];
+        }
+        return null;
     }
 
     @Override

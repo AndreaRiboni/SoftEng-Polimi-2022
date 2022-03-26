@@ -10,7 +10,8 @@ import java.util.Observable;
 
 public class GameBoard extends Observable {
     private final Cloud[] clouds;
-    private final Player[] players;
+    private Player[] players;
+    public int NOF_PLAYERS;
     private final Professor[] professors;
     private final Island[] islands;
     private CharacterDeck character_cards;
@@ -21,18 +22,22 @@ public class GameBoard extends Observable {
     public static final int NOF_CHAR_CARDS = 12;
     public static final int NOF_PROFS = 5;
 
-    public GameBoard(int nof_players) {
+    public GameBoard() {
+        clouds = new Cloud[NOF_CLOUD];
+        islands = new Island[NOF_ISLAND];
+        professors = new Professor[NOF_PROFS];
+        character_cards = null;
+        mother_nature = null;
+    }
+
+    public void setNOFPlayers(int nof_players) throws EriantysException {
         if(nof_players <= 0 || nof_players > 4){
             throw new EriantysException(
                     String.format(EriantysException.INVALID_NOF_PLAYER, nof_players)
             );
         }
-        clouds = new Cloud[NOF_CLOUD];
+        NOF_PLAYERS = nof_players;
         players = new Player[nof_players];
-        islands = new Island[NOF_ISLAND];
-        professors = new Professor[NOF_PROFS];
-        character_cards = null;
-        mother_nature = null;
     }
 
     public void initializeMotherNature(int island_index) throws EriantysException {
@@ -53,6 +58,11 @@ public class GameBoard extends Observable {
 
     public void initializeCharacterDeck(){
         character_cards = new CharacterDeck(this);
+        CharacterCard[] active = character_cards.draw3Cards();
+        for (int i = 0; i < active.length; i++) {
+            CharacterCard characterCard = active[i];
+            characterCard.setActive();
+        }
         //TODO: the game needs only three cards: we could avoid instantiating the whole deck
         //and we need to specify which 3 cards anyway
     }
