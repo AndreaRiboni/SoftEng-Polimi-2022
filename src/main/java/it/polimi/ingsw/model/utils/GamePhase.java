@@ -4,5 +4,6 @@ public enum GamePhase {
     START,
     PUT_ON_CLOUDS,
     DRAW_ASSIST_CARD,
-    MOVE_3_STUDENTS
+    MOVE_3_STUDENTS,
+    MOVE_MOTHERNATURE
 }

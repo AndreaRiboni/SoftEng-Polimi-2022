@@ -13,7 +13,6 @@ import java.util.List;
 public class Player {
     private int turn_value, coins;
     private final Color color;
-    private final MotherNature mothernature;
     private Wizard wizard;
     private int played_assistcard;
     private final School school;
@@ -22,12 +21,11 @@ public class Player {
     private GameBoard gameboard;
     private final int ID;
 
-    public Player(GameBoard gameboard, int ID, Color color, MotherNature mothernature, boolean three_players){
+    public Player(GameBoard gameboard, int ID, Color color, boolean three_players){
         turn_value = 0;
         coins = 0;
         this.gameboard = gameboard;
         this.color = color;
-        this.mothernature = mothernature;
         this.ID = ID;
         //istanziare school, wizard, team_mate
         school = new School(color, three_players);
@@ -46,11 +44,6 @@ public class Player {
 
     public void playAssistCard(int card_index){
         played_assistcard = card_index;
-    }
-
-    public void moveMotherNature(int steps){
-        mothernature.stepForward(steps);
-        mothernature.calculateInfluence();
     }
 
     public boolean moveStudentInDiningHall(Student student){

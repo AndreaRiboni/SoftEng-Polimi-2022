@@ -5,7 +5,7 @@ import it.polimi.ingsw.global.Observer;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GamePhase;
 
-public class View extends Observable implements Runnable, Observer {
+public class View extends Observable implements Observer, Runnable {
 
     @Override
     public void run() {

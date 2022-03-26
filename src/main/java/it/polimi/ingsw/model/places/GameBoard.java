@@ -45,7 +45,7 @@ public class GameBoard extends Observable {
         } else {
             for(int i = 0; i < players.length; i++){
                 Color col = i < players.length / 2 ? Color.WHITE : Color.BLACK;
-                players[i] = new Player(this, i, col, mother_nature, false);
+                players[i] = new Player(this, i, col, false);
             }
         }
     }
@@ -83,5 +83,10 @@ public class GameBoard extends Observable {
 
     public int getNofPlayers(){
         return players.length;
+    }
+
+    public void moveMotherNature(int steps){
+        mother_nature.stepForward(steps);
+        mother_nature.calculateInfluence();
     }
 }

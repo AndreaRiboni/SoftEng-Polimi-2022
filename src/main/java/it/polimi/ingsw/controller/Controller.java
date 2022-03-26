@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.places.*;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
+import it.polimi.ingsw.model.utils.GamePhase;
 import it.polimi.ingsw.view.View;
 
 import java.util.List;
@@ -28,32 +29,39 @@ public class Controller implements Observer {
             throw new IllegalArgumentException();
         }
         Action action = (Action)arg;
+        /*
+         * A better approach for the flow control could be based on a check based on both the current game-phase and
+         * the last one
+         */
+        flow.assertPhase(action.getGamePhase()); //check that the action's game-phase is coherent with the game-flow
         switch(action.getGamePhase()){
             case START:
-                flow.assertCount(0);
-                initializeGame(action);
-                flow.increment();
+                initializeGame(action); //action
+                flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS); //set the accepted next phases
                 break;
             case PUT_ON_CLOUDS:
-                flow.assertCount(1);
                 putOnClouds(action);
-                flow.increment();
+                flow.setAcceptedPhases(GamePhase.DRAW_ASSIST_CARD);
                 break;
             case DRAW_ASSIST_CARD:
-                flow.assertCount(2);
                 flow.addSubCountIfNotPresent("assistcard-draw");
                 drawAssistCard(action);
                 flow.incrementSubCount("assistcard-draw");
-                if(flow.getSubCount("assistcard-draw") == model.getNofPlayers()){
-                    flow.increment();
+                if(flow.getSubCount("assistcard-draw") == model.getNofPlayers()){ //everyone has played
+                    flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS);
                     flow.deleteSubCount("assistcard-draw");
                     calculateOrder();
+                } else {
+                    flow.setAcceptedPhases(GamePhase.DRAW_ASSIST_CARD); //someone has to play
                 }
                 break;
             case MOVE_3_STUDENTS:
-                flow.assertCount(3);
-                flow.addSubCountIfNotPresent("move3s"); //too political
                 move3Studs(action);
+                flow.setAcceptedPhases(GamePhase.MOVE_MOTHERNATURE);
+                break;
+            case MOVE_MOTHERNATURE:
+                moveMotherNature(action);
+                break;
         }
     }
 
@@ -139,5 +147,9 @@ public class Controller implements Observer {
         for(int i = 0; i < 3; i++){
             player.removeEntranceStudent(students.get(i));
         }
+    }
+
+    private void moveMotherNature(Action action){
+        model.moveMotherNature(action.getMothernatureIncrement());
     }
 }
