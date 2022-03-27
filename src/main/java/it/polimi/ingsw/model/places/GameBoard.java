@@ -95,9 +95,10 @@ public class GameBoard extends Observable {
     }
     
      public Professor getProfFromColor(Color col){
-        Professor professor;
-        professor = new Professor(col);
-        return professor;
+         for(int i = 0; i < professors.length; i++){
+             if(professors[i].getColor().equals(col)) return professors[i];
+         }
+        return null;
     }
 
     public void checkProf() {
