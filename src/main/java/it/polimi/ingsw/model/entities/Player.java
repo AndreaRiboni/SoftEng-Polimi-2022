@@ -49,7 +49,7 @@ public class Player {
         boolean result;
         result =  school.addStudent(student, Places.DINING_HALL);
         if(result){
-            Player.addCoins(1);
+            addCoins(1);
         }
     }
 
@@ -81,7 +81,7 @@ public class Player {
         return school.getNumberOfTowers();
     }
 
-    public static void addCoins(int qty){
+    public void addCoins(int qty){
         if(qty > 0)
             coins += qty;
     }
