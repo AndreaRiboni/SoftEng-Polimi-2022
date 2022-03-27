@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Student;
-import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.EriantysException;
 
 public class DiningHall extends StudentPlace {
     public static final int STUDENTS_PER_COLOR = 10;
@@ -10,25 +10,21 @@ public class DiningHall extends StudentPlace {
     public DiningHall(){
         super(0);
     }
-    
-    public boolean addStudent(Student student, Player player){
-        if(students.stream().filter(stud -> stud.getColor().equals(student.getColor())).count() < STUDENTS_PER_COLOR) {
-            students.add(student);
-            if (students.stream().filter(stud -> stud.getColor().equals(student.getColor())).count() %3 == 0 && 
-                    students.stream().filter(stud -> stud.getColor().equals(student.getColor())).count() > 0 ) {
-               player.addCoins(1);
-            }
-            return true;
-        }
-        return false;
-    }
-    
+
     @Override
-    public boolean addStudent(Student student) {
-        if(students.stream().filter(stud -> stud.getColor().equals(student.getColor())).count() < STUDENTS_PER_COLOR) {
-            students.add(student);
-            return true;
-        }
-        return false;
+    public boolean addStudent(Student student) throws EriantysException{
+        long students_per_color;
+        students_per_color = students.stream().filter(stud -> stud.getColor().equals(student.getColor())).count();
+
+       if(students_per_color < STUDENTS_PER_COLOR) {
+           students.add(student);
+           if (students_per_color %3 == 0 && students_per_color > 0 ) {
+               return true;
+           }
+           return false;
+       }
+       else{
+           throw new EriantysException(String.format(EriantysException.INVALID_NOF_PLAYER, students_per_color));
+       }
     }
 }
