@@ -51,7 +51,13 @@ public class Player {
         if(result){
             addCoins(1);
         }
+        gameboard.checkProf();
     }
+    
+     public int numOfStudentInDiningHall(Color color){
+        return school.getNumberOfStudents(color, Places.DINING_HALL);
+    }
+
 
 
     public boolean moveStudentInIsland(int island_index, Student student){
