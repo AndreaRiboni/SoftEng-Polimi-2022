@@ -45,13 +45,14 @@ public class Player {
         played_assistcard = card_index;
     }
 
-    public boolean moveStudentInDiningHall(Student student){
-        return school.addStudent(student, Places.DINING_HALL);
+    public void moveStudentInDiningHall(Student student){
+        boolean result;
+        result =  school.addStudent(student, Places.DINING_HALL);
+        if(result){
+            Player.addCoins(1);
+        }
     }
 
-    public boolean moveStudentInDiningHall(Student student, Player player){
-        return school.addStudent(student, Places.DINING_HALL);
-    }
 
     public boolean moveStudentInIsland(int island_index, Student student){
         return gameboard.getIsland(island_index).addStudent(student);
@@ -80,7 +81,7 @@ public class Player {
         return school.getNumberOfTowers();
     }
 
-    public void addCoins(int qty){
+    public static void addCoins(int qty){
         if(qty > 0)
             coins += qty;
     }
