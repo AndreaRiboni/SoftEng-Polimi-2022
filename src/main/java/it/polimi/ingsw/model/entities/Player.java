@@ -105,7 +105,7 @@ public class Player {
     }
 
     public void useCharacterCard(CharacterCard card){
-        card.performAction(); //TODO
+        //card.performAction(); //TODO
     }
 
     public void drawStudent(){
