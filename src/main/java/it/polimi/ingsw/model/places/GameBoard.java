@@ -93,6 +93,36 @@ public class GameBoard extends Observable {
     public Professor[] getProfessors(){
         return professors;
     }
+    
+     public Professor getProfFromColor(Color col){
+        Professor professor;
+        professor = new Professor(col);
+        return professor;
+    }
+
+    public void checkProf() {
+        int flag = 0;
+        int total = 0;
+        int max = 0;
+        for(Color color : Color.values()){
+            if(!color.equals(Color.WHITE) && !color.equals(Color.BLACK) && !color.equals(Color.GREY)){
+                for(Player player : players){
+                    total = player.numOfStudentInDiningHall(color);
+                    if (flag == 0) {
+                        max = total;
+                        flag = 1;
+                        getProfFromColor(color).setPlayer(player);
+                    }
+                    else{
+                        if(total > max){
+                            max = total;
+                            getProfFromColor(color).setPlayer(player);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     public int getNofPlayers(){
         return players.length;
