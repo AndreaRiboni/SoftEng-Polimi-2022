@@ -10,6 +10,8 @@ public class MotherNatureController extends Controller {
     }
 
     public void moveMotherNature() throws EriantysException {
+        //TODO: posso muovermi di questo numero di passi? Verificare con la carta assistente
+        //action.getPlayerID() --> getLastPlayedCard() --> getValue >= mn_increment
         model.moveMotherNature(action.getMothernatureIncrement());
     }
 }

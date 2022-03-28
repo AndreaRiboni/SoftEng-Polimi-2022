@@ -49,13 +49,14 @@ public class FlowChecker {
     }
 
     public void assertPhase(GamePhase gp) throws EriantysException {
-        if(!gamephase.contains(gp)){
+        if(!gamephase.contains(gp) && !gamephase.isEmpty()){
             throw new EriantysException(EriantysException.INVALID_GAMEFLOW);
         }
     }
 
-    public void setAcceptedPhases(GamePhase... gp){
+    public void setAcceptedPhases(GamePhase... gamephases){
         gamephase.clear();
-        gamephase.addAll(List.of(gp));
+        for(GamePhase gp : gamephases)
+            gamephase.add(gp);
     }
 }

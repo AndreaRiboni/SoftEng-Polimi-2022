@@ -16,7 +16,7 @@ public class MobilityController extends Controller {
 
     private boolean checkPlaces(Places[] places){
         for(Places sp : places){
-            if(!(sp.equals(Places.ISLAND)) && !(sp.equals(Places.ENTRANCE))) return false;
+            if(!(sp.equals(Places.ISLAND)) && !(sp.equals(Places.DINING_HALL))) return false;
         }
         return true;
     }

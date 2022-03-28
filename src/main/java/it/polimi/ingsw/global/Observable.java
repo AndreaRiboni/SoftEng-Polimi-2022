@@ -13,7 +13,7 @@ public class Observable {
         observers.add(observer);
     }
 
-    public void notify(Object message) throws EriantysException {
+    public void notify(Object message)  {
         for(Observer observer: observers){
             observer.update(this, message);
         }

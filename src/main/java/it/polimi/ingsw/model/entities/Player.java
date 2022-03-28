@@ -129,4 +129,8 @@ public class Player {
         for(Student s : stud)
             school.addStudent(s, Places.ENTRANCE);
     }
+
+    public Student getEntranceStudent(int index) throws EriantysException {
+        return school.getEntranceStudents().get(index);
+    }
 }

@@ -27,8 +27,8 @@ public class Island extends StudentPlace implements TowerPlace {
 
     public Color calculateInfluence(){
         Player[] players = gameboard.getPlayers();
-        int[] stud_counters = new int[5];
-        int[] player_points = new int[players.length];
+        int[] stud_counters = new int[5]; //contatore di studenti per ogni colore
+        int[] player_points = new int[players.length]; //punti influenza di ogni giocatore
         for(int i=0; i<students.size(); i++){
             Student s = students.get(i);
             stud_counters[s.getColor().getVal()]++;
@@ -45,6 +45,7 @@ public class Island extends StudentPlace implements TowerPlace {
             Professor p = professors[i];
             //considero il giocatore g che detiene il prof p
             Player g = p.getPlayer();
+            if(g == null) continue; //prof non ancora assegnato
             //considero il colore c del prof
             Color c = p.getColor();
             //aggiungo al giocatore g tanti punti quanto è il numero di studenti di colore c su quest'isola

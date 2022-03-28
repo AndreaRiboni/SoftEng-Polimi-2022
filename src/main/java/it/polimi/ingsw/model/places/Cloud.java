@@ -19,11 +19,11 @@ public class Cloud extends StudentPlace {
         MAX_STUDENTS = side == SIDE_2_4 ? MAX_STUDENTS_2_4 : MAX_STUDENTS_3;
     }
 
-    public Cloud create2or4PlayerCloud(){
+    public static Cloud create2or4PlayerCloud(){
         return new Cloud(SIDE_2_4);
     }
 
-    public Cloud create3PlayerCloud(){
+    public static Cloud create3PlayerCloud(){
         return new Cloud(SIDE_3);
     }
 

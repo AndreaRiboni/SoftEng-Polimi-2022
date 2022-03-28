@@ -1,12 +1,12 @@
 package it.polimi.ingsw.model.places;
 
+import it.polimi.ingsw.global.Observable;
 import it.polimi.ingsw.model.entities.*;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
-import java.util.Observable;
 
 public class GameBoard extends Observable {
     private final Cloud[] clouds;
@@ -26,6 +26,9 @@ public class GameBoard extends Observable {
         clouds = new Cloud[NOF_CLOUD];
         islands = new Island[NOF_ISLAND];
         professors = new Professor[NOF_PROFS];
+        for(int i = 0; i < NOF_PROFS; i++){
+            professors[i] = new Professor(Color.getFromInt(i));
+        }
         character_cards = null;
         mother_nature = null;
     }
@@ -38,6 +41,15 @@ public class GameBoard extends Observable {
         }
         NOF_PLAYERS = nof_players;
         players = new Player[nof_players];
+
+        for(int i = 0; i < NOF_CLOUD; i++) {
+            if (nof_players == 3)
+                clouds[i] = Cloud.create3PlayerCloud();
+            else clouds[i] = Cloud.create2or4PlayerCloud();
+        }
+        for(int i = 0; i < NOF_ISLAND; i++){
+            islands[i] = new Island(this, i);
+        }
     }
 
     public void initializeMotherNature(int island_index) throws EriantysException {
