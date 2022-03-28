@@ -26,6 +26,9 @@ public class MotherNature {
             if(current.isLocked()){
                 current.unlock();
                 current.getLock().removeFromIsland();
+                if(current.getTower(Color.WHITE)) return Color.WHITE;
+                if(current.getTower(Color.GREY)) return Color.GREY;
+                if(current.getTower(Color.BLACK)) return Color.BLACK;
                 return null;
                 //return gameboard.getIsland(island_index).getInfluent(); //da definire
             } else {

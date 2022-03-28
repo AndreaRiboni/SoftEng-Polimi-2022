@@ -1,8 +1,10 @@
 package it.polimi.ingsw.model.places;
 
+import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.EriantysException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,22 +16,26 @@ public class School {
     private final Color tower_color;
     private final List<Professor> professors;
 
+
     public School(Color color, boolean three_players){
         tower_color = color;
         entrance = new Entrance();
         dining_hall = new DiningHall();
         tower_hall = new TowerHall(tower_color, three_players);
         professors = new ArrayList<>();
+        for(int i=0; i<7; i++) addStudent(Bag.getRandomStudent(), Places.ENTRANCE);
     }
 
-    public boolean addStudent(Student student, Places place){
+    public void addStudent(Student student, Places place) throws EriantysException{
         switch(place) {
             case DINING_HALL: //TODO: coins
-                return dining_hall.addStudent(student);
+                dining_hall.addStudent(student);
+                break;
             case ENTRANCE:
-                return entrance.addStudent(student);
+                entrance.addStudent(student);
+                break;
             default:
-                return false;
+                throw new EriantysException(EriantysException.INVALID_PLACE);
         }
     }
 
@@ -73,8 +79,9 @@ public class School {
         return tower_hall.getTower(tower_color);
     }
 
-    public boolean addProfessor(Professor prof){
-        return professors.add(prof); //TODO: checks
+    public void addProfessor(Professor prof) throws EriantysException{
+        if(professors.contains(prof)) throw new EriantysException(EriantysException.DUPLICATE_PROFESSOR);
+        professors.add(prof); //TODO: redundancy
     }
 
     public boolean popProfessor(Color col){

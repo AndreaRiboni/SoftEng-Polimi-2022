@@ -19,18 +19,19 @@ public class Player {
     private Player team_mate;
     private GameBoard gameboard;
     private final int ID;
+    private final int nof_total_towers;
 
     public Player(GameBoard gameboard, int ID, Color color, boolean three_players){
         turn_value = 0;
-        coins = 0;
+        coins = 1;
         this.gameboard = gameboard;
         this.color = color;
         this.ID = ID;
-        //istanziare school, wizard, team_mate
         school = new School(color, three_players);
         wizard = new Wizard();
         played_assistcard = -1;
         team_mate = null;
+        nof_total_towers = three_players ? 6 : 8;
     }
 
     public int getTurnValue() {
@@ -84,7 +85,7 @@ public class Player {
     }
 
     public int getNumberOfPlacedTowers(){
-        return school.getNumberOfTowers();
+        return nof_total_towers - school.getNumberOfTowers();
     }
 
     public void addCoins(int qty){

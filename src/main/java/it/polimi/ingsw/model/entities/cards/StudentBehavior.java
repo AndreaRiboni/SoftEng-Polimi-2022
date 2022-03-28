@@ -35,7 +35,7 @@ public class StudentBehavior extends CardBehavior {
 
     @Override
     public LockCard getLock() {
-        return false;
+        return null;
     }
 
     @Override

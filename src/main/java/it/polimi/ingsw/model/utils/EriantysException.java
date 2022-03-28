@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.utils;
 import it.polimi.ingsw.model.entities.cards.AssistCard;
 import it.polimi.ingsw.model.places.GameBoard;
 
-public class EriantysException extends UnsupportedOperationException {
+public class EriantysException extends Exception {
     public EriantysException(String msg){
         super(msg);
     }
@@ -36,5 +36,9 @@ public class EriantysException extends UnsupportedOperationException {
             INVALID_GAMEFLOW = "Invalid flow",
             INVALID_PLACE = "Invalid place",
             NOT_ENOUGH_MONEY = "Unable to use the character card: not enough money",
-            NOT_ENOUGH_LOCKS = "Unable to choose a lock: no locks have been found";
+            NOT_ENOUGH_LOCKS = "Unable to choose a lock: no locks have been found",
+            DUPLICATE_PROFESSOR = "This color's professor has already been assigned",
+            TOWERPLACE_FULL = "Unable to add: towerplace is full or wrong color",
+            STUDENTPLACE_FULL = "Unable to add: studentplace is full",
+            INVALID_CLOUD_INDEX = "Invalid cloud index: %d";
 }

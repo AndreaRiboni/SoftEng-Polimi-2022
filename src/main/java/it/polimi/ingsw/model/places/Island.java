@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.entities.cards.LockCard;
 import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.EriantysException;
 
 public class Island extends StudentPlace implements TowerPlace {
     private boolean locked;
@@ -90,12 +91,11 @@ public class Island extends StudentPlace implements TowerPlace {
     }
 
     @Override
-    public boolean addTower(Tower tower) {
+    public void addTower(Tower tower) throws EriantysException{
         if(hasTower()){
-            return false;
+            throw new EriantysException(EriantysException.TOWERPLACE_FULL);
         }
         this.tower = tower;
-        return true;
     }
 
     @Override

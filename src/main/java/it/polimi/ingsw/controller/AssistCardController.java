@@ -17,6 +17,7 @@ public class AssistCardController extends Controller {
         this doesn't need any additional control since we're searching the player with the lower turn_value
         from id 0 to id 3*/
         //TODO: has this card already been played? then throw the exception
+        if () throw EriantysException;
         //TODO: a check on the turn's order could be useful
         model.getPlayers()[action.getPlayerID()].playAssistCard(action.getAssistCardIndex()); //code to actually play the card
     }

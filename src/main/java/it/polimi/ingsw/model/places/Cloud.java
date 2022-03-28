@@ -11,13 +11,11 @@ public class Cloud extends StudentPlace {
     public static final int MAX_STUDENTS_2_4 = 4, MAX_STUDENTS_3 = 3;
     private final int MAX_STUDENTS;
     private final boolean side;
-    private final List<Student> students;
 
     private Cloud(boolean side){
         super(0);
         this.side = side;
         MAX_STUDENTS = side == SIDE_2_4 ? MAX_STUDENTS_2_4 : MAX_STUDENTS_3;
-        students = new ArrayList<>();
     }
 
     public Cloud create2or4PlayerCloud(){

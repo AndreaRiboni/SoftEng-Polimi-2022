@@ -47,7 +47,9 @@ public class GameBoard extends Observable {
 
     public void initalizePlayers(){
         if(players.length == 3){
-            //TODO
+            players[0] = new Player(this, 0, Color.WHITE, true);
+            players[1] = new Player(this, 1, Color.GREY, true);
+            players[2] = new Player(this, 2, Color.BLACK, true);
         } else {
             for(int i = 0; i < players.length; i++){
                 Color col = i < players.length / 2 ? Color.WHITE : Color.BLACK;
@@ -82,7 +84,10 @@ public class GameBoard extends Observable {
         return Bag.getRandomStudent();
     }
 
-    public void putOnCloud(Student student, int cloud_index){
+    public void putOnCloud(Student student, int cloud_index) throws EriantysException{
+        if(cloud_index != 0 && cloud_index!=1) throw new EriantysException(
+                String.format(EriantysException.INVALID_CLOUD_INDEX, cloud_index)
+        );
         clouds[cloud_index].addStudent(student);
     }
 
@@ -129,13 +134,16 @@ public class GameBoard extends Observable {
         return players.length;
     }
 
-    public void moveMotherNature(int steps){
+    public void moveMotherNature(int steps) throws EriantysException {
         mother_nature.stepForward(steps);
         mother_nature.calculateInfluence();
     }
 
-    public Cloud getCloud(int index){
-        return clouds[index];
+    public Cloud getCloud(int cloud_index) throws EriantysException{
+        if(cloud_index != 0 && cloud_index!=1) throw new EriantysException(
+                String.format(EriantysException.INVALID_CLOUD_INDEX, cloud_index)
+        );
+        return clouds[cloud_index];
     }
 
     public CharacterCard getActiveCharacterCard(int index){

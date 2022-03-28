@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.places;
 import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.EriantysException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +23,13 @@ public class TowerHall implements TowerPlace {
     }
 
     @Override
-    public boolean addTower(Tower tower) {
+    public void addTower(Tower tower) throws EriantysException {
         if(towers.size() < MAX_TOWERS && tower.getColor().equals(color)){
             towers.add(tower);
-            return true;
         }
-        return false;
+        else{
+            throw new EriantysException(EriantysException.TOWERPLACE_FULL);
+        }
     }
 
     @Override
