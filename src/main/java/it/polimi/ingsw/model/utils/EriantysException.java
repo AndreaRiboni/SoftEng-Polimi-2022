@@ -41,5 +41,7 @@ public class EriantysException extends Exception {
             TOWERPLACE_FULL = "Unable to add: towerplace is full or wrong color",
             STUDENTPLACE_FULL = "Unable to add: studentplace is full",
             INVALID_CLOUD_INDEX = "Invalid cloud index: %d",
-            INVALID_COLOR = "Unable to set this color";
+            INVALID_COLOR = "Unable to set this color",
+            ALREADY_LOCKED = "Island is already locked",
+            ALREADY_UNLOCKED = "Island is already unlocked";
 }

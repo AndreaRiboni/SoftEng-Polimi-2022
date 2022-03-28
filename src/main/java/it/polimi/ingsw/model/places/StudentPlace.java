@@ -19,8 +19,7 @@ public abstract class StudentPlace {
     public void addStudent(Student student) throws EriantysException{
         if(students.size() < MAX_STUDENTS) {
             students.add(student);
-        }
-        else{
+        } else {
             throw new EriantysException(EriantysException.STUDENTPLACE_FULL);
         }
     }

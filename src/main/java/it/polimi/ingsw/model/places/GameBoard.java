@@ -69,7 +69,6 @@ public class GameBoard extends Observable {
         //and we need to specify which 3 cards anyway
     }
 
-    //metodi di interfaccia
     public Island getIsland(int island_index) throws EriantysException {
         EriantysException.throwInvalidIslandIndex(island_index);
         return islands[island_index]; //passare una copia?

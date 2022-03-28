@@ -14,7 +14,6 @@ public class School {
     private final DiningHall dining_hall;
     private final TowerHall tower_hall;
     private final Color tower_color;
-    private final List<Professor> professors;
 
 
     public School(Color color, boolean three_players) throws EriantysException {
@@ -22,14 +21,17 @@ public class School {
         entrance = new Entrance();
         dining_hall = new DiningHall();
         tower_hall = new TowerHall(tower_color, three_players);
-        professors = new ArrayList<>();
         for(int i=0; i<7; i++) addStudent(Bag.getRandomStudent(), Places.ENTRANCE);
     }
 
-    public void addStudent(Student student, Places place) throws EriantysException{
+    public int addStudent(Student student, Places place) throws EriantysException{
         switch(place) {
-            case DINING_HALL: //TODO: coins
+            case DINING_HALL:
                 dining_hall.addStudent(student);
+                int nof_studs = dining_hall.getNofStudents(student.getColor());
+                if(nof_studs % 3 == 0 && nof_studs > 0){
+                    return 1;
+                }
                 break;
             case ENTRANCE:
                 entrance.addStudent(student);
@@ -37,6 +39,7 @@ public class School {
             default:
                 throw new EriantysException(EriantysException.INVALID_PLACE);
         }
+        return 0;
     }
 
     public int getNumberOfStudents(Color col, Places place){
@@ -77,25 +80,6 @@ public class School {
 
     public boolean removeTower(){
         return tower_hall.getTower(tower_color);
-    }
-
-    public void addProfessor(Professor prof) throws EriantysException{
-        if(professors.contains(prof)) throw new EriantysException(EriantysException.DUPLICATE_PROFESSOR);
-        professors.add(prof); //TODO: redundancy
-    }
-
-    public boolean popProfessor(Color col){
-        for(int i = 0; i < professors.size(); i++){
-            if(professors.get(i).getColor().equals(col)){
-                professors.remove(i);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public int getNumberOfProfs(){
-        return professors.size();
     }
 
     public int getNumberOfTowers(){

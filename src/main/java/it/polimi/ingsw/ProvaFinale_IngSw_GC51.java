@@ -11,6 +11,7 @@ public class ProvaFinale_IngSw_GC51 {
         ControllerHub controller = new ControllerHub(model, view);
         view.addObserver(controller);
         //model.addObserver(view); it could be easier doing it manually (?)
-        view.run();
+        Thread view_thread = new Thread(view);
+        view_thread.start();
     }
 }

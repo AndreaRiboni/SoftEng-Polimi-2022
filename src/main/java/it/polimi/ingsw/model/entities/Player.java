@@ -49,11 +49,8 @@ public class Player {
 
     public void moveStudentInDiningHall(Student student) throws EriantysException {
         boolean result;
-        school.addStudent(student, Places.DINING_HALL);
-        if(false){
-            addCoins(1);
-            //TODO: manage coins
-        }
+        int coins = school.addStudent(student, Places.DINING_HALL);
+        addCoins(coins);
         gameboard.checkProf();
     }
     
@@ -61,16 +58,8 @@ public class Player {
         return school.getNumberOfStudents(color, Places.DINING_HALL);
     }
 
-
-
     public void moveStudentInIsland(int island_index, Student student) throws EriantysException {
         gameboard.getIsland(island_index).addStudent(student);
-    }
-
-    public void moveStudentInEntrance(int nof_students) throws EriantysException {
-        for(int i = 0; i < nof_students; i++) {
-            school.addStudent(Bag.getRandomStudent(), Places.ENTRANCE);
-        }
     }
 
     public void moveTowerInIsland(int island_index) throws EriantysException {
@@ -78,10 +67,6 @@ public class Player {
             Tower tower = new Tower(color);
             gameboard.getIsland(island_index).addTower(tower);
         }
-    }
-
-    public int getNumberOfProf(){
-        return school.getNumberOfProfs();
     }
 
     public int getNumberOfPlacedTowers(){
@@ -103,14 +88,6 @@ public class Player {
 
     public int getCoins(){
         return coins;
-    }
-
-    public void useCharacterCard(CharacterCard card){
-        //card.performAction(); //TODO
-    }
-
-    public void drawStudent(){
-        Bag.getRandomStudent(); //why
     }
 
     public void cooperate(Player player){
@@ -135,7 +112,7 @@ public class Player {
     }
 
     public List<Student> getEntranceStudents(){
-        return school.getEntranceStudents();
+        return school.getEntranceStudents(); //TODO: pass a copy
     }
 
     public void removeEntranceStudent(int index){

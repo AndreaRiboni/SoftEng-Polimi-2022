@@ -61,25 +61,30 @@ public class Island extends StudentPlace implements TowerPlace {
         //TODO: gestire la parità
     }
 
-    public boolean lock(){
+    public void lock() throws EriantysException {
         if(!locked){
             locked = true;
-            return true;
         } else {
-            return false;
+            throw new EriantysException(EriantysException.ALREADY_LOCKED);
         }
     }
 
-    public void unlock(){
-        locked = false;
+    public void unlock() throws EriantysException {
+        if(locked){
+            locked = false;
+        } else {
+            throw new EriantysException(EriantysException.ALREADY_UNLOCKED);
+        }
     }
 
-    public boolean merge(Island island){
+    public void merge(Island island) throws EriantysException {
         if(index == island.index-1){
             next = island;
-            return true;
+        } else {
+            throw new EriantysException(
+                    String.format(EriantysException.INVALID_ISLAND_INDEX, island.index)
+            );
         }
-        return false;
     }
 
     public boolean hasTower(){
@@ -105,6 +110,10 @@ public class Island extends StudentPlace implements TowerPlace {
             return true;
         }
         return false;
+    }
+
+    public Color getTowerColor(){
+        return tower.getColor();
     }
 
     private int getStudentsByColor(Color color){
