@@ -22,4 +22,15 @@ public enum Color {
     public static Color getRandomColor(){
         return Color.values()[(int)(Math.random()*(Color.values().length))];
     }
+
+    public static Color getFromInt(int val){
+        for(Color c : Color.values()){
+            if(c.val == val) return c;
+        }
+        return null;
+    }
+
+    public static Color getRandomStudentColor(){
+        return getFromInt((int)(Math.random() * 5));
+    }
 }

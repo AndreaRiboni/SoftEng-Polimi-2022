@@ -9,6 +9,6 @@ import java.util.List;
 public class Bag  {
 
     public static Student getRandomStudent() {
-        return new Student(Color.getRandomColor());
+        return new Student(Color.getRandomStudentColor());
     }
 }

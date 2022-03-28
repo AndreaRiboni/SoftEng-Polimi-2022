@@ -42,68 +42,79 @@ public class ControllerHub implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) throws EriantysException {
+    public void update(Observable o, Object arg) {
         if (o != view || !(arg instanceof Action)) {
             throw new IllegalArgumentException();
         }
         Action action = (Action) arg;
 
-        flow.assertPhase(action.getGamePhase()); //check that the action's game-phase is coherent with the game-flow
-        switch (action.getGamePhase()) {
-            case START:
-                g_controller.setAction(action);
-                g_controller.initializeGame(); //action
-                flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS); //set the accepted next phases
-                break;
-            case PUT_ON_CLOUDS: //new turn
-                c_controller.setAction(action);
-                c_controller.putOnCloud();
-                flow.resetSubCount("player-turn");
-                flow.setAcceptedPhases(GamePhase.DRAW_ASSIST_CARD);
-            case DRAW_ASSIST_CARD:
-                flow.addSubCountIfNotPresent("assistcard-draw");
-                ac_controller.setAction(action);
-                ac_controller.drawAssistCard();
-                flow.incrementSubCount("assistcard-draw");
-                if (flow.getSubCount("assistcard-draw") == nof_players) { //everyone has played
-                    flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD);
-                    flow.deleteSubCount("assistcard-draw");
-                    g_controller.calculateOrder();
-                } else {
-                    flow.setAcceptedPhases(GamePhase.DRAW_ASSIST_CARD); //someone has to play
-                }
-                break;
-            case MOVE_3_STUDENTS:
-                flow.addSubCountIfNotPresent("player-turn");
-                m_controller.setAction(action);
-                m_controller.move3Studs();
-                flow.setAcceptedPhases(GamePhase.MOVE_MOTHERNATURE);
-                break;
-            case MOVE_MOTHERNATURE:
-                mn_controller.setAction(action);
-                mn_controller.moveMotherNature(); //includes the tower-placing and the island-merging
-                flow.setAcceptedPhases(GamePhase.DRAIN_CLOUD);
-                break;
-            case DRAIN_CLOUD:
-                c_controller.setAction(action);
-                c_controller.drainCloud();
-                flow.incrementSubCount("player-turn");
-                if (flow.getSubCount("player-turn") == nof_players) {
-                    flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS, GamePhase.USE_CHARACTER_CARD);
-                } else {
-                    flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD);
-                }
-                g_controller.checkForEnd();
-                break;
-            case USE_CHARACTER_CARD:
-                cc_controller.setAction(action);
-                cc_controller.manage();
-                if (flow.getSubCount("player-turn") == nof_players) {
-                    flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS);
-                } else {
-                    flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS);
-                }
-                break;
+        try {
+            flow.assertPhase(action.getGamePhase()); //check that the action's game-phase is coherent with the game-flow
+            switch (action.getGamePhase()) {
+                case START:
+                    System.out.println("entering game start");
+                    g_controller.setAction(action);
+                    g_controller.initializeGame(); //action
+                    nof_players = action.getNOfPlayers();
+                    flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS); //set the accepted next phases
+                    break;
+                case PUT_ON_CLOUDS: //new turn
+                    System.out.println("entering put on clouds");
+                    c_controller.setAction(action);
+                    c_controller.putOnCloud();
+                    flow.resetSubCount("player-turn");
+                    flow.setAcceptedPhases(GamePhase.DRAW_ASSIST_CARD);
+                    break;
+                case DRAW_ASSIST_CARD:
+                    System.out.println("entering draw assist card");
+                    flow.addSubCountIfNotPresent("assistcard-draw");
+                    ac_controller.setAction(action);
+                    ac_controller.drawAssistCard();
+                    flow.incrementSubCount("assistcard-draw");
+                    if (flow.getSubCount("assistcard-draw") == nof_players) { //everyone has played
+                        flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD);
+                        flow.deleteSubCount("assistcard-draw");
+                        g_controller.calculateOrder();
+                    } else {
+                        flow.setAcceptedPhases(GamePhase.DRAW_ASSIST_CARD); //someone has to play
+                    }
+                    break;
+                case MOVE_3_STUDENTS:
+                    System.out.println("entering move 3 students");
+                    flow.addSubCountIfNotPresent("player-turn");
+                    m_controller.setAction(action);
+                    m_controller.move3Studs();
+                    flow.setAcceptedPhases(GamePhase.MOVE_MOTHERNATURE);
+                    break;
+                case MOVE_MOTHERNATURE:
+                    System.out.println("entering move mother nature");
+                    mn_controller.setAction(action);
+                    mn_controller.moveMotherNature(); //includes the tower-placing and the island-merging
+                    flow.setAcceptedPhases(GamePhase.DRAIN_CLOUD);
+                    break;
+                case DRAIN_CLOUD:
+                    c_controller.setAction(action);
+                    c_controller.drainCloud();
+                    flow.incrementSubCount("player-turn");
+                    if (flow.getSubCount("player-turn") == nof_players) {
+                        flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS, GamePhase.USE_CHARACTER_CARD);
+                    } else {
+                        flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD);
+                    }
+                    g_controller.checkForEnd();
+                    break;
+                case USE_CHARACTER_CARD:
+                    cc_controller.setAction(action);
+                    cc_controller.manage();
+                    if (flow.getSubCount("player-turn") == nof_players) {
+                        flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS);
+                    } else {
+                        flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS);
+                    }
+                    break;
+            }
+        } catch (EriantysException erex){
+            erex.printStackTrace();
         }
     }
 }

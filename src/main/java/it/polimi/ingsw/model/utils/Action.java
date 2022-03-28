@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model.utils;
 
-import it.polimi.ingsw.model.places.Cloud;
 import it.polimi.ingsw.model.places.Places;
-import it.polimi.ingsw.model.places.StudentPlace;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +17,7 @@ public class Action {
         return (int)param.get(GameParameter.PLAYER_ID);
     }
 
-    public void setPlayer_id(int player_id) {
+    public void setPlayerID(int player_id) {
         param.put(GameParameter.PLAYER_ID, player_id);
     }
 
