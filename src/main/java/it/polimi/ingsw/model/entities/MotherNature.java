@@ -21,7 +21,7 @@ public class MotherNature {
         island_index %= GameBoard.NOF_ISLAND;
     }
 
-    public Color calculateInfluence(){ //Creare un metodo statico su Island per calcolare un'influenza generica
+    public Color calculateInfluence() throws EriantysException { //Creare un metodo statico su Island per calcolare un'influenza generica
             Island current = gameboard.getIsland(island_index);
             if(current.isLocked()){
                 current.unlock();

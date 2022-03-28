@@ -28,7 +28,7 @@ public class CharacterCardController extends Controller {
         performAction();
     }
 
-    public void performAction(){
+    public void performAction() throws EriantysException {
         switch(card.getBehaviorName()){
             case LOCK:
                 //take 1 lock-card from this char-card and put it onto an island

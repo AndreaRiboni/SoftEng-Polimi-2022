@@ -43,8 +43,6 @@ public abstract class CardBehavior {
     public abstract boolean getStudent(Color color);
     public abstract LockCard getLock();
     public abstract boolean exchangeStudent(Student student1, Student student2);
-    public abstract void preTurnEffect();
-    public abstract void postTurnEffect();
 
     public void chooseColor(Color color){
         this.color = color;

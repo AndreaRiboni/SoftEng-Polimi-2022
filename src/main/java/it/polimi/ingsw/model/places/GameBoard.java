@@ -45,7 +45,7 @@ public class GameBoard extends Observable {
         mother_nature = new MotherNature(this, island_index);
     }
 
-    public void initalizePlayers(){
+    public void initalizePlayers() throws EriantysException {
         if(players.length == 3){
             players[0] = new Player(this, 0, Color.WHITE, true);
             players[1] = new Player(this, 1, Color.GREY, true);

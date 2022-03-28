@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.entities.Student;
+import it.polimi.ingsw.model.utils.EriantysException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +32,13 @@ public class Cloud extends StudentPlace {
     }
 
     @Override
-    public boolean addStudent(Student student) {
+    public void addStudent(Student student) throws EriantysException {
         if(students.size() < MAX_STUDENTS){
             students.add(student);
-            return true;
         }
-        return false;
+        else{
+            throw new EriantysException(EriantysException.STUDENTPLACE_FULL);
+        }
     }
 
     @Override

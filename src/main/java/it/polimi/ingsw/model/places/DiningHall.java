@@ -12,16 +12,15 @@ public class DiningHall extends StudentPlace {
     }
 
     @Override
-    public boolean addStudent(Student student) throws EriantysException{
+    public void addStudent(Student student) throws EriantysException{
         long students_per_color;
         students_per_color = students.stream().filter(stud -> stud.getColor().equals(student.getColor())).count();
 
        if(students_per_color < STUDENTS_PER_COLOR) {
            students.add(student);
            if (students_per_color %3 == 0 && students_per_color > 0 ) {
-               return true;
+               //TODO: qui ritornava vero per la moneta
            }
-           return false;
        }
        else{
            throw new EriantysException(String.format(EriantysException.INVALID_NOF_PLAYER, students_per_color));

@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
+import it.polimi.ingsw.model.utils.EriantysException;
 
 public class CloudController extends Controller{
     private int cloud_index;
@@ -19,7 +20,7 @@ public class CloudController extends Controller{
         this.cloud_index = cloud_index;
     }
 
-    public void putOnCloud(){
+    public void putOnCloud() throws EriantysException {
         for(int nof_stud = 0; nof_stud < 3; nof_stud++) {
             for(int nof_cloud = 0; nof_cloud < 2; nof_cloud++) {
                 model.getCloud(nof_cloud).addStudent(Bag.getRandomStudent());
@@ -27,7 +28,7 @@ public class CloudController extends Controller{
         }
     }
 
-    public void drainCloud(){
+    public void drainCloud() throws EriantysException {
         //get every student from a cloud and take them to your entrance
         int cloud_index = action.getCloudIndex();
         Player player = model.getPlayers()[action.getPlayerID()];

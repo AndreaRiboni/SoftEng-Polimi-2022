@@ -1,5 +1,7 @@
 package it.polimi.ingsw.global;
 
+import it.polimi.ingsw.model.utils.EriantysException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class Observable {
         observers.add(observer);
     }
 
-    public void notify(Object message){
+    public void notify(Object message) throws EriantysException {
         for(Observer observer: observers){
             observer.update(this, message);
         }

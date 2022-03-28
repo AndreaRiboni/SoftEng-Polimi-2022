@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.places.School;
 import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.EriantysException;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Player {
     private final int ID;
     private final int nof_total_towers;
 
-    public Player(GameBoard gameboard, int ID, Color color, boolean three_players){
+    public Player(GameBoard gameboard, int ID, Color color, boolean three_players) throws EriantysException {
         turn_value = 0;
         coins = 1;
         this.gameboard = gameboard;
@@ -46,11 +47,12 @@ public class Player {
         played_assistcard = card_index;
     }
 
-    public void moveStudentInDiningHall(Student student){
+    public void moveStudentInDiningHall(Student student) throws EriantysException {
         boolean result;
-        result =  school.addStudent(student, Places.DINING_HALL);
-        if(result){
+        school.addStudent(student, Places.DINING_HALL);
+        if(false){
             addCoins(1);
+            //TODO: manage coins
         }
         gameboard.checkProf();
     }
@@ -61,23 +63,21 @@ public class Player {
 
 
 
-    public boolean moveStudentInIsland(int island_index, Student student){
-        return gameboard.getIsland(island_index).addStudent(student);
+    public void moveStudentInIsland(int island_index, Student student) throws EriantysException {
+        gameboard.getIsland(island_index).addStudent(student);
     }
 
-    public boolean moveStudentInEntrance(int nof_students){
-        for(int i = 0; i < nof_students; i++){
-            if(!school.addStudent(Bag.getRandomStudent(), Places.ENTRANCE)) return false;
+    public void moveStudentInEntrance(int nof_students) throws EriantysException {
+        for(int i = 0; i < nof_students; i++) {
+            school.addStudent(Bag.getRandomStudent(), Places.ENTRANCE);
         }
-        return true;
     }
 
-    public boolean moveTowerInIsland(int island_index){
+    public void moveTowerInIsland(int island_index) throws EriantysException {
         if(school.removeTower()){
             Tower tower = new Tower(color);
-            return gameboard.getIsland(island_index).addTower(tower);
+            gameboard.getIsland(island_index).addTower(tower);
         }
-        return false;
     }
 
     public int getNumberOfProf(){
@@ -93,12 +93,12 @@ public class Player {
             coins += qty;
     }
 
-    public boolean removeCoins(int qty){
+    public void removeCoins(int qty) throws EriantysException{
         if(coins - qty >= 0){
             coins -= qty;
-            return true;
+        } else{
+            throw new EriantysException(EriantysException.NOT_ENOUGH_MONEY);
         }
-        return false;
     }
 
     public int getCoins(){
@@ -144,11 +144,12 @@ public class Player {
     }
 
     public void removeEntranceStudent(Student student){
-        school.getEntranceStudents().remove(student);
+        school.removeStudent(student.getColor(), Places.ENTRANCE);
+        //TODO: checks
     }
 
-    public void addEntranceStudent(Student... stud){
+    public void addEntranceStudent(Student... stud) throws EriantysException {
         for(Student s : stud)
-            school.getEntranceStudents().add(s);
+            school.addStudent(s, Places.ENTRANCE);
     }
 }

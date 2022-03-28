@@ -40,5 +40,6 @@ public class EriantysException extends Exception {
             DUPLICATE_PROFESSOR = "This color's professor has already been assigned",
             TOWERPLACE_FULL = "Unable to add: towerplace is full or wrong color",
             STUDENTPLACE_FULL = "Unable to add: studentplace is full",
-            INVALID_CLOUD_INDEX = "Invalid cloud index: %d";
+            INVALID_CLOUD_INDEX = "Invalid cloud index: %d",
+            INVALID_COLOR = "Unable to set this color";
 }

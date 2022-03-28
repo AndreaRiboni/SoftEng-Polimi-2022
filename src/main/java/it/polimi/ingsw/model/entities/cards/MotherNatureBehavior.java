@@ -39,14 +39,4 @@ public class MotherNatureBehavior extends CardBehavior{
         EriantysException.throwUnsupportedOperation();
         return false;
     }
-
-    @Override
-    public void preTurnEffect() {
-        //todo
-    }
-
-    @Override
-    public void postTurnEffect() {
-        //todo
-    }
 }

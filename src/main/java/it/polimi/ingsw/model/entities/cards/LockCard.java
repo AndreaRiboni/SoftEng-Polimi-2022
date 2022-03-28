@@ -13,7 +13,7 @@ public class LockCard {
         island_index = -1;
     }
 
-    public void lockIsland(){
+    public void lockIsland() throws EriantysException {
         gameboard.getIsland(island_index).lock();
     }
 

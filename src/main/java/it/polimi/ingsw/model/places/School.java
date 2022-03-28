@@ -17,7 +17,7 @@ public class School {
     private final List<Professor> professors;
 
 
-    public School(Color color, boolean three_players){
+    public School(Color color, boolean three_players) throws EriantysException {
         tower_color = color;
         entrance = new Entrance();
         dining_hall = new DiningHall();

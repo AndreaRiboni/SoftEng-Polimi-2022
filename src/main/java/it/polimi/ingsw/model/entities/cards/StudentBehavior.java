@@ -48,14 +48,4 @@ public class StudentBehavior extends CardBehavior {
         }
         return false;
     }
-
-    @Override
-    public void preTurnEffect() {
-        //no special effect is needed
-    }
-
-    @Override
-    public void postTurnEffect() {
-        //todo
-    }
 }

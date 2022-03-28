@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.utils.EriantysException;
 
 public class GameController extends Controller {
 
@@ -9,7 +10,7 @@ public class GameController extends Controller {
         super(model);
     }
 
-    public void initializeGame() {
+    public void initializeGame() throws EriantysException {
         model.setNOFPlayers(action.getNOfPlayers());
         model.initializeMotherNature((int) (Math.random() * GameBoard.NOF_ISLAND));
         model.initializeCharacterDeck();

@@ -1,15 +1,16 @@
 package it.polimi.ingsw.model.entities;
 
 import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.EriantysException;
 
 public class Tower {
     private Color color;
 
-    public Tower(Color color){
+    public Tower(Color color) throws EriantysException {
         if(color.equals(Color.WHITE) || color.equals(Color.BLACK) || color.equals(Color.GREY)) {
             this.color = color;
         } else {
-            this.color = Color.WHITE;
+            throw new EriantysException(EriantysException.INVALID_COLOR);
         }
     }
 
