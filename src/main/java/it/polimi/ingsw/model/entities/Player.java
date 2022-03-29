@@ -133,4 +133,11 @@ public class Player {
     public Student getEntranceStudent(int index) throws EriantysException {
         return school.getEntranceStudents().get(index);
     }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("player: ").append(Color.colorToString(color)).append(", coins: ").append(coins).append(", turn_value: ").append(turn_value);
+        sb.append("\nplayer's school (below):\n").append(school);
+        return sb.toString();
+    }
 }

@@ -33,4 +33,26 @@ public enum Color {
     public static Color getRandomStudentColor(){
         return getFromInt((int)(Math.random() * 5));
     }
+
+    public static String colorToString(Color col){
+        switch(col){
+            case YELLOW:
+                return "yellow";
+            case BLUE:
+                return "blue";
+            case GREEN:
+                return "green";
+            case RED:
+                return "red";
+            case PINK:
+                return "pink";
+            case BLACK:
+                return "black";
+            case GREY:
+                return "grey";
+            case WHITE:
+                return "white";
+        }
+        return null;
+    }
 }

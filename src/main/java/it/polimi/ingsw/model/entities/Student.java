@@ -12,4 +12,8 @@ public class Student {
     public Color getColor(){
         return color;
     }
+
+    public String toString(){
+        return "student-" + Color.colorToString(color);
+    }
 }

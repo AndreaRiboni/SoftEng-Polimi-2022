@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.Student;
+import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
@@ -49,5 +50,14 @@ public abstract class StudentPlace {
 
     public void empty(){
         students.clear();
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        if(students.isEmpty()) sb.append("empty");
+        for(Student s : students){
+            sb.append("[").append(s).append("]");
+        }
+        return sb.toString();
     }
 }

@@ -43,4 +43,13 @@ public class TowerHall implements TowerPlace {
     public int getNumberOfTowers(){
         return towers.size();
     }
+
+    public String toString(){ //TODO: improve the print
+        StringBuilder sb = new StringBuilder();
+        if(towers.isEmpty()) sb.append("empty");
+        for(Tower t : towers){
+            sb.append("[").append(t).append("]");
+        }
+        return sb.toString();
+    }
 }

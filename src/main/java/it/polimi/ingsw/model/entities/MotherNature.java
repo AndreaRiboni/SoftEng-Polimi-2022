@@ -35,4 +35,8 @@ public class MotherNature {
                 return current.calculateInfluence();
             }
     }
+
+    public String toString(){
+        return "mothernature on " + island_index;
+    }
 }

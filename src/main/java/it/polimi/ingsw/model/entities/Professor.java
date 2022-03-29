@@ -23,4 +23,12 @@ public class Professor {
     public Player getPlayer(){
         return player;
     }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder("prof-");
+        sb.append(Color.colorToString(color));
+        if(player!=null)
+            sb.append(" is in player-").append(Color.colorToString(player.getColor())).append("'s school");
+        return sb.toString();
+    }
 }

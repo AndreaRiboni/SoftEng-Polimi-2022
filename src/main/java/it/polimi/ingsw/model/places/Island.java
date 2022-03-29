@@ -15,6 +15,8 @@ public class Island extends StudentPlace implements TowerPlace {
     private final int index;
     private final GameBoard gameboard;
     private LockCard lock;
+    private Color influent;
+    private boolean has_mothernature;
 
     public Island(GameBoard gameboard, int index){
         super(Integer.MAX_VALUE);
@@ -23,6 +25,7 @@ public class Island extends StudentPlace implements TowerPlace {
         tower = null;
         this.index = index;
         this.gameboard = gameboard;
+        influent = null;
     }
 
     public Color calculateInfluence(){
@@ -60,6 +63,7 @@ public class Island extends StudentPlace implements TowerPlace {
         }
         return players[index].getColor();
         //TODO: gestire la parità
+        //tip: settare "influent" come il colore della torre che ha l'influenza così che sia facile gestire la parità e accedere senza ricalcolare
     }
 
     public void lock() throws EriantysException {
@@ -127,5 +131,15 @@ public class Island extends StudentPlace implements TowerPlace {
 
     public void setLockCard(LockCard lock){
         this.lock = lock;
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder("island: ");
+        if(hasTower()) sb.append(tower);
+        if(students.isEmpty()) sb.append("empty");
+        for(Student s : students){
+            sb.append("[").append(s).append("]");
+        }
+        return sb.toString();
     }
 }

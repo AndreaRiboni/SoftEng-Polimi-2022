@@ -54,8 +54,8 @@ public class ControllerHub implements Observer {
                 case START:
                     System.out.println("entering game start");
                     g_controller.setAction(action);
-                    g_controller.initializeGame(); //action
                     nof_players = action.getNOfPlayers();
+                    g_controller.initializeGame(); //action
                     flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS); //set the accepted next phases
                     break;
                 case PUT_ON_CLOUDS: //new turn
@@ -93,6 +93,7 @@ public class ControllerHub implements Observer {
                     flow.setAcceptedPhases(GamePhase.DRAIN_CLOUD);
                     break;
                 case DRAIN_CLOUD:
+                    System.out.println("Entering drain cloud");
                     c_controller.setAction(action);
                     c_controller.drainCloud();
                     flow.incrementSubCount("player-turn");
