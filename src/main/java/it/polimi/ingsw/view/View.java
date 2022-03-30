@@ -42,6 +42,28 @@ public class View extends Observable implements Observer, Runnable {
         act.setGamePhase(GamePhase.DRAIN_CLOUD);
         act.setCloudIndex(0);
         notify(act);
+
+        act.setGamePhase(GamePhase.USE_CHARACTER_CARD);
+        act.setCharacterCardIndex(0);
+        notify(act);
+
+        //turn player-2
+        /*
+        act.setThreeStudents(new int[]{0,1,2});
+        act.setPlayerID(1);
+        isl.setExtraValue(2);
+        act.setThreeStudentPlaces(new Places[]{Places.DINING_HALL, Places.DINING_HALL, isl});
+        act.setGamePhase(GamePhase.MOVE_3_STUDENTS);
+        notify(act);
+
+        act.setGamePhase(GamePhase.MOVE_MOTHERNATURE);
+        act.setMothernatureIncrement(2);
+        notify(act);
+
+        act.setGamePhase(GamePhase.DRAIN_CLOUD);
+        act.setCloudIndex(0);
+        notify(act);
+         */
     }
 
     @Override

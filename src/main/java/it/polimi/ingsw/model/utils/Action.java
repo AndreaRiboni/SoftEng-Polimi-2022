@@ -109,4 +109,12 @@ public class Action {
         return (int)param.get(GameParameter.CHARACTER_CARD_INDEX);
     }
 
+    public int[] getStudentIndexes(){
+        return (int[])param.get(GameParameter.STUDENT_INDEXES);
+    }
+
+    public void setStudentIndexes(int[] indexes){
+        param.put(GameParameter.STUDENT_INDEXES, indexes);
+    }
+
 }

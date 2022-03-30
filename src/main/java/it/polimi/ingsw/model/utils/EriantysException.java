@@ -35,7 +35,7 @@ public class EriantysException extends Exception {
             INVALID_NOF_PLAYER = "Invalid number of players: %d",
             INVALID_GAMEFLOW = "Invalid flow",
             INVALID_PLACE = "Invalid place",
-            NOT_ENOUGH_MONEY = "Unable to use the character card: not enough money",
+            NOT_ENOUGH_MONEY = "Unable to use the character card: not enough money. Required: %d, Player has: %d",
             NOT_ENOUGH_LOCKS = "Unable to choose a lock: no locks have been found",
             DUPLICATE_PROFESSOR = "This color's professor has already been assigned",
             TOWERPLACE_FULL = "Unable to add: towerplace is full or wrong color",
@@ -43,5 +43,6 @@ public class EriantysException extends Exception {
             INVALID_CLOUD_INDEX = "Invalid cloud index: %d",
             INVALID_COLOR = "Unable to set this color",
             ALREADY_LOCKED = "Island is already locked",
-            ALREADY_UNLOCKED = "Island is already unlocked";
+            ALREADY_UNLOCKED = "Island is already unlocked",
+            INVALID_CC_INDEX = "Invalid index";
 }

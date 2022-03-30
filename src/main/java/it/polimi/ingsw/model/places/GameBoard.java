@@ -76,12 +76,9 @@ public class GameBoard extends Observable {
     }
 
     public void initializeCharacterDeck(){
+        System.out.println("initializing character deck");
         character_cards = new CharacterDeck(this);
-        CharacterCard[] active = character_cards.draw3Cards();
-        for (int i = 0; i < active.length; i++) {
-            CharacterCard characterCard = active[i];
-            characterCard.setActive();
-        }
+        character_cards.draw3Cards();
         //TODO: the game needs only three cards: we could avoid instantiating the whole deck
         //and we need to specify which 3 cards anyway
     }
@@ -163,8 +160,11 @@ public class GameBoard extends Observable {
         return clouds[cloud_index];
     }
 
-    public CharacterCard getActiveCharacterCard(int index){
-        CharacterCard[] cards = character_cards.getCardsByStatus(true);
-        return cards[index];
+    public CharacterCard getActiveCharacterCard(int index) throws EriantysException {
+        return character_cards.getActiveCard(index);
+    }
+
+    public void putOnIsland(Student student, int island_index) throws EriantysException {
+        getIsland(island_index).addStudent(student);
     }
 }

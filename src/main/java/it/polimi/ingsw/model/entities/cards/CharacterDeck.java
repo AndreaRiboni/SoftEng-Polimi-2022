@@ -1,14 +1,17 @@
 package it.polimi.ingsw.model.entities.cards;
 
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.utils.EriantysException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 public class CharacterDeck {
     private final GameBoard gameboard;
@@ -18,6 +21,7 @@ public class CharacterDeck {
         this.gameboard = gameboard;
         cards = new CharacterCard[GameBoard.NOF_CHAR_CARDS];
         createDeck();
+        System.out.println("deck created");
     }
 
     /**
@@ -27,26 +31,30 @@ public class CharacterDeck {
      *
      * @return (in)active cards
      */
-    public CharacterCard[] getCardsByStatus(boolean status) {
-        int count = (int)Arrays.stream(cards).filter(card -> card.isOnBoard()==status).count();
-        CharacterCard[] subdeck = new CharacterCard[count];
-        count = 0;
-        for(int i = 0; i < subdeck.length; i++){
-            if(cards[i].isOnBoard() == status){
-                subdeck[count++] = cards[i];
+    private List<CharacterCard> getCardsByStatus(boolean status) {
+        List<CharacterCard> status_card = new ArrayList<>();
+        for (CharacterCard card : cards) {
+            if (card.isOnBoard() == status) {
+                status_card.add(card);
             }
         }
-        return subdeck;
+        return status_card;
     }
 
-    public CharacterCard[] draw3Cards() {
-        CharacterCard[] picked = new CharacterCard[3];
-        for (int i = 0; i < 3; i++){
-            CharacterCard[] inactive_cards = getCardsByStatus(false);
-            int index = (int)(Math.random() * inactive_cards.length);
-            picked[i] = inactive_cards[index];
-        }
-        return picked;
+    public CharacterCard getActiveCard(int index) throws EriantysException {
+        if(index < 0 || index > 3) throw new EriantysException(EriantysException.INVALID_CC_INDEX);
+        return getCardsByStatus(true).get(index);
+    }
+
+    public void draw3Cards() {
+        int found = 0;
+        do {
+            int index = (int)(Math.random() * cards.length);
+            if(!cards[index].isOnBoard()){
+                found++;
+                cards[index].setActive();
+            }
+        } while(found < 3);
     }
 
     private void createDeck(){
@@ -104,13 +112,15 @@ public class CharacterDeck {
                 cards[id] = new CharacterCard(
                         gameboard,
                         price,
-                        behavior
+                        behavior,
+                        id
                 );
                 //System.out.println(id + " " + behavior + "\n");
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+        System.out.println("created the character cards");
     }
 
 

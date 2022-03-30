@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.utils.EriantysException;
 public class MotherNatureBehavior extends CardBehavior{
 
     public MotherNatureBehavior(GameBoard gameboard, int id, int extra_steps, int extra_points, boolean avoid_color, boolean avoid_towers, boolean pick_island, Behaviors behavior_name) {
-        super(gameboard, id,0, 0, 0, extra_steps, extra_points, 0, pick_island, avoid_towers, avoid_color, behavior_name);
+        super(gameboard, id,0, 0, 0, 0, extra_points, 0, pick_island, avoid_towers, avoid_color, behavior_name, extra_steps);
     }
 
     @Override
@@ -16,6 +16,12 @@ public class MotherNatureBehavior extends CardBehavior{
         EriantysException.throwUnsupportedOperation();
         return null;
     }
+
+    @Override
+    public int getNofTakeableStudents() {
+        return 0;
+    }
+
 
     @Override
     public int getAvailableLocks() {
@@ -38,5 +44,10 @@ public class MotherNatureBehavior extends CardBehavior{
     public boolean exchangeStudent(Student student1, Student student2) {
         EriantysException.throwUnsupportedOperation();
         return false;
+    }
+
+    @Override
+    public void resetStudent(int student_index) {
+        throw new UnsupportedOperationException();
     }
 }

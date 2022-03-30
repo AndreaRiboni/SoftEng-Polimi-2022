@@ -8,13 +8,17 @@ import it.polimi.ingsw.model.utils.Color;
 public class StudentBehavior extends CardBehavior {
 
     public StudentBehavior(GameBoard gameboard, int id, int nof_student, int available_students, int exchange_students, int drop_student, Behaviors behavior_name) {
-        super(gameboard, id, exchange_students, drop_student, nof_student, 0, 0, 0, false, false, false, behavior_name);
-
+        super(gameboard, id, exchange_students, drop_student, nof_student, available_students, 0, 0, false, false, false, behavior_name, 0);
     }
 
     @Override
     public Student[] getAvailableStudents() {
         return students;
+    }
+
+    @Override
+    public int getNofTakeableStudents() {
+        return available_students;
     }
 
     @Override
@@ -47,5 +51,10 @@ public class StudentBehavior extends CardBehavior {
             }
         }
         return false;
+    }
+
+    @Override
+    public void resetStudent(int student_index) {
+        students[student_index] = Bag.getRandomStudent();
     }
 }

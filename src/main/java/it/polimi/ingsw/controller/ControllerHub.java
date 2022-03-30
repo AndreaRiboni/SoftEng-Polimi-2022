@@ -105,6 +105,7 @@ public class ControllerHub implements Observer {
                     g_controller.checkForEnd();
                     break;
                 case USE_CHARACTER_CARD:
+                    System.out.println("Entering use character card");
                     cc_controller.setAction(action);
                     cc_controller.manage();
                     if (flow.getSubCount("player-turn") == nof_players) {

@@ -16,11 +16,11 @@ public abstract class CardBehavior {
     protected final LockCard[] lock_cards;
     protected Behaviors behavior_name;
 
-    public CardBehavior(GameBoard gameboard, int id, int exchange_students, int drop_students, int nof_students, int extra_steps, int extra_points, int nof_locks, boolean pick_island, boolean avoid_towers, boolean avoid_color, Behaviors behavior_name) {
+    public CardBehavior(GameBoard gameboard, int id, int exchange_students, int drop_students, int nof_students, int takeable_students, int extra_points, int nof_locks, boolean pick_island, boolean avoid_towers, boolean avoid_color, Behaviors behavior_name, int extra_steps) {
         this.gameboard = gameboard;
         color = null;
         island_index = -1;
-        available_students = nof_students;
+        available_students = takeable_students;
         this.id=id;
         this.exchange_students = exchange_students;
         this.drop_students = drop_students;
@@ -39,10 +39,19 @@ public abstract class CardBehavior {
     }
 
     public abstract Student[] getAvailableStudents();
+    public abstract int getNofTakeableStudents();
     public abstract int getAvailableLocks();
     public abstract boolean getStudent(Color color);
     public abstract LockCard getLock();
     public abstract boolean exchangeStudent(Student student1, Student student2);
+
+    public int getNofExchangeableStudents(){
+        return exchange_students;
+    }
+
+    public int getNofDroppableStudents(){
+        return drop_students;
+    }
 
     public void chooseColor(Color color){
         this.color = color;
@@ -83,4 +92,6 @@ public abstract class CardBehavior {
                 avoid_towers
         );
     }
+
+    public abstract void resetStudent(int student_index);
 }

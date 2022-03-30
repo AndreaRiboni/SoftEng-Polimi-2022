@@ -8,13 +8,18 @@ import it.polimi.ingsw.model.utils.EriantysException;
 public class LockBehavior extends CardBehavior{
 
     public LockBehavior(GameBoard gameboard, int id, int nof_locks, Behaviors behavior_name) {
-        super(gameboard, id, 0, 0, 0, 0, 0, nof_locks, false, false, false, behavior_name);
+        super(gameboard, id, 0, 0, 0, 0, 0, nof_locks, false, false, false, behavior_name, 0);
     }
 
     @Override
     public Student[] getAvailableStudents() {
         EriantysException.throwUnsupportedOperation();
         return null;
+    }
+
+    @Override
+    public int getNofTakeableStudents() {
+        return 0;
     }
 
     @Override
@@ -41,5 +46,10 @@ public class LockBehavior extends CardBehavior{
     public boolean exchangeStudent(Student student1, Student student2) {
         EriantysException.throwUnsupportedOperation();
         return false;
+    }
+
+    @Override
+    public void resetStudent(int student_index) {
+        throw new UnsupportedOperationException();
     }
 }
