@@ -16,4 +16,8 @@ public class Student {
     public String toString(){
         return "student-" + Color.colorToString(color);
     }
+
+    public Student clone(){
+        return new Student(color);
+    }
 }

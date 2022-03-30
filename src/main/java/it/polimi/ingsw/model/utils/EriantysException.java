@@ -44,5 +44,7 @@ public class EriantysException extends Exception {
             INVALID_COLOR = "Unable to set this color",
             ALREADY_LOCKED = "Island is already locked",
             ALREADY_UNLOCKED = "Island is already unlocked",
-            INVALID_CC_INDEX = "Invalid index";
+            INVALID_CC_INDEX = "Invalid index",
+            CARD_PARAMETER_ERROR = "The specified parameter doesn't match the game rules",
+            INVALID_STUDENT_INDEX = "Invalid student index";
 }

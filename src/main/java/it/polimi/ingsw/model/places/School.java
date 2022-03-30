@@ -90,6 +90,34 @@ public class School {
         return entrance.getStudents();
     }
 
+    public List<Student> getDiningStudents(){
+        return dining_hall.getStudents();
+    }
+
+    public void swapEntranceDining(int entrance_index, int dining_index) throws EriantysException {
+        if(entrance_index < 0 || entrance_index > getEntranceStudents().size() || dining_index < 0 || dining_index > getDiningStudents().size()){
+            throw new EriantysException(EriantysException.INVALID_STUDENT_INDEX);
+        }
+        List<Student> entrance = getEntranceStudents();
+        List<Student> dining = getDiningStudents();
+        Student entrance_s = entrance.get(entrance_index);
+        Student dining_s = dining.get(dining_index);
+        entrance.remove(entrance_s);
+        dining.remove(dining_s);
+        entrance.add(dining_s);
+        dining.add(entrance_s);
+    }
+
+    public boolean removeFromDiningHall(Color c){
+        for(int i = 0; i < getDiningStudents().size(); i++){
+            if(getDiningStudents().get(i).getColor().equals(c)){
+                getDiningStudents().remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("entrance: ").append(entrance).append("\n");

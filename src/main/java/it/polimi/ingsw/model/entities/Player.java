@@ -48,8 +48,7 @@ public class Player {
     }
 
     public void moveStudentInDiningHall(Student student) throws EriantysException {
-        boolean result;
-        int coins = school.addStudent(student, Places.DINING_HALL);
+        int coins = school.addStudent(student.clone(), Places.DINING_HALL);
         addCoins(coins);
         gameboard.checkProf();
     }
@@ -59,7 +58,7 @@ public class Player {
     }
 
     public void moveStudentInIsland(int island_index, Student student) throws EriantysException {
-        gameboard.getIsland(island_index).addStudent(student);
+        gameboard.getIsland(island_index).addStudent(student.clone());
     }
 
     public void moveTowerInIsland(int island_index) throws EriantysException {
@@ -132,6 +131,14 @@ public class Player {
 
     public Student getEntranceStudent(int index) throws EriantysException {
         return school.getEntranceStudents().get(index);
+    }
+
+    public void swapEntranceDining(int entrance_index, int dining_index) throws EriantysException {
+        school.swapEntranceDining(entrance_index, dining_index);
+    }
+
+    public boolean removeFromDiningHall(Color col){
+        return school.removeFromDiningHall(col);
     }
 
     public String toString(){

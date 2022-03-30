@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.entities.cards.CardBehavior;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.LockCard;
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
 public class CharacterCardController extends Controller {
@@ -60,25 +61,51 @@ public class CharacterCardController extends Controller {
         int takeable_students = behavior.getNofTakeableStudents();
         int exchangeable_students = behavior.getNofExchangeableStudents();
         int droppable_students = behavior.getNofDroppableStudents();
-        if(available_students > 0){ //there are students placed on this card
-            Student[] students = behavior.getAvailableStudents();
-            if(card.getID() == 0) { //i can take some of this card's students to an island
+        int desired_nof_student = 0; //how many students to retrieve
+        Player player;
+        Student[] students = behavior.getAvailableStudents();
+        switch(card.getID()) {
+            case 0: //take 1 student and put it on a island
                 for (int i = 0; i < takeable_students; i++) { //for each takeable student
                     int island_index = action.getIslandIndexes()[i]; //i-th-student destination
                     int student_index = action.getStudentIndexes()[i]; //selected student
                     model.putOnIsland(students[student_index], island_index);
                     behavior.resetStudent(student_index);
                 }
-            } else if(card.getID() == 6){ //i can take 3 of this card's student and take them to my entrance
-
-            }
-        } else { //there aren't students on this card
-            if(droppable_students > 0){ //i can drop out some students
-
-            }
-            if(exchangeable_students > 0){ //i can exchange some students
-
-            }
+                break;
+            case 6: //exchange up to 3 students (from this card to your entrance)
+                desired_nof_student = action.getDesiderNofStudents(); //how many students to retrieve
+                if(desired_nof_student > takeable_students) throw new EriantysException(EriantysException.CARD_PARAMETER_ERROR);
+                for(int i = 0; i < desired_nof_student; i++){
+                    int student_index = action.getStudentIndexes()[i]; //selected student
+                    model.getPlayers()[action.getPlayerID()].addEntranceStudent(students[student_index]); //adds the student to the player's entrance
+                    behavior.resetStudent(student_index); //reset the student
+                }
+                break;
+            case 9: //exchange up to 2 students (your entrance - your dininghall)
+                desired_nof_student = action.getDesiderNofStudents(); //how many students to retrieve
+                player = model.getPlayers()[action.getPlayerID()];
+                for(int i = 0; i < desired_nof_student; i++) {
+                    player.swapEntranceDining(action.getEntranceIndexes()[i], action.getDiningIndexes()[i]);
+                }
+                break;
+            case 10: //get 1 student and put it into your dining
+                for (int i = 0; i < takeable_students; i++) { //for each takeable student
+                    int student_index = action.getStudentIndexes()[i]; //selected student
+                    player = model.getPlayers()[action.getPlayerID()];
+                    player.moveStudentInDiningHall(students[student_index]);
+                    behavior.resetStudent(student_index);
+                }
+                break;
+            case 11: //pick a color c. Every player has to remove from his dining 3 c student
+                Color col = action.getColor();
+                Player[] players = model.getPlayers();
+                for(int i = 0; i < players.length; i++){
+                    for(int o = 0; o < droppable_students; o++){
+                        players[i].removeFromDiningHall(col);
+                    }
+                }
+                break;
         }
     }
 

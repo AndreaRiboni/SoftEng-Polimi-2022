@@ -117,4 +117,36 @@ public class Action {
         param.put(GameParameter.STUDENT_INDEXES, indexes);
     }
 
+    public int getDesiderNofStudents(){
+        return (int)param.get(GameParameter.DESIRED_NOFSTUDENTS);
+    }
+
+    public void setDesiredNofStudents(int nofs){
+        param.put(GameParameter.DESIRED_NOFSTUDENTS, nofs);
+    }
+
+    public int[] getEntranceIndexes(){
+        return (int[])param.get(GameParameter.ENTRANCE_INDEX);
+    }
+
+    public void setEntranceIndexes(int[] index){
+        param.put(GameParameter.ENTRANCE_INDEX, index);
+    }
+
+    public int[] getDiningIndexes(){
+        return (int[])param.get(GameParameter.DINING_INDEX);
+    }
+
+    public void setDiningIndexes(int[] index){
+        param.put(GameParameter.DINING_INDEX, index);
+    }
+
+    public void setColor(Color col){
+        param.put(GameParameter.COLOR, col);
+    }
+
+    public Color getColor(){
+        return (Color)param.get(GameParameter.COLOR);
+    }
+
 }
