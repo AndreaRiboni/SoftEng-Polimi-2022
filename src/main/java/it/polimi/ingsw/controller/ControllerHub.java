@@ -99,8 +99,10 @@ public class ControllerHub implements Observer {
                     flow.incrementSubCount("player-turn");
                     if (flow.getSubCount("player-turn") == nof_players) {
                         flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS, GamePhase.USE_CHARACTER_CARD);
+                        //flow.setFlag("turn-end", true);
                     } else {
                         flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD);
+                        //flow.setFlag("turn-end", false);
                     }
                     g_controller.checkForEnd();
                     break;
@@ -113,6 +115,7 @@ public class ControllerHub implements Observer {
                     } else {
                         flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS);
                     }
+                    g_controller.checkForEnd();
                     break;
             }
         } catch (EriantysException erex){

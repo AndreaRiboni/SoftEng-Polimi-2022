@@ -12,10 +12,12 @@ import java.util.Map;
 public class FlowChecker {
     private List<GamePhase> gamephase;
     private final Map<String, Integer> count;
+    private final Map<String, Boolean> flags;
 
     public FlowChecker(){
         gamephase = new ArrayList<>();
         count = new HashMap<>();
+        flags = new HashMap<>();
     }
 
     public int getSubCount(String name){
@@ -58,5 +60,13 @@ public class FlowChecker {
         gamephase.clear();
         for(GamePhase gp : gamephases)
             gamephase.add(gp);
+    }
+
+    public void setFlag(String key, boolean value) {
+        flags.put(key, value);
+    }
+
+    public boolean getFlag(String key){
+        return (boolean)flags.get(key);
     }
 }
