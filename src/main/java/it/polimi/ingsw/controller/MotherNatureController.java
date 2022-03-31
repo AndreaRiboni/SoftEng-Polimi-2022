@@ -13,5 +13,6 @@ public class MotherNatureController extends Controller {
         //TODO: posso muovermi di questo numero di passi? Verificare con la carta assistente
         //action.getPlayerID() --> getLastPlayedCard() --> getValue >= mn_increment
         model.moveMotherNature(action.getMothernatureIncrement());
+        model.getMotherNature().endTurn();
     }
 }

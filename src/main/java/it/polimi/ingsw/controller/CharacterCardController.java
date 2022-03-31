@@ -49,8 +49,10 @@ public class CharacterCardController extends Controller {
                 studentCardDispatcher();
                 break;
             case MOTHER_NATURE:
+                motherNatureCardDispatcher();
                 break;
             case PROFESSOR:
+                professorCardDispatcher();
                 break;
         }
     }
@@ -109,5 +111,34 @@ public class CharacterCardController extends Controller {
         }
     }
 
+    private void professorCardDispatcher(){ //during this turn you're able to control professors even if the nof_student is equals to some other player's
+        //TODO
+    }
+
+    private void motherNatureCardDispatcher() throws EriantysException {
+        CardBehavior behavior = card.getBehavior();
+        boolean pick_island = behavior.canPickIsland();
+        boolean avoid_towers = behavior.canAvoidTowers();
+        boolean avoid_color = behavior.canAvoidColor();
+        int extra_points = behavior.getExtraPoints();
+        int extra_steps = behavior.getExtraSteps();
+        Player player = model.getPlayers()[action.getPlayerID()];
+
+        if(extra_steps > 0) {
+            player.setMotherNatureExtraSteps(extra_steps);
+        }
+        if(extra_points > 0){
+            player.setMotherNatureExtraPoints(extra_points);
+        }
+        if(avoid_towers){
+            model.getMotherNature().avoidTowers();
+        }
+        if(avoid_color){
+            model.getMotherNature().avoidColor(action.getColor());
+        }
+        if(pick_island){ //calculate the island's influence
+            model.calculateInfluence(action.getIslandIndex());
+        }
+    }
 
 }

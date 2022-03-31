@@ -9,10 +9,14 @@ import it.polimi.ingsw.model.places.Island;
 public class MotherNature {
     private int island_index;
     private final GameBoard gameboard;
+    private boolean avoid_towers;
+    private Color avoid_color;
 
     public MotherNature(GameBoard gameboard, int island_index){
         this.island_index = island_index;
         this.gameboard = gameboard;
+        avoid_towers = false;
+        avoid_color = null;
     }
 
     public void stepForward(int steps) throws EriantysException {
@@ -21,19 +25,30 @@ public class MotherNature {
         island_index %= GameBoard.NOF_ISLAND;
     }
 
-    public Color calculateInfluence() throws EriantysException { //Creare un metodo statico su Island per calcolare un'influenza generica
+    public Color calculateInfluence() throws EriantysException {
             Island current = gameboard.getIsland(island_index);
-            if(current.isLocked()){
-                current.unlock();
-                current.getLock().removeFromIsland();
-                if(current.getTower(Color.WHITE)) return Color.WHITE;
-                if(current.getTower(Color.GREY)) return Color.GREY;
-                if(current.getTower(Color.BLACK)) return Color.BLACK;
-                return null;
-                //return gameboard.getIsland(island_index).getInfluent(); //da definire
-            } else {
-                return current.calculateInfluence();
-            }
+            return current.calculateInfluence(avoid_towers, avoid_color);
+    }
+
+    public void endTurn(){
+        avoid_towers = false;
+        avoid_color = null;
+    }
+
+    public void avoidTowers(){
+        avoid_towers = true;
+    }
+
+    public void avoidColor(Color col){
+        avoid_color = col;
+    }
+
+    public boolean hasToAvoidTowers(){
+        return avoid_towers;
+    }
+
+    public Color hasToAvoidColor(){
+        return avoid_color;
     }
 
     public String toString(){

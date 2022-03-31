@@ -94,4 +94,24 @@ public abstract class CardBehavior {
     }
 
     public abstract void resetStudent(int student_index);
+
+    public boolean canPickIsland() {
+        return pick_island;
+    }
+
+    public boolean canAvoidTowers() {
+        return avoid_towers;
+    }
+
+    public boolean canAvoidColor() {
+        return avoid_color;
+    }
+
+    public int getExtraPoints() {
+        return extra_points;
+    }
+
+    public int getExtraSteps(){
+        return extra_steps;
+    }
 }

@@ -28,7 +28,23 @@ public class Island extends StudentPlace implements TowerPlace {
         influent = null;
     }
 
-    public Color calculateInfluence(){
+    /**
+     * calculate an island's influence
+     * @param avoid_tower if true, don't count the towers
+     * @param avoid_color if not null, don't count the student of this color
+     * @return the influence color (tower)
+     * @throws EriantysException error
+     */
+    public Color calculateInfluence(boolean avoid_tower, Color avoid_color) throws EriantysException {
+        if(isLocked()){ //the island is locked ==> we unlock it and return the tower's color (not re-calculating the influence)
+            unlock();
+            getLock().removeFromIsland();
+            if(getTower(Color.WHITE)) return Color.WHITE;
+            if(getTower(Color.GREY)) return Color.GREY;
+            if(getTower(Color.BLACK)) return Color.BLACK;
+            return null;
+        }
+        //otherwise, we have to calculate the influence
         Player[] players = gameboard.getPlayers();
         int[] stud_counters = new int[5]; //contatore di studenti per ogni colore
         int[] player_points = new int[players.length]; //punti influenza di ogni giocatore
@@ -64,6 +80,8 @@ public class Island extends StudentPlace implements TowerPlace {
         return players[index].getColor();
         //TODO: gestire la parità
         //tip: settare "influent" come il colore della torre che ha l'influenza così che sia facile gestire la parità e accedere senza ricalcolare
+        //TODO: settare le torri
+        //TODO: gestire avoid_color e avoid_towers
     }
 
     public void lock() throws EriantysException {

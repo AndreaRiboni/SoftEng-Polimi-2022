@@ -21,6 +21,7 @@ public class Player {
     private GameBoard gameboard;
     private final int ID;
     private final int nof_total_towers;
+    private int mothernature_extrasteps, mothernature_extrapoints;
 
     public Player(GameBoard gameboard, int ID, Color color, boolean three_players) throws EriantysException {
         turn_value = 0;
@@ -33,6 +34,8 @@ public class Player {
         played_assistcard = -1;
         team_mate = null;
         nof_total_towers = three_players ? 6 : 8;
+        mothernature_extrasteps = 0;
+        mothernature_extrapoints = 0;
     }
 
     public int getTurnValue() {
@@ -139,6 +142,14 @@ public class Player {
 
     public boolean removeFromDiningHall(Color col){
         return school.removeFromDiningHall(col);
+    }
+
+    public void setMotherNatureExtraSteps(int extra){
+        mothernature_extrasteps = extra;
+    }
+
+    public void setMotherNatureExtraPoints(int extra){
+        mothernature_extrapoints = extra;
     }
 
     public String toString(){

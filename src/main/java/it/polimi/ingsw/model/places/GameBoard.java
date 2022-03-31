@@ -167,4 +167,12 @@ public class GameBoard extends Observable {
     public void putOnIsland(Student student, int island_index) throws EriantysException {
         getIsland(island_index).addStudent(student);
     }
+
+    public Color calculateInfluence(int island_index) throws EriantysException {
+        return getIsland(island_index).calculateInfluence(mother_nature.hasToAvoidTowers(), mother_nature.hasToAvoidColor());
+    }
+
+    public MotherNature getMotherNature(){
+        return mother_nature;
+    }
 }
