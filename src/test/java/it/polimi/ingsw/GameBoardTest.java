@@ -13,8 +13,13 @@ public class GameBoardTest {
     @Test
     public void checkProfTest() throws EriantysException {
         GameBoard gameBoard = new GameBoard();
-        Player player = new Player(gameBoard, 1, Color.BLACK, false);
-        Player player2 = new Player(gameBoard, 2, Color.WHITE, false);
+        gameBoard.setNOFPlayers(2);
+        gameBoard.initializeMotherNature((int) (Math.random() * GameBoard.NOF_ISLAND));
+        gameBoard.initializeCharacterDeck();
+        gameBoard.initalizePlayers();
+
+        Player player = gameBoard.getPlayers()[0];
+        Player player2 = gameBoard.getPlayers()[1];
 
         List<Student> students = player.getEntranceStudents();
         List<Student> students2 = player2.getEntranceStudents();
