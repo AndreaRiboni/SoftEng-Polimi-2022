@@ -90,4 +90,14 @@ public class TowerHallTest {
         }
     }
 
+    @Test
+    public void checkGetTower() throws EriantysException{
+        TowerHall towerHall = new TowerHall(Color.BLACK, false);
+        Tower tower = new Tower(Color.BLACK);
+        for(int i = 0; i < 8; i++){
+            towerHall.addTower(tower);
+        }
+        towerHall.getTower(Color.BLACK);
+        assertEquals(7, towerHall.getNumberOfTowers());
+    }
 }
