@@ -45,19 +45,23 @@ public class Island extends StudentPlace implements TowerPlace {
         Player[] players = gameboard.getPlayers();
         int[] stud_counters = new int[5]; //how many students per color
         int[] player_points = new int[players.length]; //points per player
-        for(int i=0; i<students.size(); i++){ //count how many students per color
-            Student s = students.get(i);
-            if(!s.getColor().equals(avoid_color))
-                stud_counters[s.getColor().getVal()]++;
-        }
-        if(hasTower() && !avoid_tower){ //if there's a tower we increment the corresponding player's points
-            for(int i = 0; i < players.length; i++){
-                if(players[i].getColor().equals(tower.getColor())){
-                    player_points[i]++;
-                    break; //otherwise we're counting a +1 for each team member
+        Island curr_island = this;
+        do { //for each connected island
+            for (int i = 0; i < curr_island.students.size(); i++) { //count how many students per color
+                Student s = curr_island.students.get(i);
+                if (!s.getColor().equals(avoid_color))
+                    stud_counters[s.getColor().getVal()]++;
+            }
+            if(curr_island.hasTower() && !avoid_tower){ //if there's a tower we increment the corresponding player's points
+                for(int i = 0; i < players.length; i++){
+                    if(players[i].getColor().equals(curr_island.tower.getColor())){
+                        player_points[i]++;
+                        break; //otherwise we're counting a +1 for each team member
+                    }
                 }
             }
-        }
+            curr_island = curr_island.next;
+        } while(curr_island != null);
         Professor[] professors = gameboard.getProfessors(); //get the professors
         for(int i = 0; i < professors.length; i++){ //for each of them we add the corresponding points to the player who is controlling it
             Professor p = professors[i];
