@@ -121,13 +121,33 @@ public class GameBoard extends Observable {
 
     public void checkProf() {
         int flag = 0;
+        int old_num;
         int total = 0;
         int max = 0;
         for(Color color : Color.values()){
             if(!color.equals(Color.WHITE) && !color.equals(Color.BLACK) && !color.equals(Color.GREY)){
+                Player old_player = getProfFromColor(color).getPlayer();
+
+                if(old_player == null){
+                    old_num = 0;
+                }
+                else{
+                    old_num =  old_player.numOfStudentInDiningHall(color);
+                }
+
+                flag = 0;
+                total = 0;
                 for(Player player : players){
                     total = player.numOfStudentInDiningHall(color);
-                    if (flag == 0) {
+
+                    if(total > old_num){
+                        getProfFromColor(color).setPlayer(player);
+                    }
+                    else{
+                        getProfFromColor(color).setPlayer(player);
+                    }
+
+                    /*if (flag == 0 && !player.equals(old_player)) {
                         max = total;
                         flag = 1;
                         getProfFromColor(color).setPlayer(player);
@@ -137,7 +157,7 @@ public class GameBoard extends Observable {
                             max = total;
                             getProfFromColor(color).setPlayer(player);
                         }
-                    }
+                    }*/
                 }
             }
         }
