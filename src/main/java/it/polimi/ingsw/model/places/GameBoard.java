@@ -195,4 +195,12 @@ public class GameBoard extends Observable {
     public MotherNature getMotherNature(){
         return mother_nature;
     }
+
+
+    public int getPlayerByColor(Color col){
+        for(int i = 0; i < players.length; i++){
+            if(players[i].getColor().equals(col)) return i;
+        }
+        return -1;
+    }
 }

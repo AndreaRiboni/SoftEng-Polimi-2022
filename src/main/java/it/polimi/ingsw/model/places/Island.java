@@ -39,49 +39,58 @@ public class Island extends StudentPlace implements TowerPlace {
         if(isLocked()){ //the island is locked ==> we unlock it and return the tower's color (not re-calculating the influence)
             unlock();
             getLock().removeFromIsland();
-            if(getTower(Color.WHITE)) return Color.WHITE;
-            if(getTower(Color.GREY)) return Color.GREY;
-            if(getTower(Color.BLACK)) return Color.BLACK;
-            return null;
+            return influent;
         }
         //otherwise, we have to calculate the influence
         Player[] players = gameboard.getPlayers();
-        int[] stud_counters = new int[5]; //contatore di studenti per ogni colore
-        int[] player_points = new int[players.length]; //punti influenza di ogni giocatore
-        for(int i=0; i<students.size(); i++){
+        int[] stud_counters = new int[5]; //how many students per color
+        int[] player_points = new int[players.length]; //points per player
+        for(int i=0; i<students.size(); i++){ //count how many students per color
             Student s = students.get(i);
-            stud_counters[s.getColor().getVal()]++;
+            if(!s.getColor().equals(avoid_color))
+                stud_counters[s.getColor().getVal()]++;
         }
-        if(hasTower()){
+        if(hasTower() && !avoid_tower){ //if there's a tower we increment the corresponding player's points
             for(int i = 0; i < players.length; i++){
                 if(players[i].getColor().equals(tower.getColor())){
                     player_points[i]++;
+                    break; //otherwise we're counting a +1 for each team member
                 }
             }
         }
-        Professor[] professors = gameboard.getProfessors();
-        for(int i = 0; i < professors.length; i++){
+        Professor[] professors = gameboard.getProfessors(); //get the professors
+        for(int i = 0; i < professors.length; i++){ //for each of them we add the corresponding points to the player who is controlling it
             Professor p = professors[i];
-            //considero il giocatore g che detiene il prof p
             Player g = p.getPlayer();
-            if(g == null) continue; //prof non ancora assegnato
-            //considero il colore c del prof
+            if(g == null) continue; //unassigned professor
             Color c = p.getColor();
-            //aggiungo al giocatore g tanti punti quanto è il numero di studenti di colore c su quest'isola
-            player_points[g.getID()]+=getStudentsByColor(c);
+            player_points[g.getID()]+=getStudentsByColor(c); //adding how many students of that color are on the island
         }
-        //ritorno il colore della torre del giocatore con maggior punti
-        int index = 0;
+        int index = 0; //we then calculate the influent color (the most influent player's tower color)
         for(int i = 0; i < player_points.length; i++){
             if(player_points[i] > player_points[index]){
                 index = i;
             }
         }
-        return players[index].getColor();
-        //TODO: gestire la parità
-        //tip: settare "influent" come il colore della torre che ha l'influenza così che sia facile gestire la parità e accedere senza ricalcolare
-        //TODO: settare le torri
-        //TODO: gestire avoid_color e avoid_towers
+        if(!players[index].getColor().equals(influent)) { //the tower is being replaced
+            if(countOccurrences(player_points, player_points[index]) > 1){ //tie
+                return influent;
+            }
+            Player old_king = gameboard.getPlayers()[gameboard.getPlayerByColor(influent)]; //remove the old tower
+            old_king.getTowerBack(tower);
+            players[index].moveTowerInIsland(this.index); //place the new tower
+            influent = players[index].getColor();
+            tryMerge(); //tries to merge to the next island
+        }
+        return influent;
+    }
+
+    private int countOccurrences(int[] array, int num){
+        int count = 0;
+        for(int i : array)
+            if(i == num)
+                count++;
+        return count;
     }
 
     public void lock() throws EriantysException {
@@ -100,9 +109,18 @@ public class Island extends StudentPlace implements TowerPlace {
         }
     }
 
-    public void merge(Island island) throws EriantysException {
-        if(index == island.index-1){
-            next = island;
+    private void tryMerge() throws EriantysException {
+        Island next = gameboard.getIsland((index + 1) % GameBoard.NOF_ISLAND);
+        if(next.getTowerColor().equals(getTowerColor())){
+            merge(next);
+        }
+    }
+
+    private void merge(Island island) throws EriantysException {
+        if(index % GameBoard.NOF_ISLAND == (island.index-1) % GameBoard.NOF_ISLAND){
+            if(getTowerColor().equals(island.getTowerColor()))
+                next = island;
+            else throw new EriantysException(EriantysException.INVALID_MERGE_COLOR);
         } else {
             throw new EriantysException(
                     String.format(EriantysException.INVALID_ISLAND_INDEX, island.index)

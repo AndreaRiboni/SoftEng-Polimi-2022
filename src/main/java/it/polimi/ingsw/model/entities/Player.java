@@ -158,4 +158,8 @@ public class Player {
         sb.append("\nplayer's school (below):\n").append(school);
         return sb.toString();
     }
+
+    public void getTowerBack(Tower tower) throws EriantysException {
+        school.addTower(tower);
+    }
 }

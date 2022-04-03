@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.places;
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.entities.Student;
+import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
@@ -124,5 +125,9 @@ public class School {
         sb.append("dininghall: ").append(dining_hall).append("\n");
         sb.append("towerhall: ").append(tower_hall).append("\n");
         return sb.toString();
+    }
+
+    public void addTower(Tower tower) throws EriantysException {
+        tower_hall.addTower(tower);
     }
 }

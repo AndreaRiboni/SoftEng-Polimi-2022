@@ -46,5 +46,6 @@ public class EriantysException extends Exception {
             ALREADY_UNLOCKED = "Island is already unlocked",
             INVALID_CC_INDEX = "Invalid index",
             CARD_PARAMETER_ERROR = "The specified parameter doesn't match the game rules",
-            INVALID_STUDENT_INDEX = "Invalid student index";
+            INVALID_STUDENT_INDEX = "Invalid student index",
+            INVALID_MERGE_COLOR = "Unable to merge: the islands have different colors";
 }
