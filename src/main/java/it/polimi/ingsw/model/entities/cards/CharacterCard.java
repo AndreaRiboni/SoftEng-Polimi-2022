@@ -48,4 +48,12 @@ public class CharacterCard {
     public Behaviors getBehaviorName(){
         return behavior.getBehaviorName();
     }
+     
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        if(price > 1){
+            sb.append("The price of this card is ").append(price).append(" coins");
+        }else{ sb.append("The price of this card is ").append(price).append(" coin");}
+        return sb.toString();
+    }
 }
