@@ -14,7 +14,6 @@ public class CharacterCard {
         onBoard = false;
         this.price = price;
         this.behavior = behavior;
-        System.out.println("card created");
         this.id = id;
     }
 

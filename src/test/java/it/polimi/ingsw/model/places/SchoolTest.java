@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.places;
 import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,13 +25,13 @@ class SchoolTest {
 
     @Test
     public void addStudentTest() throws EriantysException{
-        Student[] yellow_students = new Student[9];
-        for(int i=0; i<9; i++){
+        Student[] yellow_students = new Student[10];
+        for(int i=0; i< yellow_students.length; i++){
             yellow_students[i] = new Student(Color.YELLOW);
         }
 
-        Student[] red_students = new Student[9];
-        for(int i=0; i<9; i++){
+        Student[] red_students = new Student[10];
+        for(int i=0; i < red_students.length; i++){
             red_students[i] = new Student(Color.RED);
         }
 
@@ -53,12 +54,42 @@ class SchoolTest {
         assertEquals(0, school.addStudent(red_students[1], Places.DINING_HALL));
         assertEquals(1, school.addStudent(red_students[2], Places.DINING_HALL));
 
-        //3 more yellow students (TOT: 9 yellow students)
+        //4 more yellow students (TOT: 10 yellow students)
         assertEquals(0, school.addStudent(yellow_students[6], Places.DINING_HALL));
         assertEquals(0, school.addStudent(yellow_students[7], Places.DINING_HALL));
         assertEquals(1, school.addStudent(yellow_students[8], Places.DINING_HALL));
+        assertEquals(0, school.addStudent(yellow_students[9], Places.DINING_HALL));
 
-        //TODO: adding a 10th yellow student I expect an error
+        //adding a 11th yellow student I expect an error
+        EriantysException thrown = Assertions.assertThrows(EriantysException.class, () -> {
+            school.addStudent(new Student(Color.YELLOW), Places.DINING_HALL);
+        });
+
+        //adding a student in a place different than the dining hall and the entrance throws an exception
+        thrown = Assertions.assertThrows(EriantysException.class, () -> {
+            school.addStudent(new Student(Color.RED), Places.CLOUD);
+        });
+
+        //adding more than 7 the red students to the entrance throws an exception (the entrance is initialized with 7 students)
+        thrown = Assertions.assertThrows(EriantysException.class, () -> {
+            school.addStudent(new Student(Color.PINK), Places.ENTRANCE);
+        });
+
     }
 
+    @Test
+    void removeStudent() {
+        //test: i can remove a student from DINING_HALL and ENTRANCE only
+        //      when i choose the wrong StudentPlace i get return false
+        //test: the number of student of that color in that studentplace is decreased by one
+        //      the number of student of other colors doesn't change
+        //test: if i can't remove any students i get return false
+        //test: if the student is removed i get return true
+    }
+
+    @Test
+    void removeTower() {
+        //test: it returns true if the tower is removed ( ==> number of towers decreased)
+        //test: it return false if there aren't enough towers / wrong tower color
+    }
 }

@@ -21,7 +21,6 @@ public class CharacterDeck {
         this.gameboard = gameboard;
         cards = new CharacterCard[GameBoard.NOF_CHAR_CARDS];
         createDeck();
-        System.out.println("deck created");
     }
 
     /**
@@ -115,12 +114,10 @@ public class CharacterDeck {
                         behavior,
                         id
                 );
-                //System.out.println(id + " " + behavior + "\n");
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-        System.out.println("created the character cards");
     }
 
 

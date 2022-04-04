@@ -29,6 +29,8 @@ public class Professor {
         sb.append(Color.colorToString(color));
         if(player!=null)
             sb.append(" is in player-").append(Color.colorToString(player.getColor())).append("'s school");
+        else sb.append(" isn't in a school");
         return sb.toString();
     }
+
 }

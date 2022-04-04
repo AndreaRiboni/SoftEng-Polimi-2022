@@ -53,7 +53,7 @@ public class Player {
     public void moveStudentInDiningHall(Student student) throws EriantysException {
         int coins = school.addStudent(student.clone(), Places.DINING_HALL);
         addCoins(coins);
-        gameboard.checkProf();
+        gameboard.checkProf(student.getColor(), ID, false);
     }
     
      public int numOfStudentInDiningHall(Color color){
@@ -137,11 +137,24 @@ public class Player {
     }
 
     public void swapEntranceDining(int entrance_index, int dining_index) throws EriantysException {
-        school.swapEntranceDining(entrance_index, dining_index);
+        //remove it from the dining
+        Color ToEntrance = school.getDiningStudents().get(dining_index).getColor();
+        removeFromDiningHall(ToEntrance);
+        //remove it from the entrance
+        Student ToDining = school.getEntranceStudents().get(entrance_index);
+        removeEntranceStudent(ToDining);
+        //add it to the dining
+        moveStudentInDiningHall(ToDining);
+        //add it to entrance
+        addEntranceStudent(new Student(ToEntrance));
     }
 
     public boolean removeFromDiningHall(Color col){
-        return school.removeFromDiningHall(col);
+        boolean result = school.removeStudent(col, Places.DINING_HALL);
+        if(result){
+            gameboard.checkProf(col, ID, true);
+        }
+        return result;
     }
 
     public void setMotherNatureExtraSteps(int extra){
@@ -161,5 +174,15 @@ public class Player {
 
     public void getTowerBack(Tower tower) throws EriantysException {
         school.addTower(tower);
+    }
+
+    public int getNofStudentInDiningHall(Color col){
+        return (int) school.getDiningStudents().stream().filter(s -> s.getColor().equals(col)).count();
+    }
+
+    public boolean equals(Object obj){
+        if(!(obj instanceof Player)) return false;
+        Player other = (Player)obj;
+        return getID() == other.getID();
     }
 }

@@ -21,27 +21,29 @@ public class GameBoardTest {
         gameBoard.initializeCharacterDeck();
         gameBoard.initalizePlayers();
 
-        Professor professor = gameBoard.getProfFromColor(Color.YELLOW);
-
         Player player = gameBoard.getPlayers()[0];
         Player player2 = gameBoard.getPlayers()[1];
 
-        List<Student> students = player.getEntranceStudents();
-        List<Student> students2 = player2.getEntranceStudents();
+        //red-prof goes to player1 (1-0)
+        player.moveStudentInDiningHall(new Student(Color.RED));
+        assertEquals(gameBoard.getProfFromColor(Color.RED).getPlayer().getID(), player.getID());
 
-        System.out.println(students);
-        System.out.println(students2);
+        //tie. still player1 (1-1)
+        player2.moveStudentInDiningHall(new Student(Color.RED));
+        assertEquals(gameBoard.getProfFromColor(Color.RED).getPlayer().getID(), player.getID());
 
-        for(int i = 0; i < students.size(); i++){
-            player.moveStudentInDiningHall(students.get(i));
-        }
+        //red-prof goes to player2 (1-2)
+        player2.moveStudentInDiningHall(new Student(Color.RED));
+        assertEquals(gameBoard.getProfFromColor(Color.RED).getPlayer().getID(), player2.getID());
 
-        for(int i = 0; i < students2.size(); i++){
-            player2.moveStudentInDiningHall(students2.get(i));
-        }
+        //tie. still player2 (1-1)
+        player2.removeFromDiningHall(Color.RED);
+        assertEquals(gameBoard.getProfFromColor(Color.RED).getPlayer().getID(), player2.getID());
 
-        gameBoard.checkProf();
+    }
 
-        System.out.println(professor.getPlayer());
+    @Test
+    public void calculateInfluence() {
+        //not yet
     }
 }

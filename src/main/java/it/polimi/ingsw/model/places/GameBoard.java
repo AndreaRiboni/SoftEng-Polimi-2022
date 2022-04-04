@@ -76,7 +76,6 @@ public class GameBoard extends Observable {
     }
 
     public void initializeCharacterDeck(){
-        System.out.println("initializing character deck");
         character_cards = new CharacterDeck(this);
         character_cards.draw3Cards();
         //TODO: the game needs only three cards: we could avoid instantiating the whole deck
@@ -88,6 +87,7 @@ public class GameBoard extends Observable {
         return islands[island_index]; //passare una copia?
     }
 
+    /*
     public void setTowerOn(int island_index, Tower tower) throws EriantysException {
         EriantysException.throwInvalidIslandIndex(island_index);
         getIsland(island_index).addTower(tower);
@@ -103,6 +103,7 @@ public class GameBoard extends Observable {
         );
         clouds[cloud_index].addStudent(student);
     }
+     */
 
     public Player[] getPlayers(){
         return players;
@@ -119,46 +120,38 @@ public class GameBoard extends Observable {
         return null;
     }
 
-    public void checkProf() {
-        int flag = 0;
-        int old_num;
-        int total = 0;
-        int max = 0;
-        for(Color color : Color.values()){
-            if(!color.equals(Color.WHITE) && !color.equals(Color.BLACK) && !color.equals(Color.GREY)){
-                Player old_player = getProfFromColor(color).getPlayer();
-
-                if(old_player == null){
-                    old_num = 0;
+    public void checkProf(Color col, int last_player_id, boolean removed){
+        //who currently has this prof
+        Professor prof = getProfFromColor(col);
+        Player old = prof.getPlayer();
+        int new_stud = 0;
+        if(!removed) { //a student has been added
+            //if no one ever had this prof i can assign it to the last player
+            if (old == null) {
+                prof.setPlayer(players[last_player_id]);
+            } else { //i can assign the professor to the last player only if the last player has more col-students
+                int old_stud = old.getNofStudentInDiningHall(col);
+                new_stud = players[last_player_id].getNofStudentInDiningHall(col);
+                if (new_stud > old_stud) {
+                    prof.setPlayer(players[last_player_id]);
                 }
-                else{
-                    old_num =  old_player.numOfStudentInDiningHall(color);
+            }
+        } else { //a student has been removed: do i still own that prof?
+            //trovo chi ha più studenti di quel colore
+            int max_index = 0, max_num = 0;
+            boolean tie = false;
+            for(int i = 0; i < players.length; i++){
+                new_stud = players[i].getNofStudentInDiningHall(col);
+                if(new_stud > max_num){
+                    max_num = new_stud;
+                    max_index = i;
+                    tie = false;
+                } else if(new_stud == max_num){
+                    tie = true;
                 }
-
-                flag = 0;
-                total = 0;
-                for(Player player : players){
-                    total = player.numOfStudentInDiningHall(color);
-
-                    if(total > old_num){
-                        getProfFromColor(color).setPlayer(player);
-                    }
-                    else{
-                        getProfFromColor(color).setPlayer(player);
-                    }
-
-                    /*if (flag == 0 && !player.equals(old_player)) {
-                        max = total;
-                        flag = 1;
-                        getProfFromColor(color).setPlayer(player);
-                    }
-                    else{
-                        if(total > max){
-                            max = total;
-                            getProfFromColor(color).setPlayer(player);
-                        }
-                    }*/
-                }
+            }
+            if(!tie){ //if it's a tie nothing changes
+                prof.setPlayer(players[max_index]);
             }
         }
     }
