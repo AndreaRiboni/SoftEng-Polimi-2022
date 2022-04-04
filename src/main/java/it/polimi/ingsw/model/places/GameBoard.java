@@ -87,12 +87,12 @@ public class GameBoard extends Observable {
         return islands[island_index]; //passare una copia?
     }
 
-    /*
     public void setTowerOn(int island_index, Tower tower) throws EriantysException {
         EriantysException.throwInvalidIslandIndex(island_index);
         getIsland(island_index).addTower(tower);
     }
-
+    
+    /*
     public Student drawFromBag(){
         return Bag.getRandomStudent();
     }
