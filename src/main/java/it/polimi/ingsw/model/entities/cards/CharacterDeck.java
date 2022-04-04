@@ -119,6 +119,13 @@ public class CharacterDeck {
             e.printStackTrace();
         }
     }
-
+    
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        if(cards.length > 0){
+            sb.append("Cards remaining: ").append(cards.length);
+        }else{ sb.append("\nEmpty deck!\n");}
+        return sb.toString();
+    }
 
 }
