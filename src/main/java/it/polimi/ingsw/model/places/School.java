@@ -1,14 +1,11 @@
 package it.polimi.ingsw.model.places;
 
-import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.Professor;
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class School {
     private final Entrance entrance;
@@ -24,11 +21,11 @@ public class School {
         for(int i=0; i<7; i++) addStudent(Bag.getRandomStudent(), Places.ENTRANCE);
     }
 
-    public int addStudent(Student student, Places place) throws EriantysException{
+    public int addStudent(Color student, Places place) throws EriantysException{
         switch(place) {
             case DINING_HALL:
                 dining_hall.addStudent(student);
-                int nof_studs = dining_hall.getNofStudents(student.getColor());
+                int nof_studs = dining_hall.countByColor(student);
                 if(nof_studs % 3 == 0 && nof_studs > 0){
                     return 1;
                 }
@@ -54,7 +51,7 @@ public class School {
         default:
             return -1;
         }
-        return (int)sp.getStudents().stream().filter(stud->stud.getColor().equals(col)).count();
+        return sp.getStudents().getOrDefault(col, 0);
     }
 
     public boolean removeStudent(Color color, Places place){
@@ -69,13 +66,7 @@ public class School {
             default:
                 return false;
         }
-        for(int i = 0; i < sp.getStudents().size(); i++){
-            if(sp.getStudents().get(i).getColor().equals(color)){
-                sp.getStudents().remove(i);
-                return true;
-            }
-        }
-        return false;
+        return StudentPlace.incrementMapValue(sp.getStudents(), color, -1);
     }
 
     public boolean removeTower(){
@@ -86,11 +77,11 @@ public class School {
         return tower_hall.getNumberOfTowers();
     }
 
-    public List<Student> getEntranceStudents(){
+    public Map<Color, Integer> getEntranceStudents(){
         return entrance.getStudents();
     }
 
-    public List<Student> getDiningStudents(){
+    public Map<Color, Integer> getDiningStudents(){
         return dining_hall.getStudents();
     }
 

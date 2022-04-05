@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.cards.CardBehavior;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.LockCard;
@@ -65,7 +64,7 @@ public class CharacterCardController extends Controller {
         int droppable_students = behavior.getNofDroppableStudents();
         int desired_nof_student = 0; //how many students to retrieve
         Player player;
-        Student[] students = behavior.getAvailableStudents();
+        Color[] students = behavior.getAvailableStudents();
         switch(card.getID()) {
             case 0: //take 1 student and put it on a island
                 for (int i = 0; i < takeable_students; i++) { //for each takeable student
@@ -88,7 +87,7 @@ public class CharacterCardController extends Controller {
                 desired_nof_student = action.getDesiderNofStudents(); //how many students to retrieve
                 player = model.getPlayers()[action.getPlayerID()];
                 for(int i = 0; i < desired_nof_student; i++) {
-                    player.swapEntranceDining(action.getEntranceIndexes()[i], action.getDiningIndexes()[i]);
+                    player.swapEntranceDining(action.getEntranceColors()[i], action.getDiningColors()[i]);
                 }
                 break;
             case 10: //get 1 student and put it into your dining

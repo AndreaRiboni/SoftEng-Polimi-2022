@@ -61,12 +61,12 @@ public class Action {
         param.put(GameParameter.PLAYER_ORDER, player_order);
     }
 
-    public void setThreeStudents(int[] index){
-        param.put(GameParameter.THREE_STUDENTS_INDEXES, index);
+    public void setThreeStudents(Color[] students){
+        param.put(GameParameter.THREE_STUDENTS_INDEXES, students);
     }
 
-    public int[] getThreeStudents(){
-        return (int[])param.get(GameParameter.THREE_STUDENTS_INDEXES);
+    public Color[] getThreeStudents(){
+        return (Color[])param.get(GameParameter.THREE_STUDENTS_INDEXES);
     }
 
     public Places[] getThreeStudentPlaces(){
@@ -125,19 +125,19 @@ public class Action {
         param.put(GameParameter.DESIRED_NOFSTUDENTS, nofs);
     }
 
-    public int[] getEntranceIndexes(){
-        return (int[])param.get(GameParameter.ENTRANCE_INDEX);
+    public Color[] getEntranceColors(){
+        return (Color[])param.get(GameParameter.ENTRANCE_INDEX);
     }
 
-    public void setEntranceIndexes(int[] index){
+    public void setEntranceColors(Color[] index){
         param.put(GameParameter.ENTRANCE_INDEX, index);
     }
 
-    public int[] getDiningIndexes(){
-        return (int[])param.get(GameParameter.DINING_INDEX);
+    public Color[] getDiningColors(){
+        return (Color[])param.get(GameParameter.DINING_INDEX);
     }
 
-    public void setDiningIndexes(int[] index){
+    public void setDiningColors(Color[] index){
         param.put(GameParameter.DINING_INDEX, index);
     }
 

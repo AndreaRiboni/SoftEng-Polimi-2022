@@ -1,9 +1,11 @@
 package it.polimi.ingsw.model.entities.cards;
 
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.places.StudentPlace;
 import it.polimi.ingsw.model.utils.Color;
+
+import java.util.Map;
 
 public class StudentBehavior extends CardBehavior {
 
@@ -12,7 +14,7 @@ public class StudentBehavior extends CardBehavior {
     }
 
     @Override
-    public Student[] getAvailableStudents() {
+    public Color[] getAvailableStudents() {
         return students;
     }
 
@@ -29,7 +31,7 @@ public class StudentBehavior extends CardBehavior {
     @Override
     public boolean getStudent(Color color) {
         for(int i = 0; i < nof_students; i++){
-            if(students[i].getColor().equals(color)){
+            if(students[i].equals(color)){
                 students[i] = Bag.getRandomStudent();
                 return true;
             }
@@ -43,9 +45,9 @@ public class StudentBehavior extends CardBehavior {
     }
 
     @Override
-    public boolean exchangeStudent(Student student1, Student student2) {
+    public boolean exchangeStudent(Color student1, Color student2) {
         for(int i = 0; i < nof_students; i++){
-            if(students[i].getColor().equals(color)){
+            if(students[i].equals(color)){
                 students[i] = student2;
                 return true;
             }
@@ -54,7 +56,7 @@ public class StudentBehavior extends CardBehavior {
     }
 
     @Override
-    public void resetStudent(int student_index) {
-        students[student_index] = Bag.getRandomStudent();
+    public void resetStudent(int index) {
+        students[index] = Bag.getRandomStudent();
     }
 }

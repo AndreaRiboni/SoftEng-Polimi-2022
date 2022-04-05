@@ -1,10 +1,13 @@
 package it.polimi.ingsw.model.entities.cards;
 
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.places.StudentPlace;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class CardBehavior {
     protected GameBoard gameboard;
@@ -12,7 +15,7 @@ public abstract class CardBehavior {
     protected int island_index, available_students;
     protected final int id, exchange_students, drop_students, nof_students, extra_steps, extra_points, nof_locks;
     protected final boolean avoid_color, pick_island, avoid_towers;
-    protected final Student[] students;
+    protected final Color[] students;
     protected final LockCard[] lock_cards;
     protected Behaviors behavior_name;
 
@@ -31,19 +34,19 @@ public abstract class CardBehavior {
         this.pick_island = pick_island;
         this.avoid_towers = avoid_towers;
         this.avoid_color = avoid_color;
-        students = new Student[nof_students];
-        fillStudents(nof_students);
+        students = new Color[nof_students];
+        fillStudents();
         lock_cards = new LockCard[nof_locks];
         fillLocks(nof_locks);
         this.behavior_name = behavior_name;
     }
 
-    public abstract Student[] getAvailableStudents();
+    public abstract Color[] getAvailableStudents();
     public abstract int getNofTakeableStudents();
     public abstract int getAvailableLocks();
     public abstract boolean getStudent(Color color);
     public abstract LockCard getLock();
-    public abstract boolean exchangeStudent(Student student1, Student student2);
+    public abstract boolean exchangeStudent(Color student1, Color student2);
 
     public int getNofExchangeableStudents(){
         return exchange_students;
@@ -62,7 +65,7 @@ public abstract class CardBehavior {
         this.island_index = island_index;
     }
 
-    private void fillStudents(int nof_students){
+    private void fillStudents(){
         for(int i = 0; i < nof_students; i++){
             students[i] = Bag.getRandomStudent();
         }

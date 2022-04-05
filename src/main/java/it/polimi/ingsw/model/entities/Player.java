@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
 import java.util.List;
+import java.util.Map;
 
 public class Player {
     private int turn_value, coins;
@@ -50,18 +51,18 @@ public class Player {
         played_assistcard = card_index;
     }
 
-    public void moveStudentInDiningHall(Student student) throws EriantysException {
-        int coins = school.addStudent(student.clone(), Places.DINING_HALL);
+    public void moveStudentInDiningHall(Color student) throws EriantysException {
+        int coins = school.addStudent(student, Places.DINING_HALL);
         addCoins(coins);
-        gameboard.checkProf(student.getColor(), ID, false);
+        gameboard.checkProf(student, ID, false);
     }
     
      public int numOfStudentInDiningHall(Color color){
         return school.getNumberOfStudents(color, Places.DINING_HALL);
     }
 
-    public void moveStudentInIsland(int island_index, Student student) throws EriantysException {
-        gameboard.getIsland(island_index).addStudent(student.clone());
+    public void moveStudentInIsland(int island_index, Color student) throws EriantysException {
+        gameboard.getIsland(island_index).addStudent(student);
     }
 
     public void moveTowerInIsland(int island_index) throws EriantysException {
@@ -113,40 +114,29 @@ public class Player {
         return wizard.getCards()[played_assistcard];
     }
 
-    public List<Student> getEntranceStudents(){
+    public Map<Color, Integer> getEntranceStudents(){
         return school.getEntranceStudents(); //TODO: pass a copy
     }
 
-    public void removeEntranceStudent(int index){
-        school.getEntranceStudents().remove(index);
+    public void removeEntranceStudent(Color student){
+        school.removeStudent(student, Places.ENTRANCE);
         //TODO: checks
     }
 
-    public void removeEntranceStudent(Student student){
-        school.removeStudent(student.getColor(), Places.ENTRANCE);
-        //TODO: checks
-    }
-
-    public void addEntranceStudent(Student... stud) throws EriantysException {
-        for(Student s : stud)
+    public void addEntranceStudent(Color... stud) throws EriantysException {
+        for(Color s : stud)
             school.addStudent(s, Places.ENTRANCE);
     }
 
-    public Student getEntranceStudent(int index) throws EriantysException {
-        return school.getEntranceStudents().get(index);
-    }
-
-    public void swapEntranceDining(int entrance_index, int dining_index) throws EriantysException {
+    public void swapEntranceDining(Color entrance, Color dining) throws EriantysException {
         //remove it from the dining
-        Color ToEntrance = school.getDiningStudents().get(dining_index).getColor();
-        removeFromDiningHall(ToEntrance);
+        removeFromDiningHall(dining);
         //remove it from the entrance
-        Student ToDining = school.getEntranceStudents().get(entrance_index);
-        removeEntranceStudent(ToDining);
+        removeEntranceStudent(entrance);
         //add it to the dining
-        moveStudentInDiningHall(ToDining);
+        moveStudentInDiningHall(entrance);
         //add it to entrance
-        addEntranceStudent(new Student(ToEntrance));
+        addEntranceStudent(dining);
     }
 
     public boolean removeFromDiningHall(Color col){
@@ -179,7 +169,7 @@ public class Player {
     }
 
     public int getNofStudentInDiningHall(Color col){
-        return (int) school.getDiningStudents().stream().filter(s -> s.getColor().equals(col)).count();
+        return school.getDiningStudents().get(col);
     }
 
     public boolean equals(Object obj){

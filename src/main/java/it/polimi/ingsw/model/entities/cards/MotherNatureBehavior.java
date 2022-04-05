@@ -1,9 +1,10 @@
 package it.polimi.ingsw.model.entities.cards;
 
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
+
+import java.util.Map;
 
 public class MotherNatureBehavior extends CardBehavior{
 
@@ -12,7 +13,7 @@ public class MotherNatureBehavior extends CardBehavior{
     }
 
     @Override
-    public Student[] getAvailableStudents() {
+    public Color[] getAvailableStudents() {
         EriantysException.throwUnsupportedOperation();
         return null;
     }
@@ -41,13 +42,13 @@ public class MotherNatureBehavior extends CardBehavior{
     }
 
     @Override
-    public boolean exchangeStudent(Student student1, Student student2) {
+    public boolean exchangeStudent(Color student1, Color student2) {
         EriantysException.throwUnsupportedOperation();
         return false;
     }
 
     @Override
-    public void resetStudent(int student_index) {
+    public void resetStudent(int index) {
         throw new UnsupportedOperationException();
     }
 }

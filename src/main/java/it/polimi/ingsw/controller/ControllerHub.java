@@ -2,15 +2,11 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.global.Observable;
 import it.polimi.ingsw.global.Observer;
-import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.places.*;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
 import it.polimi.ingsw.view.View;
-
-import java.util.List;
 
 /*
 TODO: we should avoid accessing directly to the data structures (i.e. the students list)

@@ -3,39 +3,32 @@ package it.polimi.ingsw.model.places;
 import static org.junit.jupiter.api.Assertions.*;
 
 import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.Professor;
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.List;
-
 public class GameBoardTest {
 
     @Test
     public void checkProfTest() throws EriantysException {
         GameBoard gameBoard = new GameBoard();
-        gameBoard.setNOFPlayers(2);
-        gameBoard.initializeMotherNature((int) (Math.random() * GameBoard.NOF_ISLAND));
-        gameBoard.initializeCharacterDeck();
-        gameBoard.initalizePlayers();
+        gameBoard.initialize(2, (int) (Math.random() * GameBoard.NOF_ISLAND));
 
         Player player = gameBoard.getPlayers()[0];
         Player player2 = gameBoard.getPlayers()[1];
 
         //red-prof goes to player1 (1-0)
-        player.moveStudentInDiningHall(new Student(Color.RED));
+        player.moveStudentInDiningHall(Color.RED);
         assertEquals(gameBoard.getProfFromColor(Color.RED).getPlayer().getID(), player.getID());
 
         //tie. still player1 (1-1)
-        player2.moveStudentInDiningHall(new Student(Color.RED));
+        player2.moveStudentInDiningHall(Color.RED);
         assertEquals(gameBoard.getProfFromColor(Color.RED).getPlayer().getID(), player.getID());
 
         //red-prof goes to player2 (1-2)
-        player2.moveStudentInDiningHall(new Student(Color.RED));
+        player2.moveStudentInDiningHall(Color.RED);
         assertEquals(gameBoard.getProfFromColor(Color.RED).getPlayer().getID(), player2.getID());
 
         //tie. still player2 (1-1)
@@ -52,10 +45,7 @@ public class GameBoardTest {
     @Test
     public void setTowerOnTest() throws EriantysException{
         GameBoard gameBoard = new GameBoard();
-        gameBoard.setNOFPlayers(2);
-        gameBoard.initializeMotherNature((int) (Math.random() * GameBoard.NOF_ISLAND));
-        gameBoard.initializeCharacterDeck();
-        gameBoard.initalizePlayers();
+        gameBoard.initialize(2, (int) (Math.random() * GameBoard.NOF_ISLAND));
 
         Tower t = new Tower(Color.WHITE);
         Tower t1 = new Tower(Color.BLACK);
@@ -82,44 +72,34 @@ public class GameBoardTest {
     @Test
     public void putOnCloud2_4Test() throws EriantysException {
         GameBoard gameBoard = new GameBoard();
-        gameBoard.setNOFPlayers(2);
-        gameBoard.initializeMotherNature((int) (Math.random() * GameBoard.NOF_ISLAND));
-        gameBoard.initializeCharacterDeck();
-        gameBoard.initalizePlayers();
-
-        Student s1 = new Student(Color.RED);
-        Student s2 = new Student(Color.GREEN);
-        Student s3 = new Student(Color.BLUE);
-        Student s4 = new Student(Color.PINK);
-        Student s5 = new Student(Color.YELLOW);
-        Student s6 = new Student(Color.RED);
+        gameBoard.initialize(2, (int) (Math.random() * GameBoard.NOF_ISLAND));
 
         //if cloud_index is not 0 or 1 I expect an exception
         EriantysException thrown = Assertions.assertThrows(EriantysException.class, () -> {
-            gameBoard.putOnCloud(s1, 3);
+            gameBoard.putOnCloud(Color.RED, 3);
         });
 
         //every time I put a student on a cloud I want from students.size() to increase
         Cloud c1 = gameBoard.getCloud(0);
         Cloud c2 = gameBoard.getCloud(1);
-        assertEquals(0, c1.getStudents().size());
-        gameBoard.putOnCloud(s1, 0);
-        assertEquals(1, c1.getStudents().size());
-        gameBoard.putOnCloud(s2, 0);
-        assertEquals(2, c1.getStudents().size());
-        gameBoard.putOnCloud(s3, 1);
-        assertEquals(1, c2.getStudents().size());
-        gameBoard.putOnCloud(s4, 0);
-        assertEquals(3, c1.getStudents().size());
-        gameBoard.putOnCloud(s5, 0);
-        assertEquals(4, c1.getStudents().size());
+        assertEquals(0, c1.getNofStudent()); //empty cloud
+        gameBoard.putOnCloud(Color.RED, 0); //put red on 0
+        assertEquals(1, c1.countByColor(Color.RED)); //0 has 1 red
+        gameBoard.putOnCloud(Color.GREEN, 0); //put green on 0
+        assertEquals(1, c1.countByColor(Color.GREEN)); //0 has 1 green
+        gameBoard.putOnCloud(Color.BLUE, 1);  //put blue on 1
+        assertEquals(1, c2.countByColor(Color.BLUE)); //1 has 1 blue
+        gameBoard.putOnCloud(Color.PINK, 0); //put pink on 0
+        assertEquals(1, c1.countByColor(Color.PINK)); //0 has 1 pink
+        gameBoard.putOnCloud(Color.RED, 0); //put red on 0
+        assertEquals(2, c1.countByColor(Color.RED)); //0 has 2 red
 
         //if I try to add a new student on a full cloud I expect an exception
         thrown = Assertions.assertThrows(EriantysException.class, () -> {
-            gameBoard.putOnCloud(s6, 0);
+            gameBoard.putOnCloud(Color.RED, 0);
         });
         c1.popStudent(Color.RED);
-        assertEquals(3, c1.getStudents().size());
+        assertEquals(3, c1.getNofStudent());
 
     }
 }

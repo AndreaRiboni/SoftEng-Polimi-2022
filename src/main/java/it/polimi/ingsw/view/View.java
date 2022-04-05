@@ -27,6 +27,7 @@ public class View extends Observable implements Observer, Runnable {
         act.setGamePhase(GamePhase.DRAW_ASSIST_CARD);
         notify(act);
 
+        /*
         act.setThreeStudents(new int[]{0,1,2});
         act.setPlayerID(0);
         Places isl = Places.ISLAND;
@@ -48,7 +49,7 @@ public class View extends Observable implements Observer, Runnable {
         notify(act);
 
         //turn player-2
-        /*
+
         act.setThreeStudents(new int[]{0,1,2});
         act.setPlayerID(1);
         isl.setExtraValue(2);

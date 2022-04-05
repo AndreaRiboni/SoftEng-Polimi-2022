@@ -11,10 +11,7 @@ public class GameController extends Controller {
     }
 
     public void initializeGame() throws EriantysException {
-        model.setNOFPlayers(action.getNOfPlayers());
-        model.initializeMotherNature((int) (Math.random() * GameBoard.NOF_ISLAND));
-        model.initializeCharacterDeck();
-        model.initalizePlayers();
+        model.initialize(action.getNOfPlayers(), (int) (Math.random() * GameBoard.NOF_ISLAND));
     }
 
     /**

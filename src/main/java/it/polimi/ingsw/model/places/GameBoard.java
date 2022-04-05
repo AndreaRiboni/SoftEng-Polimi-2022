@@ -37,7 +37,14 @@ public class GameBoard extends Observable {
         mother_nature = null;
     }
 
-    public void setNOFPlayers(int nof_players) throws EriantysException {
+    public void initialize(int nof_players, int island_index) throws EriantysException {
+        setNOFPlayers(nof_players);
+        initializeMotherNature(island_index);
+        initalizePlayers();
+        initializeCharacterDeck();
+    }
+
+    private void setNOFPlayers(int nof_players) throws EriantysException {
         if(nof_players <= 0 || nof_players > 4){
             throw new EriantysException(
                     String.format(EriantysException.INVALID_NOF_PLAYER, nof_players)
@@ -56,12 +63,12 @@ public class GameBoard extends Observable {
         }
     }
 
-    public void initializeMotherNature(int island_index) throws EriantysException {
+    private void initializeMotherNature(int island_index) throws EriantysException {
         EriantysException.throwInvalidIslandIndex(island_index);
         mother_nature = new MotherNature(this, island_index);
     }
 
-    public void initalizePlayers() throws EriantysException {
+    private void initalizePlayers() throws EriantysException {
         if(players.length == 3){
             players[0] = new Player(this, 0, Color.WHITE, true);
             players[1] = new Player(this, 1, Color.GREY, true);
@@ -75,7 +82,7 @@ public class GameBoard extends Observable {
         notify(this); //is it better to pass a gamephase and a List<Object>?
     }
 
-    public void initializeCharacterDeck(){
+    private void initializeCharacterDeck(){
         character_cards = new CharacterDeck(this);
         character_cards.draw3Cards();
         //TODO: the game needs only three cards: we could avoid instantiating the whole deck
@@ -98,7 +105,7 @@ public class GameBoard extends Observable {
     }
     */
 
-    public void putOnCloud(Student student, int cloud_index) throws EriantysException{
+    public void putOnCloud(Color student, int cloud_index) throws EriantysException{
         if(cloud_index != 0 && cloud_index!=1) throw new EriantysException(
                 String.format(EriantysException.INVALID_CLOUD_INDEX, cloud_index)
         );
@@ -177,7 +184,7 @@ public class GameBoard extends Observable {
         return character_cards.getActiveCard(index);
     }
 
-    public void putOnIsland(Student student, int island_index) throws EriantysException {
+    public void putOnIsland(Color student, int island_index) throws EriantysException {
         getIsland(island_index).addStudent(student);
     }
 

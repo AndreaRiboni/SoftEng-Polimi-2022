@@ -1,11 +1,9 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.Student;
-import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
-import it.polimi.ingsw.model.utils.Action;
+import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
 public class CloudController extends Controller{
@@ -33,8 +31,9 @@ public class CloudController extends Controller{
         //get every student from a cloud and take them to your entrance
         int cloud_index = action.getCloudIndex();
         Player player = model.getPlayers()[action.getPlayerID()];
-        for(Student stud : model.getCloud(cloud_index).getStudents())
+        for(Color stud : model.getCloud(cloud_index).getStudents().keySet()) {
             player.addEntranceStudent(stud);
+        }
         model.getCloud(cloud_index).empty();
         //TODO: check that the cloud index is valid, since it can be used only once (2 players mode)
     }

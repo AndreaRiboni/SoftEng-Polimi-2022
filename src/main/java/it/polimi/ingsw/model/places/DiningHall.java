@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model.places;
 
-import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
@@ -13,18 +11,14 @@ public class DiningHall extends StudentPlace {
     }
 
     @Override
-    public void addStudent(Student student) throws EriantysException{
-        int students_per_color = getNofStudents(student.getColor());
+    public void addStudent(Color student) throws EriantysException{
+        int students_per_color = students.getOrDefault(student, 0);
 
        if(students_per_color < STUDENTS_PER_COLOR) {
-           students.add(student);
+           StudentPlace.incrementMapValue(students, student, 1);
        }
        else{
            throw new EriantysException(String.format(EriantysException.INVALID_NOF_PLAYER, students_per_color));
        }
-    }
-
-    public int getNofStudents(Color col){
-        return (int)students.stream().filter(stud -> stud.getColor().equals(col)).count();
     }
 }

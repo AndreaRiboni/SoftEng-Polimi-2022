@@ -12,14 +12,11 @@ class CharacterDeckTest {
     @Test
     public void getActiveCardTest() throws EriantysException {
         GameBoard gameBoard = new GameBoard();
-        gameBoard.setNOFPlayers(2);
-        gameBoard.initializeMotherNature((int) (Math.random() * GameBoard.NOF_ISLAND));
-        gameBoard.initializeCharacterDeck(); //metodo da testare
-        gameBoard.initalizePlayers();
+        gameBoard.initialize(2, (int) (Math.random() * GameBoard.NOF_ISLAND));
 
-        assertTrue(gameBoard.getActiveCharacterCard(0) != null);
-        assertTrue(gameBoard.getActiveCharacterCard(1) != null);
-        assertTrue(gameBoard.getActiveCharacterCard(2) != null);
+        assertNotNull(gameBoard.getActiveCharacterCard(0));
+        assertNotNull(gameBoard.getActiveCharacterCard(1));
+        assertNotNull(gameBoard.getActiveCharacterCard(2));
         IndexOutOfBoundsException thrown = Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
             gameBoard.getActiveCharacterCard(3);
         });

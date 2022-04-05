@@ -1,16 +1,13 @@
 package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.utils.Color;
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.utils.EriantysException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public class Cloud extends StudentPlace {
     public static final boolean SIDE_2_4 = true, SIDE_3 = false;
     public static final int MAX_STUDENTS_2_4 = 4, MAX_STUDENTS_3 = 3;
-    private final int MAX_STUDENTS;
     private final boolean side;
 
     private Cloud(boolean side){
@@ -32,32 +29,12 @@ public class Cloud extends StudentPlace {
     }
 
     @Override
-    public void addStudent(Student student) throws EriantysException {
-        if(students.size() < MAX_STUDENTS){
-            students.add(student);
+    public void addStudent(Color student) throws EriantysException {
+        if(getNofStudent() < MAX_STUDENTS){
+            StudentPlace.incrementMapValue(students, student, 1);
         }
         else{
             throw new EriantysException(EriantysException.STUDENTPLACE_FULL);
         }
-    }
-
-    @Override
-    public boolean popStudent(Color color) {
-        int to_remove = -1;
-        for(int i = 0; i < students.size() && to_remove==-1; i++){
-            if(students.get(i).getColor().equals(color)){
-                to_remove = i;
-            }
-        }
-        students.remove(to_remove);
-        return true;
-    }
-
-    @Override
-    public Student getRandomStudent() {
-        int index = (int)(Math.random() * students.size());
-        Student student = students.get(index);
-        students.remove(student);
-        return student;
     }
 }

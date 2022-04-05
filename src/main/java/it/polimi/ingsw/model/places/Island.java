@@ -2,7 +2,6 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.entities.cards.LockCard;
 import it.polimi.ingsw.model.utils.Color;
@@ -51,11 +50,11 @@ public class Island extends StudentPlace implements TowerPlace {
         int[] player_points = new int[players.length]; //points per player
         Island curr_island = this;
         do { //for each connected island
-            for (int i = 0; i < curr_island.students.size(); i++) { //count how many students per color
-                Student s = curr_island.students.get(i);
-                if (!s.getColor().equals(avoid_color))
-                    stud_counters[s.getColor().getVal()]++;
-            }
+            stud_counters[0] = students.getOrDefault(Color.YELLOW, 0);
+            stud_counters[1] = students.getOrDefault(Color.BLUE, 0);
+            stud_counters[2] = students.getOrDefault(Color.GREEN, 0);
+            stud_counters[3] = students.getOrDefault(Color.RED, 0);
+            stud_counters[4] = students.getOrDefault(Color.PINK, 0);
             if(curr_island.hasTower() && !avoid_tower){ //if there's a tower we increment the corresponding player's points
                 for(int i = 0; i < players.length; i++){
                     if(players[i].getColor().equals(curr_island.tower.getColor())){
@@ -166,7 +165,7 @@ public class Island extends StudentPlace implements TowerPlace {
     }
 
     private int getStudentsByColor(Color color){
-        return (int) students.stream().filter(s->s.getColor().equals(color)).count();
+        return students.getOrDefault(color, 0);
     }
 
     public LockCard getLock(){

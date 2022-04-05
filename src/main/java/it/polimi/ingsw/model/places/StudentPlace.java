@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.places;
 
-import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
@@ -12,47 +11,59 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class StudentPlace {
-    protected final List<Student> students;
-    protected final int MAX_STUDENTS;
+    protected final Map<Color, Integer> students;
+    protected int MAX_STUDENTS;
 
     public StudentPlace(int max_stud) {
-        students = new ArrayList<>();
+        students = new HashMap<>();
         MAX_STUDENTS = max_stud;
     }
 
-    public void addStudent(Student student) throws EriantysException {
+    public void addStudent(Color student) throws EriantysException {
         if (students.size() < MAX_STUDENTS) {
-            students.add(student);
+            incrementMapValue(students, student, 1);
         } else {
             throw new EriantysException(EriantysException.STUDENTPLACE_FULL);
         }
     }
 
     public boolean popStudent(Color color) {
-        int found = -1;
-        for (int i = 0; i < students.size() && found == -1; i++) {
-            if (students.get(i).getColor().equals(color)) {
-                found = i;
-                students.remove(i);
-            }
-        }
-        return found != -1;
+        if(students.containsKey(color) && students.get(color) > 0){
+            incrementMapValue(students, color, -1);
+            return true;
+        } return false;
     }
 
-    public Student getRandomStudent() {
-        if (students.isEmpty()) return null;
-        int index = (int) (Math.random() * students.size());
-        Student student = students.get(index);
-        students.remove(index);
-        return student;
-    }
-
-    public List<Student> getStudents() {
+    public Map<Color, Integer> getStudents() {
         return students;
     }
 
     public void empty() {
         students.clear();
+    }
+
+    public static boolean incrementMapValue(Map<Color, Integer> map, Color key, int increment){
+        if(map.containsKey(key)){
+            if(increment < 0 && map.get(key) < -increment) return false;
+            int value = map.get(key);
+            map.put(key, value+increment);
+            return true;
+        } else {
+            if(increment < 0) return false;
+            map.put(key, increment);
+            return true;
+        }
+    }
+
+    public int countByColor(Color col){
+        return students.getOrDefault(col, 0);
+    }
+
+    public int getNofStudent(){
+        int nof_stud = 0;
+        for(Color col : students.keySet())
+            nof_stud += students.get(col);
+        return nof_stud;
     }
 
     public String toString() {
