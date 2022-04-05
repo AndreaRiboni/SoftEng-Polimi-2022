@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.places;
 
-import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import org.junit.jupiter.api.Assertions;
@@ -104,12 +103,10 @@ class SchoolTest {
     @Test
     void removeTowerTest() throws EriantysException {
         //test: it returns true if the tower is removed ( ==> number of towers decreased)
-        Tower t1 = new Tower(Color.WHITE);
-        school.addTower(t1);
+        school.addTower(Color.WHITE);
         assertTrue(school.removeTower());
         //test: it return false if there aren't enough towers / wrong tower color
         assertFalse(school.removeTower());
-        Tower t2 = new Tower(Color.GREY);
         assertFalse(school.removeTower());
     }
 

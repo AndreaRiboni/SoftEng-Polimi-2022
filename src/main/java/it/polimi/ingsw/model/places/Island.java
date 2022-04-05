@@ -2,19 +2,20 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
-import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.entities.cards.LockCard;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.Printer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Island extends StudentPlace implements TowerPlace {
     private boolean locked;
     private Island next; //da usare quando si ha un gruppo di isole. Se l'isola è singola, viene settato a null
-    private Tower tower;
+    private Color tower;
     private final int index;
     private final GameBoard gameboard;
     private LockCard lock;
@@ -57,7 +58,7 @@ public class Island extends StudentPlace implements TowerPlace {
             stud_counters[4] = students.getOrDefault(Color.PINK, 0);
             if(curr_island.hasTower() && !avoid_tower){ //if there's a tower we increment the corresponding player's points
                 for(int i = 0; i < players.length; i++){
-                    if(players[i].getColor().equals(curr_island.tower.getColor())){
+                    if(players[i].getColor().equals(curr_island.tower)){
                         player_points[i]++;
                         break; //otherwise we're counting a +1 for each team member
                     }
@@ -144,7 +145,7 @@ public class Island extends StudentPlace implements TowerPlace {
     }
 
     @Override
-    public void addTower(Tower tower) throws EriantysException{
+    public void addTower(Color tower) throws EriantysException{
         if(hasTower()){
             throw new EriantysException(EriantysException.TOWERPLACE_FULL);
         }
@@ -153,7 +154,7 @@ public class Island extends StudentPlace implements TowerPlace {
 
     @Override
     public boolean getTower(Color color) {
-        if(tower.getColor().equals(color)){
+        if(tower.equals(color)){
             tower = null;
             return true;
         }
@@ -161,7 +162,7 @@ public class Island extends StudentPlace implements TowerPlace {
     }
 
     public Color getTowerColor(){
-        return tower.getColor();
+        return tower;
     }
 
     private int getStudentsByColor(Color color){
@@ -177,8 +178,9 @@ public class Island extends StudentPlace implements TowerPlace {
     }
 
     public String toString(){
-        List<Tower> towers = new ArrayList<Tower>();
-        towers.add(tower);
+        Map<Color, Integer> towers = new HashMap<>();
+        if(tower != null)
+            towers.put(tower, 1);
         StringBuilder sb = new StringBuilder();
         return sb.append("\tstudents:\n")
                 .append(Printer.studentPlaceToString(this, students))

@@ -67,8 +67,7 @@ public class Player {
 
     public void moveTowerInIsland(int island_index) throws EriantysException {
         if(school.removeTower()){
-            Tower tower = new Tower(color);
-            gameboard.getIsland(island_index).addTower(tower);
+            gameboard.getIsland(island_index).addTower(color);
         }
     }
 
@@ -164,7 +163,7 @@ public class Player {
         return sb.toString();
     }
 
-    public void getTowerBack(Tower tower) throws EriantysException {
+    public void getTowerBack(Color tower) throws EriantysException {
         school.addTower(tower);
     }
 

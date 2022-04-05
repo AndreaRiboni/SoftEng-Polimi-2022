@@ -1,10 +1,8 @@
 package it.polimi.ingsw.model.places;
 
-import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
-import java.util.List;
 import java.util.Map;
 
 public class School {
@@ -93,7 +91,7 @@ public class School {
         return sb.toString();
     }
 
-    public void addTower(Tower tower) throws EriantysException {
+    public void addTower(Color tower) throws EriantysException {
         tower_hall.addTower(tower);
     }
 }

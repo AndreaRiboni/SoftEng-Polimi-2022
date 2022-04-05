@@ -3,7 +3,6 @@ package it.polimi.ingsw.model.places;
 import static org.junit.jupiter.api.Assertions.*;
 
 import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import org.junit.Test;
@@ -47,23 +46,20 @@ public class GameBoardTest {
         GameBoard gameBoard = new GameBoard();
         gameBoard.initialize(2, (int) (Math.random() * GameBoard.NOF_ISLAND));
 
-        Tower t = new Tower(Color.WHITE);
-        Tower t1 = new Tower(Color.BLACK);
-
         //if island_index < 0 or > 12 I expect an exception
         //  if no tower is set on the island I expect hasTower()=false
         EriantysException thrown = Assertions.assertThrows(EriantysException.class, () -> {
-            gameBoard.setTowerOn(-2, t);
+            gameBoard.setTowerOn(-2, Color.WHITE);
         });
         thrown = Assertions.assertThrows(EriantysException.class, () -> {
-            gameBoard.setTowerOn(15, t);
+            gameBoard.setTowerOn(15, Color.WHITE);
         });
         assertFalse(gameBoard.getIsland(5).hasTower());
 
         //if an island is already occupied I can't set a tower and hasTower() is true
-        gameBoard.setTowerOn(5, t);
+        gameBoard.setTowerOn(5, Color.WHITE);
         thrown = Assertions.assertThrows(EriantysException.class, () -> {
-            gameBoard.setTowerOn(5, t1);
+            gameBoard.setTowerOn(5, Color.BLACK);
         });
         assertTrue(gameBoard.getIsland(5).hasTower());
 
