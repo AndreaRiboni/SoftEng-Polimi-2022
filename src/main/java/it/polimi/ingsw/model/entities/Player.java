@@ -167,7 +167,9 @@ public class Player {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("player: ").append(Color.colorToString(color)).append(", coins: ").append(coins).append(", turn_value: ").append(turn_value);
+        sb.append("player #").append(ID+1).append(":\n")
+                .append("\tTower Color: ").append(Color.colorToString(color)).append("\n")
+                .append("\tCoins: ").append(coins);
         sb.append("\nplayer's school (below):\n").append(school);
         return sb.toString();
     }

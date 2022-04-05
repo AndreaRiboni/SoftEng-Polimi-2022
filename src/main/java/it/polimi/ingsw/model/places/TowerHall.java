@@ -4,9 +4,12 @@ import it.polimi.ingsw.model.entities.Student;
 import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
+import it.polimi.ingsw.model.utils.Printer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TowerHall implements TowerPlace {
     private List<Tower> towers;
@@ -44,12 +47,8 @@ public class TowerHall implements TowerPlace {
         return towers.size();
     }
 
-    public String toString(){ //TODO: improve the print
-        StringBuilder sb = new StringBuilder();
-        if(towers.isEmpty()) sb.append("empty");
-        for(Tower t : towers){
-            sb.append("[").append(t).append("]");
-        }
-        return sb.toString();
+    public String toString(){
+        return Printer.towerPlaceToString(this, towers);
     }
 }
+

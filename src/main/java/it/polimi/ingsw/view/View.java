@@ -84,10 +84,11 @@ public class View extends Observable implements Observer, Runnable {
         try {
             for (int i = 0; i < model.getNofPlayers(); i++)
                 System.out.println(model.getPlayers()[i]);
-            System.out.println("cloud: " + model.getCloud(0));
-            System.out.println("cloud: " + model.getCloud(1));
+            System.out.println("cloud #1:\n" + model.getCloud(0));
+            System.out.println("cloud #2:\n" + model.getCloud(1));
             for (int i = 0; i < GameBoard.NOF_ISLAND; i++)
-                System.out.println(model.getIsland(i));
+                System.out.println("island #"+(i+1)+":\n"+model.getIsland(i));
+            System.out.println("\nprofessors:");
             for (int i = 0; i < GameBoard.NOF_PROFS; i++)
                 System.out.println(model.getProfessors()[i]);
             System.out.println("----------------------");

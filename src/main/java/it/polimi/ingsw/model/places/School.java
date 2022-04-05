@@ -96,9 +96,9 @@ public class School {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("entrance: ").append(entrance).append("\n");
-        sb.append("dininghall: ").append(dining_hall).append("\n");
-        sb.append("towerhall: ").append(tower_hall).append("\n");
+        sb.append("entrance:\n").append(entrance).append("\n");
+        sb.append("dininghall:\n").append(dining_hall).append("\n");
+        sb.append("towerhall:\n").append(tower_hall).append("\n");
         return sb.toString();
     }
 

@@ -7,6 +7,10 @@ import it.polimi.ingsw.model.entities.Tower;
 import it.polimi.ingsw.model.entities.cards.LockCard;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
+import it.polimi.ingsw.model.utils.Printer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Island extends StudentPlace implements TowerPlace {
     private boolean locked;
@@ -174,12 +178,12 @@ public class Island extends StudentPlace implements TowerPlace {
     }
 
     public String toString(){
-        StringBuilder sb = new StringBuilder("island: ");
-        if(hasTower()) sb.append(tower);
-        if(students.isEmpty()) sb.append("empty");
-        for(Student s : students){
-            sb.append("[").append(s).append("]");
-        }
-        return sb.toString();
+        List<Tower> towers = new ArrayList<Tower>();
+        towers.add(tower);
+        StringBuilder sb = new StringBuilder();
+        return sb.append("\tstudents:\n")
+                .append(Printer.studentPlaceToString(this, students))
+                .append("\ttowers:\n")
+                .append(Printer.towerPlaceToString(this, towers)).toString();
     }
 }
