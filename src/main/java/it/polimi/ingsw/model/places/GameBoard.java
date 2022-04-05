@@ -96,14 +96,15 @@ public class GameBoard extends Observable {
     public Student drawFromBag(){
         return Bag.getRandomStudent();
     }
-
+    */
+    
     public void putOnCloud(Student student, int cloud_index) throws EriantysException{
         if(cloud_index != 0 && cloud_index!=1) throw new EriantysException(
                 String.format(EriantysException.INVALID_CLOUD_INDEX, cloud_index)
         );
         clouds[cloud_index].addStudent(student);
     }
-     */
+     
 
     public Player[] getPlayers(){
         return players;
