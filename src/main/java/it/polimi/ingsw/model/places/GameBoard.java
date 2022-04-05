@@ -102,16 +102,6 @@ public class GameBoard extends Observable {
         if(cloud_index != 0 && cloud_index!=1) throw new EriantysException(
                 String.format(EriantysException.INVALID_CLOUD_INDEX, cloud_index)
         );
-        if(clouds[cloud_index].getSide() == Cloud.SIDE_2_4){
-            if(clouds[cloud_index].students.size() >= 4){
-                throw new EriantysException(EriantysException.STUDENTPLACE_FULL);
-            }
-        }
-        if(clouds[cloud_index].getSide() == Cloud.SIDE_3){
-            if(clouds[cloud_index].students.size() >= 3){
-                throw new EriantysException(EriantysException.STUDENTPLACE_FULL);
-            }
-        }
         clouds[cloud_index].addStudent(student);
     }
 
