@@ -191,10 +191,6 @@ public class Island extends StudentPlace implements TowerPlace {
         return tower;
     }
 
-    private int getStudentsByColor(Color color){
-        return students.getOrDefault(color, 0);
-    }
-
     public Island getNext(){
         return next;
     }

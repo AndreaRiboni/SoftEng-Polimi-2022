@@ -20,7 +20,10 @@ public class MotherNature {
     }
 
     public void stepForward(int steps) throws EriantysException {
-        EriantysException.throwInvalidSteps(steps);
+        if(steps <= 0 || steps > AssistCard.MAX_STEPS)
+            throw new EriantysException(
+                    String.format(EriantysException.INVALID_STEPS, steps)
+            );
         island_index += steps;
         island_index %= GameBoard.NOF_ISLAND;
     }

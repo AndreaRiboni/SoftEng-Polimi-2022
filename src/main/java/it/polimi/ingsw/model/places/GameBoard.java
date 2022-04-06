@@ -167,7 +167,7 @@ public class GameBoard extends Observable {
         return players.length;
     }
 
-    public void moveMotherNature(int steps) throws EriantysException {
+    public void moveMotherNature(int steps) throws EriantysException { //TODO: gestire extra points e extra steps
         mother_nature.stepForward(steps);
         mother_nature.calculateInfluence();
         notify(this);

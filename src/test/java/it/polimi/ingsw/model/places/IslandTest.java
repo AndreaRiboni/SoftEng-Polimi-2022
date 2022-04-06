@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.places;
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -74,11 +75,24 @@ class IslandTest {
 
         //let's now try the locks
         island.lock();
+        Assertions.assertThrows(EriantysException.class, island::lock);
         //if we set avoid tower, g1 should be dominant. But the island is locked.
         island.calculateInfluence(true, null);
         assertEquals(island.getTowerColor(), g2.getColor());
         island.calculateInfluence(true, null);
         assertEquals(island.getTowerColor(), g1.getColor());
-        
+        Assertions.assertThrows(EriantysException.class, island::unlock);
+    }
+
+    @Test
+    public void smallerTests() throws EriantysException {
+        Island island = gameboard.getIsland(0);
+        island.addTower(Color.BLACK);
+        assertTrue(island.getTower(Color.BLACK));
+        island.addStudent(Color.RED);
+        System.out.println(island);
+        Places place = Places.ISLAND;
+        place.setExtraValue(2);
+        assertEquals(place.getExtraValue(), 2);
     }
 }

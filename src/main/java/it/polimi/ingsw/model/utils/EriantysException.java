@@ -19,13 +19,6 @@ public class EriantysException extends Exception {
             );
     }
 
-    public static void throwInvalidSteps(int steps) throws EriantysException {
-        if(steps <= 0 || steps > AssistCard.MAX_STEPS)
-            throw new EriantysException(
-                    String.format(EriantysException.INVALID_STEPS, steps)
-            );
-    }
-
     /**
      * Reference errors. Might be useful to move them into a specific file.
      */

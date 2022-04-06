@@ -96,9 +96,7 @@ public class Player {
         team_mate = player;
     }
 
-    public void setWizard(Wizard wizard){
-        this.wizard = wizard;
-    }
+    public Wizard getWizard(){return wizard;}
 
     public Color getColor() {
         return color;
@@ -146,13 +144,21 @@ public class Player {
         return result;
     }
 
+    public Map<Color, Integer> getDiningStudents(){
+        return school.getDiningStudents();
+    }
+
     public void setMotherNatureExtraSteps(int extra){
         mothernature_extrasteps = extra;
     }
 
+    public int getMotherNatureExtraSteps(){return mothernature_extrasteps;}
+
     public void setMotherNatureExtraPoints(int extra){
         mothernature_extrapoints = extra;
     }
+
+    public int getMotherNatureExtraPoints(){return mothernature_extrapoints;}
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
@@ -168,7 +174,7 @@ public class Player {
     }
 
     public int getNofStudentInDiningHall(Color col){
-        return school.getDiningStudents().get(col);
+        return school.getDiningStudents().getOrDefault(col, 0);
     }
 
     public boolean equals(Object obj){

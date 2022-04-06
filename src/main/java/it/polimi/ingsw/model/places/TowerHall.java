@@ -13,7 +13,7 @@ public class TowerHall implements TowerPlace {
     private int towers;
     private final Color color;
     private static final int MAX_TOWERS_2_4 = 8, MAX_TOWERS_3 = 6;
-    private final int MAX_TOWERS;
+    public final int MAX_TOWERS;
 
     public TowerHall(Color color, boolean three_players){
         this.color = color;

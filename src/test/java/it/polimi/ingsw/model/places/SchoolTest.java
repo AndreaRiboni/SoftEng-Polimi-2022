@@ -17,6 +17,7 @@ class SchoolTest {
     public void init(){
         try{
             school = new School(Color.WHITE, false);
+            System.out.println(school);
         } catch (EriantysException e){
             e.printStackTrace();
         }
@@ -102,11 +103,9 @@ class SchoolTest {
 
     @Test
     void removeTowerTest() throws EriantysException {
-        //test: it returns true if the tower is removed ( ==> number of towers decreased)
-        school.addTower(Color.WHITE);
-        assertTrue(school.removeTower());
-        //test: it return false if there aren't enough towers / wrong tower color
-        assertFalse(school.removeTower());
+        while(school.getNumberOfTowers() > 0){
+            assertTrue(school.removeTower());
+        }
         assertFalse(school.removeTower());
     }
 

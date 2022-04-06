@@ -27,14 +27,4 @@ public class Cloud extends StudentPlace {
     public boolean getSide(){
         return side;
     }
-
-    @Override
-    public void addStudent(Color student) throws EriantysException {
-        if(getNofStudent() < MAX_STUDENTS){
-            StudentPlace.incrementMapValue(students, student, 1);
-        }
-        else{
-            throw new EriantysException(EriantysException.STUDENTPLACE_FULL);
-        }
-    }
 }

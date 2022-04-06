@@ -17,7 +17,7 @@ public abstract class StudentPlace {
     }
 
     public void addStudent(Color student) throws EriantysException {
-        if (students.size() < MAX_STUDENTS) {
+        if (getNofStudent() < MAX_STUDENTS) {
             incrementMapValue(students, student, 1);
         } else {
             throw new EriantysException(EriantysException.STUDENTPLACE_FULL);

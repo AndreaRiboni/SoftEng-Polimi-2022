@@ -9,6 +9,25 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class GameBoardTest {
+    @Test
+    public void wrongInitialization(){
+        GameBoard gameBoard = new GameBoard();
+        Assertions.assertThrows(EriantysException.class, () -> {
+            gameBoard.initialize(6, 0);
+        });
+        Assertions.assertThrows(EriantysException.class, () -> {
+            gameBoard.initialize(3, 13);
+        });
+        assertDoesNotThrow(() -> gameBoard.initialize(3, 0));
+        assertNull(gameBoard.getProfFromColor(Color.BLACK));
+        assertEquals(gameBoard.getNofPlayers(), 3);
+        Assertions.assertThrows(EriantysException.class, () -> {
+            gameBoard.getCloud(3);
+        });
+        Assertions.assertThrows(EriantysException.class, () -> {
+            gameBoard.getActiveCharacterCard(4);
+        });
+    }
 
     @Test
     public void checkProfTest() throws EriantysException {

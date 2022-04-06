@@ -24,11 +24,6 @@ public class StudentBehavior extends CardBehavior {
     }
 
     @Override
-    public int getAvailableLocks() {
-        return nof_locks;
-    }
-
-    @Override
     public boolean getStudent(Color color) {
         for(int i = 0; i < nof_students; i++){
             if(students[i].equals(color)){
@@ -36,11 +31,6 @@ public class StudentBehavior extends CardBehavior {
                 return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean getLock() {
         return false;
     }
 

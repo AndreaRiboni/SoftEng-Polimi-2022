@@ -44,12 +44,12 @@ public abstract class CardBehavior {
         this.behavior_name = behavior_name;
     }
 
-    public abstract Color[] getAvailableStudents();
-    public abstract int getNofTakeableStudents();
-    public abstract int getAvailableLocks();
-    public abstract boolean getStudent(Color color);
-    public abstract boolean getLock();
-    public abstract boolean exchangeStudent(Color student1, Color student2);
+    public Color[] getAvailableStudents(){return null;}
+    public int getNofTakeableStudents(){return 0;}
+    public int getAvailableLocks(){return 0;}
+    public boolean getStudent(Color color){return false;}
+    public boolean getLock(){return false;}
+    public boolean exchangeStudent(Color student1, Color student2){return false;}
 
     public int getNofExchangeableStudents(){
         return exchange_students;
@@ -93,7 +93,7 @@ public abstract class CardBehavior {
         );
     }
 
-    public abstract void resetStudent(int student_index);
+    public void resetStudent(int student_index){}
 
     public boolean canPickIsland() {
         return pick_island;

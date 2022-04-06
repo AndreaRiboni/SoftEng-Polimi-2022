@@ -13,25 +13,8 @@ public class LockBehavior extends CardBehavior{
     }
 
     @Override
-    public Color[] getAvailableStudents() {
-        EriantysException.throwUnsupportedOperation();
-        return null;
-    }
-
-    @Override
-    public int getNofTakeableStudents() {
-        return 0;
-    }
-
-    @Override
     public int getAvailableLocks() {
-        return 0;
-    }
-
-    @Override
-    public boolean getStudent(Color color) {
-        EriantysException.throwUnsupportedOperation();
-        return false;
+        return nof_locks;
     }
 
     @Override
@@ -42,16 +25,5 @@ public class LockBehavior extends CardBehavior{
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean exchangeStudent(Color student1, Color student2) {
-        EriantysException.throwUnsupportedOperation();
-        return false;
-    }
-
-    @Override
-    public void resetStudent(int index) {
-        throw new UnsupportedOperationException();
     }
 }

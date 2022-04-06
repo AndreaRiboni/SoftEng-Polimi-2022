@@ -8,6 +8,7 @@ public class Wizard {
 
     public Wizard(){
         cards = new AssistCard[NOF_ASSIST_CARDS];
+        createCards();
     }
 
     private void createCards(){
