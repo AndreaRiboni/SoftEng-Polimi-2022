@@ -13,10 +13,15 @@ public abstract class CardBehavior {
     protected GameBoard gameboard;
     protected Color color;
     protected int island_index, available_students;
-    protected final int id, exchange_students, drop_students, nof_students, extra_steps, extra_points, nof_locks;
+    protected final int id;
+    protected final int exchange_students;
+    protected final int drop_students;
+    protected final int nof_students;
+    protected final int extra_steps;
+    protected final int extra_points;
+    protected int nof_locks;
     protected final boolean avoid_color, pick_island, avoid_towers;
     protected final Color[] students;
-    protected final LockCard[] lock_cards;
     protected Behaviors behavior_name;
 
     public CardBehavior(GameBoard gameboard, int id, int exchange_students, int drop_students, int nof_students, int takeable_students, int extra_points, int nof_locks, boolean pick_island, boolean avoid_towers, boolean avoid_color, Behaviors behavior_name, int extra_steps) {
@@ -36,8 +41,6 @@ public abstract class CardBehavior {
         this.avoid_color = avoid_color;
         students = new Color[nof_students];
         fillStudents();
-        lock_cards = new LockCard[nof_locks];
-        fillLocks(nof_locks);
         this.behavior_name = behavior_name;
     }
 
@@ -45,7 +48,7 @@ public abstract class CardBehavior {
     public abstract int getNofTakeableStudents();
     public abstract int getAvailableLocks();
     public abstract boolean getStudent(Color color);
-    public abstract LockCard getLock();
+    public abstract boolean getLock();
     public abstract boolean exchangeStudent(Color student1, Color student2);
 
     public int getNofExchangeableStudents(){
@@ -68,12 +71,6 @@ public abstract class CardBehavior {
     private void fillStudents(){
         for(int i = 0; i < nof_students; i++){
             students[i] = Bag.getRandomStudent();
-        }
-    }
-
-    private void fillLocks(int nof_locks){
-        for(int i = 0; i < nof_locks; i++){
-            lock_cards[i] = new LockCard(gameboard);
         }
     }
 
@@ -116,5 +113,9 @@ public abstract class CardBehavior {
 
     public int getExtraSteps(){
         return extra_steps;
+    }
+
+    public void getLockBack() {
+        nof_locks++;
     }
 }

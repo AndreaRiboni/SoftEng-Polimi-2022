@@ -2,14 +2,11 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
-import it.polimi.ingsw.model.entities.cards.LockCard;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.Printer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Island extends StudentPlace implements TowerPlace {
@@ -18,7 +15,6 @@ public class Island extends StudentPlace implements TowerPlace {
     private Color tower;
     private final int index;
     private final GameBoard gameboard;
-    private LockCard lock;
     private Color influent;
     private boolean has_mothernature;
 
@@ -42,7 +38,7 @@ public class Island extends StudentPlace implements TowerPlace {
     public Color calculateInfluence(boolean avoid_tower, Color avoid_color) throws EriantysException {
         if(isLocked()){ //the island is locked ==> we unlock it and return the tower's color (not re-calculating the influence)
             unlock();
-            getLock().removeFromIsland();
+            gameboard.getLockBack();
             return influent;
         }
         //otherwise, we have to calculate the influence
@@ -167,14 +163,6 @@ public class Island extends StudentPlace implements TowerPlace {
 
     private int getStudentsByColor(Color color){
         return students.getOrDefault(color, 0);
-    }
-
-    public LockCard getLock(){
-        return lock;
-    }
-
-    public void setLockCard(LockCard lock){
-        this.lock = lock;
     }
 
     public String toString(){

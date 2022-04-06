@@ -25,7 +25,7 @@ public class StudentBehavior extends CardBehavior {
 
     @Override
     public int getAvailableLocks() {
-        return lock_cards.length;
+        return nof_locks;
     }
 
     @Override
@@ -40,8 +40,8 @@ public class StudentBehavior extends CardBehavior {
     }
 
     @Override
-    public LockCard getLock() {
-        return null;
+    public boolean getLock() {
+        return false;
     }
 
     @Override

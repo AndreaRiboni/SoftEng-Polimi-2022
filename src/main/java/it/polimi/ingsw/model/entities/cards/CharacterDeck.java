@@ -128,4 +128,7 @@ public class CharacterDeck {
         return sb.toString();
     }
 
+    public void getLockBack() {
+        cards[4].getLockBack();
+    }
 }

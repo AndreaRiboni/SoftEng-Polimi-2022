@@ -35,12 +35,13 @@ public class LockBehavior extends CardBehavior{
     }
 
     @Override
-    public LockCard getLock() {
-        //returns a usable lock
-        for(int i = 0; i < lock_cards.length; i++){
-            if(!lock_cards[i].isOnIsland()) return lock_cards[i];
+    public boolean getLock() {
+        //returns true if there is an available lock
+        if(nof_locks > 0){
+            nof_locks--;
+            return true;
         }
-        return null;
+        return false;
     }
 
     @Override

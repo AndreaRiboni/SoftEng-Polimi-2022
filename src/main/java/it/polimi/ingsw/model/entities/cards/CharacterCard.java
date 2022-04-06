@@ -56,4 +56,8 @@ public class CharacterCard {
         }else{ sb.append("The price of this card is ").append(price).append(" coin");}
         return sb.toString();
     }
+
+    public void getLockBack() {
+        behavior.getLockBack();
+    }
 }

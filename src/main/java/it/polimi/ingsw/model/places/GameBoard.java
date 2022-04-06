@@ -203,4 +203,8 @@ public class GameBoard extends Observable {
         }
         return -1;
     }
+
+    public void getLockBack(){
+        character_cards.getLockBack();
+    }
 }

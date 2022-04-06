@@ -36,8 +36,8 @@ public class ProfessorBehavior extends CardBehavior {
     }
 
     @Override
-    public LockCard getLock() {
-        return null;
+    public boolean getLock() {
+        return false;
     }
 
     @Override

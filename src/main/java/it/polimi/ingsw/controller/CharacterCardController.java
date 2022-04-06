@@ -3,7 +3,6 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.cards.CardBehavior;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
-import it.polimi.ingsw.model.entities.cards.LockCard;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
@@ -37,12 +36,10 @@ public class CharacterCardController extends Controller {
         switch(card.getBehaviorName()){
             case LOCK:
                 //take 1 lock-card from this char-card and put it onto an island
-                LockCard lock_card = card.getBehavior().getLock();
-                if(lock_card == null){
+                if(!card.getBehavior().getLock()){
                     throw new EriantysException(EriantysException.NOT_ENOUGH_LOCKS);
                 }
-                lock_card.setIsland(action.getIslandIndex());
-                lock_card.lockIsland(); //TODO: checks
+                model.getIsland(action.getIslandIndex()).lock(); //TODO: checks
                 break;
             case STUDENT:
                 studentCardDispatcher();

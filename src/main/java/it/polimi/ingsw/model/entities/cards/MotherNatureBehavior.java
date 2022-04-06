@@ -37,8 +37,8 @@ public class MotherNatureBehavior extends CardBehavior{
     }
 
     @Override
-    public LockCard getLock() {
-        return null;
+    public boolean getLock() {
+        return false;
     }
 
     @Override
