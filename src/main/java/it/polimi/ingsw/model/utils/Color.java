@@ -55,4 +55,8 @@ public enum Color {
         }
         return null;
     }
+
+    public String toString(){
+        return colorToString(this);
+    }
 }

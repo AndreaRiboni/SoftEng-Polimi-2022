@@ -36,39 +36,49 @@ public class Island extends StudentPlace implements TowerPlace {
      * @throws EriantysException error
      */
     public Color calculateInfluence(boolean avoid_tower, Color avoid_color) throws EriantysException {
+        System.out.println();
         if(isLocked()){ //the island is locked ==> we unlock it and return the tower's color (not re-calculating the influence)
             unlock();
             gameboard.getLockBack();
+            //System.out.println("island is now unlocked. influent: " + influent);
             return influent;
-        }
+        } //else System.out.println("island wasn't locked");
         //otherwise, we have to calculate the influence
         Player[] players = gameboard.getPlayers();
         int[] stud_counters = new int[5]; //how many students per color
         int[] player_points = new int[players.length]; //points per player
         Island curr_island = this;
         do { //for each connected island
-            stud_counters[0] = students.getOrDefault(Color.YELLOW, 0);
-            stud_counters[1] = students.getOrDefault(Color.BLUE, 0);
-            stud_counters[2] = students.getOrDefault(Color.GREEN, 0);
-            stud_counters[3] = students.getOrDefault(Color.RED, 0);
-            stud_counters[4] = students.getOrDefault(Color.PINK, 0);
+            //System.out.println("studying island #" + index);
+            for(int i = 0; i < stud_counters.length; i++){
+                if(!Color.getFromInt(i).equals(avoid_color)) {
+                    stud_counters[i] = students.getOrDefault(Color.getFromInt(i), 0);
+                } else stud_counters[i] = 0;
+                //System.out.println("there are " + stud_counters[i] + " " + Color.getFromInt(i) + " students");
+            }
             if(curr_island.hasTower() && !avoid_tower){ //if there's a tower we increment the corresponding player's points
+                //System.out.println("island has a tower and we are not avoiding it");
                 for(int i = 0; i < players.length; i++){
+                    //System.out.println("studying player " + i);
                     if(players[i].getColor().equals(curr_island.tower)){
+                        //System.out.println("player " + i + " has one of their towers on this island. adding a point.");
                         player_points[i]++;
                         break; //otherwise we're counting a +1 for each team member
                     }
                 }
-            }
+            } //else System.out.println("island has no tower / has tower but has to avoid it");
             curr_island = curr_island.next;
         } while(curr_island != null);
         Professor[] professors = gameboard.getProfessors(); //get the professors
         for(int i = 0; i < professors.length; i++){ //for each of them we add the corresponding points to the player who is controlling it
             Professor p = professors[i];
             Player g = p.getPlayer();
+            //System.out.println("studying professor " + p.getColor());
+            //System.out.println("professor's player is " + (g == null ? "null" : g.getID()));
             if(g == null) continue; //unassigned professor
             Color c = p.getColor();
-            player_points[g.getID()]+=getStudentsByColor(c); //adding how many students of that color are on the island
+            player_points[g.getID()]+=stud_counters[c.getVal()]; //adding how many students of that color are on the island
+            //System.out.println("adding " + getStudentsByColor(c) + " points to player " + g.getID());
         }
         int index = 0; //we then calculate the influent color (the most influent player's tower color)
         for(int i = 0; i < player_points.length; i++){
@@ -76,12 +86,23 @@ public class Island extends StudentPlace implements TowerPlace {
                 index = i;
             }
         }
+        //System.out.println("most influent player is " + index);
         if(!players[index].getColor().equals(influent)) { //the tower is being replaced
+            //System.out.println("changing the tower color");
             if(countOccurrences(player_points, player_points[index]) > 1){ //tie
+                //System.out.println("seems like it was a tie");
                 return influent;
             }
-            Player old_king = gameboard.getPlayers()[gameboard.getPlayerByColor(influent)]; //remove the old tower
-            old_king.getTowerBack(tower);
+            //if(influent == null) System.out.println("no influent color for now");
+            //else System.out.println("influent: " + Color.colorToString(influent));
+            int old_king_index = gameboard.getPlayerByColor(influent);
+            //System.out.println("get player by color: " + old_king_index);
+            if(old_king_index != -1) {
+                Player old_king = gameboard.getPlayers()[old_king_index]; //remove the old tower
+                old_king.getTowerBack(tower);
+                //System.out.println("the old king has got its tower back");
+                tower = null;
+            }
             players[index].moveTowerInIsland(this.index); //place the new tower
             influent = players[index].getColor();
             tryMerge(); //tries to merge to the next island
@@ -114,17 +135,26 @@ public class Island extends StudentPlace implements TowerPlace {
     }
 
     private void tryMerge() throws EriantysException {
+        //TODO: we're linking to the next island ONLY IF the island has index+1 as its index
+        //--> we should link it to the previous island to
+        //--> an "ISLANDS" class could probably help us
         Island next = gameboard.getIsland((index + 1) % GameBoard.NOF_ISLAND);
-        if(next.getTowerColor().equals(getTowerColor())){
+        //System.out.println("next island color: " + (next.getTowerColor() == null ? "null" : next.getTowerColor()));
+        if(next.getTowerColor()!=null && next.getTowerColor().equals(getTowerColor())){
             merge(next);
         }
     }
 
     private void merge(Island island) throws EriantysException {
         if(index % GameBoard.NOF_ISLAND == (island.index-1) % GameBoard.NOF_ISLAND){
-            if(getTowerColor().equals(island.getTowerColor()))
+            //System.out.println("right index");
+            if(getTowerColor().equals(island.getTowerColor())) {
+                //System.out.println("right color");
                 next = island;
-            else throw new EriantysException(EriantysException.INVALID_MERGE_COLOR);
+                //System.out.println("linked: " + index + " to " + island.index);
+            } else {
+                throw new EriantysException(EriantysException.INVALID_MERGE_COLOR);
+            }
         } else {
             throw new EriantysException(
                     String.format(EriantysException.INVALID_ISLAND_INDEX, island.index)
@@ -163,6 +193,10 @@ public class Island extends StudentPlace implements TowerPlace {
 
     private int getStudentsByColor(Color color){
         return students.getOrDefault(color, 0);
+    }
+
+    public Island getNext(){
+        return next;
     }
 
     public String toString(){
