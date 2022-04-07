@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.utils;
 
+import java.util.Locale;
+
 public enum Color {
     YELLOW(0),
     BLUE(1),
@@ -54,6 +56,15 @@ public enum Color {
                 return "white";
         }
         return null;
+    }
+
+    public static Color parseColor(String str) throws Exception {
+        for(Color col : Color.values()){
+            if(Color.colorToString(col).equals(str.toLowerCase())){
+                return col;
+            }
+        }
+        throw new Exception("no such color");
     }
 
     public String toString(){
