@@ -38,6 +38,7 @@ public class InputUtils {
                 System.out.println(prompt);
                 value = Integer.parseInt(kb_input.readLine());
                 found = accepted_values == null || contains(accepted_values, value);
+                if(!found) System.out.println(error);
             } catch (IOException e){
                 e.printStackTrace();
                 return value;
@@ -64,6 +65,7 @@ public class InputUtils {
                 System.out.println(prompt);
                 value = Color.parseColor(kb_input.readLine());
                 found = accepted_values == null || contains(accepted_values, value);
+                if(!found) System.out.println(error);
             } catch (Exception e){
                 System.out.println(error);
             }

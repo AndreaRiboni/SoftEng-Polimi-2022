@@ -2,11 +2,14 @@ package it.polimi.ingsw.global.client;
 
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.InputUtils;
-import jdk.internal.util.xml.impl.Input;
+
+import java.io.IOException;
+import java.net.Socket;
 
 public class ClientLauncher {
 
-    public static void main(String[] args){
+    /*
+    EXAMPLES
         //ask the user an island index
         int island_index = InputUtils.getInt("Which island?", "Invalid island index :(", InputUtils.EVERY_ISLAND);
         System.out.println("your value: " + island_index);
@@ -16,5 +19,7 @@ public class ClientLauncher {
         //ask the user a generic integer
         int number = InputUtils.getInt("pick a number", "error", null);
         System.out.println("picked: " + number);
+     */
+    public static void main(String[] args){
     }
 }
