@@ -1,43 +1,57 @@
 package it.polimi.ingsw.global.client;
 
+import it.polimi.ingsw.global.server.MultiServerLauncher;
 import it.polimi.ingsw.model.utils.Action;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
-public class MessageSender extends Thread {
+public class MessageSender {
     private Socket socket;
-    private BufferedReader input;
+    private PrintWriter txt_output;
     private ObjectOutputStream output;
+    private ClientNetworkListener listener;
 
     public MessageSender(){
         try {
-            socket = new Socket("localhost", 60125);
-            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            output = new ObjectOutputStream(socket.getOutputStream());
+            socket = new Socket("localhost", MultiServerLauncher.PORT);
+            listener = new ClientNetworkListener(socket);
+            listener.start();
         } catch (IOException e) {
             System.out.println("Unable to initialize the socket");
             e.printStackTrace();
         }
     }
 
-    public void send(Action action) throws IOException {
-        output.writeObject(action);
-    }
-
-    public void run(){
+    public void send(String msg){
         try {
-            while (true) {
-                if (input.ready()) {
-                    System.out.println("Received: " + input.readLine());
-                }
+            if (txt_output == null) {
+                txt_output = new PrintWriter(socket.getOutputStream());
+                output = null;
             }
+            System.out.println("sending: " + msg);
+            txt_output.println(msg);
+            txt_output.flush();
         } catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public void send(Action action) {
+        try {
+            if(txt_output == null){
+                txt_output = null;
+                output = new ObjectOutputStream(socket.getOutputStream());
+            }
+            output.writeObject(action);
+            output.flush();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public Socket getSocket(){
+        return socket;
     }
 
 }

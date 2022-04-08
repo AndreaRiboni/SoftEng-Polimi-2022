@@ -49,6 +49,17 @@ public class InputUtils {
         return value;
     }
 
+    public static String getString(String prompt){
+        try {
+            if (!initialized) init();
+            System.out.println(prompt);
+            return kb_input.readLine();
+        } catch (IOException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     /**
      * get a color input value from user's keyboard
      * @param prompt question to ask the user in order to get the value

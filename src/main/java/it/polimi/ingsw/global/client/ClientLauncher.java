@@ -21,5 +21,9 @@ public class ClientLauncher {
         System.out.println("picked: " + number);
      */
     public static void main(String[] args){
+        MessageSender msg = new MessageSender();
+        msg.send(
+                Integer.toString(InputUtils.getInt("quanti giocatori?", "numero non valido", new int[]{2,3,4}))
+        );
     }
 }
