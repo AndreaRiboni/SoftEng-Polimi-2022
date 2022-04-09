@@ -1,18 +1,13 @@
 package it.polimi.ingsw.model.places;
 
-import it.polimi.ingsw.global.Observable;
 import it.polimi.ingsw.model.entities.*;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
-import it.polimi.ingsw.model.utils.GamePhase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class GameBoard extends Observable {
+public class GameBoard {
     private final Cloud[] clouds;
     private Player[] players;
     public int NOF_PLAYERS;
@@ -79,7 +74,6 @@ public class GameBoard extends Observable {
                 players[i] = new Player(this, i, col, false);
             }
         }
-        notify(this); //is it better to pass a gamephase and a List<Object>?
     }
 
     private void initializeCharacterDeck(){
@@ -170,7 +164,6 @@ public class GameBoard extends Observable {
     public void moveMotherNature(int steps) throws EriantysException { //TODO: gestire extra points e extra steps
         mother_nature.stepForward(steps);
         mother_nature.calculateInfluence();
-        notify(this);
     }
 
     public Cloud getCloud(int cloud_index) throws EriantysException{

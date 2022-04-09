@@ -3,7 +3,6 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.controller.ControllerHub;
 import it.polimi.ingsw.global.server.MultiServerLauncher;
 import it.polimi.ingsw.model.places.GameBoard;
-import it.polimi.ingsw.view.View;
 
 import java.io.*;
 import java.net.ServerSocket;

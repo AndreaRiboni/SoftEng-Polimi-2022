@@ -1,8 +1,11 @@
 package it.polimi.ingsw.global.server;
 
+import it.polimi.ingsw.model.utils.Action;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -19,24 +22,25 @@ public class ServerDispatcher extends Thread {
 
     public void run(){
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String received = in.readLine();
-            System.out.println("received: " + received);
-            switch(received){
-                case "2":
-                    two_players.connect(socket);
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+            Action received = (Action)in.readObject();
+            int nof_players = received.getNOfPlayers();
+            System.out.println(this + ". client has sent a message [" + socket + "]: " + nof_players);
+            switch(nof_players){
+                case 2:
+                    two_players.connect(socket, in);
                     break;
-                case "3":
-                    three_players.connect(socket);
+                case 3:
+                    three_players.connect(socket, in);
                     break;
-                case "4":
-                    four_players.connect(socket);
+                case 4:
+                    four_players.connect(socket, in);
                     break;
                 default:
-                    System.out.println("a client hasn't followed the protocol and typed: '" + received + "'");
+                    System.out.println("client hasn't followed the protocol and typed: '" + received.getNOfPlayers() + "' [" + socket + "]");
                     socket.close();
             }
-        } catch (IOException e){
+        } catch (IOException | ClassNotFoundException e){
             System.out.println("Server dispatcher error");
         }
     }

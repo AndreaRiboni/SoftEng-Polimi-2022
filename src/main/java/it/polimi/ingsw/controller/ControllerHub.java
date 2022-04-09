@@ -1,20 +1,17 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.global.Observable;
-import it.polimi.ingsw.global.Observer;
 import it.polimi.ingsw.model.places.*;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
-import it.polimi.ingsw.view.View;
 
 /*
 TODO: we should avoid accessing directly to the data structures (i.e. the students list)
 --> create the related interface functions to improve the code quality
  */
-public class ControllerHub implements Observer {
+public class ControllerHub {
     private GameBoard model;
-    private final View view;
+    //private final View view;
     private final FlowChecker flow;
     private final CharacterCardController cc_controller;
     private final CloudController c_controller;
@@ -24,9 +21,9 @@ public class ControllerHub implements Observer {
     private final MotherNatureController mn_controller;
     private int nof_players;
 
-    public ControllerHub(GameBoard model, View view) {
+    public ControllerHub(GameBoard model) {
         this.model = model;
-        this.view = view;
+        //this.view = view;
         flow = new FlowChecker();
         cc_controller = new CharacterCardController(model);
         c_controller = new CloudController(model);
@@ -37,14 +34,9 @@ public class ControllerHub implements Observer {
         nof_players = -1; //TODO: get it from the View
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if (o != view || !(arg instanceof Action)) {
-            throw new IllegalArgumentException();
-        }
-        Action action = (Action) arg;
-
+    public boolean update(Action action) {
         try {
+            System.out.println("RECEIVED UPDATE: " + action.getGamePhase());
             flow.assertPhase(action.getGamePhase()); //check that the action's game-phase is coherent with the game-flow
             switch (action.getGamePhase()) {
                 case START:
@@ -116,6 +108,8 @@ public class ControllerHub implements Observer {
             }
         } catch (EriantysException erex){
             erex.printStackTrace();
+            return false;
         }
+        return true;
     }
 }

@@ -33,7 +33,8 @@ class PlayerTest {
 
     @Test
     void swapEntranceDining() throws EriantysException {
-        g1.removeEntranceStudent(Color.RED);
+        for(int i = 0; i < 5; i++)
+            g1.removeEntranceStudent(Color.getFromInt(i));
         g1.addEntranceStudent(Color.RED);
         g1.moveStudentInDiningHall(Color.YELLOW);
         int old_red_entrance = g1.getEntranceStudents().getOrDefault(Color.RED, 0);

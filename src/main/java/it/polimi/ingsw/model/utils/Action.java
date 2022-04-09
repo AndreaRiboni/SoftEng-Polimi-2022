@@ -2,15 +2,21 @@ package it.polimi.ingsw.model.utils;
 
 import it.polimi.ingsw.model.places.Places;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Action {
+public class Action implements Serializable {
     private GamePhase game_phase;
     private final Map<GameParameter, Object> param;
 
     public Action(){
         param = new HashMap<>();
+    }
+
+    public void printEverything(){
+        for(GameParameter gp : param.keySet())
+            System.out.println(gp);
     }
 
     public int getPlayerID() {

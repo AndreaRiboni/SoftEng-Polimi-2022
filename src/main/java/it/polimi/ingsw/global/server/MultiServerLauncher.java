@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 
 public class MultiServerLauncher {
     public final static int PORT = 60125;
-    private WaitingRoom two_players, three_players, four_players;
+    private final WaitingRoom two_players, three_players, four_players;
 
     public MultiServerLauncher(){
         two_players = new WaitingRoom(2);
@@ -33,6 +33,7 @@ public class MultiServerLauncher {
         while (true){
             try{
                 Socket socket = serverSocket.accept();
+                System.out.println("New client has connected: " + socket);
                 new ServerDispatcher(two_players, three_players, four_players, socket).start();
             }catch(IOException e){
                 break; //In case the serverSocket gets closed

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.global.client;
 
+import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.GamePhase;
 import it.polimi.ingsw.model.utils.InputUtils;
 
 import java.io.IOException;
@@ -20,10 +22,8 @@ public class ClientLauncher {
         int number = InputUtils.getInt("pick a number", "error", null);
         System.out.println("picked: " + number);
      */
-    public static void main(String[] args){
-        MessageSender msg = new MessageSender();
-        msg.send(
-                Integer.toString(InputUtils.getInt("quanti giocatori?", "numero non valido", new int[]{2,3,4}))
-        );
+    public static void main(String[] args) throws InterruptedException {
+        ClientLogic client = new ClientLogic();
+        client.start();
     }
 }
