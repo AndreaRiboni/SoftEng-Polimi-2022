@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.places.*;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
-import it.polimi.ingsw.model.utils.GamePhaseNode;
 
 import java.util.*;
 
