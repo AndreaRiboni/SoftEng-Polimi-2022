@@ -2,10 +2,7 @@ package it.polimi.ingsw.global.server;
 
 import it.polimi.ingsw.model.utils.Action;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -22,19 +19,21 @@ public class ServerDispatcher extends Thread {
 
     public void run(){
         try {
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            out.flush();
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             Action received = (Action)in.readObject();
             int nof_players = received.getNOfPlayers();
             System.out.println(this + ". client has sent a message [" + socket + "]: " + nof_players);
             switch(nof_players){
                 case 2:
-                    two_players.connect(socket, in);
+                    two_players.connect(socket, in, out);
                     break;
                 case 3:
-                    three_players.connect(socket, in);
+                    three_players.connect(socket, in, out);
                     break;
                 case 4:
-                    four_players.connect(socket, in);
+                    four_players.connect(socket, in, out);
                     break;
                 default:
                     System.out.println("client hasn't followed the protocol and typed: '" + received.getNOfPlayers() + "' [" + socket + "]");

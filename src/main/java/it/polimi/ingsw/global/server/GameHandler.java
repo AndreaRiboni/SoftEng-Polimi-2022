@@ -1,34 +1,33 @@
 package it.polimi.ingsw.global.server;
 
 import it.polimi.ingsw.controller.ControllerHub;
+import it.polimi.ingsw.global.MessageSender;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GamePhase;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.List;
 
 public class GameHandler implements Runnable {
     private Socket[] players;
-    private PrintWriter[] out;
-    private ObjectInputStream[] in;
+    private MessageSender[] out;
+    private ObjectInputStream[] ins;
+    private ObjectOutputStream[] outs;
     private GameBoard model;
     private ControllerHub controller;
 
-    public GameHandler(Socket[] players, ObjectInputStream[] inputs) {
+    public GameHandler(Socket[] players, ObjectInputStream[] inputs, ObjectOutputStream[] outputs) {
         System.out.println(this + " has been created");
         this.players = players;
-        out = new PrintWriter[players.length];
-        in = inputs;
+        out = new MessageSender[players.length];
+        ins = inputs;
+        outs = outputs;
         for(int i = 0; i < players.length; i++){
-            try {
-                out[i] = new PrintWriter(players[i].getOutputStream(), true);
-            } catch (IOException e){
-                e.printStackTrace();
-            }
+            out[i] = new MessageSender(players[i], ins[i], outs[i]);
         }
         //TODO: View doesn't have to be in the controller's constructor anymore since it'll be communicating through the network.
         model = new GameBoard();
@@ -43,30 +42,48 @@ public class GameHandler implements Runnable {
 
     private Action readAction(int client_index){
         try {
-            return (Action)in[client_index].readObject();
+            return (Action) ins[client_index].readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }
     }
 
+    private int getWhoIsPlaying(){
+        return 0;
+    }
+
+    private void sendAction(int player, List<GamePhase> gamephases){
+        out[player].send(gamephases);
+    }
+
+    private void sendGameBoard(){
+
+    }
+
     @Override
     public void run() {
         boolean game_ended = false;
         System.out.println(this + ". New match has started [" + players.length + " players]");
-        for(PrintWriter pw : out){
-            pw.println("correct");
-        }
-        int client_index = 0;
         do {
-            System.out.println("reading");
-            Action action = readAction(client_index);
-            action.printEverything();
-            if(controller.update(action)){
-                out[client_index].println("correct");
-                client_index++;
+            int player_playing = getWhoIsPlaying();
+            //send the correct client what action we need from him
+            List<GamePhase> gamephases = controller.getAcceptedGamephases();
+            sendAction(player_playing, gamephases);
+            //get the action
+            Action client_action = readAction(player_playing);
+            //process the action
+            boolean response = controller.update(client_action);
+            //send the response
+            gamephases.clear();
+            if(response){
+                gamephases.add(GamePhase.CORRECT);
+                sendAction(player_playing, gamephases);
+                //send the updated gameboard to every client
+                sendGameBoard();
             } else {
-                out[client_index].println("error");
+                gamephases.add(GamePhase.ERROR_PHASE);
+                sendAction(player_playing, gamephases);
             }
         } while(!game_ended);
     }

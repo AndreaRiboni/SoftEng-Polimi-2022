@@ -4,6 +4,9 @@ import it.polimi.ingsw.model.places.*;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
+import it.polimi.ingsw.model.utils.GamePhaseNode;
+
+import java.util.*;
 
 /*
 TODO: we should avoid accessing directly to the data structures (i.e. the students list)
@@ -20,6 +23,7 @@ public class ControllerHub {
     private final MobilityController m_controller;
     private final MotherNatureController mn_controller;
     private int nof_players;
+    private Map<GamePhase, List<GamePhase>> gamephases;
 
     public ControllerHub(GameBoard model) {
         this.model = model;
@@ -31,10 +35,12 @@ public class ControllerHub {
         ac_controller = new AssistCardController(model);
         m_controller = new MobilityController(model);
         mn_controller = new MotherNatureController(model);
-        nof_players = -1; //TODO: get it from the View
+        nof_players = -1;
+        createGamePhaseTree();
     }
 
     public boolean update(Action action) {
+        //TODO: use the hashmap to determine wether the gamephase is correct
         try {
             System.out.println("RECEIVED UPDATE: " + action.getGamePhase());
             flow.assertPhase(action.getGamePhase()); //check that the action's game-phase is coherent with the game-flow
@@ -111,5 +117,46 @@ public class ControllerHub {
             return false;
         }
         return true;
+    }
+
+    public List<GamePhase> getAcceptedGamephases() {
+        List<GamePhase> gamephases = new ArrayList<>();
+        for(GamePhase gp : GamePhase.values())
+            gamephases.add(gp);
+        return gamephases;
+    }
+
+    private void createGamePhaseTree(){
+        gamephases = new HashMap<>();
+        List<GamePhase> start = new ArrayList<>();
+        List<GamePhase> puntonclouds = new ArrayList<>();
+        List<GamePhase> drawassistcard = new ArrayList<>();
+        List<GamePhase> move3students = new ArrayList<>();
+        List<GamePhase> movemothernature = new ArrayList<>();
+        List<GamePhase> draincloud = new ArrayList<>();
+        List<GamePhase> usecharactercard = new ArrayList<>();
+        start.add(GamePhase.PUT_ON_CLOUDS);
+        gamephases.put(GamePhase.START, start);
+        puntonclouds.add(GamePhase.DRAW_ASSIST_CARD);
+        gamephases.put(GamePhase.PUT_ON_CLOUDS, puntonclouds);
+        drawassistcard.add(GamePhase.MOVE_3_STUDENTS);
+        drawassistcard.add(GamePhase.USE_CHARACTER_CARD);
+        drawassistcard.add(GamePhase.DRAW_ASSIST_CARD);
+        gamephases.put(GamePhase.DRAW_ASSIST_CARD, drawassistcard);
+        move3students.add(GamePhase.MOVE_MOTHERNATURE);
+        gamephases.put(GamePhase.MOVE_3_STUDENTS, move3students);
+        movemothernature.add(GamePhase.DRAIN_CLOUD);
+        gamephases.put(GamePhase.MOVE_MOTHERNATURE, movemothernature);
+        draincloud.add(GamePhase.PUT_ON_CLOUDS);
+        draincloud.add(GamePhase.USE_CHARACTER_CARD);
+        draincloud.add(GamePhase.MOVE_3_STUDENTS);
+        gamephases.put(GamePhase.DRAIN_CLOUD, draincloud);
+        usecharactercard.add(GamePhase.PUT_ON_CLOUDS);
+        usecharactercard.add(GamePhase.MOVE_3_STUDENTS);
+        gamephases.put(GamePhase.USE_CHARACTER_CARD, usecharactercard);
+    }
+
+    public List<GamePhase> getNextPhases(GamePhase gp){
+        return gamephases.get(gp);
     }
 }

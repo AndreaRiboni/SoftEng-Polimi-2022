@@ -7,5 +7,8 @@ public enum GamePhase {
     MOVE_3_STUDENTS,
     MOVE_MOTHERNATURE,
     DRAIN_CLOUD,
-    USE_CHARACTER_CARD
+    USE_CHARACTER_CARD,
+    ERROR_PHASE,
+    CORRECT,
+    END_GAME
 }

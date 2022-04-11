@@ -1,27 +1,43 @@
 package it.polimi.ingsw.global.client;
 
+import it.polimi.ingsw.global.MessageSender;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GamePhase;
 import it.polimi.ingsw.model.utils.InputUtils;
 
+import java.util.List;
+
 public class ClientLogic {
     private final MessageSender msg;
-    private final ClientNetworkListener listener;
+    private final GamePhaseNetworkListener listener;
 
     public ClientLogic(){
         msg = new MessageSender();
-        listener = new ClientNetworkListener(msg.getSocket());
+        System.out.println("message sender is ready");
+        listener = new GamePhaseNetworkListener(msg.getSocket(), msg.getInput());
+        System.out.println("listener is ready");
         listener.start();
+        System.out.println("client is ready");
     }
 
-    private boolean waitForResponse() throws InterruptedException {
-        while(!listener.isResponseReady()){
+    private List<GamePhase> waitForResponse() {
+        List<GamePhase> gamephase = null;
+        while((gamephase = listener.getResponseIfReady()) == null){
             //do nothing
         }
-        return !listener.hasError();
+        return gamephase;
+    }
+
+    private String waitForModelResponse() {
+        String gamephase = null;
+        while((gamephase = listener.getModelResponseIfReady()) == null){
+            //do nothing
+        }
+        return gamephase;
     }
 
     public void start() throws InterruptedException {
+        System.out.println("client has started");
         int nof_players = InputUtils.getInt("quanti giocatori?", "numero non valido", new int[]{2,3,4});
         System.out.println("sending number of players");
         Action start = new Action();
@@ -30,21 +46,13 @@ public class ClientLogic {
         msg.send(start);
         System.out.println("Sent. Waiting for response");
 
-        boolean response = waitForResponse();
-
-        if(response){ //no errors occurred
-            System.out.println("response was okay");
-            System.out.println("sending assist card index");
-            Action assist = new Action();
-            assist.setPlayerID(0);
-            assist.setAssistCardIndex(0);
-            assist.setGamePhase(GamePhase.DRAW_ASSIST_CARD);
-            msg.send(assist);
-            System.out.println("Sent.");
-        } else {
-            //resend the correct nof players
-            System.out.println("response caused an error");
+        List<GamePhase> current_gamephases = waitForResponse();
+        for(GamePhase gp : current_gamephases){
+            System.out.println("An acceptable gamephase is " + gp);
         }
+
+
+
         //TODO: [idea] rendere le singole comunicazioni di determinate parti di gioco delle funzioni e creare una funzione
         //che continui ad inviare il messaggio (chiedendo i dati all'utente) fino a che non si ha la corretta response
 
