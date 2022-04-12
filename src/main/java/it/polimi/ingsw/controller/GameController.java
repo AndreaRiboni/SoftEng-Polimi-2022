@@ -4,10 +4,15 @@ import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.EriantysException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameController extends Controller {
+    private List<Player> HasPlayed;
 
     public GameController(GameBoard model){
         super(model);
+        HasPlayed = new ArrayList<>();
     }
 
     public void initializeGame() throws EriantysException {
@@ -40,4 +45,63 @@ public class GameController extends Controller {
         //TODO: has the game ended?
     }
 
+    public void updatePlayer(){
+        HasPlayed.add(model.getPlayers()[action.getPlayerID()]);
+    }
+
+    public void resetOrder(){
+        HasPlayed.clear();
+    }
+
+    /**
+     * Verifies that the players are following the neutral order (0->1->2->3)
+     * @throws EriantysException
+     */
+    public void verifyNeutralOrder() throws EriantysException {
+        Player playing = model.getPlayers()[action.getPlayerID()];
+        int playing_index = playing.getID();
+        Player last = HasPlayed.get(HasPlayed.size() - 1);
+        int last_index = HasPlayed.indexOf(last);
+        if(last_index + 1 != playing_index){
+            throw new EriantysException(
+                    String.format(EriantysException.WRONG_TURN, last_index + 1, playing_index)
+            );
+        }
+    }
+
+    /**
+     * Throws an exception if the wrong player has tried to play
+     * This function is used when the player playing is changing
+     * @throws EriantysException wrong turn
+     */
+    public void verifyOrder() throws EriantysException {
+        Player playing = model.getPlayers()[action.getPlayerID()];
+        //find the player with the lowest turn value who is not present in HasPlayed
+        int lowest = model.getPlayers()[0].getTurnValue();
+        for(Player p : model.getPlayers()){
+            if(p.getTurnValue() <= lowest && !HasPlayed.contains(p)){ //TODO: case of parity between two turn_values. Could be useful to add a second turn value.
+                lowest = p.getTurnValue();
+            }
+        }
+        if(playing.getTurnValue() != lowest){
+            throw new EriantysException(
+                String.format(EriantysException.WRONG_TURN, lowest, playing.getTurnValue())
+            );
+        }
+        //TODO: this implementation can be used only during MOVE_3_STUDENTS, but not during any other phases
+    }
+
+    /**
+     * Verifies that the player who has played last is the same who's playing now
+     * @throws EriantysException wrong turn
+     */
+    public void verifyIdentity() throws EriantysException {
+        Player playing = model.getPlayers()[action.getPlayerID()];
+        Player last = HasPlayed.get(HasPlayed.size() - 1);
+        if(!playing.equals(last)){
+            throw new EriantysException(
+                    String.format(EriantysException.WRONG_TURN, last.getID(), playing.getID())
+            );
+        }
+    }
 }

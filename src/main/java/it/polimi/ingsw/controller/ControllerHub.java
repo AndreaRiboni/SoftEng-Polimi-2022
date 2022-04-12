@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.places.*;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
-import it.polimi.ingsw.model.utils.GamePhaseNode;
 
 import java.util.*;
 
@@ -23,7 +22,6 @@ public class ControllerHub {
     private final MobilityController m_controller;
     private final MotherNatureController mn_controller;
     private int nof_players;
-    private Map<GamePhase, List<GamePhase>> gamephases;
 
     public ControllerHub(GameBoard model) {
         this.model = model;
@@ -36,7 +34,6 @@ public class ControllerHub {
         m_controller = new MobilityController(model);
         mn_controller = new MotherNatureController(model);
         nof_players = -1;
-        createGamePhaseTree();
     }
 
     public boolean update(Action action) {
@@ -44,71 +41,99 @@ public class ControllerHub {
         try {
             System.out.println("RECEIVED UPDATE: " + action.getGamePhase());
             flow.assertPhase(action.getGamePhase()); //check that the action's game-phase is coherent with the game-flow
+            g_controller.setAction(action);
             switch (action.getGamePhase()) {
                 case START:
                     System.out.println("entering game start");
-                    g_controller.setAction(action);
                     nof_players = action.getNOfPlayers();
                     g_controller.initializeGame(); //action
-                    flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS); //set the accepted next phases
+                    flow.setLastGamePhase(GamePhase.START); //last gamephase is START -> i can go on PUT_ON_CLOUDS only
                     break;
                 case PUT_ON_CLOUDS: //new turn
                     System.out.println("entering put on clouds");
                     c_controller.setAction(action);
+                    System.out.println("trying to put on cloud");
                     c_controller.putOnCloud();
                     flow.resetSubCount("player-turn");
-                    flow.setAcceptedPhases(GamePhase.DRAW_ASSIST_CARD);
+                    flow.setLastGamePhase(GamePhase.PUT_ON_CLOUDS);
+                    g_controller.resetOrder();
                     break;
                 case DRAW_ASSIST_CARD:
                     System.out.println("entering draw assist card");
-                    flow.addSubCountIfNotPresent("assistcard-draw");
+                    g_controller.verifyNeutralOrder(); //are we following the right order?
+                    flow.addSubCountIfNotPresent("assistcard-draw"); //who's playing
                     ac_controller.setAction(action);
                     ac_controller.drawAssistCard();
-                    flow.incrementSubCount("assistcard-draw");
+                    flow.setLastGamePhase(GamePhase.DRAW_ASSIST_CARD);
+                    flow.incrementSubCount("assistcard-draw"); //player has played
+                    g_controller.updatePlayer();
                     if (flow.getSubCount("assistcard-draw") == nof_players) { //everyone has played
-                        flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD);
                         flow.deleteSubCount("assistcard-draw");
-                        g_controller.calculateOrder();
-                    } else {
-                        flow.setAcceptedPhases(GamePhase.DRAW_ASSIST_CARD); //someone has to play
+                        g_controller.resetOrder();
+                        flow.avoidConditionEdge(GamePhase.DRAW_ASSIST_CARD); //we can not receive another DRAW_ASSIST_CARD
+                        g_controller.calculateOrder(); //move_3_students' order
+                    } else { //someone has to play
+                        flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD); //we can not receive neither MOVE_3_STUDENTS nor USE_CHARACTER_CARD
                     }
                     break;
                 case MOVE_3_STUDENTS:
+                    //we are in the correct order if no one has entered usecharcard yet AND we have the lowest turn_valeu OR
+                    //if the last one entering usecharcard is the same player who is now playing
+                    if(flow.getSubCount("usecharcard init") > 0){ //we have already entered move3students
+                        g_controller.verifyIdentity(); //check that who's playing is the player who was already playing
+                    } else {
+                        g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
+                    }
                     System.out.println("entering move 3 students");
                     flow.addSubCountIfNotPresent("player-turn");
                     m_controller.setAction(action);
                     m_controller.move3Studs();
-                    flow.setAcceptedPhases(GamePhase.MOVE_MOTHERNATURE);
+                    flow.setLastGamePhase(GamePhase.MOVE_3_STUDENTS);
+                    flow.doNotAvoidConditionEdge();
+                    g_controller.updatePlayer();
+                    flow.addSubCountIfNotPresent("move3students init"); //we have entered this phase
+                    flow.incrementSubCount("move3students init");
                     break;
                 case MOVE_MOTHERNATURE:
+                    g_controller.verifyIdentity();
                     System.out.println("entering move mother nature");
                     mn_controller.setAction(action);
                     mn_controller.moveMotherNature(); //includes the tower-placing and the island-merging
-                    flow.setAcceptedPhases(GamePhase.DRAIN_CLOUD);
+                    flow.setLastGamePhase(GamePhase.MOVE_MOTHERNATURE);
                     break;
                 case DRAIN_CLOUD:
+                    g_controller.verifyIdentity();
                     System.out.println("Entering drain cloud");
                     c_controller.setAction(action);
                     c_controller.drainCloud();
                     flow.incrementSubCount("player-turn");
-                    if (flow.getSubCount("player-turn") == nof_players) {
-                        flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS, GamePhase.USE_CHARACTER_CARD);
-                        //flow.setFlag("turn-end", true);
-                    } else {
-                        flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD);
-                        //flow.setFlag("turn-end", false);
+                    flow.setLastGamePhase(GamePhase.DRAIN_CLOUD);
+                    if (flow.getSubCount("player-turn") == nof_players) { //every one has played
+                        flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS); //we can not receive any other MOVE_3_STUDENTS
+                    } else { //someone still has to play
+                        flow.avoidConditionEdge(GamePhase.PUT_ON_CLOUDS); //we can not receive any other PUT_ON_CLOUDS
                     }
                     g_controller.checkForEnd();
                     break;
                 case USE_CHARACTER_CARD:
+                    //we are in the correct order if no one has entered move3students yet AND we have the lowest turn_value OR
+                    //if the last one entering move3students is the same player who is now playing
+                    if(flow.getSubCount("move3students init") > 0){ //we have already entered move3students
+                        g_controller.verifyIdentity(); //check that who's playing is the player who was already playing
+                    } else {
+                        g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
+                    }
                     System.out.println("Entering use character card");
                     cc_controller.setAction(action);
                     cc_controller.manage();
+                    flow.setLastGamePhase(GamePhase.USE_CHARACTER_CARD);
                     if (flow.getSubCount("player-turn") == nof_players) {
-                        flow.setAcceptedPhases(GamePhase.PUT_ON_CLOUDS);
+                        flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS); //we can not receive any other MOVE_3_STUDENTS
                     } else {
-                        flow.setAcceptedPhases(GamePhase.MOVE_3_STUDENTS);
+                        flow.avoidConditionEdge(GamePhase.PUT_ON_CLOUDS); //we can not receive any other PUT_ON_CLOUDS
                     }
+                    flow.addSubCountIfNotPresent("usecharcard init"); //we have entered this phase
+                    flow.incrementSubCount("usecharcard init");
                     g_controller.checkForEnd();
                     break;
             }
@@ -120,43 +145,7 @@ public class ControllerHub {
     }
 
     public List<GamePhase> getAcceptedGamephases() {
-        List<GamePhase> gamephases = new ArrayList<>();
-        for(GamePhase gp : GamePhase.values())
-            gamephases.add(gp);
-        return gamephases;
+        return flow.getAcceptedGamephases();
     }
 
-    private void createGamePhaseTree(){
-        gamephases = new HashMap<>();
-        List<GamePhase> start = new ArrayList<>();
-        List<GamePhase> puntonclouds = new ArrayList<>();
-        List<GamePhase> drawassistcard = new ArrayList<>();
-        List<GamePhase> move3students = new ArrayList<>();
-        List<GamePhase> movemothernature = new ArrayList<>();
-        List<GamePhase> draincloud = new ArrayList<>();
-        List<GamePhase> usecharactercard = new ArrayList<>();
-        start.add(GamePhase.PUT_ON_CLOUDS);
-        gamephases.put(GamePhase.START, start);
-        puntonclouds.add(GamePhase.DRAW_ASSIST_CARD);
-        gamephases.put(GamePhase.PUT_ON_CLOUDS, puntonclouds);
-        drawassistcard.add(GamePhase.MOVE_3_STUDENTS);
-        drawassistcard.add(GamePhase.USE_CHARACTER_CARD);
-        drawassistcard.add(GamePhase.DRAW_ASSIST_CARD);
-        gamephases.put(GamePhase.DRAW_ASSIST_CARD, drawassistcard);
-        move3students.add(GamePhase.MOVE_MOTHERNATURE);
-        gamephases.put(GamePhase.MOVE_3_STUDENTS, move3students);
-        movemothernature.add(GamePhase.DRAIN_CLOUD);
-        gamephases.put(GamePhase.MOVE_MOTHERNATURE, movemothernature);
-        draincloud.add(GamePhase.PUT_ON_CLOUDS);
-        draincloud.add(GamePhase.USE_CHARACTER_CARD);
-        draincloud.add(GamePhase.MOVE_3_STUDENTS);
-        gamephases.put(GamePhase.DRAIN_CLOUD, draincloud);
-        usecharactercard.add(GamePhase.PUT_ON_CLOUDS);
-        usecharactercard.add(GamePhase.MOVE_3_STUDENTS);
-        gamephases.put(GamePhase.USE_CHARACTER_CARD, usecharactercard);
-    }
-
-    public List<GamePhase> getNextPhases(GamePhase gp){
-        return gamephases.get(gp);
-    }
 }
