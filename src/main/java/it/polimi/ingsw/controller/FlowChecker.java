@@ -32,6 +32,7 @@ public class FlowChecker {
     }
 
     public void setLastGamePhase(GamePhase gp){
+        System.out.println("UPDATING GAMEPHASE TO " + gp);
         last = gp;
     }
 
@@ -82,6 +83,7 @@ public class FlowChecker {
         List<GamePhase> movemothernature = new ArrayList<>();
         List<GamePhase> draincloud = new ArrayList<>();
         List<GamePhase> usecharactercard = new ArrayList<>();
+        start.add(GamePhase.START);
         start.add(GamePhase.PUT_ON_CLOUDS);
         gamephases.put(GamePhase.START, start);
         puntonclouds.add(GamePhase.DRAW_ASSIST_CARD);
@@ -104,7 +106,9 @@ public class FlowChecker {
     }
 
     public List<GamePhase> getNextPhases(GamePhase gp){
-
+        System.out.println("GAMEPHASE ATTUALE " + gp);
+        for(GamePhase gps : gamephases.get(gp))
+            System.out.println("GAMEPHASE ACCETTABILE " + gps);
         return gamephases.get(gp);
     }
 }

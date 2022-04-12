@@ -49,6 +49,7 @@ public class ClientLogic {
         List<GamePhase> current_gamephases = waitForResponse();
         for(GamePhase gp : current_gamephases){
             System.out.println("An acceptable gamephase is " + gp);
+            //ask the user the needed inputs and send the related Action to the server
         }
 
 
