@@ -38,7 +38,7 @@ public class ClientLogic {
 
     public void start() throws InterruptedException {
         System.out.println("client has started");
-        int nof_players = InputUtils.getInt("quanti giocatori?", "numero non valido", new int[]{2,3,4});
+        int nof_players = InputUtils.getInt("How many players?", "Invalid number", new int[]{2,3,4});
         System.out.println("sending number of players");
         Action start = new Action();
         start.setGamePhase(GamePhase.START);
@@ -54,8 +54,8 @@ public class ClientLogic {
 
 
 
-        //TODO: [idea] rendere le singole comunicazioni di determinate parti di gioco delle funzioni e creare una funzione
-        //che continui ad inviare il messaggio (chiedendo i dati all'utente) fino a che non si ha la corretta response
+        /*TODO: [idea] rendere le singole comunicazioni di determinate parti di gioco delle funzioni e creare una funzione
+           che continui ad inviare il messaggio (chiedendo i dati all'utente) fino a che non si ha la corretta response*/
 
     }
 }
