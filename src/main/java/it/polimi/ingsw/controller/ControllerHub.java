@@ -148,4 +148,12 @@ public class ControllerHub {
         return flow.getAcceptedGamephases();
     }
 
+    public int getNextWeightedOrder(){
+        return g_controller.getNextWeightedOrder();
+    }
+
+    public int getNextNeutralOrder(){
+        return g_controller.getNextNeutralOrder();
+    }
+
 }

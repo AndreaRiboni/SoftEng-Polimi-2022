@@ -60,13 +60,22 @@ public class GameController extends Controller {
     public void verifyNeutralOrder() throws EriantysException {
         Player playing = model.getPlayers()[action.getPlayerID()];
         int playing_index = playing.getID();
+        System.out.println("verifying that player " + playing_index + " is playing in the correct turn");
+        if(playing_index == 0 && HasPlayed.size() == 0) return;
         Player last = HasPlayed.get(HasPlayed.size() - 1);
-        int last_index = HasPlayed.indexOf(last);
+        int last_index = last.getID();
+        System.out.println("last player was " + last_index);
         if(last_index + 1 != playing_index){
             throw new EriantysException(
                     String.format(EriantysException.WRONG_TURN, last_index + 1, playing_index)
             );
         }
+    }
+
+    public int getNextNeutralOrder(){
+        if(HasPlayed.isEmpty()) return 0; //no one has played it
+        if(HasPlayed.size() == model.getPlayers().length) return -1; //everyone has already played
+        return HasPlayed.get(HasPlayed.size() - 1).getID() + 1; //next player
     }
 
     /**
@@ -89,6 +98,20 @@ public class GameController extends Controller {
             );
         }
         //TODO: this implementation can be used only during MOVE_3_STUDENTS, but not during any other phases
+    }
+
+    public int getNextWeightedOrder(){
+        //who has the lowest turn_value
+        int lowest = model.getPlayers()[0].getTurnValue();
+        int lowest_player = model.getPlayers()[0].getID();
+        if(HasPlayed.size() == model.getPlayers().length) return -1; //everyone has already played
+        for(Player p : model.getPlayers()){
+            if(p.getTurnValue() <= lowest && !HasPlayed.contains(p)){ //TODO: case of parity between two turn_values. Could be useful to add a second turn value.
+                lowest = p.getTurnValue();
+                lowest_player = p.getID();
+            }
+        }
+        return lowest_player;
     }
 
     /**

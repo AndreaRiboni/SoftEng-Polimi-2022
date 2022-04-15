@@ -106,7 +106,7 @@ public class FlowChecker {
     }
 
     public List<GamePhase> getNextPhases(GamePhase gp){
-        System.out.println("GAMEPHASE ATTUALE " + gp);
+        System.out.println("GAMEPHASE DI PARTENZA " + gp);
         for(GamePhase gps : gamephases.get(gp))
             System.out.println("GAMEPHASE ACCETTABILE " + gps);
         return gamephases.get(gp);

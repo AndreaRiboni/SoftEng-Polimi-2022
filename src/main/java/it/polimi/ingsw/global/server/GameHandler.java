@@ -50,7 +50,7 @@ public class GameHandler implements Runnable {
     }
 
     private int getWhoIsPlaying(){
-        return 0;
+        return controller.getNextNeutralOrder();
     }
 
     private void sendAction(int player, List<GamePhase> gamephases){
@@ -67,11 +67,13 @@ public class GameHandler implements Runnable {
         System.out.println(this + ". New match has started [" + players.length + " players]");
         do {
             int player_playing = getWhoIsPlaying();
+            System.out.println("player " + player_playing + " is playing");
             //send the correct client what action we need from him
             List<GamePhase> gamephases = controller.getAcceptedGamephases();
             sendAction(player_playing, gamephases);
             //get the action
             Action client_action = readAction(player_playing);
+            client_action.setPlayerID(player_playing);
             //process the action
             boolean response = controller.update(client_action);
             //send the response
