@@ -71,7 +71,7 @@ public class ClientLogic {
                             new int[]{1,2,3,4,5,6,7,8,9,10}
                             );
 
-                    draw.setAssistCardIndex(assist_index);
+                    draw.setAssistCardIndex(assist_index-1);
                     msg.send(draw);
                     System.out.println("Sent. Waiting for response");
                     current_gamephases = waitForResponse();
