@@ -47,7 +47,7 @@ public class ControllerHub {
                     System.out.println("entering game start");
                     nof_players = action.getNOfPlayers();
                     g_controller.initializeGame(); //action
-                    flow.setLastGamePhase(GamePhase.START); //last gamephase is START -> i can go on PUT_ON_CLOUDS only
+                    flow.setLastGamePhase(GamePhase.START); //last gamephase is START -> I can go on PUT_ON_CLOUDS only
                     break;
                 case PUT_ON_CLOUDS: //new turn
                     System.out.println("entering put on clouds");
