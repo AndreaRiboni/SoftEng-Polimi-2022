@@ -46,32 +46,35 @@ public class ClientLogic {
         start.setNOfPlayers(nof_players);
         msg.send(start);
         System.out.println("Sent. Waiting for response");
-
         List<GamePhase> current_gamephases = waitForResponse();
+
         for(GamePhase gp : current_gamephases){
             System.out.println("An acceptable gamephase is " + gp);
-            Action act = new Action();
-            act.setGamePhase(gp);
             //ask the user the needed inputs and send the related Action to the server
             switch(gp){
                 case DRAW_ASSIST_CARD:
-                    System.out.println("1) Sir Cheetuh");
-                    System.out.println("2) Lord Duckoff");
-                    System.out.println("3) Ms. Meowsie");
-                    System.out.println("4) Messire Sparrown");
-                    System.out.println("5) Lady Foxine");
-                    System.out.println("6) Ms. Liza");
-                    System.out.println("7) Donna Octavia");
-                    System.out.println("8) Don Bulldon");
-                    System.out.println("9) Ms. Helena");
-                    System.out.println("10) Sir Shelliferg");
+                    Action draw = new Action();
+                    draw.setGamePhase(gp);
+                    System.out.println("1) Sir Cheetuh, 1 step");
+                    System.out.println("2) Lord Duckoff, 1 step");
+                    System.out.println("3) Ms. Meowsie, 2 steps");
+                    System.out.println("4) Messire Sparrown, 2 steps");
+                    System.out.println("5) Lady Foxine, 3 steps");
+                    System.out.println("6) Ms. Liza, 3 steps");
+                    System.out.println("7) Donna Octavia, 4 steps");
+                    System.out.println("8) Don Bulldon, 4 steps");
+                    System.out.println("9) Ms. Helena, 5 steps");
+                    System.out.println("10) Sir Shelliferg, 5 steps");
                     int assist_index = InputUtils.getInt(
                             "Enter the index of the assist card you want to play",
                             "Invalid index",
                             new int[]{1,2,3,4,5,6,7,8,9,10}
                             );
-                    act.setAssistCardIndex(assist_index);
-                    msg.send(act);
+
+                    draw.setAssistCardIndex(assist_index);
+                    msg.send(draw);
+                    System.out.println("Sent. Waiting for response");
+                    current_gamephases = waitForResponse();
                     break;
                 default:
                     System.out.println("Ciao");
