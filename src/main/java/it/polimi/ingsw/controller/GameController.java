@@ -3,12 +3,15 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.EriantysException;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameController extends Controller {
     private List<Player> HasPlayed;
+    private static final Logger log = LogManager.getRootLogger();
 
     public GameController(GameBoard model){
         super(model);
@@ -60,11 +63,11 @@ public class GameController extends Controller {
     public void verifyNeutralOrder() throws EriantysException {
         Player playing = model.getPlayers()[action.getPlayerID()];
         int playing_index = playing.getID();
-        System.out.println("verifying that player " + playing_index + " is playing in the correct turn");
+        log.info("verifying that player " + playing_index + " is playing in the correct turn");
         if(playing_index == 0 && HasPlayed.size() == 0) return;
         Player last = HasPlayed.get(HasPlayed.size() - 1);
         int last_index = last.getID();
-        System.out.println("last player was " + last_index);
+        log.info("last player was " + last_index);
         if(last_index + 1 != playing_index){
             throw new EriantysException(
                     String.format(EriantysException.WRONG_TURN, last_index + 1, playing_index)

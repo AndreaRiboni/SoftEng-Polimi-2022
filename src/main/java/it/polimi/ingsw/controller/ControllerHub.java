@@ -4,6 +4,8 @@ import it.polimi.ingsw.model.places.*;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -22,6 +24,7 @@ public class ControllerHub {
     private final MobilityController m_controller;
     private final MotherNatureController mn_controller;
     private int nof_players;
+    private static final Logger log = LogManager.getRootLogger();
 
     public ControllerHub(GameBoard model) {
         this.model = model;
@@ -39,27 +42,23 @@ public class ControllerHub {
     public boolean update(Action action) {
         //TODO: use the hashmap to determine wether the gamephase is correct
         try {
-            System.out.println("RECEIVED UPDATE: " + action.getGamePhase());
+            log.info("Received an update - Analyzing " + action.getGamePhase());
             flow.assertPhase(action.getGamePhase()); //check that the action's game-phase is coherent with the game-flow
             g_controller.setAction(action);
             switch (action.getGamePhase()) {
                 case START:
-                    System.out.println("entering game start");
                     nof_players = action.getNOfPlayers();
                     g_controller.initializeGame(); //action
                     flow.setLastGamePhase(GamePhase.START); //last gamephase is START -> I can go on PUT_ON_CLOUDS only
                     break;
                 case PUT_ON_CLOUDS: //new turn
-                    System.out.println("entering put on clouds");
                     c_controller.setAction(action);
-                    System.out.println("trying to put on cloud");
                     c_controller.putOnCloud();
                     flow.resetSubCount("player-turn");
                     flow.setLastGamePhase(GamePhase.PUT_ON_CLOUDS);
                     g_controller.resetOrder();
                     break;
                 case DRAW_ASSIST_CARD:
-                    System.out.println("entering draw assist card");
                     g_controller.verifyNeutralOrder(); //are we following the right order?
                     flow.addSubCountIfNotPresent("assistcard-draw"); //who's playing
                     ac_controller.setAction(action);
@@ -84,7 +83,6 @@ public class ControllerHub {
                     } else {
                         g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
                     }
-                    System.out.println("entering move 3 students");
                     flow.addSubCountIfNotPresent("player-turn");
                     m_controller.setAction(action);
                     m_controller.move3Studs();
@@ -96,14 +94,12 @@ public class ControllerHub {
                     break;
                 case MOVE_MOTHERNATURE:
                     g_controller.verifyIdentity();
-                    System.out.println("entering move mother nature");
                     mn_controller.setAction(action);
                     mn_controller.moveMotherNature(); //includes the tower-placing and the island-merging
                     flow.setLastGamePhase(GamePhase.MOVE_MOTHERNATURE);
                     break;
                 case DRAIN_CLOUD:
                     g_controller.verifyIdentity();
-                    System.out.println("Entering drain cloud");
                     c_controller.setAction(action);
                     c_controller.drainCloud();
                     flow.incrementSubCount("player-turn");
@@ -123,7 +119,6 @@ public class ControllerHub {
                     } else {
                         g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
                     }
-                    System.out.println("Entering use character card");
                     cc_controller.setAction(action);
                     cc_controller.manage();
                     flow.setLastGamePhase(GamePhase.USE_CHARACTER_CARD);

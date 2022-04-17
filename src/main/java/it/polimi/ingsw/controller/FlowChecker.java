@@ -3,6 +3,8 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +16,7 @@ public class FlowChecker {
     private GamePhase last;
     private Map<GamePhase, List<GamePhase>> gamephases;
     private GamePhase[] avoid_edges;
+    private static final Logger log = LogManager.getRootLogger();
 
 
     public FlowChecker(){
@@ -32,7 +35,7 @@ public class FlowChecker {
     }
 
     public void setLastGamePhase(GamePhase gp){
-        System.out.println("UPDATING GAMEPHASE TO " + gp);
+        log.info("GamePhase " + gp + " has been processed correctly");
         last = gp;
     }
 
@@ -66,6 +69,7 @@ public class FlowChecker {
 
     public void assertPhase(GamePhase gp) throws EriantysException {
         if(!getAcceptedGamephases().contains(gp)){
+            log.warn("The received gamephase can not be processed (" + gp + ")");
             throw new EriantysException(EriantysException.INVALID_GAMEFLOW);
         }
     }
@@ -106,9 +110,8 @@ public class FlowChecker {
     }
 
     public List<GamePhase> getNextPhases(GamePhase gp){
-        System.out.println("GAMEPHASE DI PARTENZA " + gp);
-        for(GamePhase gps : gamephases.get(gp))
-            System.out.println("GAMEPHASE ACCETTABILE " + gps);
-        return gamephases.get(gp);
+        List<GamePhase> next = gamephases.get(gp);
+        log.info("Calculating next available gamephases (now: " + gp + ") (next: " + next + ")");
+        return next;
     }
 }

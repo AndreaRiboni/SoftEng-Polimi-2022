@@ -1,6 +1,9 @@
 package it.polimi.ingsw.global.server;
 
 import it.polimi.ingsw.model.utils.Action;
+import it.polimi.ingsw.model.utils.Printer;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.Socket;
@@ -9,6 +12,7 @@ import java.util.Scanner;
 public class ServerDispatcher extends Thread {
     private WaitingRoom two_players, three_players, four_players;
     private Socket socket;
+    private static final Logger log = LogManager.getRootLogger();
 
     public ServerDispatcher(WaitingRoom two_players, WaitingRoom three_players, WaitingRoom four_players, Socket socket) {
         this.two_players = two_players;
@@ -22,9 +26,10 @@ public class ServerDispatcher extends Thread {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             out.flush();
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+            log.info("ServerDispatcher ready");
             Action received = (Action)in.readObject();
             int nof_players = received.getNOfPlayers();
-            System.out.println(this + ". client has sent a message [" + socket + "]: " + nof_players);
+            log.info("A client has sent a message - " + Printer.socketToString(socket) + ": " + nof_players);
             switch(nof_players){
                 case 2:
                     two_players.connect(socket, in, out);
@@ -36,7 +41,7 @@ public class ServerDispatcher extends Thread {
                     four_players.connect(socket, in, out);
                     break;
                 default:
-                    System.out.println("client hasn't followed the protocol and typed: '" + received.getNOfPlayers() + "' [" + socket + "]");
+                    log.info("client hasn't followed the protocol and typed: '" + received.getNOfPlayers() + "' [" + Printer.socketToString(socket) + "]");
                     socket.close();
             }
         } catch (IOException | ClassNotFoundException e){

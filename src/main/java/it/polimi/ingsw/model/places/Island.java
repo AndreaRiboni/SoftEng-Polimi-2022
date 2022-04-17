@@ -199,7 +199,7 @@ public class Island extends StudentPlace implements TowerPlace {
         Map<Color, Integer> towers = new HashMap<>();
         if(tower != null)
             towers.put(tower, 1);
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("Island #").append(index+1).append("\n");
         return sb.append("\tstudents:\n")
                 .append(Printer.studentPlaceToString(this, students))
                 .append("\ttowers:\n")

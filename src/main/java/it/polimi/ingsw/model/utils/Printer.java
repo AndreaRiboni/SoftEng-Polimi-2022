@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.utils;
 import it.polimi.ingsw.model.places.StudentPlace;
 import it.polimi.ingsw.model.places.TowerPlace;
 
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,5 +32,9 @@ public class Printer {
             sb.append("\t\t").append("[").append(Color.colorToString(c)).append(tab).append(students.get(c)).append("]\n");
         }
         return sb.toString();
+    }
+
+    public static String socketToString(Socket socket){
+        return "[" + socket.getInetAddress() + ":" + socket.getPort() + "]";
     }
 }

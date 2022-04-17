@@ -3,6 +3,8 @@ package it.polimi.ingsw.global;
 import it.polimi.ingsw.global.server.MultiServerLauncher;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GamePhase;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.Socket;
@@ -12,6 +14,7 @@ public class MessageSender {
     private Socket socket;
     private ObjectOutputStream output;
     private ObjectInputStream input;
+    private static final Logger log = LogManager.getRootLogger();
 
     public MessageSender(){
         try {
@@ -20,7 +23,7 @@ public class MessageSender {
             output.flush();
             input = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
-            System.out.println("Unable to initialize socket");
+            log.error("Unable to initialize socket");
             e.printStackTrace();
         }
     }
@@ -32,7 +35,7 @@ public class MessageSender {
     }
 
     public void send(Action action) {
-        System.out.println("currently sending " + action.getGamePhase());
+        log.info("currently sending " + action.getGamePhase());
         try {
             output.writeObject(action);
             output.flush();
@@ -42,9 +45,19 @@ public class MessageSender {
     }
 
     public void send(List<GamePhase> gamephase) {
-        System.out.println("currently sending " + gamephase);
+        log.info("currently sending " + gamephase);
         try {
             output.writeObject(gamephase);
+            output.flush();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void send(String model) {
+        log.info("currently sending the new model representation");
+        try {
+            output.writeObject(model);
             output.flush();
         } catch (IOException e){
             e.printStackTrace();

@@ -1,24 +1,23 @@
 package it.polimi.ingsw.global.client;
 
 import it.polimi.ingsw.global.MessageSender;
-import it.polimi.ingsw.model.entities.cards.AssistCard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GamePhase;
 import it.polimi.ingsw.model.utils.InputUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
 public class ClientLogic {
     private final MessageSender msg;
-    private final GamePhaseNetworkListener listener;
+    private final NetworkListener listener;
+    private static final Logger log = LogManager.getRootLogger();
 
     public ClientLogic(){
         msg = new MessageSender();
-        System.out.println("message sender is ready");
-        listener = new GamePhaseNetworkListener(msg.getSocket(), msg.getInput());
-        System.out.println("listener is ready");
+        listener = new NetworkListener(msg.getSocket(), msg.getInput());
         listener.start();
-        System.out.println("client is ready");
     }
 
     private List<GamePhase> waitForResponse() {
@@ -29,15 +28,25 @@ public class ClientLogic {
         return gamephase;
     }
 
-    private String waitForModelResponse() {
-        String gamephase = null;
-        while((gamephase = listener.getModelResponseIfReady()) == null){
-            //do nothing
-        }
-        return gamephase;
+    public void fakeStart(){
+        log.info("client has started. sending 2 players request");
+        Action start = new Action();
+        start.setGamePhase(GamePhase.START);
+        start.setNOfPlayers(2);
+        msg.send(start);
+        log.info("sent 2 players request. waiting for response");
+        List<GamePhase> current_gamephases = waitForResponse();
+        log.info("available gamephases: \t" + current_gamephases);
+
+        log.info("sending draw assist card");
+        Action draw_assist_card = new Action();
+        draw_assist_card.setGamePhase(GamePhase.DRAW_ASSIST_CARD);
+        draw_assist_card.setAssistCardIndex(0);
+        msg.send(draw_assist_card);
+        log.info("sent draw assist card. waiting for response");
     }
 
-    public void start() throws InterruptedException {
+    public void start() {
         System.out.println("client has started");
         int nof_players = InputUtils.getInt("How many players?", "Invalid number", new int[]{2,3,4});
         System.out.println("sending number of players");

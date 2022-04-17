@@ -200,4 +200,21 @@ public class GameBoard {
     public void getLockBack(){
         character_cards.getLockBack();
     }
+
+    public String toString(){
+        String newline = "--------------------------------------------\n";
+        StringBuilder rep = new StringBuilder();
+        for(Player p : players){
+            rep.append(p.toString()).append("\n");
+        }
+        rep.append(newline);
+        for(Professor p : professors){
+            rep.append(p.toString()).append("\n");
+        }
+        rep.append(newline);
+        for(Island i : islands){
+            rep.append(i.toString()).append("\n");
+        }
+        return rep.toString();
+    }
 }

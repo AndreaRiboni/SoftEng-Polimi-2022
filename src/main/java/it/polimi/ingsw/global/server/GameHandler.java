@@ -5,6 +5,8 @@ import it.polimi.ingsw.global.MessageSender;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GamePhase;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,9 +21,10 @@ public class GameHandler implements Runnable {
     private ObjectOutputStream[] outs;
     private GameBoard model;
     private ControllerHub controller;
+    private boolean follow_neutral_order;
+    private static final Logger log = LogManager.getRootLogger();
 
     public GameHandler(Socket[] players, ObjectInputStream[] inputs, ObjectOutputStream[] outputs) {
-        System.out.println(this + " has been created");
         this.players = players;
         out = new MessageSender[players.length];
         ins = inputs;
@@ -38,6 +41,7 @@ public class GameHandler implements Runnable {
         controller.update(start_game);
         start_game.setGamePhase(GamePhase.PUT_ON_CLOUDS);
         controller.update(start_game);
+        follow_neutral_order = true;
     }
 
     private Action readAction(int client_index){
@@ -50,7 +54,7 @@ public class GameHandler implements Runnable {
     }
 
     private int getWhoIsPlaying(){
-        return controller.getNextNeutralOrder();
+        return follow_neutral_order ? controller.getNextNeutralOrder() : controller.getNextWeightedOrder();
     }
 
     private void sendAction(int player, List<GamePhase> gamephases){
@@ -58,19 +62,23 @@ public class GameHandler implements Runnable {
     }
 
     private void sendGameBoard(){
-
+        for(MessageSender msg_send : out){
+            msg_send.send(model.toString());
+        }
     }
 
     @Override
     public void run() {
         boolean game_ended = false;
-        System.out.println(this + ". New match has started [" + players.length + " players]");
+        log.info("New match has started [" + players.length + " players]");
         do {
+            System.out.println();
             int player_playing = getWhoIsPlaying();
             System.out.println("player " + player_playing + " is playing");
             //send the correct client what action we need from him
             List<GamePhase> gamephases = controller.getAcceptedGamephases();
             sendAction(player_playing, gamephases);
+            log.info("The available gamephases have been sent to the client (player " + player_playing + ")");
             //get the action
             Action client_action = readAction(player_playing);
             client_action.setPlayerID(player_playing);

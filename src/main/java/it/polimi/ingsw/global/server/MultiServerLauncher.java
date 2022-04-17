@@ -1,5 +1,9 @@
 package it.polimi.ingsw.global.server;
 
+import it.polimi.ingsw.model.utils.Printer;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -14,6 +18,7 @@ import java.util.concurrent.Executors;
 public class MultiServerLauncher {
     public final static int PORT = 60125;
     private final WaitingRoom two_players, three_players, four_players;
+    private static final Logger log = LogManager.getRootLogger();
 
     public MultiServerLauncher(){
         two_players = new WaitingRoom(2);
@@ -29,11 +34,11 @@ public class MultiServerLauncher {
             System.err.println(e.getMessage()); //port not available
             return;
         }
-        System.out.println("MultiServerLauncher ready");
+        log.info("MultiServerLauncher ready");
         while (true){
             try{
                 Socket socket = serverSocket.accept();
-                System.out.println("New client has connected: " + socket);
+                log.info("New client has connected: " + Printer.socketToString(socket));
                 new ServerDispatcher(two_players, three_players, four_players, socket).start();
             }catch(IOException e){
                 break; //In case the serverSocket gets closed

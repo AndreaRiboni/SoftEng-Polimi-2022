@@ -1,5 +1,9 @@
 package it.polimi.ingsw.global.server;
 
+import it.polimi.ingsw.model.utils.Printer;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -12,6 +16,7 @@ public class WaitingRoom {
     private ObjectOutputStream[] out;
     private int connected;
     private ExecutorService executor;
+    private static final Logger log = LogManager.getRootLogger();
 
     public WaitingRoom(int nof_players){
         clients = new Socket[nof_players];
@@ -26,9 +31,9 @@ public class WaitingRoom {
         in[connected] = ois;
         out[connected] = oos;
         connected++;
-        System.out.println(this + ". Client has joined a match [" + connected + "/" + clients.length + "]: " + client);
+        log.info(Printer.socketToString(client) + " has joined a match [" + connected + "/" + clients.length + "]");
         if(connected == clients.length){
-            System.out.println("starting a match...");
+            log.info("starting a match...");
             executor.submit(new GameHandler(clients, in, out));
             connected = 0;
         }
