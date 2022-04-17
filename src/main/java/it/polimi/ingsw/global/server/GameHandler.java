@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameHandler implements Runnable {
@@ -61,6 +62,12 @@ public class GameHandler implements Runnable {
         out[player].send(gamephases);
     }
 
+    private void sendAction(int player, GamePhase gamephase){
+        List<GamePhase> temp = new ArrayList<>();
+        temp.add(gamephase);
+        out[player].send(temp);
+    }
+
     private void sendGameBoard(){
         for(MessageSender msg_send : out){
             msg_send.send(model.toString());
@@ -76,8 +83,7 @@ public class GameHandler implements Runnable {
             int player_playing = getWhoIsPlaying();
             System.out.println("player " + player_playing + " is playing");
             //send the correct client what action we need from him
-            List<GamePhase> gamephases = controller.getAcceptedGamephases();
-            sendAction(player_playing, gamephases);
+            sendAction(player_playing, controller.getAcceptedGamephases());
             log.info("The available gamephases have been sent to the client (player " + player_playing + ")");
             //get the action
             Action client_action = readAction(player_playing);
@@ -85,15 +91,12 @@ public class GameHandler implements Runnable {
             //process the action
             boolean response = controller.update(client_action);
             //send the response
-            gamephases.clear();
             if(response){
-                gamephases.add(GamePhase.CORRECT);
-                sendAction(player_playing, gamephases);
+                sendAction(player_playing, GamePhase.CORRECT);
                 //send the updated gameboard to every client
                 sendGameBoard();
             } else {
-                gamephases.add(GamePhase.ERROR_PHASE);
-                sendAction(player_playing, gamephases);
+                sendAction(player_playing, GamePhase.ERROR_PHASE);
             }
         } while(!game_ended);
     }

@@ -151,4 +151,6 @@ public class ControllerHub {
         return g_controller.getNextNeutralOrder();
     }
 
+    public FlowChecker getFlow(){return flow;}
+
 }

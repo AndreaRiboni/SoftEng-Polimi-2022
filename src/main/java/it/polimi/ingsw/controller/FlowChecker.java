@@ -14,7 +14,7 @@ import java.util.Map;
 public class FlowChecker {
     private final Map<String, Integer> count;
     private GamePhase last;
-    private Map<GamePhase, List<GamePhase>> gamephases;
+    private final Map<GamePhase, List<GamePhase>> gamephases;
     private GamePhase[] avoid_edges;
     private static final Logger log = LogManager.getRootLogger();
 
@@ -22,6 +22,7 @@ public class FlowChecker {
     public FlowChecker(){
         last = GamePhase.START;
         count = new HashMap<>();
+        gamephases = new HashMap<>();
         createGamePhaseSequence();
         doNotAvoidConditionEdge();
     }
@@ -79,7 +80,6 @@ public class FlowChecker {
     }
 
     private void createGamePhaseSequence(){
-        gamephases = new HashMap<>();
         List<GamePhase> start = new ArrayList<>();
         List<GamePhase> puntonclouds = new ArrayList<>();
         List<GamePhase> drawassistcard = new ArrayList<>();
@@ -110,8 +110,16 @@ public class FlowChecker {
     }
 
     public List<GamePhase> getNextPhases(GamePhase gp){
-        List<GamePhase> next = gamephases.get(gp);
-        log.info("Calculating next available gamephases (now: " + gp + ") (next: " + next + ")");
+        List<GamePhase> next = new ArrayList<>(gamephases.get(gp));
+        if(avoid_edges != null)
+            for(GamePhase avoid : avoid_edges){
+                next.remove(avoid);
+            }
+        log.info("Calculated next available gamephases (now: " + gp + ") (next: " + next + ")");
         return next;
+    }
+
+    public void checkThat(int line){
+        if(!gamephases.get(GamePhase.DRAW_ASSIST_CARD).contains(GamePhase.DRAW_ASSIST_CARD)) log.error("VALORE ALTERATO " + line);
     }
 }

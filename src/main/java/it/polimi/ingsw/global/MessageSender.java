@@ -3,6 +3,7 @@ package it.polimi.ingsw.global;
 import it.polimi.ingsw.global.server.MultiServerLauncher;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GamePhase;
+import it.polimi.ingsw.model.utils.Printer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -55,7 +56,7 @@ public class MessageSender {
     }
 
     public void send(String model) {
-        log.info("currently sending the new model representation");
+        log.info("currently sending the new model representation to " + Printer.socketToString(socket));
         try {
             output.writeObject(model);
             output.flush();
