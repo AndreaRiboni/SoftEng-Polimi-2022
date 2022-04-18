@@ -92,7 +92,5 @@ class IslandTest {
         island.addStudent(Color.RED);
         System.out.println(island);
         Places place = Places.ISLAND;
-        place.setExtraValue(2);
-        assertEquals(place.getExtraValue(), 2);
     }
 }

@@ -130,4 +130,9 @@ public class GameController extends Controller {
             );
         }
     }
+
+    public int getLastPlaying(){
+        Player last = HasPlayed.get(HasPlayed.size() - 1);
+        return last.getID();
+    }
 }

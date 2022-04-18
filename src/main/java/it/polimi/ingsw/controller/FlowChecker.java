@@ -70,8 +70,14 @@ public class FlowChecker {
 
     public void assertPhase(GamePhase gp) throws EriantysException {
         if(!getAcceptedGamephases().contains(gp)){
-            log.warn("The received gamephase can not be processed (" + gp + ")");
-            throw new EriantysException(EriantysException.INVALID_GAMEFLOW);
+            log.error("The received gamephase can not be processed (" + gp + ")");
+            throw new EriantysException(
+                    String.format(
+                            EriantysException.INVALID_GAMEFLOW,
+                            getAcceptedGamephases().toString(),
+                            gp.toString()
+                    )
+            );
         }
     }
 
@@ -117,9 +123,5 @@ public class FlowChecker {
             }
         log.info("Calculated next available gamephases (now: " + gp + ") (next: " + next + ")");
         return next;
-    }
-
-    public void checkThat(int line){
-        if(!gamephases.get(GamePhase.DRAW_ASSIST_CARD).contains(GamePhase.DRAW_ASSIST_CARD)) log.error("VALORE ALTERATO " + line);
     }
 }

@@ -200,9 +200,19 @@ public class Island extends StudentPlace implements TowerPlace {
         if(tower != null)
             towers.put(tower, 1);
         StringBuilder sb = new StringBuilder("Island #").append(index+1).append("\n");
+        String mother_nature = has_mothernature ? "\n1tmother nature is relaxing here" : "";
         return sb.append("\tstudents:\n")
                 .append(Printer.studentPlaceToString(this, students))
                 .append("\ttowers:\n")
-                .append(Printer.towerPlaceToString(this, towers)).toString();
+                .append(Printer.towerPlaceToString(this, towers))
+                .append(mother_nature).toString();
+    }
+
+    public void setMotherNature() {
+        has_mothernature = true;
+    }
+
+    public void unsetMotherNature() {
+        has_mothernature = false;
     }
 }

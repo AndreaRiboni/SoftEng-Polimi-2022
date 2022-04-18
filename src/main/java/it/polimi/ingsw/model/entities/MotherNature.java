@@ -20,12 +20,15 @@ public class MotherNature {
     }
 
     public void stepForward(int steps) throws EriantysException {
+        int old_island_index = island_index;
         if(steps <= 0 || steps > AssistCard.MAX_STEPS)
             throw new EriantysException(
                     String.format(EriantysException.INVALID_STEPS, steps)
             );
         island_index += steps;
         island_index %= GameBoard.NOF_ISLAND;
+        gameboard.getIsland(island_index).setMotherNature();
+        gameboard.getIsland(old_island_index).unsetMotherNature();
     }
 
     public Color calculateInfluence() throws EriantysException {
@@ -52,6 +55,10 @@ public class MotherNature {
 
     public Color hasToAvoidColor(){
         return avoid_color;
+    }
+
+    public int getIslandIndex(){
+        return island_index;
     }
 
     public String toString(){

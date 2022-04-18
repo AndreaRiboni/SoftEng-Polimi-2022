@@ -22,7 +22,6 @@ public class GameHandler implements Runnable {
     private ObjectOutputStream[] outs;
     private GameBoard model;
     private ControllerHub controller;
-    private boolean follow_neutral_order;
     private static final Logger log = LogManager.getRootLogger();
 
     public GameHandler(Socket[] players, ObjectInputStream[] inputs, ObjectOutputStream[] outputs) {
@@ -42,7 +41,6 @@ public class GameHandler implements Runnable {
         controller.update(start_game);
         start_game.setGamePhase(GamePhase.PUT_ON_CLOUDS);
         controller.update(start_game);
-        follow_neutral_order = true;
     }
 
     private Action readAction(int client_index){
@@ -55,7 +53,7 @@ public class GameHandler implements Runnable {
     }
 
     private int getWhoIsPlaying(){
-        return follow_neutral_order ? controller.getNextNeutralOrder() : controller.getNextWeightedOrder();
+        return controller.getNextAutomaticOrder();
     }
 
     private void sendAction(int player, List<GamePhase> gamephases){

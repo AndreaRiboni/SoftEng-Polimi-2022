@@ -27,7 +27,6 @@ public class CloudController extends Controller{
     }
 
     public void drainCloud() throws EriantysException {
-        //TODO: check - is the player draining the cloud the one's playing in this turn?
         //get every student from a cloud and take them to your entrance
         int cloud_index = action.getCloudIndex();
         Player player = model.getPlayers()[action.getPlayerID()];

@@ -3,8 +3,12 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class MotherNatureController extends Controller {
+    private static final Logger log = LogManager.getRootLogger();
+
     public MotherNatureController(GameBoard model){
         super(model);
     }
@@ -12,6 +16,7 @@ public class MotherNatureController extends Controller {
     public void moveMotherNature() throws EriantysException {
         //TODO: posso muovermi di questo numero di passi? Verificare con la carta assistente
         //action.getPlayerID() --> getLastPlayedCard() --> getValue >= mn_increment
+        log.info("Moving mother nature (" + action.getMothernatureIncrement() + " steps)");
         model.moveMotherNature(action.getMothernatureIncrement());
         model.getMotherNature().endTurn();
     }

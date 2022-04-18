@@ -46,8 +46,8 @@ public class NetworkListener extends Thread{
                     log.info("the received object is the model");
                     System.out.println((String)received);
                 } else {
-                    log.info("the received object is the game-phases list");
                     List<GamePhase> gamephases = (List<GamePhase>) received;
+                    log.info("the received object is the game-phases list: " + gamephases);
                     setResponse(gamephases);
                     for (GamePhase gp : gamephases) {
                         if (gp.equals(GamePhase.END_GAME)) game_ended = true;

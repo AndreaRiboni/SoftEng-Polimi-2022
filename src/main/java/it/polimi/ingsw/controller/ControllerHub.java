@@ -24,6 +24,7 @@ public class ControllerHub {
     private final MobilityController m_controller;
     private final MotherNatureController mn_controller;
     private int nof_players;
+    private boolean follow_neutral_order, keep_going;
     private static final Logger log = LogManager.getRootLogger();
 
     public ControllerHub(GameBoard model) {
@@ -37,6 +38,8 @@ public class ControllerHub {
         m_controller = new MobilityController(model);
         mn_controller = new MotherNatureController(model);
         nof_players = -1;
+        follow_neutral_order = true;
+        keep_going = false;
     }
 
     public boolean update(Action action) {
@@ -50,6 +53,8 @@ public class ControllerHub {
                     nof_players = action.getNOfPlayers();
                     g_controller.initializeGame(); //action
                     flow.setLastGamePhase(GamePhase.START); //last gamephase is START -> I can go on PUT_ON_CLOUDS only
+                    follow_neutral_order = true;
+                    keep_going = false;
                     break;
                 case PUT_ON_CLOUDS: //new turn
                     c_controller.setAction(action);
@@ -72,6 +77,7 @@ public class ControllerHub {
                         flow.avoidConditionEdge(GamePhase.DRAW_ASSIST_CARD); //we can not receive another DRAW_ASSIST_CARD
                         g_controller.calculateOrder(); //move_3_students' order
                     } else { //someone has to play
+                        follow_neutral_order = false;
                         flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD); //we can not receive neither MOVE_3_STUDENTS nor USE_CHARACTER_CARD
                     }
                     break;
@@ -91,12 +97,14 @@ public class ControllerHub {
                     g_controller.updatePlayer();
                     flow.addSubCountIfNotPresent("move3students init"); //we have entered this phase
                     flow.incrementSubCount("move3students init");
+                    keep_going = true;
                     break;
                 case MOVE_MOTHERNATURE:
                     g_controller.verifyIdentity();
                     mn_controller.setAction(action);
                     mn_controller.moveMotherNature(); //includes the tower-placing and the island-merging
                     flow.setLastGamePhase(GamePhase.MOVE_MOTHERNATURE);
+                    keep_going = true;
                     break;
                 case DRAIN_CLOUD:
                     g_controller.verifyIdentity();
@@ -108,6 +116,7 @@ public class ControllerHub {
                         flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS); //we can not receive any other MOVE_3_STUDENTS
                     } else { //someone still has to play
                         flow.avoidConditionEdge(GamePhase.PUT_ON_CLOUDS); //we can not receive any other PUT_ON_CLOUDS
+                        keep_going = false;
                     }
                     g_controller.checkForEnd();
                     break;
@@ -124,8 +133,11 @@ public class ControllerHub {
                     flow.setLastGamePhase(GamePhase.USE_CHARACTER_CARD);
                     if (flow.getSubCount("player-turn") == nof_players) {
                         flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS); //we can not receive any other MOVE_3_STUDENTS
+                        keep_going = true;
                     } else {
                         flow.avoidConditionEdge(GamePhase.PUT_ON_CLOUDS); //we can not receive any other PUT_ON_CLOUDS
+                        follow_neutral_order = true;
+                        keep_going = false;
                     }
                     flow.addSubCountIfNotPresent("usecharcard init"); //we have entered this phase
                     flow.incrementSubCount("usecharcard init");
@@ -134,6 +146,7 @@ public class ControllerHub {
             }
         } catch (EriantysException erex){
             erex.printStackTrace();
+            log.error(erex.getMessage());
             return false;
         }
         return true;
@@ -143,14 +156,22 @@ public class ControllerHub {
         return flow.getAcceptedGamephases();
     }
 
-    public int getNextWeightedOrder(){
+    private int getNextWeightedOrder(){
         return g_controller.getNextWeightedOrder();
     }
 
-    public int getNextNeutralOrder(){
+    private int getNextNeutralOrder(){
         return g_controller.getNextNeutralOrder();
     }
 
+    private int getLastPlaying(){
+        return g_controller.getLastPlaying();
+    }
+
+    public int getNextAutomaticOrder(){
+        //TODO: dopo il primo turno l'ordine di gioco è una versione modificara di NeutralOrder
+        return keep_going ? getLastPlaying() : follow_neutral_order ? getNextNeutralOrder() : getNextWeightedOrder();
+    }
     public FlowChecker getFlow(){return flow;}
 
 }

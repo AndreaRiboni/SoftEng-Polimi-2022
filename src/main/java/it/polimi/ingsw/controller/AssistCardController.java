@@ -3,8 +3,11 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class AssistCardController extends Controller {
+    private static final Logger log = LogManager.getRootLogger();
 
     public AssistCardController(GameBoard model){
         super(model);
@@ -18,6 +21,7 @@ public class AssistCardController extends Controller {
         from id 0 to id 3*/
         //TODO: has this card already been played? then throw the exception
         //TODO: a check on the turn's order could be useful
+        log.info("Requested assist-card: " + action.getAssistCardIndex());
         model.getPlayers()[action.getPlayerID()].playAssistCard(action.getAssistCardIndex()); //code to actually play the card
     }
 }

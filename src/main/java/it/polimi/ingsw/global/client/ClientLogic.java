@@ -1,7 +1,9 @@
 package it.polimi.ingsw.global.client;
 
 import it.polimi.ingsw.global.MessageSender;
+import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.utils.Action;
+import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.GamePhase;
 import it.polimi.ingsw.model.utils.InputUtils;
 import org.apache.log4j.LogManager;
@@ -28,6 +30,11 @@ public class ClientLogic {
         return gamephase;
     }
 
+    /**
+     * TODO: il codice seguente è un esempio di come funziona la comunicazione
+     * nota che presenta errori e semplificazioni
+     * se trovate errori nel server avvisatemi
+     */
     public void fakeStart(){
         log.info("client has started. sending 2 players request");
         Action start = new Action();
@@ -38,12 +45,78 @@ public class ClientLogic {
         List<GamePhase> current_gamephases = waitForResponse();
         log.info("available gamephases: \t" + current_gamephases);
 
-        log.info("sending draw assist card");
         Action draw_assist_card = new Action();
         draw_assist_card.setGamePhase(GamePhase.DRAW_ASSIST_CARD);
-        draw_assist_card.setAssistCardIndex(0);
+        int assist_card_index = (int)(Math.random() * 10);
+        draw_assist_card.setAssistCardIndex(assist_card_index);
         msg.send(draw_assist_card);
         log.info("sent draw assist card. waiting for response");
+        List<GamePhase> response = waitForResponse(); //CORRECT vs ERROR
+        current_gamephases = waitForResponse();
+        log.info("available gamephases: \t" + current_gamephases);
+
+        log.info("sending move 3 students");
+        Action move3studs = new Action();
+        move3studs.setGamePhase(GamePhase.MOVE_3_STUDENTS);
+        do {
+            Color[] chosen = new Color[]{
+                    Color.getRandomStudentColor(),
+                    Color.getRandomStudentColor(),
+                    Color.getRandomStudentColor()
+            };
+            move3studs.setThreeStudents(chosen);
+            int island_index = (int)(Math.random()*12);
+            log.info("Chosen 3 colors: " + chosen[0] + ", " + chosen[1] + ", " + chosen[2]);
+            log.info("Chosen 3 places: dining, dining, island (" + island_index + ")");
+            move3studs.setThreeStudentPlaces(
+                    new Places[]{
+                            Places.DINING_HALL,
+                            Places.DINING_HALL,
+                            Places.ISLAND
+                    }
+            );
+            move3studs.setIslandIndexes(new int[]{0,0,island_index});
+            msg.send(move3studs);
+            log.info("sent move 3 students. waiting for response");
+            response = waitForResponse();
+            if(response.contains(GamePhase.ERROR_PHASE)) log.error("There was an error. Retrying");
+        } while (response.contains(GamePhase.ERROR_PHASE));
+        current_gamephases = waitForResponse();
+        log.info("available gamephases: \t" + current_gamephases);
+
+        Action move_mothernature = new Action();
+        move_mothernature.setGamePhase(GamePhase.MOVE_MOTHERNATURE);
+        move_mothernature.setMothernatureIncrement((int)(Math.random() * Math.floor((assist_card_index+1)/2)) + 1);
+        msg.send(move_mothernature);
+        log.info("sent move mother nature. waiting for response");
+        response = waitForResponse(); //CORRECT vs ERROR
+        current_gamephases = waitForResponse();
+        log.info("available gamephases: \t" + current_gamephases);
+
+        log.info("sending drain cloud");
+        Action draincloud = new Action();
+        draincloud.setGamePhase(GamePhase.DRAIN_CLOUD);
+        do {
+            int index = Math.random() > 0.5 ? 0 : 1;
+            draincloud.setCloudIndex(index);
+            log.info("Chosen cloud index: " + index);
+            msg.send(draincloud);
+            log.info("sent drain cloud. waiting for response");
+            response = waitForResponse();
+            if(response.contains(GamePhase.ERROR_PHASE)) log.error("There was an error. Retrying");
+        } while (response.contains(GamePhase.ERROR_PHASE));
+        current_gamephases = waitForResponse();
+        log.info("available gamephases: \t" + current_gamephases);
+
+        if(current_gamephases.contains(GamePhase.PUT_ON_CLOUDS)){ //new turn
+            Action putonclouds = new Action();
+            putonclouds.setGamePhase(GamePhase.PUT_ON_CLOUDS);
+            msg.send(putonclouds);
+            log.info("sent turn end notification. waiting for response");
+            response = waitForResponse(); //CORRECT vs ERROR
+            current_gamephases = waitForResponse();
+            log.info("available gamephases: \t" + current_gamephases);
+        }
     }
 
     public void start() {

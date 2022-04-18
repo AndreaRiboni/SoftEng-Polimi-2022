@@ -26,7 +26,7 @@ public class EriantysException extends Exception {
             INVALID_ISLAND_INDEX = "Invalid island index: %d",
             INVALID_STEPS = "Invalid number of steps: %d",
             INVALID_NOF_PLAYER = "Invalid number of players: %d",
-            INVALID_GAMEFLOW = "Invalid flow",
+            INVALID_GAMEFLOW = "Invalid flow. Expected %s but got %s",
             INVALID_PLACE = "Invalid place",
             NOT_ENOUGH_MONEY = "Unable to use the character card: not enough money. Required: %d, Player has: %d",
             NOT_ENOUGH_LOCKS = "Unable to choose a lock: no locks have been found",
@@ -42,5 +42,6 @@ public class EriantysException extends Exception {
             INVALID_STUDENT_INDEX = "Invalid student index",
             INVALID_MERGE_COLOR = "Unable to merge: the islands have different colors",
             WRONG_TURN = "Player is playing during thw wrong turn. [turn_value] Expected: %d, Given: $d",
-            WRONG_PLAYER = "Player is playing during thw wrong turn. [player_id] Expected: %d, Given: $d";
+            WRONG_PLAYER = "Player is playing during thw wrong turn. [player_id] Expected: %d, Given: $d",
+            NOT_ENOUGH_STUDENTS = "Unable to remove the selected students: Not enough";
 }

@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.entities.cards.CharacterDeck;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class GameBoard {
     private final Cloud[] clouds;
@@ -35,8 +38,28 @@ public class GameBoard {
     public void initialize(int nof_players, int island_index) throws EriantysException {
         setNOFPlayers(nof_players);
         initializeMotherNature(island_index);
+        initializeIslands();
         initalizePlayers();
         initializeCharacterDeck();
+    }
+
+    private void initializeIslands() throws EriantysException {
+        int motherly_island = mother_nature.getIslandIndex();
+        int opposite_island = (motherly_island + (NOF_ISLAND/2)) % NOF_ISLAND;
+        List<Color> init_students = new ArrayList<>();
+        for(int i = 0; i < 5; i++){
+            init_students.add(Color.getFromInt(i));
+            init_students.add(Color.getFromInt(i));
+        }
+        for(int i = 0; i < islands.length; i++){
+            if(i != motherly_island && i != opposite_island){
+                int index = (int)(Math.random() * init_students.size());
+                islands[i].addStudent(
+                        init_students.get(index)
+                );
+                init_students.remove(index);
+            }
+        }
     }
 
     private void setNOFPlayers(int nof_players) throws EriantysException {
@@ -85,7 +108,7 @@ public class GameBoard {
 
     public Island getIsland(int island_index) throws EriantysException {
         EriantysException.throwInvalidIslandIndex(island_index);
-        return islands[island_index]; //passare una copia?
+        return islands[island_index];
     }
 
     public void setTowerOn(int island_index, Color tower) throws EriantysException {
