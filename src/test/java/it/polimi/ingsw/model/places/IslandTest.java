@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.Player;
+import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import org.junit.jupiter.api.Assertions;
@@ -25,6 +26,7 @@ class IslandTest {
     @Test
     void calculateInfluence() throws EriantysException {
         Island island = gameboard.getIsland(0);
+        island.getStudents().clear();
         Island next_island = gameboard.getIsland(1);
         Player g1 = gameboard.getPlayers()[0];
         Player g2 = gameboard.getPlayers()[1];
@@ -57,6 +59,7 @@ class IslandTest {
         //let's test the avoid tower / avoid color
         //we add 2 red students to #2
         island = gameboard.getIsland(3);
+        island.getStudents().clear();
         gameboard.putOnIsland(Color.RED, 3);
         gameboard.putOnIsland(Color.RED, 3);
         //the influence should be null if we avoid red
