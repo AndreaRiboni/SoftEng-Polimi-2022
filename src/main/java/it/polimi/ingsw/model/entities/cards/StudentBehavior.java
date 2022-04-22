@@ -27,7 +27,7 @@ public class StudentBehavior extends CardBehavior {
     public boolean getStudent(Color color) {
         for(int i = 0; i < nof_students; i++){
             if(students[i].equals(color)){
-                students[i] = Bag.getRandomStudent();
+                students[i] = gameboard.drawFromBag();
                 return true;
             }
         }
@@ -47,6 +47,6 @@ public class StudentBehavior extends CardBehavior {
 
     @Override
     public void resetStudent(int index) {
-        students[index] = Bag.getRandomStudent();
+        students[index] = gameboard.drawFromBag();
     }
 }

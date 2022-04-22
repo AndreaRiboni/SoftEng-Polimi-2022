@@ -70,7 +70,7 @@ public abstract class CardBehavior {
 
     private void fillStudents(){
         for(int i = 0; i < nof_students; i++){
-            students[i] = Bag.getRandomStudent();
+            students[i] = gameboard.drawFromBag();
         }
     }
 

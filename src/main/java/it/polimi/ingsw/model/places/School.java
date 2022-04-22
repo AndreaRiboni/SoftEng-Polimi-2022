@@ -10,13 +10,15 @@ public class School {
     private final DiningHall dining_hall;
     private final TowerHall tower_hall;
     private final Color tower_color;
+    private final GameBoard gameboard;
 
-    public School(Color color, boolean three_players) throws EriantysException {
+    public School(Color color, boolean three_players, GameBoard gameboard) throws EriantysException {
         tower_color = color;
         entrance = new Entrance();
         dining_hall = new DiningHall();
         tower_hall = new TowerHall(tower_color, three_players);
-        for(int i=0; i<7; i++) addStudent(Bag.getRandomStudent(), Places.ENTRANCE);
+        this.gameboard = gameboard;
+        for(int i=0; i<7; i++) addStudent(gameboard.drawFromBag(), Places.ENTRANCE);
     }
 
     public int addStudent(Color student, Places place) throws EriantysException{

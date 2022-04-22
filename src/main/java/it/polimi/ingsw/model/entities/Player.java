@@ -30,7 +30,7 @@ public class Player {
         this.gameboard = gameboard;
         this.color = color;
         this.ID = ID;
-        school = new School(color, three_players);
+        school = new School(color, three_players, gameboard);
         wizard = new Wizard();
         played_assistcard = -1;
         team_mate = null;

@@ -18,6 +18,7 @@ public class GameBoard {
     private final Island[] islands;
     private CharacterDeck character_cards;
     private MotherNature mother_nature;
+    private final Bag bag;
     public static final int NOF_ISLAND = 12;
     public static final int NOF_CLOUD = 2;
     public static final int NOF_STUDENT_COLOR = 5;
@@ -28,6 +29,7 @@ public class GameBoard {
         clouds = new Cloud[NOF_CLOUD];
         islands = new Island[NOF_ISLAND];
         professors = new Professor[NOF_PROFS];
+        bag = new Bag();
         for(int i = 0; i < NOF_PROFS; i++){
             professors[i] = new Professor(Color.getFromInt(i));
         }
@@ -115,12 +117,10 @@ public class GameBoard {
         EriantysException.throwInvalidIslandIndex(island_index);
         getIsland(island_index).addTower(tower);
     }
-    
-    /*
-    public Student drawFromBag(){
-        return Bag.getRandomStudent();
+
+    public Color drawFromBag(){
+        return bag.getRandomStudent();
     }
-    */
 
     public void putOnCloud(Color student, int cloud_index) throws EriantysException{
         if(cloud_index != 0 && cloud_index!=1) throw new EriantysException(

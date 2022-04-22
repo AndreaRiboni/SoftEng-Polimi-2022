@@ -21,7 +21,7 @@ public class CloudController extends Controller{
     public void putOnCloud() throws EriantysException {
         for(int nof_stud = 0; nof_stud < 3; nof_stud++) {
             for(int nof_cloud = 0; nof_cloud < 2; nof_cloud++) {
-                model.getCloud(nof_cloud).addStudent(Bag.getRandomStudent());
+                model.getCloud(nof_cloud).addStudent(model.drawFromBag());
             }
         }
     }

@@ -16,7 +16,8 @@ class SchoolTest {
     @BeforeEach
     public void init(){
         try{
-            school = new School(Color.WHITE, false);
+            GameBoard gameboard = new GameBoard();
+            school = new School(Color.WHITE, false, gameboard);
             System.out.println(school);
         } catch (EriantysException e){
             e.printStackTrace();

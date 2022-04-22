@@ -45,7 +45,7 @@ public class GameController extends Controller {
     }
 
     public void checkForEnd(){
-        //TODO: has the game ended?
+
     }
 
     public void updatePlayer(){
