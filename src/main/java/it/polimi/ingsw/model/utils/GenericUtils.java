@@ -33,4 +33,17 @@ public class GenericUtils {
         }
         return true;
     }
+
+    public static String getOrdinal(int num){
+        switch(num){
+            case 1:
+                return "first";
+            case 2:
+                return "second";
+            case 3:
+                return "third";
+            default:
+                throw new UnsupportedOperationException();
+        }
+    }
 }

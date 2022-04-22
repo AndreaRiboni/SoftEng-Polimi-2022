@@ -215,4 +215,14 @@ public class Island extends StudentPlace implements TowerPlace {
     public void unsetMotherNature() {
         has_mothernature = false;
     }
+
+    public int getIndex(){ return index; }
+
+    /**
+     * @param island
+     * @warning only for testing
+     */
+    public void setNext(Island island){
+        next = island;
+    }
 }

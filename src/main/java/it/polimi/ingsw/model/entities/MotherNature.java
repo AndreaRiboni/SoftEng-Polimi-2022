@@ -25,8 +25,15 @@ public class MotherNature {
             throw new EriantysException(
                     String.format(EriantysException.INVALID_STEPS, steps)
             );
-        island_index += steps;
-        island_index %= GameBoard.NOF_ISLAND;
+        while(steps>0){
+            Island current = gameboard.getIsland(island_index);
+            while(current.getNext()!=null){
+                current = current.getNext();
+            }
+            island_index = (current.getIndex() + 1) % GameBoard.NOF_ISLAND;
+            steps--;
+
+        }
         gameboard.getIsland(island_index).setMotherNature();
         gameboard.getIsland(old_island_index).unsetMotherNature();
     }
@@ -59,6 +66,14 @@ public class MotherNature {
 
     public int getIslandIndex(){
         return island_index;
+    }
+
+    /**
+     * @param index
+     * @warning only for test
+     */
+    public void setIslandIndex(int index){
+        island_index = index;
     }
 
     public String toString(){

@@ -13,7 +13,7 @@ public class Wizard {
 
     private void createCards(){
         for(int i = 0; i < cards.length; i++){
-            cards[i] = new AssistCard(i,(int)Math.floor((i+1)/2));
+            cards[i] = new AssistCard(i+1,(int)Math.floor((i+1)/2));
         }
     }
 

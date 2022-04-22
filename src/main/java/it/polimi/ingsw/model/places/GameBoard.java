@@ -224,6 +224,10 @@ public class GameBoard {
         character_cards.getLockBack();
     }
 
+    public Island[] getIslands(){
+        return islands;
+    }
+
     public String toString(){
         String newline = "--------------------------------------------\n";
         StringBuilder rep = new StringBuilder();

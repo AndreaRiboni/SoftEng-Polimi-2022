@@ -29,6 +29,6 @@ public class ClientLauncher {
     public static void main(String[] args) throws InterruptedException {
         PropertyConfigurator.configure("log4j.properties");
         ClientLogic client = new ClientLogic();
-        client.fakeStart(); //pseudo-testing
+        client.start(); //pseudo-testing
     }
 }

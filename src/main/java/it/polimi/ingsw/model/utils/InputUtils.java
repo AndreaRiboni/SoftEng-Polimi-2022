@@ -14,7 +14,7 @@ public class InputUtils {
     private static BufferedReader kb_input;
     private static boolean initialized = false;
 
-    public static final int[] EVERY_ISLAND = {0,1,2,3,4,5,6,7,8,9,10,11}, EVERY_CLOUD = {0, 1};
+    public static final int[] EVERY_ISLAND = {1,2,3,4,5,6,7,8,9,10,11, 12}, EVERY_CLOUD = {1, 2};
     public static final Color[] EVERY_STUD_COLOR = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PINK}, EVERY_TOWER_COLOR = {Color.BLACK, Color.WHITE, Color.GREY};
 
     private static void init(){
