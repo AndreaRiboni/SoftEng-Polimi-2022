@@ -191,6 +191,28 @@ public class ClientLogic {
                 act.setThreeStudentPlaces(chosen_places);
                 act.setIslandIndexes(chosen_island_indexes);
                 break;
+                
+            case MOVE_MOTHERNATURE:
+                int steps = InputUtils.getInt(
+                        "Choose a number of steps for Mother Nature",
+                        "Invalid number", new int[] {}
+                );
+                act.setMothernatureIncrement(steps);
+                break;
+            
+            case DRAIN_CLOUD:
+                break;
+            
+            case USE_CHARACTER_CARD:
+                CharacterCard characterCard;
+                if(characterCard.isOnBoard()){
+                    System.out.println(characterCard.getID() + characterCard.toString());
+                }
+                int chosen_id = InputUtils.getInt(
+                        "Choose the character you want to use", "Invalid index",
+                            new int []{0,1,2,3,4,5,6,7,8,9,10,11}
+                );
+                break;
 
             default:
                 System.out.println("Ciao");
