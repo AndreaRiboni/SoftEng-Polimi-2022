@@ -204,10 +204,10 @@ public class ClientLogic {
                 break;
             
             case USE_CHARACTER_CARD:
-                CharacterCard characterCard;
+                /*CharacterCard characterCard;
                 if(characterCard.isOnBoard()){
                     System.out.println(characterCard.getID() + characterCard.toString());
-                }
+                }*/
                 int chosen_id = InputUtils.getInt(
                         "Choose the character you want to use", "Invalid index",
                             new int []{0,1,2,3,4,5,6,7,8,9,10,11}
