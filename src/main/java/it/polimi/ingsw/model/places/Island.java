@@ -195,6 +195,8 @@ public class Island extends StudentPlace implements TowerPlace {
         return next;
     }
 
+    public boolean hasNext(){ return next!=null; }
+
     public String toString(){
         Map<Color, Integer> towers = new HashMap<>();
         if(tower != null)
@@ -224,5 +226,6 @@ public class Island extends StudentPlace implements TowerPlace {
      */
     public void setNext(Island island){
         next = island;
+        gameboard.decreaseNofGroups();
     }
 }

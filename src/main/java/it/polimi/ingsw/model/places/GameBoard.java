@@ -228,6 +228,8 @@ public class GameBoard {
         return islands;
     }
 
+    public Bag getBag() { return bag;}
+
     public String toString(){
         String newline = "--------------------------------------------\n";
         StringBuilder rep = new StringBuilder();

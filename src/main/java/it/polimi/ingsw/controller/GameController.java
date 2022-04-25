@@ -1,7 +1,9 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.entities.Player;
+import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.places.Island;
 import it.polimi.ingsw.model.utils.EriantysException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -44,8 +46,18 @@ public class GameController extends Controller {
         }
     }
 
-    public void checkForEnd(){
-
+    //TODO: test checkForEnd
+    public boolean checkForEnd(){
+        for(Player playing : model.getPlayers()) {
+            if (playing.getNumberOfPlacedTowers() == 8) {
+                return true;
+            } else if (getNofGroupsOfIslands() == 3) {
+                return true;
+            } else if (model.getBag().getRemaining() == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void updatePlayer(){
@@ -135,4 +147,13 @@ public class GameController extends Controller {
         Player last = HasPlayed.get(HasPlayed.size() - 1);
         return last.getID();
     }
+
+    private int getNofGroupsOfIslands(){
+        int links = 0;
+        for(Island island : model.getIslands()){
+            if(island.hasNext()) links++;
+        }
+        return 12 - links;
+    }
+
 }
