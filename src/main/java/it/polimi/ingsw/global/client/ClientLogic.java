@@ -119,13 +119,18 @@ public class ClientLogic {
     }
 
     private int askGamePhase(List <GamePhase> current_gamephases){
-        int gamephase_indexes[] = new int[current_gamephases.size()];
-        for(int i=0; i<current_gamephases.size(); i++){
-            gamephase_indexes[i] = i+1;
-            System.out.println("Gamephase #"+(i+1)+": "+current_gamephases.get(i));
+        if(current_gamephases.size()!=1) {
+            int gamephase_indexes[] = new int[current_gamephases.size()];
+            for (int i = 0; i < current_gamephases.size(); i++) {
+                gamephase_indexes[i] = i + 1;
+                System.out.println("Gamephase #" + (i + 1) + ": " + current_gamephases.get(i));
+            }
+            int chosen = InputUtils.getInt("Which gamephase do you want to play?", "Invalid number", gamephase_indexes) - 1;
+            return chosen;
         }
-        int chosen = InputUtils.getInt("Which gamephase do you want to play?", "Invalid number", gamephase_indexes)-1;
-        return chosen;
+        else{
+            return 0;
+        }
     }
 
     private boolean getFeedback(Action action){
@@ -181,10 +186,10 @@ public class ClientLogic {
                     if(chosen_place==1){
                         chosen_places[i] = Places.ISLAND;
                         chosen_island_indexes[i] = InputUtils.getInt(
-                                "Enter the index of the island (1 or 2)",
+                                "Enter the index of the island (from 1 to 12)",
                                 "Invalid index",
                                 InputUtils.EVERY_ISLAND
-                        );
+                        ) - 1;
                     } else{
                         chosen_places[i] = Places.DINING_HALL;
                     }
@@ -204,7 +209,7 @@ public class ClientLogic {
             
             case DRAIN_CLOUD:
                 int cloud_id = InputUtils.getInt(
-                        "Choose the cloud to get drain the students from",
+                        "Choose the cloud to get drain the students from (1 or 2)",
                         "Invalid index", new int[]{1,2}
                 );
                 act.setCloudIndex(cloud_id);

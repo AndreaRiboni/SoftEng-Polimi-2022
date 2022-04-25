@@ -40,8 +40,8 @@ public class NetworkListener extends Thread{
         boolean game_ended = false;
         while(!game_ended){
             try {
-                log.info("Received an object");
                 Object received = in.readObject();
+                log.info("Received an object");
                 if (received instanceof String) {
                     log.info("the received object is the model");
                     System.out.println((String)received);
