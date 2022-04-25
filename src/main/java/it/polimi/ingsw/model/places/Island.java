@@ -226,6 +226,5 @@ public class Island extends StudentPlace implements TowerPlace {
      */
     public void setNext(Island island){
         next = island;
-        gameboard.decreaseNofGroups();
     }
 }
