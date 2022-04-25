@@ -197,7 +197,7 @@ public class ClientLogic {
             case MOVE_MOTHERNATURE:
                 int steps = InputUtils.getInt(
                         "Choose a number of steps for Mother Nature",
-                        "Invalid number", new int[] {}
+                        "Invalid number", new int[] {1,2,3,4,5}
                 );
                 act.setMothernatureIncrement(steps);
                 break;

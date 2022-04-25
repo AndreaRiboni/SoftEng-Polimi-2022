@@ -155,4 +155,12 @@ public class Action implements Serializable {
         return (Color)param.get(GameParameter.COLOR);
     }
 
+    /*
+    public void setErrorMessage(String errorMessage){}
+
+    public String getErrorMessage(){
+        return "errore";
+    }
+    */
+
 }
