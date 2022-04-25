@@ -203,6 +203,11 @@ public class ClientLogic {
                 break;
             
             case DRAIN_CLOUD:
+                int cloud_id = InputUtils.getInt(
+                        "Choose the cloud to get drain the students from",
+                        "Invalid index", new int[]{1,2}
+                );
+                act.setCloudIndex(cloud_id);
                 break;
             
             case USE_CHARACTER_CARD:
