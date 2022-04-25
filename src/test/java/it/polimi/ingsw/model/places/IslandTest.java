@@ -96,4 +96,29 @@ class IslandTest {
         System.out.println(island);
         Places place = Places.ISLAND;
     }
+
+    @Test
+    public void mergeTests() throws EriantysException {
+        //Giving prof-red to g1 and emptying the islands
+        Island[] islands = gameboard.getIslands();
+        Player g1 = gameboard.getPlayers()[0];
+        Player g2 = gameboard.getPlayers()[1];
+        gameboard.getProfFromColor(Color.RED).setPlayer(g1);
+        for(Island i : islands){
+            i.getStudents().clear();
+        }
+        //adding a red student in island 0
+        islands[0].addStudent(Color.RED);
+        //calculating the influence (putting a tower)
+        islands[0].calculateInfluence(false, null);
+        //doing the same with the previous island
+        islands[11].addStudent(Color.RED);
+        islands[11].calculateInfluence(false, null);
+        //now they should be linked
+        assertEquals(islands[0], islands[11].getNext());
+        //repeating for island 1
+        islands[1].addStudent(Color.RED);
+        islands[1].calculateInfluence(false, null);
+        assertEquals(islands[1], islands[0].getNext());
+    }
 }

@@ -120,10 +120,11 @@ public class ClientLogic {
 
     private int askGamePhase(List <GamePhase> current_gamephases){
         if(current_gamephases.size()!=1) {
+            System.out.println("Here's what you can do:");
             int gamephase_indexes[] = new int[current_gamephases.size()];
             for (int i = 0; i < current_gamephases.size(); i++) {
                 gamephase_indexes[i] = i + 1;
-                System.out.println("Gamephase #" + (i + 1) + ": " + current_gamephases.get(i));
+                System.out.println("\tGamephase #" + (i + 1) + ": " + current_gamephases.get(i));
             }
             int chosen = InputUtils.getInt("Which gamephase do you want to play?", "Invalid number", gamephase_indexes) - 1;
             return chosen;
@@ -211,10 +212,10 @@ public class ClientLogic {
                 int cloud_id = InputUtils.getInt(
                         "Choose the cloud to get drain the students from (1 or 2)",
                         "Invalid index", new int[]{1,2}
-                );
+                ) - 1;
                 act.setCloudIndex(cloud_id);
                 break;
-            
+
             case USE_CHARACTER_CARD:
                 System.out.println("1) Father Marryman");
                 System.out.println("2) Mr. Greedy");
@@ -234,9 +235,6 @@ public class ClientLogic {
                 );
                 act.setCharacterCardIndex(chosen_id-1);
                 break;
-
-            default:
-                System.out.println("Ciao");
         }
         return getFeedback(act);
     }
@@ -258,9 +256,6 @@ public class ClientLogic {
                 //ask the user the needed inputs and send the related Action to the server
                 succeeded = processGamePhase(current_gamephases.get(chosen));
             } while (!succeeded);
-        }while(true);
-        /*TODO: [idea] rendere le singole comunicazioni di determinate parti di gioco delle funzioni e creare una funzione
-           che continui ad inviare il messaggio (chiedendo i dati all'utente) fino a che non si ha la corretta response*/
-
+        } while(true);
     }
 }

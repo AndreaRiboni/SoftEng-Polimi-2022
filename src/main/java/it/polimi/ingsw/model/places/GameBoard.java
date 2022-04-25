@@ -244,6 +244,12 @@ public class GameBoard {
         for(Island i : islands){
             rep.append(i.toString()).append("\n");
         }
+        rep.append(newline);
+        for(int i = 0; i < clouds.length; i++){
+            rep.append("Cloud #").append(i+1).append("\n")
+                .append(clouds[i].toString());
+        }
+        rep.append(newline);
         return rep.toString();
     }
 }

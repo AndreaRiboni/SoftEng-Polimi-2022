@@ -12,9 +12,10 @@ public class MotherNature {
     private boolean avoid_towers;
     private Color avoid_color;
 
-    public MotherNature(GameBoard gameboard, int island_index){
+    public MotherNature(GameBoard gameboard, int island_index) throws EriantysException {
         this.island_index = island_index;
         this.gameboard = gameboard;
+        this.gameboard.getIsland(this.island_index).setMotherNature();
         avoid_towers = false;
         avoid_color = null;
     }

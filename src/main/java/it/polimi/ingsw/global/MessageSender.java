@@ -8,6 +8,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.util.List;
 
@@ -25,7 +26,6 @@ public class MessageSender {
             input = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             log.error("Unable to initialize socket");
-            e.printStackTrace();
         }
     }
 

@@ -139,25 +139,32 @@ public class Island extends StudentPlace implements TowerPlace {
         //--> we should link it to the previous island to
         //--> an "ISLANDS" class could probably help us
         Island next = gameboard.getIsland((index + 1) % GameBoard.NOF_ISLAND);
+        Island prev = gameboard.getIsland(
+                index == 0 ? 11 : index - 1
+        );
         //System.out.println("next island color: " + (next.getTowerColor() == null ? "null" : next.getTowerColor()));
         if(next.getTowerColor()!=null && next.getTowerColor().equals(getTowerColor())){
-            merge(next);
+            merge(this, next);
+        }
+        if(prev.getTowerColor()!=null && prev.getTowerColor().equals(getTowerColor())){
+            merge(prev, this);
         }
     }
 
-    private void merge(Island island) throws EriantysException {
-        if(index % GameBoard.NOF_ISLAND == (island.index-1) % GameBoard.NOF_ISLAND){
+    private void merge(Island start, Island end) throws EriantysException {
+        int indexes_difference = Math.abs(start.index-end.index);
+        if(indexes_difference == 1 || indexes_difference == 11){
             //System.out.println("right index");
-            if(getTowerColor().equals(island.getTowerColor())) {
+            if(start.getTowerColor().equals(end.getTowerColor())) {
                 //System.out.println("right color");
-                next = island;
+                start.next = end;
                 //System.out.println("linked: " + index + " to " + island.index);
             } else {
                 throw new EriantysException(EriantysException.INVALID_MERGE_COLOR);
             }
         } else {
             throw new EriantysException(
-                    String.format(EriantysException.INVALID_ISLAND_INDEX, island.index)
+                    String.format(EriantysException.INVALID_ISLAND_INDEXES, start.index, end.index)
             );
         }
     }
@@ -202,7 +209,7 @@ public class Island extends StudentPlace implements TowerPlace {
         if(tower != null)
             towers.put(tower, 1);
         StringBuilder sb = new StringBuilder("Island #").append(index+1).append("\n");
-        String mother_nature = has_mothernature ? "\n1tmother nature is relaxing here" : "";
+        String mother_nature = has_mothernature ? "\n\tmother nature is relaxing here" : "";
         return sb.append("\tstudents:\n")
                 .append(Printer.studentPlaceToString(this, students))
                 .append("\ttowers:\n")
