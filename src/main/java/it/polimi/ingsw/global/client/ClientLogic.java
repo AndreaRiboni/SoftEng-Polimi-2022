@@ -181,7 +181,7 @@ public class ClientLogic {
                     if(chosen_place==1){
                         chosen_places[i] = Places.ISLAND;
                         chosen_island_indexes[i] = InputUtils.getInt(
-                                "Enter the index of the island",
+                                "Enter the index of the island (1 or 2)",
                                 "Invalid index",
                                 InputUtils.EVERY_ISLAND
                         );
