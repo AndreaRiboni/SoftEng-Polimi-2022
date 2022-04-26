@@ -14,6 +14,7 @@ public class Bag  {
             remaining.put(Color.getFromInt(i), 26);
         }
     }
+
     public Color getRandomStudent() {
         int value;
         Color randomstudent;
@@ -38,5 +39,10 @@ public class Bag  {
             sum+=i;
         }
         return sum;
+    }
+
+    public void removeStudent(Color color, int qty){
+        int remaining = this.remaining.get(color);
+        this.remaining.put(color, remaining - qty);
     }
 }

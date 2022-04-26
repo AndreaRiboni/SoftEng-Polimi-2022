@@ -41,8 +41,8 @@ public class EriantysException extends Exception {
             CARD_PARAMETER_ERROR = "The specified parameter doesn't match the game rules",
             INVALID_STUDENT_INDEX = "Invalid student index",
             INVALID_MERGE_COLOR = "Unable to merge: the islands have different colors",
-            WRONG_TURN = "Player is playing during thw wrong turn. [turn_value] Expected: %d, Given: $d",
-            WRONG_PLAYER = "Player is playing during thw wrong turn. [player_id] Expected: %d, Given: $d",
+            WRONG_TURN = "Player is playing during thw wrong turn. [turn_value] Expected: %d, Given: %d",
+            WRONG_PLAYER = "Player is playing during thw wrong turn. [player_id] Expected: %d, Given: %d",
             NOT_ENOUGH_STUDENTS = "Unable to remove the selected students: Not enough",
             INVALID_ISLAND_INDEXES = "Invalid island indexes: %d and %d";
 }

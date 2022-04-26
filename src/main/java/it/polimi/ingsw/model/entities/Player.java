@@ -26,7 +26,7 @@ public class Player {
 
     public Player(GameBoard gameboard, int ID, Color color, boolean three_players) throws EriantysException {
         turn_value = 0;
-        coins = 1;
+        coins = 100000000;
         this.gameboard = gameboard;
         this.color = color;
         this.ID = ID;

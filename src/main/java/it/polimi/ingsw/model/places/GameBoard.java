@@ -52,6 +52,7 @@ public class GameBoard {
         for(int i = 0; i < 5; i++){
             init_students.add(Color.getFromInt(i));
             init_students.add(Color.getFromInt(i));
+            bag.removeStudent(Color.getFromInt(i), 2);
         }
         for(int i = 0; i < islands.length; i++){
             if(i != motherly_island && i != opposite_island){
@@ -249,7 +250,7 @@ public class GameBoard {
             rep.append("Cloud #").append(i+1).append("\n")
                 .append(clouds[i].toString());
         }
-        rep.append(newline);
+        rep.append(newline).append("waiting...\n");
         return rep.toString();
     }
 }

@@ -78,9 +78,11 @@ public class GameHandler implements Runnable {
         log.info("New match has started [" + players.length + " players]");
         do {
             System.out.println();
+            log.info("get whos playng");
             int player_playing = getWhoIsPlaying();
             System.out.println("player " + player_playing + " is playing");
             //send the correct client what action we need from him
+            log.info("getting the next phases from chub");
             sendAction(player_playing, controller.getAcceptedGamephases());
             log.info("The available gamephases have been sent to the client (player " + player_playing + ")");
             //get the action
@@ -93,6 +95,7 @@ public class GameHandler implements Runnable {
                 sendAction(player_playing, GamePhase.CORRECT);
                 //send the updated gameboard to every client
                 sendGameBoard();
+                log.info("gameboard mandata");
             } else {
                 sendAction(player_playing, GamePhase.ERROR_PHASE);
             }

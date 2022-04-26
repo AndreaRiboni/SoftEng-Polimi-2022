@@ -1,8 +1,6 @@
 package it.polimi.ingsw.global.client;
 
 import it.polimi.ingsw.global.MessageSender;
-import it.polimi.ingsw.model.entities.cards.CharacterCard;
-import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.utils.*;
 import org.apache.log4j.LogManager;
@@ -29,11 +27,6 @@ public class ClientLogic {
         return gamephase;
     }
 
-    /**
-     * TODO: il codice seguente è un esempio di come funziona la comunicazione
-     * nota che presenta errori e semplificazioni
-     * se trovate errori nel server avvisatemi
-     */
     public void fakeStart(){
         log.info("client has started. sending 2 players request");
         Action start = new Action();

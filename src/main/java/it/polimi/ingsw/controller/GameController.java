@@ -60,8 +60,8 @@ public class GameController extends Controller {
         return false;
     }
 
-    public void updatePlayer(){
-        HasPlayed.add(model.getPlayers()[action.getPlayerID()]);
+    public void updatePlayer(int player_id){
+        HasPlayed.add(model.getPlayers()[player_id]);
     }
 
     public void resetOrder(){
@@ -76,11 +76,11 @@ public class GameController extends Controller {
         Player playing = model.getPlayers()[action.getPlayerID()];
         int playing_index = playing.getID();
         log.info("verifying that player " + playing_index + " is playing in the correct turn");
-        if(playing_index == 0 && HasPlayed.size() == 0) return;
+        if(HasPlayed.size() == 0) return;
         Player last = HasPlayed.get(HasPlayed.size() - 1);
         int last_index = last.getID();
         log.info("last player was " + last_index);
-        if(last_index + 1 != playing_index){
+        if((last_index + 1) % model.getNofPlayers() != playing_index){
             throw new EriantysException(
                     String.format(EriantysException.WRONG_TURN, last_index + 1, playing_index)
             );
@@ -89,8 +89,11 @@ public class GameController extends Controller {
 
     public int getNextNeutralOrder(){
         if(HasPlayed.isEmpty()) return 0; //no one has played it
-        if(HasPlayed.size() == model.getPlayers().length) return -1; //everyone has already played
-        return HasPlayed.get(HasPlayed.size() - 1).getID() + 1; //next player
+        for(Player p : HasPlayed){
+            System.out.println("neutral order: " + p.getID());
+        }
+        if(everyoneHasPlayed()) return -1; //everyone has already played
+        return (HasPlayed.get(HasPlayed.size() - 1).getID() + 1) % model.getNofPlayers(); //next player
     }
 
     /**
@@ -101,31 +104,46 @@ public class GameController extends Controller {
     public void verifyOrder() throws EriantysException {
         Player playing = model.getPlayers()[action.getPlayerID()];
         //find the player with the lowest turn value who is not present in HasPlayed
-        int lowest = model.getPlayers()[0].getTurnValue();
+        int lowest = Integer.MAX_VALUE;
         for(Player p : model.getPlayers()){
             if(p.getTurnValue() <= lowest && !HasPlayed.contains(p)){ //TODO: case of parity between two turn_values. Could be useful to add a second turn value.
                 lowest = p.getTurnValue();
             }
         }
         if(playing.getTurnValue() != lowest){
+            log.info("valore sbagliato");
             throw new EriantysException(
                 String.format(EriantysException.WRONG_TURN, lowest, playing.getTurnValue())
             );
-        }
+        } else log.info("valore ok");
         //TODO: this implementation can be used only during MOVE_3_STUDENTS, but not during any other phases
+    }
+
+    private boolean everyoneHasPlayed(){
+        boolean[] values = {false, false, false, false};
+        int distinct = 0;
+        for(Player p : HasPlayed){
+            if(!values[p.getID()]) distinct++;
+            values[p.getID()] = true;
+        }
+        return distinct == model.getNofPlayers();
     }
 
     public int getNextWeightedOrder(){
         //who has the lowest turn_value
-        int lowest = model.getPlayers()[0].getTurnValue();
+        int lowest = Integer.MAX_VALUE;
         int lowest_player = model.getPlayers()[0].getID();
-        if(HasPlayed.size() == model.getPlayers().length) return -1; //everyone has already played
+        for(Player p : HasPlayed){
+            System.out.println("weighted order: " + p.getID());
+        }
+        if(everyoneHasPlayed()) return -1; //everyone has already played
         for(Player p : model.getPlayers()){
             if(p.getTurnValue() <= lowest && !HasPlayed.contains(p)){ //TODO: case of parity between two turn_values. Could be useful to add a second turn value.
                 lowest = p.getTurnValue();
                 lowest_player = p.getID();
             }
         }
+        log.info("il valore minore lo ha " + lowest_player);
         return lowest_player;
     }
 
