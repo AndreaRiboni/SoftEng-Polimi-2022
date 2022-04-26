@@ -19,12 +19,20 @@ public class ClientLogic {
         listener.start();
     }
 
-    private List<GamePhase> waitForResponse() {
+    private List<GamePhase> waitForAvailableGamephases() {
         List<GamePhase> gamephase = null;
-        while((gamephase = listener.getResponseIfReady()) == null){
+        while((gamephase = listener.getPhasesIfReady()) == null){
             //do nothing
         }
         return gamephase;
+    }
+
+    private Action waitForResponse(){
+        Action response = null;
+        while((response = listener.getResponseIfReady()) == null){
+            //do nothing
+        }
+        return response;
     }
 
     public void fakeStart(){
@@ -34,7 +42,7 @@ public class ClientLogic {
         start.setNOfPlayers(2);
         msg.send(start);
         log.info("sent 2 players request. waiting for response");
-        List<GamePhase> current_gamephases = waitForResponse();
+        List<GamePhase> current_gamephases = waitForAvailableGamephases();
         log.info("available gamephases: \t" + current_gamephases);
 
         Action draw_assist_card = new Action();
@@ -43,8 +51,8 @@ public class ClientLogic {
         draw_assist_card.setAssistCardIndex(assist_card_index);
         msg.send(draw_assist_card);
         log.info("sent draw assist card. waiting for response");
-        List<GamePhase> response = waitForResponse(); //CORRECT vs ERROR
-        current_gamephases = waitForResponse();
+        List<GamePhase> response = waitForAvailableGamephases(); //CORRECT vs ERROR
+        current_gamephases = waitForAvailableGamephases();
         log.info("available gamephases: \t" + current_gamephases);
 
         log.info("sending move 3 students");
@@ -70,10 +78,10 @@ public class ClientLogic {
             move3studs.setIslandIndexes(new int[]{0,0,island_index});
             msg.send(move3studs);
             log.info("sent move 3 students. waiting for response");
-            response = waitForResponse();
+            response = waitForAvailableGamephases();
             if(response.contains(GamePhase.ERROR_PHASE)) log.error("There was an error. Retrying");
         } while (response.contains(GamePhase.ERROR_PHASE));
-        current_gamephases = waitForResponse();
+        current_gamephases = waitForAvailableGamephases();
         log.info("available gamephases: \t" + current_gamephases);
 
         Action move_mothernature = new Action();
@@ -81,8 +89,8 @@ public class ClientLogic {
         move_mothernature.setMothernatureIncrement((int)(Math.random() * Math.floor((assist_card_index+1)/2)) + 1);
         msg.send(move_mothernature);
         log.info("sent move mother nature. waiting for response");
-        response = waitForResponse(); //CORRECT vs ERROR
-        current_gamephases = waitForResponse();
+        response = waitForAvailableGamephases(); //CORRECT vs ERROR
+        current_gamephases = waitForAvailableGamephases();
         log.info("available gamephases: \t" + current_gamephases);
 
         log.info("sending drain cloud");
@@ -94,10 +102,10 @@ public class ClientLogic {
             log.info("Chosen cloud index: " + index);
             msg.send(draincloud);
             log.info("sent drain cloud. waiting for response");
-            response = waitForResponse();
+            response = waitForAvailableGamephases();
             if(response.contains(GamePhase.ERROR_PHASE)) log.error("There was an error. Retrying");
         } while (response.contains(GamePhase.ERROR_PHASE));
-        current_gamephases = waitForResponse();
+        current_gamephases = waitForAvailableGamephases();
         log.info("available gamephases: \t" + current_gamephases);
 
         if(current_gamephases.contains(GamePhase.PUT_ON_CLOUDS)){ //new turn
@@ -105,8 +113,8 @@ public class ClientLogic {
             putonclouds.setGamePhase(GamePhase.PUT_ON_CLOUDS);
             msg.send(putonclouds);
             log.info("sent turn end notification. waiting for response");
-            response = waitForResponse(); //CORRECT vs ERROR
-            current_gamephases = waitForResponse();
+            response = waitForAvailableGamephases(); //CORRECT vs ERROR
+            current_gamephases = waitForAvailableGamephases();
             log.info("available gamephases: \t" + current_gamephases);
         }
     }
@@ -127,15 +135,15 @@ public class ClientLogic {
         }
     }
 
-    private boolean getFeedback(Action action){
+    private String getFeedback(Action action){
         msg.send(action);
         System.out.println("Sent. Waiting for response");
-        return waitForResponse().contains(GamePhase.CORRECT);
+        Action response = waitForResponse();
+        if(response.getGamePhase().equals(GamePhase.CORRECT)) return "true";
+        return response.getErrorMessage();
     }
 
-
-
-    private boolean processGamePhase(GamePhase chosen){
+    private String processGamePhase(GamePhase chosen){
         Action act = new Action();
         act.setGamePhase(chosen);
         switch(chosen){
@@ -234,20 +242,29 @@ public class ClientLogic {
 
     public void start() {
         System.out.println("client has started");
+        String username = InputUtils.getString("Choose an username");
         int nof_players = InputUtils.getInt("How many players?", "Invalid number", new int[]{2,3,4});
         System.out.println("sending number of players");
         Action start = new Action();
         start.setGamePhase(GamePhase.START);
         start.setNOfPlayers(nof_players);
+        start.setUsername(username);
         msg.send(start);
         System.out.println("Sent. Waiting for response");
+        Action username_comunicator = waitForResponse();
+        System.out.println("Match has started. My username is " + username_comunicator.getUsername());
         do {
             boolean succeeded = false;
             do {
-                List<GamePhase> current_gamephases = waitForResponse();
+                List<GamePhase> current_gamephases = waitForAvailableGamephases();
                 int chosen = askGamePhase(current_gamephases);
                 //ask the user the needed inputs and send the related Action to the server
-                succeeded = processGamePhase(current_gamephases.get(chosen));
+                String response = processGamePhase(current_gamephases.get(chosen));
+                if(response.equalsIgnoreCase("true")){
+                    succeeded = true;
+                } else {
+                    System.out.println(response);
+                }
             } while (!succeeded);
         } while(true);
     }

@@ -15,6 +15,7 @@ import java.util.Map;
 public class Player {
     private int turn_value, coins;
     private final Color color;
+    private String username;
     private Wizard wizard;
     private int played_assistcard;
     private final School school;
@@ -37,6 +38,7 @@ public class Player {
         nof_total_towers = three_players ? 6 : 8;
         mothernature_extrasteps = 0;
         mothernature_extrapoints = 0;
+        username = null;
     }
 
     public int getTurnValue() {
@@ -162,7 +164,11 @@ public class Player {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("player #").append(ID+1).append(":\n")
+        sb.append("player #").append(ID+1);
+        if(username != null){
+            sb.append(" \"").append(username).append("\"");
+        }
+        sb.append(":\n")
                 .append("\tTower Color: ").append(Color.colorToString(color)).append("\n")
                 .append("\tCoins: ").append(coins).append("\n")
                 .append("\tTurn value: ").append(turn_value);
@@ -176,6 +182,14 @@ public class Player {
 
     public int getNofStudentInDiningHall(Color col){
         return school.getDiningStudents().getOrDefault(col, 0);
+    }
+
+    public void setUsername(String username){
+        this.username = username;
+    }
+
+    public String getUsername(){
+        return this.username;
     }
 
     public boolean equals(Object obj){

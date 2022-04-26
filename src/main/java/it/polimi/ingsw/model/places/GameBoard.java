@@ -253,4 +253,10 @@ public class GameBoard {
         rep.append(newline).append("waiting...\n");
         return rep.toString();
     }
+
+    public void setUsernames(String[] usernames) {
+        for(int i = 0; i < players.length; i++){
+            players[i].setUsername(usernames[i]);
+        }
+    }
 }

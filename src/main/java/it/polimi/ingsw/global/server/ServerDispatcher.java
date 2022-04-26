@@ -29,16 +29,17 @@ public class ServerDispatcher extends Thread {
             log.info("ServerDispatcher ready");
             Action received = (Action)in.readObject();
             int nof_players = received.getNOfPlayers();
-            log.info("A client has sent a message - " + Printer.socketToString(socket) + ": " + nof_players);
+            String username_chosen = received.getUsername();
+            log.info("A client has sent a message - " + Printer.socketToString(socket) + " [num_of_players: " + nof_players + ", username: " + username_chosen + "]");
             switch(nof_players){
                 case 2:
-                    two_players.connect(socket, in, out);
+                    two_players.connect(socket, in, out, username_chosen);
                     break;
                 case 3:
-                    three_players.connect(socket, in, out);
+                    three_players.connect(socket, in, out, username_chosen);
                     break;
                 case 4:
-                    four_players.connect(socket, in, out);
+                    four_players.connect(socket, in, out, username_chosen);
                     break;
                 default:
                     log.info("client hasn't followed the protocol and typed: '" + received.getNOfPlayers() + "' [" + Printer.socketToString(socket) + "]");

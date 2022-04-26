@@ -42,8 +42,7 @@ public class ControllerHub {
         keep_going = false;
     }
 
-    public boolean update(Action action) { //comnunicare l'errore
-        //TODO: use the hashmap to determine wether the gamephase is correct
+    public String update(Action action) {
         try {
             log.info("Received an update - Analyzing " + action.getGamePhase());
             flow.assertPhase(action.getGamePhase()); //check that the action's game-phase is coherent with the game-flow
@@ -157,9 +156,9 @@ public class ControllerHub {
         } catch (EriantysException erex){
             erex.printStackTrace();
             log.error(erex.getMessage());
-            return false;
+            return erex.getMessage();
         }
-        return true;
+        return "true";
     }
 
     public List<GamePhase> getAcceptedGamephases() {

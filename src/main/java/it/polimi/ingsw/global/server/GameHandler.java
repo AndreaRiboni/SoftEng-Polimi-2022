@@ -17,6 +17,7 @@ import java.util.List;
 
 public class GameHandler implements Runnable {
     private Socket[] players;
+    private String[] usernames;
     private MessageSender[] out;
     private ObjectInputStream[] ins;
     private ObjectOutputStream[] outs;
@@ -24,11 +25,12 @@ public class GameHandler implements Runnable {
     private ControllerHub controller;
     private static final Logger log = LogManager.getRootLogger();
 
-    public GameHandler(Socket[] players, ObjectInputStream[] inputs, ObjectOutputStream[] outputs) {
+    public GameHandler(Socket[] players, ObjectInputStream[] inputs, ObjectOutputStream[] outputs, String[] usernames) {
         this.players = players;
         out = new MessageSender[players.length];
         ins = inputs;
         outs = outputs;
+        this.usernames = usernames;
         for(int i = 0; i < players.length; i++){
             out[i] = new MessageSender(players[i], ins[i], outs[i]);
         }
@@ -39,6 +41,7 @@ public class GameHandler implements Runnable {
         start_game.setGamePhase(GamePhase.START);
         start_game.setNOfPlayers(players.length);
         controller.update(start_game);
+        model.setUsernames(usernames);
         start_game.setGamePhase(GamePhase.PUT_ON_CLOUDS);
         controller.update(start_game);
     }
@@ -60,10 +63,8 @@ public class GameHandler implements Runnable {
         out[player].send(gamephases);
     }
 
-    private void sendAction(int player, GamePhase gamephase){
-        List<GamePhase> temp = new ArrayList<>();
-        temp.add(gamephase);
-        out[player].send(temp);
+    private void sendAction(int player, Action action){
+        out[player].send(action);
     }
 
     private void sendGameBoard(){
@@ -76,6 +77,12 @@ public class GameHandler implements Runnable {
     public void run() {
         boolean game_ended = false;
         log.info("New match has started [" + players.length + " players]");
+        for(int i = 0; i < players.length; i++){
+            Action official_start = new Action();
+            official_start.setGamePhase(GamePhase.CORRECT);
+            official_start.setUsername(usernames[i]);
+            sendAction(i, official_start);
+        }
         do {
             System.out.println();
             log.info("get whos playng");
@@ -89,15 +96,18 @@ public class GameHandler implements Runnable {
             Action client_action = readAction(player_playing);
             client_action.setPlayerID(player_playing);
             //process the action
-            boolean response = controller.update(client_action);
+            String str_response = controller.update(client_action);
+            Action response = new Action();
             //send the response
-            if(response){
-                sendAction(player_playing, GamePhase.CORRECT);
+            if(str_response.equalsIgnoreCase("true")){
+                response.setGamePhase(GamePhase.CORRECT);
+                sendAction(player_playing, response);
                 //send the updated gameboard to every client
                 sendGameBoard();
-                log.info("gameboard mandata");
             } else {
-                sendAction(player_playing, GamePhase.ERROR_PHASE);
+                response.setGamePhase(GamePhase.ERROR_PHASE);
+                response.setErrorMessage(str_response);
+                sendAction(player_playing, response);
             }
         } while(!game_ended);
     }

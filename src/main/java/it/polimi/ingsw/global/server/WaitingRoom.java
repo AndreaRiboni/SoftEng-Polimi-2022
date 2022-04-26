@@ -12,6 +12,7 @@ import java.util.concurrent.Executors;
 
 public class WaitingRoom {
     private Socket[] clients;
+    private String[] usernames;
     private ObjectInputStream[] in;
     private ObjectOutputStream[] out;
     private int connected;
@@ -22,19 +23,32 @@ public class WaitingRoom {
         clients = new Socket[nof_players];
         in = new ObjectInputStream[nof_players];
         out = new ObjectOutputStream[nof_players];
+        usernames = new String[nof_players];
         connected = 0;
         executor = Executors.newCachedThreadPool();
     }
 
-    public synchronized void connect(Socket client, ObjectInputStream ois, ObjectOutputStream oos){
+    public synchronized void connect(Socket client, ObjectInputStream ois, ObjectOutputStream oos, String username){
         clients[connected] = client;
         in[connected] = ois;
         out[connected] = oos;
+        String new_username = username;
+        boolean username_found = false;
+        int extra_char = 0;
+        do {
+            username_found = false;
+            new_username = extra_char == 0 ? username : username + extra_char;
+            extra_char++;
+            for(int i = 0; i < connected; i++){
+                if(usernames[i].equalsIgnoreCase(new_username)) username_found = true;
+            }
+        } while (username_found);
+        usernames[connected] = new_username;
         connected++;
         log.info(Printer.socketToString(client) + " has joined a match [" + connected + "/" + clients.length + "]");
         if(connected == clients.length){
             log.info("starting a match...");
-            executor.submit(new GameHandler(clients, in, out));
+            executor.submit(new GameHandler(clients, in, out, usernames));
             connected = 0;
         }
     }
