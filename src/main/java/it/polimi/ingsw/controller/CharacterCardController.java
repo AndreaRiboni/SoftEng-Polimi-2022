@@ -97,10 +97,12 @@ public class CharacterCardController extends Controller {
                 break;
             case 11: //pick a color c. Every player has to remove from his dining 3 c student
                 Color col = action.getColor();
+                Bag bag = this.model.getBag();
                 Player[] players = model.getPlayers();
                 for(int i = 0; i < players.length; i++){
                     for(int o = 0; o < droppable_students; o++){
                         players[i].removeFromDiningHall(col);
+                        bag.putStudentsIn(col);
                     }
                 }
                 break;
