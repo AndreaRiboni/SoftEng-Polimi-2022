@@ -57,6 +57,38 @@ class ControllerHubTest {
         } while (!response_ok);
     }
 
+    public void moveMotherNature(int player_id){
+        Action move_mothernature = new Action();
+        move_mothernature.setGamePhase(GamePhase.MOVE_MOTHERNATURE);
+        move_mothernature.setPlayerID(player_id);
+        int assist_card_index = (int)(Math.random() * 10);
+        boolean response;
+        do{
+            move_mothernature.setMothernatureIncrement((int)(Math.random() * Math.floor((assist_card_index+1)/2)) + 1);
+            response = controller.update(move_mothernature).equals("true");
+        } while (!response);
+    }
+
+    public void drainClouds(int player_id){
+        Action draincloud = new Action();
+        draincloud.setGamePhase(GamePhase.DRAIN_CLOUD);
+        draincloud.setPlayerID(player_id);
+        boolean response;
+        do{
+            int index = Math.random() > 0.5 ? 0 : 1;
+            draincloud.setCloudIndex(index);
+            response = controller.update(draincloud).equals("true");
+        }while(!response);
+    }
+
+    public void putOnClouds(int player_id){
+        Action putonclouds = new Action();
+        putonclouds.setGamePhase(GamePhase.PUT_ON_CLOUDS);
+        putonclouds.setPlayerID(player_id);
+        boolean response;
+        response = controller.update(putonclouds).equals("true");
+    }
+
     @Test
     public void communicationTest(){
         Action start = new Action();
@@ -78,7 +110,37 @@ class ControllerHubTest {
         //player 0 moves 3 students (we don't know what students they have since they're random)
         move3Students(0);
 
-        //and so on
+        //player 0 moves mother nature
+        moveMotherNature(0);
+
+        //player 0 drains a cloud
+        drainClouds(0);
+
+        //now it's player 1's turn
+        assertEquals(model.getPlayers()[1].getID(), controller.getNextAutomaticOrder());
+
+        //player 1 moves 3 students
+        move3Students(1);
+
+        //player 1 moves mother nature
+        moveMotherNature(1);
+
+        //player 1 drains the other cloud
+        drainClouds(1);
+
+        //refill the clouds
+        putOnClouds(1);
+
+        //player 0 draws an assist card
+        drawAssistCard(4, 0);
+
+        //player 1 draws an assist card
+        drawAssistCard(2, 1);
+
+        //player 1 should be playing first
+        assertEquals(model.getPlayers()[1].getID(), controller.getNextAutomaticOrder());
+        
+        //going on...
     }
 
 }
