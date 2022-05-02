@@ -10,50 +10,13 @@ public class CharacterCard {
     private final CardBehavior behavior;
     private final GameBoard gameboard;
 
-    public CharacterCard(GameBoard gameboard, int price, CardBehavior behavior, int id){
+    public CharacterCard(GameBoard gameboard, int price, CardBehavior behavior, int id, String name){
         this.gameboard = gameboard;
         onBoard = false;
         this.price = price;
         this.behavior = behavior;
         this.id = id;
-        switch(id){
-            case 0:
-                name = "Father Marryman";
-                break;
-            case 1:
-                name = "Mr. Greedy";
-                break;
-            case 2:
-                name = "Sir Sirius Gold";
-                break;
-            case 3:
-                name = "AZ";
-                break;
-            case 4:
-                name = "Donna Herbira";
-                break;
-            case 5:
-                name = "Messire Bojack";
-                break;
-            case 6:
-                name = "Harley Dean";
-                break;
-            case 7:
-                name = "Sir Ferrante";
-                break;
-            case 8:
-                name = "Cavalier Bartolomeo Dueleoni";
-                break;
-            case 9:
-                name = "Minstrel Folcorelli";
-                break;
-            case 10:
-                name = "Miss Caballé";
-                break;
-            case 11:
-                name = "Witch Hazel";
-                break;
-        }
+        this.name = name;
     }
 
     public boolean isOnBoard(){

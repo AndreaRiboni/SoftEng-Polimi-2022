@@ -72,6 +72,7 @@ public class CharacterDeck {
                 JSONObject card = (JSONObject)o;
                 int id = (int)(long)card.get("id");
                 int price = id%3 + 1;
+                String name = (String)card.get("name");
                 switch((String)card.get("type")){
                     case "student":
                         behavior = new StudentBehavior(
@@ -112,7 +113,8 @@ public class CharacterDeck {
                         gameboard,
                         price,
                         behavior,
-                        id
+                        id,
+                        name
                 );
             }
         } catch (IOException | ParseException e) {

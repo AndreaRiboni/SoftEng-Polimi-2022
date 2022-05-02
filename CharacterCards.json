@@ -2,6 +2,7 @@
   "character_cards": [
     {
       "id": 0,
+      "name": "Father Marryman",
       "type": "student",
       "nof_student": 4,
       "available_students": 1,
@@ -10,10 +11,12 @@
     },
     {
       "id": 1,
+      "name": "Mr. Greedy",
       "type": "prof"
     },
     {
       "id": 2,
+      "name": "Sir Sirius Gold",
       "type": "mothernature",
       "extra_steps": 0,
       "extra_points": 0,
@@ -23,6 +26,7 @@
     },
     {
       "id": 3,
+      "name": "AZ",
       "type": "mothernature",
       "extra_steps": 2,
       "extra_points": 0,
@@ -32,11 +36,13 @@
     },
     {
       "id": 4,
+      "name": "Donna Herbira",
       "type": "lock",
       "nof_locks" : 4
     },
     {
       "id": 5,
+      "name": "Messire Bojack",
       "type": "mothernature",
       "extra_steps": 0,
       "extra_points": 0,
@@ -46,6 +52,7 @@
     },
     {
       "id": 6,
+      "name": "Harley Dean",
       "type": "student",
       "nof_student": 6,
       "available_students": 3,
@@ -54,6 +61,7 @@
     },
     {
       "id": 7,
+      "name": "Sir Ferrante",
       "type": "mothernature",
       "extra_steps": 0,
       "extra_points": 2,
@@ -63,6 +71,7 @@
     },
     {
       "id": 8,
+      "name": "Cavalier Bartolomeo Dueleoni",
       "type": "mothernature",
       "extra_steps": 0,
       "extra_points": 0,
@@ -72,6 +81,7 @@
     },
     {
       "id": 9,
+      "name": "Minstrel Folcorelli",
       "type": "student",
       "nof_student": 0,
       "available_students": 0,
@@ -80,6 +90,7 @@
     },
     {
       "id": 10,
+      "name": "Miss Caballé",
       "type": "student",
       "nof_student": 4,
       "available_students": 1,
@@ -88,6 +99,7 @@
     },
     {
       "id": 11,
+      "name": "Witch Hazel",
       "type": "student",
       "nof_student": 0,
       "available_students": 0,
