@@ -23,7 +23,7 @@ class CharacterDeckTest {
         assertNotNull(gameBoard.getActiveCharacterCard(0));
         assertNotNull(gameBoard.getActiveCharacterCard(1));
         assertNotNull(gameBoard.getActiveCharacterCard(2));
-        IndexOutOfBoundsException thrown = Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+        EriantysException thrown = Assertions.assertThrows(EriantysException.class, () -> {
             gameBoard.getActiveCharacterCard(3);
         });
     }
