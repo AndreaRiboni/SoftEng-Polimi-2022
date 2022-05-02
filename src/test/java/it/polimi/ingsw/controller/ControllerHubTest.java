@@ -75,7 +75,7 @@ class ControllerHubTest {
         draincloud.setPlayerID(player_id);
         boolean response;
         do{
-            int index = Math.random() > 0.5 ? 0 : 1;
+            int index = player_id % 2 == 0 ? 0 : 1;
             draincloud.setCloudIndex(index);
             response = controller.update(draincloud).equals("true");
         }while(!response);
@@ -127,9 +127,14 @@ class ControllerHubTest {
 
         //player 1 drains the other cloud
         drainClouds(1);
+        System.out.println("accepted gamephases:");
+        System.out.println(controller.getAcceptedGamephases());
+        System.out.println("accepted player");
+        System.out.println(controller.getNextAutomaticOrder());
+        System.out.println("sending put on clouds player 0");
 
         //refill the clouds
-        putOnClouds(1);
+        putOnClouds(0);
 
         //player 0 draws an assist card
         drawAssistCard(4, 0);
