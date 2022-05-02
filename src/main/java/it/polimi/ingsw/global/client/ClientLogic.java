@@ -1,6 +1,8 @@
 package it.polimi.ingsw.global.client;
 
 import it.polimi.ingsw.global.MessageSender;
+import it.polimi.ingsw.model.entities.cards.CharacterCard;
+import it.polimi.ingsw.model.entities.cards.CharacterDeck;
 import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.utils.*;
 import org.apache.log4j.LogManager;
@@ -218,7 +220,7 @@ public class ClientLogic {
                 break;
 
             case USE_CHARACTER_CARD:
-                System.out.println("1) Father Marryman");
+                /*System.out.println("1) Father Marryman");
                 System.out.println("2) Mr. Greedy");
                 System.out.println("3) Sir Sirius Gold");
                 System.out.println("4) AZ");
@@ -229,10 +231,10 @@ public class ClientLogic {
                 System.out.println("9) Cavalier Bartolomeo Dueleoni");
                 System.out.println("10) Minstrel Folcorelli");
                 System.out.println("11) Miss Caballé");
-                System.out.println("12) Witch Hazel");
+                System.out.println("12) Witch Hazel");*/
                 int chosen_id = InputUtils.getInt(
                         "Choose the character you want to use", "Invalid index",
-                            new int []{1,2,3,4,5,6,7,8,9,10,11,12}
+                            new int []{1,2,3}
                 );
                 act.setCharacterCardIndex(chosen_id-1);
                 break;

@@ -41,7 +41,7 @@ public class CharacterDeck {
     }
 
     public CharacterCard getActiveCard(int index) throws EriantysException {
-        if(index < 0 || index > 3) throw new EriantysException(EriantysException.INVALID_CC_INDEX);
+        if(index < 0 || index > 2) throw new EriantysException(EriantysException.INVALID_CC_INDEX);
         return getCardsByStatus(true).get(index);
     }
 

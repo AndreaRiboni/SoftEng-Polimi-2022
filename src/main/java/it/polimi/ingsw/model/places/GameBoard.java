@@ -250,6 +250,18 @@ public class GameBoard {
             rep.append("Cloud #").append(i+1).append("\n")
                 .append(clouds[i].toString());
         }
+        rep.append(newline).append("Characters:\n");
+
+        try {
+            CharacterCard c1 = character_cards.getActiveCard(0);
+            rep.append("\t1) "+c1.getName()+"\n");
+            CharacterCard c2 = character_cards.getActiveCard(1);
+            rep.append("\t2) "+c2.getName()+"\n");
+            CharacterCard c3 = character_cards.getActiveCard(2);
+            rep.append("\t3) "+c3.getName()+"\n");
+        } catch (EriantysException e) {
+            e.printStackTrace();
+        }
         rep.append(newline).append("waiting...\n");
         return rep.toString();
     }
