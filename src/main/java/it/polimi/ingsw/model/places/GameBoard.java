@@ -260,11 +260,11 @@ public class GameBoard {
 
         try {
             CharacterCard c1 = character_cards.getActiveCard(0);
-            rep.append("\t1) "+c1.getName()+"\n");
+            rep.append("\t"+ c1.getID()+") "+c1.getName()+"\n");
             CharacterCard c2 = character_cards.getActiveCard(1);
-            rep.append("\t2) "+c2.getName()+"\n");
+            rep.append("\t"+ c2.getID()+") "+c2.getName()+"\n");
             CharacterCard c3 = character_cards.getActiveCard(2);
-            rep.append("\t3) "+c3.getName()+"\n");
+            rep.append("\t"+ c3.getID()+") "+c3.getName()+"\n");
         } catch (EriantysException e) {
             e.printStackTrace();
         }
@@ -276,5 +276,9 @@ public class GameBoard {
         for(int i = 0; i < players.length; i++){
             players[i].setUsername(usernames[i]);
         }
+    }
+
+    public CharacterCard getCharacterCard(int index) throws EriantysException {
+        return character_cards.getCharacterCard(index);
     }
 }

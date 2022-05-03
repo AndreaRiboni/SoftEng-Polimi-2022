@@ -121,6 +121,13 @@ public class CharacterDeck {
             e.printStackTrace();
         }
     }
+
+    public CharacterCard getCharacterCard(int index) throws EriantysException{
+        if(index<0 || index>11){
+            throw new EriantysException(EriantysException.INVALID_CC_INDEX);
+        }
+        return cards[index];
+    }
     
     public String toString(){
         StringBuilder sb = new StringBuilder();

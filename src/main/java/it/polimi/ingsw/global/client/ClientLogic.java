@@ -3,6 +3,7 @@ package it.polimi.ingsw.global.client;
 import it.polimi.ingsw.global.MessageSender;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
+import it.polimi.ingsw.model.places.Island;
 import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.utils.*;
 import org.apache.log4j.LogManager;
@@ -236,8 +237,53 @@ public class ClientLogic {
                 System.out.println("12) Witch Hazel");*/
                 int chosen_id = InputUtils.getInt(
                         "Choose the character you want to use", "Invalid index",
-                            new int []{1,2,3}
+                            new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
                 );
+                switch(chosen_id){
+                    case 0:
+                        int[] island_ids = new int[1];
+                        island_ids[0] = InputUtils.getInt("Choose the island you want to put the student on",
+                                "Invalid island index",
+                                new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
+                        int[] student_ids = new int[1];
+                        student_ids[0] = InputUtils.getInt("Choose the student to put on the island",
+                                "Invalid student index",
+                                new int[]{1, 2, 3});
+                        act.setIslandIndexes(island_ids);
+                        act.setStudentIndexes(student_ids);
+                        break;
+                    case 6:
+                        int num_studs_to_exchange = InputUtils.getInt("Choose the number of students you want to exchange",
+                                "Invalid number",
+                                new int[]{1,2,3});
+                        act.setDesiredNofStudents(num_studs_to_exchange);
+
+                        //2 - array colori degli studenti da mettere sulla carta che stanno sulla mia entrance
+                        Color[] colors = new Color[num_studs_to_exchange];
+                        for(int i = 0; i < num_studs_to_exchange; i++){
+                            colors[i] = InputUtils.getColor("Choose the color of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from your entrance",
+                                    "Invalid color",
+                                    new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
+                        }
+                        act.setEntranceColors(colors);
+
+                        //3 - array di indici degli studenti da prelevare dalla carta
+                        int[] indexes = new int[num_studs_to_exchange];
+                        for(int i=0; i<num_studs_to_exchange; i++){
+                            indexes[i] = InputUtils.getInt("Choose the index of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from your character card",
+                                    "Invalid index",
+                                    new int[]{1, 2, 3, 4, 5, 6});
+                        }
+                        act.setStudentIndexes(indexes);
+                        break;
+                    case 9:
+                        break;
+                    case 10:
+                        break;
+                    case 11:
+                        break;
+
+                }
                 act.setCharacterCardIndex(chosen_id-1);
                 break;
         }

@@ -1,13 +1,8 @@
 package it.polimi.ingsw.model.entities.cards;
 
-import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
-import it.polimi.ingsw.model.places.StudentPlace;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class CardBehavior {
     protected GameBoard gameboard;
@@ -93,7 +88,7 @@ public abstract class CardBehavior {
         );
     }
 
-    public void resetStudent(int student_index){}
+    public void resetStudent(int student_index, Color new_student){}
 
     public boolean canPickIsland() {
         return pick_island;

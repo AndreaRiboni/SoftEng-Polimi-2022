@@ -1,11 +1,7 @@
 package it.polimi.ingsw.model.entities.cards;
 
-import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
-import it.polimi.ingsw.model.places.StudentPlace;
 import it.polimi.ingsw.model.utils.Color;
-
-import java.util.Map;
 
 public class StudentBehavior extends CardBehavior {
 
@@ -46,7 +42,7 @@ public class StudentBehavior extends CardBehavior {
     }
 
     @Override
-    public void resetStudent(int index) {
+    public void resetStudent(int index, Color new_student) {
         students[index] = gameboard.drawFromBag();
     }
 }
