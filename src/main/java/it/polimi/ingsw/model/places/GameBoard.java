@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class GameBoard {
-    private final Cloud[] clouds;
+    private Cloud[] clouds;
     private Player[] players;
     public int NOF_PLAYERS;
     private final Professor[] professors;
@@ -20,13 +20,12 @@ public class GameBoard {
     private MotherNature mother_nature;
     private final Bag bag;
     public static final int NOF_ISLAND = 12;
-    public static final int NOF_CLOUD = 2;
+    public static int NOF_CLOUD = 2;
     public static final int NOF_STUDENT_COLOR = 5;
     public static final int NOF_CHAR_CARDS = 12;
     public static final int NOF_PROFS = 5;
 
     public GameBoard() {
-        clouds = new Cloud[NOF_CLOUD];
         islands = new Island[NOF_ISLAND];
         professors = new Professor[NOF_PROFS];
         bag = new Bag();
@@ -43,6 +42,8 @@ public class GameBoard {
         initializeIslands();
         initalizePlayers();
         initializeCharacterDeck();
+
+
     }
 
     private void initializeIslands() throws EriantysException {
@@ -73,6 +74,10 @@ public class GameBoard {
         }
         NOF_PLAYERS = nof_players;
         players = new Player[nof_players];
+
+        if(nof_players%2 == 0) NOF_CLOUD = 2;
+        else{NOF_CLOUD = 3;}
+        clouds = new Cloud[NOF_CLOUD];
 
         for(int i = 0; i < NOF_CLOUD; i++) {
             if (nof_players == 3)
@@ -191,7 +196,8 @@ public class GameBoard {
     }
 
     public Cloud getCloud(int cloud_index) throws EriantysException{
-        if(cloud_index != 0 && cloud_index!=1) throw new EriantysException(
+        //TODO 03-05 : fix
+        if(cloud_index != 0 && cloud_index!=1 && cloud_index!=2) throw new EriantysException(
                 String.format(EriantysException.INVALID_CLOUD_INDEX, cloud_index)
         );
         return clouds[cloud_index];
