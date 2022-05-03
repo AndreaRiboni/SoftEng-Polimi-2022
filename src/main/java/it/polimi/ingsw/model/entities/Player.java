@@ -51,6 +51,7 @@ public class Player {
 
     public void playAssistCard(int card_index){
         played_assistcard = card_index;
+        wizard.getCards()[played_assistcard].played = true;
     }
 
     public void moveStudentInDiningHall(Color student) throws EriantysException {

@@ -65,9 +65,10 @@ public class ControllerHub {
                 case DRAW_ASSIST_CARD:
                     g_controller.verifyNeutralOrder(); //are we following the right order?
                     log.info("player was following the correct order");
+                    ac_controller.setAction(action);
+                    ac_controller.check();
                     flow.addSubCountIfNotPresent("assistcard-draw"); //who's playing
                     log.info("subcount was added");
-                    ac_controller.setAction(action);
                     ac_controller.drawAssistCard();
                     log.info("assist card drawn");
                     flow.setLastGamePhase(GamePhase.DRAW_ASSIST_CARD);

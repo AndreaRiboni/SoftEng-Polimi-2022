@@ -44,5 +44,6 @@ public class EriantysException extends Exception {
             WRONG_TURN = "Player is playing during thw wrong turn. [turn_value] Expected: %d, Given: %d",
             WRONG_PLAYER = "Player is playing during thw wrong turn. [player_id] Expected: %d, Given: %d",
             NOT_ENOUGH_STUDENTS = "Unable to remove the selected students: Not enough",
-            INVALID_ISLAND_INDEXES = "Invalid island indexes: %d and %d";
+            INVALID_ISLAND_INDEXES = "Invalid island indexes: %d and %d",
+            ASSIST_CARD_ALREADY_PLAYED = "Assistant card already played";
 }

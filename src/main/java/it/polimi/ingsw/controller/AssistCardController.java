@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.entities.cards.AssistCard;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
@@ -23,5 +24,14 @@ public class AssistCardController extends Controller {
         //TODO: a check on the turn's order could be useful
         log.info("Requested assist-card: " + action.getAssistCardIndex());
         model.getPlayers()[action.getPlayerID()].playAssistCard(action.getAssistCardIndex()); //code to actually play the card
+    }
+
+    public void check() throws EriantysException{
+        AssistCard[] cards = model.getPlayers()[action.getPlayerID()].getWizard().getCards();
+        AssistCard card = cards[action.getAssistCardIndex()];
+
+        if(card.isPlayed()){
+            throw new EriantysException(EriantysException.ASSIST_CARD_ALREADY_PLAYED);
+        }
     }
 }

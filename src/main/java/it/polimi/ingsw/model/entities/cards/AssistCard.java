@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.entities.cards;
 public class AssistCard {
     private final int value, steps;
     public static final int MAX_STEPS = 5;
+    public boolean played = false;
 
     public AssistCard(int value, int steps){
         this.value = value;
@@ -16,7 +17,11 @@ public class AssistCard {
     public int getSteps() {
         return steps;
     }
-    
+
+    public boolean isPlayed() {
+        return played;
+    }
+
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("The value of the card is ").append(value).append(" and Mother Nature can move up to ").append(steps).append(" steps");
