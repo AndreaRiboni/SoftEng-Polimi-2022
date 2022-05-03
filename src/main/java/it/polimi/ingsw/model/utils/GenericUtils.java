@@ -42,6 +42,8 @@ public class GenericUtils {
                 return "second";
             case 3:
                 return "third";
+            case 4:
+                return "fourth";
             default:
                 throw new UnsupportedOperationException();
         }

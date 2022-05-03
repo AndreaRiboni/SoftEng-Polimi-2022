@@ -14,6 +14,7 @@ public class ClientLogic {
     private final MessageSender msg;
     private final NetworkListener listener;
     private static final Logger log = LogManager.getRootLogger();
+    private int nof_players;
 
     public ClientLogic(){
         msg = new MessageSender();
@@ -172,11 +173,12 @@ public class ClientLogic {
                 for(int i=0; i<5; i++){
                     students_colors[i] = Color.getFromInt(i);
                 }
-                Color chosen_colors[] = new Color[3];
-                Places chosen_places[] = new Places[3];
-                int chosen_island_indexes[] = new int[3];
+                Color chosen_colors[] = new Color[nof_players+1];
+                Places chosen_places[] = new Places[nof_players+1];
+                int chosen_island_indexes[] = new int[nof_players+1];
 
-                for(int i=0; i<3; i++) {
+
+                for(int i=0; i<nof_players + 1; i++) {
                     chosen_colors[i] = InputUtils.getColor(
                             "Enter the color of the "+ GenericUtils.getOrdinal(i+1)+" student you want to move",
                             "Invalid color",
@@ -214,7 +216,7 @@ public class ClientLogic {
             case DRAIN_CLOUD:
                 int cloud_id = InputUtils.getInt(
                         "Choose the cloud to get drain the students from (1 or 2)",
-                        "Invalid index", new int[]{1,2}
+                        "Invalid index", new int[]{1,2,3}
                 ) - 1;
                 act.setCloudIndex(cloud_id);
                 break;
@@ -245,7 +247,7 @@ public class ClientLogic {
     public void start() {
         System.out.println("client has started");
         String username = InputUtils.getString("Choose an username");
-        int nof_players = InputUtils.getInt("How many players?", "Invalid number", new int[]{2,3,4});
+        nof_players = InputUtils.getInt("How many players?", "Invalid number", new int[]{2,3,4});
         System.out.println("sending number of players");
         Action start = new Action();
         start.setGamePhase(GamePhase.START);

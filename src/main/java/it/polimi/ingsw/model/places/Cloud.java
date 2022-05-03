@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Cloud extends StudentPlace {
     public static final boolean SIDE_2_4 = true, SIDE_3 = false;
-    public static final int MAX_STUDENTS_2_4 = 4, MAX_STUDENTS_3 = 3;
+    public static final int MAX_STUDENTS_2_4 = 3, MAX_STUDENTS_3 = 4;
     private final boolean side;
 
     private Cloud(boolean side){

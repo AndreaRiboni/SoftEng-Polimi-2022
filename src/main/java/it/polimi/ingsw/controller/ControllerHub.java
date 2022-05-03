@@ -108,6 +108,9 @@ public class ControllerHub {
                     mn_controller.moveMotherNature(); //includes the tower-placing and the island-merging
                     flow.setLastGamePhase(GamePhase.MOVE_MOTHERNATURE);
                     keep_going = true;
+                    if(flow.getSubCount("usecharcard init") > 0){
+                        flow.avoidConditionEdge(GamePhase.USE_CHARACTER_CARD);
+                    }
                     break;
                 case DRAIN_CLOUD:
                     g_controller.verifyIdentity();
@@ -116,7 +119,7 @@ public class ControllerHub {
                     flow.incrementSubCount("player-turn");
                     flow.setLastGamePhase(GamePhase.DRAIN_CLOUD);
                     if (flow.getSubCount("player-turn") == nof_players) { //every one has played
-                        flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS); //we can not receive any other MOVE_3_STUDENTS
+                        flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD); //we can not receive any other MOVE_3_STUDENTS
                         g_controller.resetOrder();
                     } else { //someone still has to play
                         flow.avoidConditionEdge(GamePhase.PUT_ON_CLOUDS); //we can not receive any other PUT_ON_CLOUDS

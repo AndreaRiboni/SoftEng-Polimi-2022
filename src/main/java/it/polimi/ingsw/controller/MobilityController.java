@@ -55,7 +55,8 @@ public class MobilityController extends Controller {
         }
         //these 3 studs have to be moved according to the corresponding studplace
         StringBuilder desc = new StringBuilder("Moving 3 students ");
-        for(int i = 0; i < 3; i++){
+        int NOF_Players = model.getNofPlayers();
+        for(int i = 0; i < NOF_Players + 1; i++){
             Color stud = colors[i];
             desc.append("(").append(stud).append(" in ");
             if(places[i].equals(Places.ISLAND)){

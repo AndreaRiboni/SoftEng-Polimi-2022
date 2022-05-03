@@ -105,11 +105,12 @@ public class FlowChecker {
         gamephases.put(GamePhase.DRAW_ASSIST_CARD, drawassistcard);
         move3students.add(GamePhase.MOVE_MOTHERNATURE);
         gamephases.put(GamePhase.MOVE_3_STUDENTS, move3students);
+        movemothernature.add(GamePhase.USE_CHARACTER_CARD);
         movemothernature.add(GamePhase.DRAIN_CLOUD);
         gamephases.put(GamePhase.MOVE_MOTHERNATURE, movemothernature);
         draincloud.add(GamePhase.PUT_ON_CLOUDS);
-        draincloud.add(GamePhase.USE_CHARACTER_CARD);
         draincloud.add(GamePhase.MOVE_3_STUDENTS);
+        draincloud.add(GamePhase.USE_CHARACTER_CARD);
         gamephases.put(GamePhase.DRAIN_CLOUD, draincloud);
         usecharactercard.add(GamePhase.PUT_ON_CLOUDS);
         usecharactercard.add(GamePhase.MOVE_3_STUDENTS);
