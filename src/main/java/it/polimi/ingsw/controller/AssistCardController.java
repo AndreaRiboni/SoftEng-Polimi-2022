@@ -29,9 +29,23 @@ public class AssistCardController extends Controller {
     public void check() throws EriantysException{
         AssistCard[] cards = model.getPlayers()[action.getPlayerID()].getWizard().getCards();
         AssistCard card = cards[action.getAssistCardIndex()];
+        int count = 0;
 
         if(card.isPlayed()){
             throw new EriantysException(EriantysException.ASSIST_CARD_ALREADY_PLAYED);
+        }
+
+        for(int i=0; i<cards.length; i++){
+            if(!cards[i].played) count = count+1;
+        }
+
+        if(count == 1) return;
+
+        for(int i = 0; i< model.getNofPlayers(); i++){
+            if(i != action.getPlayerID()){
+                if(model.getPlayers()[i].getLastPlayedCard().equals(card))
+                    throw new EriantysException(EriantysException.ASSIST_CARD_ALREADY_PLAYED_IN_THIS_TURN);
+            }
         }
     }
 }
