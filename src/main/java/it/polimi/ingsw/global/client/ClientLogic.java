@@ -236,21 +236,24 @@ public class ClientLogic {
                 System.out.println("11) Miss Caballé");
                 System.out.println("12) Witch Hazel");*/
                 int chosen_id = InputUtils.getInt(
-                        "Choose the character you want to use", "Invalid index",
+                        "Choose the character's index you want to use", "Invalid index",
                             new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
-                );
+                ) - 1;
+                System.out.println("Chosen cc index: " + chosen_id);
+                act.setCharacterCardIndex(chosen_id);
                 switch(chosen_id){
                     case 0:
                         int[] island_ids = new int[1];
                         island_ids[0] = InputUtils.getInt("Choose the island you want to put the student on",
                                 "Invalid island index",
-                                new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
+                                new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}) - 1;
                         int[] student_ids = new int[1];
                         student_ids[0] = InputUtils.getInt("Choose the student to put on the island",
                                 "Invalid student index",
-                                new int[]{1, 2, 3});
+                                new int[]{1, 2, 3}) - 1;
                         act.setIslandIndexes(island_ids);
                         act.setStudentIndexes(student_ids);
+                        log.info("Sending island_index: " + island_ids[0] + " and student_index: " + student_ids[0]);
                         break;
                     case 6:
                         int num_studs_to_exchange = InputUtils.getInt("Choose the number of students you want to exchange",
@@ -284,7 +287,6 @@ public class ClientLogic {
                         break;
 
                 }
-                act.setCharacterCardIndex(chosen_id-1);
                 break;
         }
         return getFeedback(act);

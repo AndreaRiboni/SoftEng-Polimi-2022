@@ -46,14 +46,17 @@ public class CharacterDeck {
     }
 
     public void draw3Cards() {
-        int found = 0;
+        cards[0].setActive();
+        cards[6].setActive();
+        cards[9].setActive();
+        /*int found = 0;
         do {
             int index = (int)(Math.random() * cards.length);
             if(!cards[index].isOnBoard()){
                 found++;
                 cards[index].setActive();
             }
-        } while(found < 3);
+        } while(found < 3);*/
     }
 
     private void createDeck(){
@@ -124,6 +127,7 @@ public class CharacterDeck {
 
     public CharacterCard getCharacterCard(int index) throws EriantysException{
         if(index<0 || index>11){
+            System.out.println("invalid character card index: " + index);
             throw new EriantysException(EriantysException.INVALID_CC_INDEX);
         }
         return cards[index];

@@ -51,7 +51,7 @@ public class Player {
 
     public void playAssistCard(int card_index){
         played_assistcard = card_index;
-        wizard.getCards()[played_assistcard].played = true;
+        wizard.getCards()[played_assistcard].setPlayed();
     }
 
     public void moveStudentInDiningHall(Color student) throws EriantysException {
@@ -163,6 +163,14 @@ public class Player {
 
     public int getMotherNatureExtraPoints(){return mothernature_extrapoints;}
 
+    public int getNofPlayableCards(){
+        int count = 0;
+        for(int i=0; i<wizard.getCards().length; i++){
+            if(!wizard.getCards()[i].isPlayed()) count++;
+        }
+        return count;
+    }
+
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("player #").append(ID+1);
@@ -173,7 +181,14 @@ public class Player {
                 .append("\tTower Color: ").append(Color.colorToString(color)).append("\n")
                 .append("\tCoins: ").append(coins).append("\n")
                 .append("\tTurn value: ").append(turn_value);
-        sb.append("\nplayer's school (below):\n").append(school);
+        sb.append("\nplayer's school (below):\n").append(school).append("\nAlready played assist card:\n");
+        if(getNofPlayableCards() == wizard.getCards().length) {
+            sb.append("\tNone");
+            return sb.toString();
+        }
+        for(AssistCard ac : wizard.getCards()){
+            if(ac.isPlayed()) sb.append("\t[").append(ac.getName()).append("]\n");
+        }
         return sb.toString();
     }
 
@@ -197,5 +212,9 @@ public class Player {
         if(!(obj instanceof Player)) return false;
         Player other = (Player)obj;
         return getID() == other.getID();
+    }
+
+    public void resetAssistCard() {
+        played_assistcard = -1;
     }
 }

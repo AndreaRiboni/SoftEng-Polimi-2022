@@ -1,13 +1,17 @@
 package it.polimi.ingsw.model.entities.cards;
 
 public class AssistCard {
-    private final int value, steps;
+    private final int value, steps, id;
     public static final int MAX_STEPS = 5;
-    public boolean played = false;
+    private boolean played;
+    private final String name;
 
-    public AssistCard(int value, int steps){
+    public AssistCard(int value, int steps, String name){
+        this.id = value - 1;
         this.value = value;
         this.steps = steps;
+        played = false;
+        this.name = name;
     }
 
     public int getValue() {
@@ -20,6 +24,20 @@ public class AssistCard {
 
     public boolean isPlayed() {
         return played;
+    }
+
+    public void setPlayed(){
+        played = true;
+    }
+
+    public String getName(){return name;}
+
+    public boolean equals(Object obj){
+        if(obj instanceof AssistCard){
+            AssistCard other = (AssistCard) obj;
+            return other.id == id;
+        }
+        return false;
     }
 
     public String toString(){

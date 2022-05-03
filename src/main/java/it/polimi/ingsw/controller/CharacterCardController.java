@@ -24,6 +24,7 @@ public class CharacterCardController extends Controller {
     }
 
     public void manage() throws EriantysException {
+        System.out.println("Received character card nidex: " + action.getCharacterCardIndex());
         CharacterCard temp = model.getCharacterCard(action.getCharacterCardIndex());
         if(!temp.isOnBoard()){
             throw new EriantysException(EriantysException.INVALID_CC_INDEX);
@@ -70,50 +71,47 @@ public class CharacterCardController extends Controller {
         int droppable_students = behavior.getNofDroppableStudents();
         int desired_nof_student = 0; //how many students to retrieve
         Player player;
+        int island_index, student_index;
+        int[] this_card_student_indexes;
+        Color student_color;
         Color[] students = behavior.getAvailableStudents();
         switch(card.getID()) {
             case 0: //take 1 student and put it on a island
-                for (int i = 0; i < takeable_students; i++) { //for each takeable student
-                    int island_index = action.getIslandIndexes()[i]; //i-th-student destination
-                    int student_index = action.getStudentIndexes()[i]; //selected student
-                    model.putOnIsland(students[student_index], island_index);
-                    //behavior.resetStudent(student_index, );
-                }
+                island_index = action.getIslandIndexes()[0]; //i-th-student destination
+                System.out.println("Received island index: " + island_index);
+                student_index = action.getStudentIndexes()[0]; //selected student
+                System.out.println("Received student index: " + student_index);
+                model.putOnIsland(students[student_index], island_index);
+                behavior.resetStudent(student_index, model.drawFromBag());
                 break;
             case 6: //exchange up to 3 students (from this card to your entrance)
                 desired_nof_student = action.getDesiderNofStudents(); //how many students to retrieve
-                int[] temp = action.getStudentIndexes();
+                this_card_student_indexes = action.getStudentIndexes();
                 if(desired_nof_student > takeable_students) throw new EriantysException(EriantysException.CARD_PARAMETER_ERROR);
-                Map<Color, Integer> studs_on_card_to_pick_up = arrayToMap(students, temp); //map of students to pick up
-                Map<Color, Integer> studs_entrance = model.getPlayers()[action.getPlayerID()].getEntranceStudents(); //map of entrance students to exchange
-                Map<Color, Integer> entrance_colors = arrayToMap(action.getEntranceColors()); //map of colors of entrance students to put on my CharacterCard
-                for(int i = 0; i < desired_nof_student; i++){
-                    //calcolo quanti studenti per ogni colore devo avere in entrance
-                    Map<Color, Integer> sub = GenericUtils.subtract(studs_entrance, entrance_colors);
-                    boolean all_positive = GenericUtils.isAllPositive(sub);
-                    //per ogni colore guardo se ce ne sono a sufficienza in entrance
-                    //se no eccezione
-                    if(!all_positive){
-                        throw new EriantysException(EriantysException.NOT_ENOUGH_STUDENTS);
-                    }
-                    if(!(action.getStudentIndexes().length == action.getDesiderNofStudents() && action.getDesiderNofStudents() == action.getEntranceColors().length)){
-                        throw new EriantysException(EriantysException.NOT_ENOUGH_STUDENTS);
-                    }
+                Map<Color, Integer> studs_in_entrance = model.getPlayers()[action.getPlayerID()].getEntranceStudents(); //map of entrance students to exchange
+                Map<Color, Integer> entrance_studs_to_exchange = arrayToMap(action.getEntranceColors()); //map of colors of entrance students to put on my CharacterCard
+                //check data length
+                if(action.getStudentIndexes().length != desired_nof_student || desired_nof_student != action.getEntranceColors().length){
+                    throw new EriantysException(EriantysException.NOT_ENOUGH_STUDENTS);
                 }
+                //check enough students
+                Map<Color, Integer> test_entrance_studs = GenericUtils.subtract(studs_in_entrance, entrance_studs_to_exchange);
+                if(!GenericUtils.isAllPositive(test_entrance_studs)){
+                    throw new EriantysException(EriantysException.NOT_ENOUGH_STUDENTS);
+                }
+                //everything is okay
                 for(int i = 0; i < desired_nof_student; i++){
-                    int student_index = action.getStudentIndexes()[i]; //index of the student on the card
-                    Color student_color = action.getEntranceColors()[i]; //color of the student on the entrance
-                    //se no ecc
-                    //tolgo uno studente dall'ingresso di quel colore SENZA rimetterlo nel sacchetto
-                    model.getPlayers()[action.getPlayerID()].removeEntranceStudent(student_color); //da agg:students[student_index]
-                    //aggiungiamo allingresso lo studente della carta
+                    student_index = action.getStudentIndexes()[i]; //index of the student on the card
+                    student_color = action.getEntranceColors()[i]; //color of the student on the entrance
+                    //remove from entrance
+                    model.getPlayers()[action.getPlayerID()].removeEntranceStudent(student_color);
+                    //add this card's student to entrance
                     model.getPlayers()[action.getPlayerID()].addEntranceStudent(students[student_index]); //da agg:students[student_index]
-                    //sostituisci lo studente nella carta con quello rimosso dalla scuola
-                    //adds the student to the player's entrance
+                    //reset this card's student
                     behavior.resetStudent(student_index, student_color); //reset the student
                 }
                 break;
-            case 9: //exchange up to 2 students (your entrance - your dininghall)
+            /*case 9: //exchange up to 2 students (your entrance - your dininghall)
                 desired_nof_student = action.getDesiderNofStudents(); //how many students to retrieve
                 player = model.getPlayers()[action.getPlayerID()];
                 for(int i = 0; i < desired_nof_student; i++) {
@@ -138,7 +136,7 @@ public class CharacterCardController extends Controller {
                         bag.putStudentsIn(col);
                     }
                 }
-                break;
+                break;*/
         }
     }
 

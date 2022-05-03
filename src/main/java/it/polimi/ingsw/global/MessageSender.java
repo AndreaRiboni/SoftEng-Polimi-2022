@@ -40,6 +40,7 @@ public class MessageSender {
         try {
             output.writeObject(action);
             output.flush();
+            output.reset();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -50,6 +51,7 @@ public class MessageSender {
         try {
             output.writeObject(gamephase);
             output.flush();
+            output.reset();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -60,6 +62,7 @@ public class MessageSender {
         try {
             output.writeObject(model);
             output.flush();
+            output.reset();
         } catch (IOException e){
             e.printStackTrace();
         }

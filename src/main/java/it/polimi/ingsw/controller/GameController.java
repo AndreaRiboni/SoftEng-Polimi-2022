@@ -102,6 +102,11 @@ public class GameController extends Controller {
      * @throws EriantysException wrong turn
      */
     public void verifyOrder() throws EriantysException {
+        log.info("Verify order");
+        StringBuilder sb = new StringBuilder();
+        for(Player p : HasPlayed)
+            sb.append(p.getID() + ", ");
+        log.info("HasPlayed list: " + sb.toString());
         Player playing = model.getPlayers()[action.getPlayerID()];
         //find the player with the lowest turn value who is not present in HasPlayed
         int lowest = Integer.MAX_VALUE;
@@ -136,7 +141,11 @@ public class GameController extends Controller {
         for(Player p : HasPlayed){
             System.out.println("weighted order: " + p.getID());
         }
-        if(everyoneHasPlayed()) return -1; //everyone has already played
+        //if(everyoneHasPlayed()) return -1; //everyone has already played
+        if(everyoneHasPlayed()){
+            HasPlayed.clear();
+            return getNextWeightedOrder();
+        }
         for(Player p : model.getPlayers()){
             if(p.getTurnValue() <= lowest && !HasPlayed.contains(p)){ //TODO: case of parity between two turn_values. Could be useful to add a second turn value.
                 lowest = p.getTurnValue();
@@ -154,6 +163,11 @@ public class GameController extends Controller {
     public void verifyIdentity() throws EriantysException {
         Player playing = model.getPlayers()[action.getPlayerID()];
         Player last = HasPlayed.get(HasPlayed.size() - 1);
+        log.info("Verifying identity. Player " + playing.getID() + " is playing. Last who has played was " + last.getID());
+        StringBuilder sb = new StringBuilder();
+        for(Player p : HasPlayed)
+            sb.append(p.getID() + ", ");
+        log.info("HasPlayed list: " + sb.toString());
         if(!playing.equals(last)){
             throw new EriantysException(
                     String.format(EriantysException.WRONG_TURN, last.getID(), playing.getID())

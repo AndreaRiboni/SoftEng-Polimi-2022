@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.entities.cards;
 
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.utils.Color;
 
 public class CharacterCard {
     private boolean onBoard;
@@ -58,8 +59,17 @@ public class CharacterCard {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         if(price > 1){
-            sb.append("The price of this card is ").append(price).append(" coins");
-        }else{ sb.append("The price of this card is ").append(price).append(" coin");}
+            sb.append("Price ").append(price).append(" coins");
+        }else{ sb.append("Price ").append(price).append(" coin");}
+        sb.append("\nName ").append(name).append("\n");
+        if(behavior instanceof StudentBehavior){
+            //stampo studenti
+            //migliora
+            sb.append("studenti: ");
+            for(int i = 0; i < behavior.getAvailableStudents().length; i++)
+                sb.append(i+1).append(") ").append(behavior.getAvailableStudents()[i]).append("\n");
+        }
+        sb.append(behavior);
         return sb.toString();
     }
 

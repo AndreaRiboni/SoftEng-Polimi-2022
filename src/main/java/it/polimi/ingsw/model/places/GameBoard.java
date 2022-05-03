@@ -258,13 +258,13 @@ public class GameBoard {
         }
         rep.append(newline).append("Characters:\n");
 
-        try {
+        try { //magari migliora la formattazione
             CharacterCard c1 = character_cards.getActiveCard(0);
-            rep.append("\t"+ c1.getID()+") "+c1.getName()+"\n");
+            rep.append("\t"+ (c1.getID()+1)+") "+c1+"\n");
             CharacterCard c2 = character_cards.getActiveCard(1);
-            rep.append("\t"+ c2.getID()+") "+c2.getName()+"\n");
+            rep.append("\t"+ (c2.getID()+1)+") "+c2+"\n");
             CharacterCard c3 = character_cards.getActiveCard(2);
-            rep.append("\t"+ c3.getID()+") "+c3.getName()+"\n");
+            rep.append("\t"+ (c3.getID()+1)+") "+c3+"\n");
         } catch (EriantysException e) {
             e.printStackTrace();
         }

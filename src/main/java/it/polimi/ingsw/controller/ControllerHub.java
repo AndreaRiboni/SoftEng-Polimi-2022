@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.places.*;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
@@ -51,6 +52,8 @@ public class ControllerHub {
                 case START:
                     nof_players = action.getNOfPlayers();
                     g_controller.initializeGame(); //action
+                    for(Player p : model.getPlayers())
+                        p.addCoins(100);
                     flow.setLastGamePhase(GamePhase.START); //last gamephase is START -> I can go on PUT_ON_CLOUDS only
                     follow_neutral_order = true;
                     keep_going = false;
@@ -61,6 +64,7 @@ public class ControllerHub {
                     flow.resetSubCount("player-turn");
                     flow.setLastGamePhase(GamePhase.PUT_ON_CLOUDS);
                     g_controller.resetOrder();
+                    ac_controller.resetPlayed();
                     break;
                 case DRAW_ASSIST_CARD:
                     g_controller.verifyNeutralOrder(); //are we following the right order?
@@ -79,7 +83,7 @@ public class ControllerHub {
                         g_controller.resetOrder();
                         flow.avoidConditionEdge(GamePhase.DRAW_ASSIST_CARD); //we can not receive another DRAW_ASSIST_CARD
                         follow_neutral_order = false;
-                        g_controller.calculateOrder(); //move_3_students' order
+                        g_controller.calculateOrder(); //move_3_students/use cc's order
                     } else { //someone has to play
                         follow_neutral_order = true;
                         flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD); //we can not receive neither MOVE_3_STUDENTS nor USE_CHARACTER_CARD
@@ -88,19 +92,20 @@ public class ControllerHub {
                 case MOVE_3_STUDENTS:
                     //we are in the correct order if no one has entered usecharcard yet AND we have the lowest turn_valeu OR
                     //if the last one entering usecharcard is the same player who is now playing
-                    if(flow.getSubCount("usecharcard init") > 0){ //we have already entered move3students
+                    if(flow.getSubCount("started with usecharcard") > 0){ //we have already entered move3students
                         g_controller.verifyIdentity(); //check that who's playing is the player who was already playing
                     } else {
                         g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
+                        flow.addSubCountIfNotPresent("player-turn");
+                        flow.incrementSubCount("player-turn");
+                        flow.addSubCountIfNotPresent("started with move3students"); //we have entered this phase
+                        flow.incrementSubCount("started with move3students");
                     }
-                    flow.addSubCountIfNotPresent("player-turn");
                     m_controller.setAction(action);
                     m_controller.move3Studs();
                     flow.setLastGamePhase(GamePhase.MOVE_3_STUDENTS);
                     flow.doNotAvoidConditionEdge();
                     g_controller.updatePlayer(action.getPlayerID());
-                    flow.addSubCountIfNotPresent("move3students init"); //we have entered this phase
-                    flow.incrementSubCount("move3students init");
                     keep_going = true;
                     break;
                 case MOVE_MOTHERNATURE:
@@ -109,51 +114,49 @@ public class ControllerHub {
                     mn_controller.moveMotherNature(); //includes the tower-placing and the island-merging
                     flow.setLastGamePhase(GamePhase.MOVE_MOTHERNATURE);
                     keep_going = true;
-                    if(flow.getSubCount("usecharcard init") > 0){
+                    if(flow.getSubCount("started with usecharcard") > 0){
                         flow.avoidConditionEdge(GamePhase.USE_CHARACTER_CARD);
                     }
                     break;
                 case DRAIN_CLOUD:
                     g_controller.verifyIdentity();
                     c_controller.setAction(action);
-                    c_controller.drainCloud(); //TODO: nuvola non giocata
-                    flow.incrementSubCount("player-turn");
+                    c_controller.drainCloud();
                     flow.setLastGamePhase(GamePhase.DRAIN_CLOUD);
                     if (flow.getSubCount("player-turn") == nof_players) { //every one has played
-                        flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD); //we can not receive any other MOVE_3_STUDENTS
+                        flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD); //we can not receive any other MOVE_3_STUDENTS / USE CHARCARD
                         g_controller.resetOrder();
                     } else { //someone still has to play
                         flow.avoidConditionEdge(GamePhase.PUT_ON_CLOUDS); //we can not receive any other PUT_ON_CLOUDS
                     }
                     keep_going = false;
                     follow_neutral_order = false;
+                    flow.deleteSubCount("started with usecharcard");
+                    flow.deleteSubCount("started with move3students");
                     g_controller.checkForEnd();
                     break;
                 case USE_CHARACTER_CARD:
                     //we are in the correct order if no one has entered move3students yet AND we have the lowest turn_value OR
                     //if the last one entering move3students is the same player who is now playing
-                    if(flow.getSubCount("move3students init") > 0){ //we have already entered move3students
-                        keep_going = false;
+                    if(flow.getSubCount("started with move3students") > 0){ //we have already entered move3students
+                        log.info("Using character card (move3 students already done)");
                         g_controller.verifyIdentity(); //check that who's playing is the player who was already playing
-                    } else {
-                        log.info("verifico ordine");
-                        keep_going = true;
+                        flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS); //since i've already entered move3students the next phase MUST be DRAIN CLOUD
+                    } else { //we are starting with USE_CHARCARD: the next phase must be MOVE_3STUDS
+                        log.info("Using character card (move3students not done yet)");
                         g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
-                        g_controller.updatePlayer(action.getPlayerID());
+                        flow.addSubCountIfNotPresent("player-turn");
+                        flow.incrementSubCount("player-turn"); //turn is starting here
+                        flow.avoidConditionEdge(GamePhase.DRAIN_CLOUD);
+                        flow.addSubCountIfNotPresent("started with usecharcard"); //we have entered this phase
+                        flow.incrementSubCount("started with usecharcard"); //NOTA BENE: prima c'era "move3students init"
                     }
                     log.info("ordine era ok");
                     cc_controller.setAction(action);
                     cc_controller.manage();
+                    g_controller.updatePlayer(action.getPlayerID());
                     flow.setLastGamePhase(GamePhase.USE_CHARACTER_CARD);
-                    if (flow.getSubCount("player-turn") == nof_players) {
-                        flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS); //we can not receive any other MOVE_3_STUDENTS
-                        keep_going = false;
-                    } else {
-                        flow.avoidConditionEdge(GamePhase.PUT_ON_CLOUDS); //we can not receive any other PUT_ON_CLOUDS
-                        follow_neutral_order = false;
-                    }
-                    flow.addSubCountIfNotPresent("usecharcard init"); //we have entered this phase
-                    flow.incrementSubCount("usecharcard init");
+                    keep_going = true; //turn start -> move3 / turn end -> drain cloud
                     g_controller.checkForEnd();
                     break;
             }
