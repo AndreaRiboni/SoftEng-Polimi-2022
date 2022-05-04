@@ -46,9 +46,9 @@ public class CharacterDeck {
     }
 
     public void draw3Cards() {
-        cards[0].setActive();
-        cards[6].setActive();
-        cards[9].setActive();
+        cards[4].setActive();
+        cards[10].setActive();
+        cards[11].setActive();
         /*int found = 0;
         do {
             int index = (int)(Math.random() * cards.length);

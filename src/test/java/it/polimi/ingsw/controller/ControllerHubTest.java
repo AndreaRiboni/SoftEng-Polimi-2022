@@ -66,6 +66,7 @@ class ControllerHubTest {
         do{
             move_mothernature.setMothernatureIncrement((int)(Math.random() * Math.floor((assist_card_index+1)/2)) + 1);
             response = controller.update(move_mothernature).equals("true");
+            System.out.println("Steps: " + move_mothernature.getMothernatureIncrement());
         } while (!response);
     }
 
@@ -75,9 +76,10 @@ class ControllerHubTest {
         draincloud.setPlayerID(player_id);
         boolean response;
         do{
-            int index = player_id % 2 == 0 ? 0 : 1;
+            int index = Math.random() < 0.5 ? 0 : 1;
             draincloud.setCloudIndex(index);
             response = controller.update(draincloud).equals("true");
+            System.out.println("index chosen: " + index);
         }while(!response);
     }
 
@@ -85,8 +87,7 @@ class ControllerHubTest {
         Action putonclouds = new Action();
         putonclouds.setGamePhase(GamePhase.PUT_ON_CLOUDS);
         putonclouds.setPlayerID(player_id);
-        boolean response;
-        response = controller.update(putonclouds).equals("true");
+        boolean response = controller.update(putonclouds).equals("true");
     }
 
     @Test
@@ -100,52 +101,28 @@ class ControllerHubTest {
 
         //player 0 draws an assist card
         drawAssistCard(0, 0);
+        System.out.println("Assistcard drawn");
 
         //player 1 draws an assist card
         drawAssistCard(3, 1);
+        System.out.println("Assistcard drawn");
 
         //player 0 should be playing first
         assertEquals(model.getPlayers()[0].getID(), controller.getNextAutomaticOrder());
 
         //player 0 moves 3 students (we don't know what students they have since they're random)
         move3Students(0);
+        System.out.println("Moved 3 students");
 
         //player 0 moves mother nature
         moveMotherNature(0);
+        System.out.println("Moved mother nature");
 
         //player 0 drains a cloud
         drainClouds(0);
+        System.out.println("Drain clouds");
 
-        //now it's player 1's turn
-        assertEquals(model.getPlayers()[1].getID(), controller.getNextAutomaticOrder());
-
-        //player 1 moves 3 students
-        move3Students(1);
-
-        //player 1 moves mother nature
-        moveMotherNature(1);
-
-        //player 1 drains the other cloud
-        drainClouds(1);
-        System.out.println("accepted gamephases:");
-        System.out.println(controller.getAcceptedGamephases());
-        System.out.println("accepted player");
-        System.out.println(controller.getNextAutomaticOrder());
-        System.out.println("sending put on clouds player 0");
-
-        //refill the clouds
-        putOnClouds(0);
-
-        //player 0 draws an assist card
-        drawAssistCard(4, 0);
-
-        //player 1 draws an assist card
-        drawAssistCard(2, 1);
-
-        //player 1 should be playing first
-        assertEquals(model.getPlayers()[1].getID(), controller.getNextAutomaticOrder());
-        
-        //going on...
+        //and so on
     }
 
 }

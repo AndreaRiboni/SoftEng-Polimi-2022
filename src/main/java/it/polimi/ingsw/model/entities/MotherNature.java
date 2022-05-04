@@ -22,7 +22,7 @@ public class MotherNature {
 
     public void stepForward(int steps) throws EriantysException {
         int old_island_index = island_index;
-        if(steps <= 0 || steps > AssistCard.MAX_STEPS)
+        if(steps <= 0 || steps > AssistCard.MAX_STEPS + 2)
             throw new EriantysException(
                     String.format(EriantysException.INVALID_STEPS, steps)
             );
@@ -80,4 +80,5 @@ public class MotherNature {
     public String toString(){
         return "mothernature on " + island_index;
     }
+
 }

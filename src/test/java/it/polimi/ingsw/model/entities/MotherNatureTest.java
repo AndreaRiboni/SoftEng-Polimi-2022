@@ -32,7 +32,7 @@ class MotherNatureTest {
             gameBoard.moveMotherNature(0);
         });
         Assertions.assertThrows(EriantysException.class, () -> {
-            gameBoard.moveMotherNature(6);
+            gameBoard.moveMotherNature(8);
         });
     }
 

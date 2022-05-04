@@ -188,4 +188,12 @@ public class GameController extends Controller {
         return 12 - links;
     }
 
+    public void resetAdditionalEffects() {
+        model.unassignProfsTemporaryPlayers();
+        for(Player player : model.getPlayers()){
+            player.setMotherNatureExtraSteps(0);
+            player.setMotherNatureExtraPoints(0);
+        }
+        model.getMotherNature().endTurn();
+    }
 }

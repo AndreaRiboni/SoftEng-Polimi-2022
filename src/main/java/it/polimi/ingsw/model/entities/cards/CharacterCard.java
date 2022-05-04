@@ -65,9 +65,10 @@ public class CharacterCard {
         if(behavior instanceof StudentBehavior){
             //stampo studenti
             //migliora
-            sb.append("studenti: ");
+            sb.append("studenti:\n");
             for(int i = 0; i < behavior.getAvailableStudents().length; i++)
-                sb.append(i+1).append(") ").append(behavior.getAvailableStudents()[i]).append("\n");
+                sb.append("\t").append(i+1).append(") ").append(behavior.getAvailableStudents()[i]).append("\n");
+            sb.append("locks: ").append(behavior.getAvailableLocks());
         }
         sb.append(behavior);
         return sb.toString();

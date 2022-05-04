@@ -160,14 +160,23 @@ public class Action implements Serializable {
     }
 
     public String getErrorMessage(){
-        return (String)param.get(GameParameter.ERROR_MSG); //TODO
+        return (String)param.get(GameParameter.ERROR_MSG);
     }
+
     public void setUsername(String username){
         param.put(GameParameter.USERNAME, username);
     }
 
     public String getUsername(){
-        return (String)param.get(GameParameter.USERNAME); //TODO
+        return (String)param.get(GameParameter.USERNAME);
+    }
+
+    public int getMotherNatureExtraSteps(){
+        return (int)param.get(GameParameter.MOTHERNATURE_EXTRASTEPS);
+    }
+
+    public void setMotherNatureExtraSteps(int extraSteps){
+        param.put(GameParameter.MOTHERNATURE_EXTRASTEPS, extraSteps);
     }
 
 }

@@ -147,146 +147,258 @@ public class ClientLogic {
         return response.getErrorMessage();
     }
 
+    private void manageDrawAssistCard(Action act){
+        System.out.println("1) Sir Cheetuh, 1 step");
+        System.out.println("2) Lord Duckoff, 1 step");
+        System.out.println("3) Ms. Meowsie, 2 steps");
+        System.out.println("4) Messire Sparrown, 2 steps");
+        System.out.println("5) Lady Foxine, 3 steps");
+        System.out.println("6) Ms. Liza, 3 steps");
+        System.out.println("7) Donna Octavia, 4 steps");
+        System.out.println("8) Don Bulldon, 4 steps");
+        System.out.println("9) Ms. Helena, 5 steps");
+        System.out.println("10) Sir Shelliferg, 5 steps");
+        int assist_index = InputUtils.getInt(
+                "Enter the index of the assist card you want to play",
+                "Invalid index",
+                new int[]{1,2,3,4,5,6,7,8,9,10}
+        );
+        act.setAssistCardIndex(assist_index-1);
+    }
+
+    private void manageMove3Students(Action act){
+        Color students_colors[] = new Color[5];
+        for(int i=0; i<5; i++){
+            students_colors[i] = Color.getFromInt(i);
+        }
+        Color chosen_colors[] = new Color[nof_players+1];
+        Places chosen_places[] = new Places[nof_players+1];
+        int chosen_island_indexes[] = new int[nof_players+1];
+
+
+        for(int i=0; i<nof_players + 1; i++) {
+            chosen_colors[i] = InputUtils.getColor(
+                    "Enter the color of the "+ GenericUtils.getOrdinal(i+1)+" student you want to move",
+                    "Invalid color",
+                    students_colors
+            );
+            int chosen_place = InputUtils.getInt(
+                    "Pick a place\n\t[1] Island\n\t[2] Dining hall",
+                    "Invalid place",
+                    new int[]{1, 2}
+            );
+            if(chosen_place==1){
+                chosen_places[i] = Places.ISLAND;
+                chosen_island_indexes[i] = InputUtils.getInt(
+                        "Enter the index of the island (from 1 to 12)",
+                        "Invalid index",
+                        InputUtils.EVERY_ISLAND
+                ) - 1;
+            } else{
+                chosen_places[i] = Places.DINING_HALL;
+            }
+        }
+        act.setThreeStudents(chosen_colors);
+        act.setThreeStudentPlaces(chosen_places);
+        act.setIslandIndexes(chosen_island_indexes);
+    }
+
+    private void manageMoveMotherNature(Action act){
+        int steps = InputUtils.getInt(
+                "Choose a number of steps for Mother Nature",
+                "Invalid number", new int[] {1,2,3,4,5, 6, 7, 8}
+        );
+        act.setMothernatureIncrement(steps);
+    }
+
+    private void manageDrainCloud(Action act){
+        int cloud_id = InputUtils.getInt(
+                "Choose the cloud to get drain the students from (1 or 2)",
+                "Invalid index", new int[]{1,2,3}
+        ) - 1;
+        act.setCloudIndex(cloud_id);
+    }
+
+    private void manageStudentBehavior(int chosen_id, Action act){
+        int num_studs_to_exchange;
+        Color[] colors;
+        int[] indexes;
+        switch(chosen_id){
+            case 0:
+                int[] island_ids = new int[1];
+                island_ids[0] = InputUtils.getInt("Choose the island you want to put the student on",
+                        "Invalid island index",
+                        new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}) - 1;
+                int[] student_ids = new int[1];
+                student_ids[0] = InputUtils.getInt("Choose the student to put on the island",
+                        "Invalid student index",
+                        new int[]{1, 2, 3}) - 1;
+                act.setIslandIndexes(island_ids);
+                act.setStudentIndexes(student_ids);
+                log.info("Sending island_index: " + island_ids[0] + " and student_index: " + student_ids[0]);
+                break;
+            case 6:
+                num_studs_to_exchange = InputUtils.getInt("Choose the number of students you want to exchange",
+                        "Invalid number",
+                        new int[]{1,2,3});
+                act.setDesiredNofStudents(num_studs_to_exchange);
+
+                //2 - array colori degli studenti da mettere sulla carta che stanno sulla mia entrance
+                colors = new Color[num_studs_to_exchange];
+                for(int i = 0; i < num_studs_to_exchange; i++){
+                    colors[i] = InputUtils.getColor("Choose the color of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from your entrance",
+                            "Invalid color",
+                            new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
+                }
+                act.setEntranceColors(colors);
+                //3 - array di indici degli studenti da prelevare dalla carta
+                indexes = new int[num_studs_to_exchange];
+                for(int i=0; i<num_studs_to_exchange; i++){
+                    indexes[i] = InputUtils.getInt("Choose the index of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from the character card",
+                            "Invalid index",
+                            new int[]{1, 2, 3, 4, 5, 6});
+                }
+                act.setStudentIndexes(indexes);
+                break;
+            case 9:
+                num_studs_to_exchange = InputUtils.getInt("Choose the number of students you want to exchange",
+                        "Invalid number",
+                        new int[]{1,2});
+                act.setDesiredNofStudents(num_studs_to_exchange);
+                //2 - array colori degli studenti da mettere sulla carta che stanno sulla mia entrance
+                Color[] entrance_colors = new Color[num_studs_to_exchange];
+                Color[] dining_colors = new Color[num_studs_to_exchange];
+                for(int i = 0; i < num_studs_to_exchange; i++){
+                    entrance_colors[i] = InputUtils.getColor("Choose the color of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from your entrance",
+                            "Invalid color",
+                            new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
+                }
+                act.setEntranceColors(entrance_colors);
+                for(int i = 0; i < num_studs_to_exchange; i++){
+                    dining_colors[i] = InputUtils.getColor("Choose the color of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from your dining hall",
+                            "Invalid color",
+                            new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
+                }
+                act.setDiningColors(dining_colors);
+                break;
+            case 10:
+                indexes = new int[1];
+                indexes[0] = InputUtils.getInt(
+                        "Choose the index of the student you want to pick up from the character card",
+                        "Invalid index",
+                        new int[]{1, 2, 3, 4}
+                ) - 1;
+                act.setStudentIndexes(indexes);
+                break;
+            case 11:
+                Color PutBackIn = InputUtils.getColor("Choose the color of the students (up to 3) you want everyone to put back in the bag",
+                        "Invalid color",
+                        new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
+                act.setColor(PutBackIn);
+                break;
+
+        }
+    }
+
+    private void manageProfessorBehavior() {
+        System.out.println("You are now in control of the professors even if the number of their student's color is equal to someone else's.\nThe effect will disappear the next turn");
+    }
+
+    private void manageMotherNatureBehavior(int chosen_id, Action act){
+        switch(chosen_id){
+            case 2: //pick an island and calculate its influence
+                act.setIslandIndex(
+                        InputUtils.getInt(
+                                "Pick an island to calculate its influence",
+                                "Invalid index",
+                                InputUtils.EVERY_ISLAND
+                        ) - 1
+                );
+                break;
+            case 3:
+                System.out.println("You can now move mother nature up to 2 extra steps (for this turn)");
+                break;
+            case 5:
+                System.out.println("Towers won't be considered when calculating the influence");
+                break;
+            case 7:
+                System.out.println("You'll get 2 additional points when calculating the influence");
+                break;
+            case 8:
+                act.setColor(
+                        InputUtils.getColor(
+                                "Choose which color won't be considered when calculating the influence",
+                                "Invalid color",
+                                InputUtils.EVERY_STUD_COLOR
+                        )
+                );
+                break;
+        }
+    }
+
+    private void manageLockBehavior(int chosen_id, Action act){
+        switch(chosen_id){
+            case 4:
+                act.setIslandIndex(
+                        InputUtils.getInt(
+                                "Which island do you want to lock?",
+                                "Invalid index",
+                                InputUtils.EVERY_ISLAND
+                        ) - 1
+                );
+                break;
+        }
+    }
+
+    private void manageUseCharacterCard(Action act){
+        int chosen_id = InputUtils.getInt(
+                "Choose the character's index you want to use", "Invalid index",
+                new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+        ) - 1;
+        System.out.println("Chosen cc index: " + chosen_id);
+        act.setCharacterCardIndex(chosen_id);
+        switch(chosen_id){
+            case 0:
+            case 6:
+            case 9:
+            case 10:
+            case 11:
+                manageStudentBehavior(chosen_id, act);
+                break;
+            case 1:
+                manageProfessorBehavior();
+                break;
+            case 2:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+                manageMotherNatureBehavior(chosen_id, act);
+                break;
+            case 4:
+                manageLockBehavior(chosen_id, act);
+                break;
+        }
+    }
+
     private String processGamePhase(GamePhase chosen){
         Action act = new Action();
         act.setGamePhase(chosen);
         switch(chosen){
             case DRAW_ASSIST_CARD:
-                System.out.println("1) Sir Cheetuh, 1 step");
-                System.out.println("2) Lord Duckoff, 1 step");
-                System.out.println("3) Ms. Meowsie, 2 steps");
-                System.out.println("4) Messire Sparrown, 2 steps");
-                System.out.println("5) Lady Foxine, 3 steps");
-                System.out.println("6) Ms. Liza, 3 steps");
-                System.out.println("7) Donna Octavia, 4 steps");
-                System.out.println("8) Don Bulldon, 4 steps");
-                System.out.println("9) Ms. Helena, 5 steps");
-                System.out.println("10) Sir Shelliferg, 5 steps");
-                int assist_index = InputUtils.getInt(
-                        "Enter the index of the assist card you want to play",
-                        "Invalid index",
-                        new int[]{1,2,3,4,5,6,7,8,9,10}
-                );
-                act.setAssistCardIndex(assist_index-1);
+                manageDrawAssistCard(act);
                 break;
             case MOVE_3_STUDENTS:
-                Color students_colors[] = new Color[5];
-                for(int i=0; i<5; i++){
-                    students_colors[i] = Color.getFromInt(i);
-                }
-                Color chosen_colors[] = new Color[nof_players+1];
-                Places chosen_places[] = new Places[nof_players+1];
-                int chosen_island_indexes[] = new int[nof_players+1];
-
-
-                for(int i=0; i<nof_players + 1; i++) {
-                    chosen_colors[i] = InputUtils.getColor(
-                            "Enter the color of the "+ GenericUtils.getOrdinal(i+1)+" student you want to move",
-                            "Invalid color",
-                            students_colors
-                    );
-                    int chosen_place = InputUtils.getInt(
-                            "Pick a place\n\t[1] Island\n\t[2] Dining hall",
-                            "Invalid place",
-                            new int[]{1, 2}
-                    );
-                    if(chosen_place==1){
-                        chosen_places[i] = Places.ISLAND;
-                        chosen_island_indexes[i] = InputUtils.getInt(
-                                "Enter the index of the island (from 1 to 12)",
-                                "Invalid index",
-                                InputUtils.EVERY_ISLAND
-                        ) - 1;
-                    } else{
-                        chosen_places[i] = Places.DINING_HALL;
-                    }
-                }
-                act.setThreeStudents(chosen_colors);
-                act.setThreeStudentPlaces(chosen_places);
-                act.setIslandIndexes(chosen_island_indexes);
+                manageMove3Students(act);
                 break;
-                
             case MOVE_MOTHERNATURE:
-                int steps = InputUtils.getInt(
-                        "Choose a number of steps for Mother Nature",
-                        "Invalid number", new int[] {1,2,3,4,5, 6, 7, 8}
-                );
-                act.setMothernatureIncrement(steps);
+                manageMoveMotherNature(act);
                 break;
-            
             case DRAIN_CLOUD:
-                int cloud_id = InputUtils.getInt(
-                        "Choose the cloud to get drain the students from (1 or 2)",
-                        "Invalid index", new int[]{1,2,3}
-                ) - 1;
-                act.setCloudIndex(cloud_id);
+                manageDrainCloud(act);
                 break;
-
             case USE_CHARACTER_CARD:
-                /*System.out.println("1) Father Marryman");
-                System.out.println("2) Mr. Greedy");
-                System.out.println("3) Sir Sirius Gold");
-                System.out.println("4) AZ");
-                System.out.println("5) Donna Herbira");
-                System.out.println("6) Messire Bojack");
-                System.out.println("7) Harley Dean");
-                System.out.println("8) Sir Ferrante");
-                System.out.println("9) Cavalier Bartolomeo Dueleoni");
-                System.out.println("10) Minstrel Folcorelli");
-                System.out.println("11) Miss Caballé");
-                System.out.println("12) Witch Hazel");*/
-                int chosen_id = InputUtils.getInt(
-                        "Choose the character's index you want to use", "Invalid index",
-                            new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
-                ) - 1;
-                System.out.println("Chosen cc index: " + chosen_id);
-                act.setCharacterCardIndex(chosen_id);
-                switch(chosen_id){
-                    case 0:
-                        int[] island_ids = new int[1];
-                        island_ids[0] = InputUtils.getInt("Choose the island you want to put the student on",
-                                "Invalid island index",
-                                new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}) - 1;
-                        int[] student_ids = new int[1];
-                        student_ids[0] = InputUtils.getInt("Choose the student to put on the island",
-                                "Invalid student index",
-                                new int[]{1, 2, 3}) - 1;
-                        act.setIslandIndexes(island_ids);
-                        act.setStudentIndexes(student_ids);
-                        log.info("Sending island_index: " + island_ids[0] + " and student_index: " + student_ids[0]);
-                        break;
-                    case 6:
-                        int num_studs_to_exchange = InputUtils.getInt("Choose the number of students you want to exchange",
-                                "Invalid number",
-                                new int[]{1,2,3});
-                        act.setDesiredNofStudents(num_studs_to_exchange);
-
-                        //2 - array colori degli studenti da mettere sulla carta che stanno sulla mia entrance
-                        Color[] colors = new Color[num_studs_to_exchange];
-                        for(int i = 0; i < num_studs_to_exchange; i++){
-                            colors[i] = InputUtils.getColor("Choose the color of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from your entrance",
-                                    "Invalid color",
-                                    new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
-                        }
-                        act.setEntranceColors(colors);
-
-                        //3 - array di indici degli studenti da prelevare dalla carta
-                        int[] indexes = new int[num_studs_to_exchange];
-                        for(int i=0; i<num_studs_to_exchange; i++){
-                            indexes[i] = InputUtils.getInt("Choose the index of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from your character card",
-                                    "Invalid index",
-                                    new int[]{1, 2, 3, 4, 5, 6});
-                        }
-                        act.setStudentIndexes(indexes);
-                        break;
-                    case 9:
-                        break;
-                    case 10:
-                        break;
-                    case 11:
-                        break;
-
-                }
+                manageUseCharacterCard(act);
                 break;
         }
         return getFeedback(act);

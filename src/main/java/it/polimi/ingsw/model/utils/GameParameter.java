@@ -18,5 +18,6 @@ public enum GameParameter {
     COLOR,
     CHARACTER_CARD_INDEX,
     ERROR_MSG,
-    USERNAME
+    USERNAME,
+    MOTHERNATURE_EXTRASTEPS
 }

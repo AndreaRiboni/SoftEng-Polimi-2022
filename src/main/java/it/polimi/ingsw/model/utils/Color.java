@@ -32,6 +32,14 @@ public enum Color {
         return null;
     }
 
+    public static Color[] getStudentColors(){
+        return new Color[]{Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.PINK};
+    }
+
+    public static Color[] getTowerColors(){
+        return new Color[]{Color.WHITE, Color.GREY, Color.BLACK};
+    }
+
     public static Color getRandomStudentColor(){
         return getFromInt((int)(Math.random() * 5));
     }

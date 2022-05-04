@@ -36,7 +36,6 @@ public class Island extends StudentPlace implements TowerPlace {
      * @throws EriantysException error
      */
     public Color calculateInfluence(boolean avoid_tower, Color avoid_color) throws EriantysException {
-        System.out.println();
         if(isLocked()){ //the island is locked ==> we unlock it and return the tower's color (not re-calculating the influence)
             unlock();
             gameboard.getLockBack();
@@ -47,6 +46,9 @@ public class Island extends StudentPlace implements TowerPlace {
         Player[] players = gameboard.getPlayers();
         int[] stud_counters = new int[5]; //how many students per color
         int[] player_points = new int[players.length]; //points per player
+        for(int i = 0; i < players.length; i++){
+            player_points[i] += players[i].getMotherNatureExtraPoints();
+        }
         Island curr_island = this;
         do { //for each connected island
             //System.out.println("studying island #" + index);
@@ -209,6 +211,7 @@ public class Island extends StudentPlace implements TowerPlace {
         if(tower != null)
             towers.put(tower, 1);
         StringBuilder sb = new StringBuilder("Island #").append(index+1).append("\n");
+        if(locked) sb.append("<<<LOCKED>>>\n");
         String mother_nature = has_mothernature ? "\n\tmother nature is relaxing here" : "";
         return sb.append("\tstudents:\n")
                 .append(Printer.studentPlaceToString(this, students))

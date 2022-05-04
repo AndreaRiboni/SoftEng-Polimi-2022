@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.utils.EriantysException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class GameBoard {
@@ -236,6 +237,32 @@ public class GameBoard {
     }
 
     public Bag getBag() { return bag;}
+
+    public void assignProfsTemporaryPlayers(Player ref){
+        //assigns each profs' temp-player so that in case of parity you get in control
+        Map<Color, Integer> refs_studs = ref.getDiningStudents();
+        for(Player player : players) {
+            if(player.equals(ref)) continue;
+            Map<Color, Integer> players_studs = player.getDiningStudents();
+            for (Color color : Color.getStudentColors()) {
+                int ref_value = refs_studs.getOrDefault(color, 0);
+                int player_value = players_studs.getOrDefault(color, 0);
+                if(
+                        ref_value == player_value &&
+                        getProfFromColor(color).getPlayer() != null &&
+                        ref_value > 0
+                ){
+                    getProfFromColor(color).setTempPlayer(ref);
+                }
+            }
+        }
+    }
+
+    public void unassignProfsTemporaryPlayers(){
+        for(Professor p : professors){
+            p.setTempPlayer(null);
+        }
+    }
 
     public String toString(){
         String newline = "--------------------------------------------\n";

@@ -82,7 +82,6 @@ public class FlowChecker {
     }
 
     public List<GamePhase> getAcceptedGamephases() {
-        log.info("get acc gp di flowcheck");
         return getNextPhases(last);
     }
 
@@ -118,10 +117,8 @@ public class FlowChecker {
     }
 
     public List<GamePhase> getNextPhases(GamePhase gp){
-        log.info("get next phases");
         List<GamePhase> next = new ArrayList<>(gamephases.get(gp));
         if(avoid_edges != null) {
-            log.info("devo evitare fasi di gioco");
             for (GamePhase avoid : avoid_edges) {
                 next.remove(avoid);
             }

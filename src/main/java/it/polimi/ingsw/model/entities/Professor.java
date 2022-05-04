@@ -6,10 +6,12 @@ import it.polimi.ingsw.model.utils.Color;
 public class Professor {
     private final Color color;
     private Player player;
+    private Player temp_player;
 
     public Professor(Color color){
         this.color = color;
         player = null;
+        temp_player = null;
     }
 
     public Color getColor(){
@@ -21,14 +23,24 @@ public class Professor {
     }
 
     public Player getPlayer(){
-        return player;
+        return temp_player == null ? player : temp_player;
+    }
+
+    public void setTempPlayer(Player player){
+        temp_player = player;
+    }
+
+    public Player getTempPlayer(){
+        return temp_player;
     }
 
     public String toString(){
         StringBuilder sb = new StringBuilder("prof-");
         sb.append(Color.colorToString(color));
-        if(player!=null)
-            sb.append(" is in player-").append(Color.colorToString(player.getColor())).append("'s school");
+        if(temp_player!=null)
+            sb.append(" is (temporarily) in player-").append(player.getUsername()).append("'s school");
+        else if(player!=null)
+            sb.append(" is in player-").append(player.getUsername()).append("'s school");
         else sb.append(" isn't in a school");
         return sb.toString();
     }

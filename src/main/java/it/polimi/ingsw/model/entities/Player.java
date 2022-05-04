@@ -205,7 +205,7 @@ public class Player {
     }
 
     public String getUsername(){
-        return this.username;
+        return username == null ? Color.colorToString(color) : username;
     }
 
     public boolean equals(Object obj){

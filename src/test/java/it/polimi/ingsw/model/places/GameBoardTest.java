@@ -106,15 +106,11 @@ public class GameBoardTest {
         assertEquals(1, c2.countByColor(Color.BLUE)); //1 has 1 blue
         gameBoard.putOnCloud(Color.PINK, 0); //put pink on 0
         assertEquals(1, c1.countByColor(Color.PINK)); //0 has 1 pink
-        gameBoard.putOnCloud(Color.RED, 0); //put red on 0
-        assertEquals(2, c1.countByColor(Color.RED)); //0 has 2 red
 
         //if I try to add a new student on a full cloud I expect an exception
         thrown = Assertions.assertThrows(EriantysException.class, () -> {
             gameBoard.putOnCloud(Color.RED, 0);
         });
-        c1.popStudent(Color.RED);
-        assertEquals(3, c1.getNofStudent());
 
     }
 }

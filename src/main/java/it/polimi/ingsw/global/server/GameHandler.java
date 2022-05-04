@@ -84,12 +84,10 @@ public class GameHandler implements Runnable {
             sendAction(i, official_start);
         }
         do {
-            System.out.println();
-            log.info("get whos playng");
+            System.out.println(); //new turn
             int player_playing = getWhoIsPlaying();
-            System.out.println("player " + player_playing + " is playing");
+            log.info("player " + player_playing + " has to play");
             //send the correct client what action we need from him
-            log.info("getting the next phases from chub");
             sendAction(player_playing, controller.getAcceptedGamephases());
             log.info("The available gamephases have been sent to the client (player " + player_playing + ")");
             //get the action
