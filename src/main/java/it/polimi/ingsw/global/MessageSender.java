@@ -23,6 +23,7 @@ public class MessageSender {
             socket = new Socket("localhost", MultiServerLauncher.PORT);
             output = new ObjectOutputStream(socket.getOutputStream());
             output.flush();
+            output.reset();
             input = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             log.error("Unable to initialize socket");

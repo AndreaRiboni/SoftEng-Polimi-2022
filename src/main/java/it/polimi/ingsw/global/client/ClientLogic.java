@@ -256,7 +256,7 @@ public class ClientLogic {
                 for(int i=0; i<num_studs_to_exchange; i++){
                     indexes[i] = InputUtils.getInt("Choose the index of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from the character card",
                             "Invalid index",
-                            new int[]{1, 2, 3, 4, 5, 6});
+                            new int[]{1, 2, 3, 4, 5, 6}) - 1;
                 }
                 act.setStudentIndexes(indexes);
                 break;

@@ -88,11 +88,14 @@ public class ControllerHub {
                     }
                     break;
                 case MOVE_3_STUDENTS:
+                    log.info("Entered in move3students");
                     //we are in the correct order if no one has entered usecharcard yet AND we have the lowest turn_valeu OR
                     //if the last one entering usecharcard is the same player who is now playing
                     if(flow.getSubCount("started with usecharcard") > 0){ //we have already entered move3students
+                        log.info("Player has already played charcard");
                         g_controller.verifyIdentity(); //check that who's playing is the player who was already playing
                     } else {
+                        log.info("Player wasn't playing charcard");
                         g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
                         flow.addSubCountIfNotPresent("player-turn");
                         flow.incrementSubCount("player-turn");
@@ -143,10 +146,6 @@ public class ControllerHub {
                     } else { //we are starting with USE_CHARCARD: the next phase must be MOVE_3STUDS
                         log.info("Using character card (move3students not done yet)");
                         g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
-                        flow.addSubCountIfNotPresent("player-turn");
-                        flow.incrementSubCount("player-turn"); //turn is starting here
-                        flow.addSubCountIfNotPresent("started with usecharcard"); //we have entered this phase
-                        flow.incrementSubCount("started with usecharcard"); //NOTA BENE: prima c'era "move3students init"
                     }
                     cc_controller.setAction(action);
                     cc_controller.manage();
@@ -155,6 +154,10 @@ public class ControllerHub {
                         flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS); //since i've already entered move3students the next phase MUST be DRAIN CLOUD
                     } else { //we are starting with USE_CHARCARD: the next phase must be MOVE_3STUDS
                         flow.avoidConditionEdge(GamePhase.DRAIN_CLOUD);
+                        flow.addSubCountIfNotPresent("player-turn");
+                        flow.incrementSubCount("player-turn"); //turn is starting here
+                        flow.addSubCountIfNotPresent("started with usecharcard"); //we have entered this phase
+                        flow.incrementSubCount("started with usecharcard"); //NOTA BENE: prima c'era "move3students init"
                     }
                     g_controller.updatePlayer(action.getPlayerID());
                     flow.setLastGamePhase(GamePhase.USE_CHARACTER_CARD);
