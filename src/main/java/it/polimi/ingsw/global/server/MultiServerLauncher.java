@@ -17,13 +17,16 @@ import java.util.concurrent.Executors;
 
 public class MultiServerLauncher {
     public final static int PORT = 60125;
-    private final WaitingRoom two_players, three_players, four_players;
+    private final List<WaitingRoom> two_players, three_players, four_players;
     private static final Logger log = LogManager.getRootLogger();
 
     public MultiServerLauncher(){
-        two_players = new WaitingRoom(2);
-        three_players = new WaitingRoom(3);
-        four_players = new WaitingRoom(4);
+        two_players = new ArrayList<>();
+        two_players.add(new WaitingRoom(2));
+        three_players = new ArrayList<>();
+        three_players.add(new WaitingRoom(3));
+        four_players = new ArrayList<>();
+        four_players.add(new WaitingRoom(4));
     }
 
     public void startServer() throws IOException {
@@ -40,7 +43,7 @@ public class MultiServerLauncher {
                 Socket socket = serverSocket.accept();
                 log.info("New client has connected: " + Printer.socketToString(socket));
                 new ServerDispatcher(two_players, three_players, four_players, socket).start();
-            }catch(IOException e){
+            } catch(IOException e){
                 break; //In case the serverSocket gets closed
             }
         }

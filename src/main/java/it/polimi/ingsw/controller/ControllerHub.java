@@ -88,22 +88,21 @@ public class ControllerHub {
                     }
                     break;
                 case MOVE_3_STUDENTS:
-                    log.info("Entered in move3students");
                     //we are in the correct order if no one has entered usecharcard yet AND we have the lowest turn_valeu OR
                     //if the last one entering usecharcard is the same player who is now playing
                     if(flow.getSubCount("started with usecharcard") > 0){ //we have already entered move3students
-                        log.info("Player has already played charcard");
                         g_controller.verifyIdentity(); //check that who's playing is the player who was already playing
                     } else {
-                        log.info("Player wasn't playing charcard");
                         g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
+                    }
+                    m_controller.setAction(action);
+                    m_controller.move3Studs();
+                    if(flow.getSubCount("started with usecharcard") <= 0){
                         flow.addSubCountIfNotPresent("player-turn");
                         flow.incrementSubCount("player-turn");
                         flow.addSubCountIfNotPresent("started with move3students"); //we have entered this phase
                         flow.incrementSubCount("started with move3students");
                     }
-                    m_controller.setAction(action);
-                    m_controller.move3Studs();
                     flow.setLastGamePhase(GamePhase.MOVE_3_STUDENTS);
                     flow.doNotAvoidConditionEdge();
                     g_controller.updatePlayer(action.getPlayerID());

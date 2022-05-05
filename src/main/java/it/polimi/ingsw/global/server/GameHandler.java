@@ -34,7 +34,6 @@ public class GameHandler implements Runnable {
         for(int i = 0; i < players.length; i++){
             out[i] = new MessageSender(players[i], ins[i], outs[i]);
         }
-        //TODO: View doesn't have to be in the controller's constructor anymore since it'll be communicating through the network.
         model = new GameBoard();
         controller = new ControllerHub(model);
         Action start_game = new Action();
@@ -47,11 +46,13 @@ public class GameHandler implements Runnable {
     }
 
     private Action readAction(int client_index){
-        try {
-            return (Action) ins[client_index].readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
+        synchronized (ins[client_index]) {
+            try {
+                return (Action) ins[client_index].readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
 

@@ -7,6 +7,8 @@ import org.apache.log4j.Logger;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -16,16 +18,19 @@ public class WaitingRoom {
     private ObjectInputStream[] in;
     private ObjectOutputStream[] out;
     private int connected;
-    private ExecutorService executor;
+    private final ExecutorService executor;
+    //private List<Thread> threads;
     private static final Logger log = LogManager.getRootLogger();
 
     public WaitingRoom(int nof_players){
+        log.info("Created a waiting room of " + nof_players + " players");
         clients = new Socket[nof_players];
         in = new ObjectInputStream[nof_players];
         out = new ObjectOutputStream[nof_players];
         usernames = new String[nof_players];
         connected = 0;
         executor = Executors.newCachedThreadPool();
+        //threads = new ArrayList<>();
     }
 
     public synchronized void connect(Socket client, ObjectInputStream ois, ObjectOutputStream oos, String username){
@@ -45,12 +50,23 @@ public class WaitingRoom {
         } while (username_found);
         usernames[connected] = new_username;
         connected++;
+        log.info("Connected: " + getNofConnected() + ", Capacity: " + getCapacity());
         log.info(Printer.socketToString(client) + " has joined a match [" + connected + "/" + clients.length + "]");
         if(connected == clients.length){
             log.info("starting a match...");
             executor.submit(new GameHandler(clients, in, out, usernames));
-            connected = 0;
+            //threads.add(new Thread(new GameHandler(clients, in, out, usernames)));
+            //threads.get(threads.size() - 1).start();
+            //connected = 0;
         }
+    }
+
+    public synchronized int getNofConnected(){
+        return connected;
+    }
+
+    public int getCapacity(){
+        return usernames.length;
     }
 
     public void shutdown(){
