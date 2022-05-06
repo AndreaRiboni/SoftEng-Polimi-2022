@@ -216,10 +216,19 @@ public class ClientLogic {
     }
 
     private void manageDrainCloud(Action act){
-        int cloud_id = InputUtils.getInt(
-                "Choose the cloud to get drain the students from (1 or 2)",
-                "Invalid index", new int[]{1,2,3}
-        ) - 1;
+        int cloud_id = 0;
+        if(nof_players%2 == 0) {
+            cloud_id = InputUtils.getInt(
+                    "Choose the cloud to get drain the students from (1 or 2)",
+                    "Invalid index", new int[]{1, 2}
+            ) - 1;
+        }else {
+            cloud_id = InputUtils.getInt(
+                    "Choose the cloud to get drain the students from (1 or 2 or 3)",
+                    "Invalid index", new int[]{1, 2, 3}
+            ) - 1;
+        }
+
         act.setCloudIndex(cloud_id);
     }
 
