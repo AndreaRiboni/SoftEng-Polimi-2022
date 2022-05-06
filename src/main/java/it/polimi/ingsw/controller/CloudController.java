@@ -33,9 +33,14 @@ public class CloudController extends Controller{
         int cloud_index = action.getCloudIndex();
         Player player = model.getPlayers()[action.getPlayerID()];
         if(model.getCloud(cloud_index).getNofStudent() == 0) throw new EriantysException(EriantysException.INVALID_CLOUD_INDEX);
-        for(Color stud : model.getCloud(cloud_index).getStudents().keySet()) {
-            player.addEntranceStudent(stud);
+
+        for(Color color : model.getCloud(cloud_index).getStudents().keySet()){
+            int count = model.getCloud(cloud_index).countByColor(color);
+            for(int i = 0; i < count; i++){
+                player.addEntranceStudent(color);
+            }
         }
+
         model.getCloud(cloud_index).empty();
         //TODO: check that the cloud index is valid, since it can be used only once (2 players mode)
     }
