@@ -113,4 +113,9 @@ public abstract class CardBehavior {
     public void getLockBack() {
         nof_locks++;
     }
+
+
+    public void invertStudent(int index, Color new_student) {
+        students[index] = new_student;
+    }
 }

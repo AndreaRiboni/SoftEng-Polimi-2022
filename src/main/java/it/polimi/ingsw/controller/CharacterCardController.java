@@ -114,7 +114,8 @@ public class CharacterCardController extends Controller {
                     //add this card's student to entrance
                     model.getPlayers()[action.getPlayerID()].addEntranceStudent(students[student_index]); //da agg:students[student_index]
                     //reset this card's student
-                    behavior.resetStudent(student_index, student_color); //reset the student
+                    //behavior.exchange_Student(student_index, student_color); //reset the student
+                    behavior.invertStudent(student_index,student_color);
                 }
                 break;
             case 9: //exchange up to 2 students (your entrance - your dininghall)

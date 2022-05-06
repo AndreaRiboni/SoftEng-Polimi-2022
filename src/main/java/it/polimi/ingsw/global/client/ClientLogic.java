@@ -1,11 +1,15 @@
 package it.polimi.ingsw.global.client;
 
 import it.polimi.ingsw.global.MessageSender;
+import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
+import it.polimi.ingsw.model.places.DiningHall;
 import it.polimi.ingsw.model.places.Island;
 import it.polimi.ingsw.model.places.Places;
+import it.polimi.ingsw.model.places.StudentPlace;
 import it.polimi.ingsw.model.utils.*;
+//import jdk.tools.jlink.internal.JmodArchive;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -25,6 +29,7 @@ public class ClientLogic {
 
     private List<GamePhase> waitForAvailableGamephases() {
         List<GamePhase> gamephase = null;
+
         while((gamephase = listener.getPhasesIfReady()) == null){
             //do nothing
         }
@@ -174,7 +179,6 @@ public class ClientLogic {
         Color chosen_colors[] = new Color[nof_players+1];
         Places chosen_places[] = new Places[nof_players+1];
         int chosen_island_indexes[] = new int[nof_players+1];
-
 
         for(int i=0; i<nof_players + 1; i++) {
             chosen_colors[i] = InputUtils.getColor(
