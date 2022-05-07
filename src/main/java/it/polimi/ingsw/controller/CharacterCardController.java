@@ -24,7 +24,7 @@ public class CharacterCardController extends Controller {
     }
 
     public void manage() throws EriantysException {
-        System.out.println("Received character card nidex: " + action.getCharacterCardIndex());
+        System.out.println("Received character card index: " + action.getCharacterCardIndex());
         CharacterCard temp = model.getCharacterCard(action.getCharacterCardIndex());
         if(!temp.isOnBoard()){
             throw new EriantysException(EriantysException.INVALID_CC_INDEX);
