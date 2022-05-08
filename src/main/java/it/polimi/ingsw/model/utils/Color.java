@@ -47,15 +47,15 @@ public enum Color {
     public static String colorToString(Color col){
         switch(col){
             case YELLOW:
-                return ConsoleColors.YELLOW + "yellow" + ConsoleColors.RESET;
+                return ConsoleColors.YELLOW_BACKGROUND + "yellow" + ConsoleColors.RESET;
             case BLUE:
-                return ConsoleColors.BLUE + "blue" + ConsoleColors.RESET;
+                return ConsoleColors.BLUE_BACKGROUND + "blue" + ConsoleColors.RESET;
             case GREEN:
-                return ConsoleColors.GREEN + "green" + ConsoleColors.RESET;
+                return ConsoleColors.GREEN_BACKGROUND + "green" + ConsoleColors.RESET;
             case RED:
-                return ConsoleColors.RED + "red" + ConsoleColors.RESET;
+                return ConsoleColors.RED_BACKGROUND + "red" + ConsoleColors.RESET;
             case PINK:
-                return ConsoleColors.PINK + "pink" + ConsoleColors.RESET;
+                return ConsoleColors.PINK_BACKGROUND + "pink" + ConsoleColors.RESET;
             case BLACK:
                 return ConsoleColors.BLACK_BACKGROUND + "black" + ConsoleColors.RESET;
             case GREY:

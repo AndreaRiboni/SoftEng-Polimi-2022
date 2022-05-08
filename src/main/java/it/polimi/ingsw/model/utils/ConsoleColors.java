@@ -36,14 +36,14 @@ public class ConsoleColors {
 
     // Background
     public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
-    public static final String RED_BACKGROUND = "\033[41m";    // RED
-    public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN
-    public static final String YELLOW_BACKGROUND = "\033[43m"; // YELLOW
-    public static final String BLUE_BACKGROUND = "\033[44m";   // BLUE
-    public static final String PURPLE_BACKGROUND = "\033[45m"; // PURPLE
+    public static final String RED_BACKGROUND = "\033[30;41m";    // RED
+    public static final String GREEN_BACKGROUND = "\033[30;42m";  // GREEN
+    public static final String YELLOW_BACKGROUND = "\033[30;43m"; // YELLOW
+    public static final String BLUE_BACKGROUND = "\033[30;44m";   // BLUE
+    public static final String PINK_BACKGROUND = "\033[30;45m"; // PINK
     public static final String CYAN_BACKGROUND = "\033[46m";   // CYAN
     public static final String GREY_BACKGROUND = "\033[47m";  // GREY
-    public static final String WHITE_BACKGROUND = "\033[0;107m";   // WHITE
+    public static final String WHITE_BACKGROUND = "\033[30;107m";  // WHITE
 
     // High Intensity
     public static final String BLACK_BRIGHT = "\033[0;90m";  // BLACK
