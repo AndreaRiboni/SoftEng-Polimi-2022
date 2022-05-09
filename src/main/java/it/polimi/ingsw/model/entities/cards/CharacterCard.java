@@ -74,7 +74,7 @@ public class CharacterCard {
                 sb.append("\t\t\t").append(i+1).append(") ").append(behavior.getAvailableStudents()[i]).append("\n");
             sb.append("\t\t" + GenericUtils.toBold("Locks") + ": ").append(behavior.getAvailableLocks());
         }
-        sb.append(behavior);
+        //sb.append(behavior);
         return sb.toString();
     }
 
