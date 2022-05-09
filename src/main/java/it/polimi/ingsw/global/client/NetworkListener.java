@@ -74,6 +74,11 @@ public class NetworkListener extends Thread{
                 }
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
+                try {
+                    socket.wait();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }
