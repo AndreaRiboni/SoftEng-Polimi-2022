@@ -4,7 +4,9 @@ import it.polimi.ingsw.model.entities.*;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
 import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.ConsoleColors;
 import it.polimi.ingsw.model.utils.EriantysException;
+import it.polimi.ingsw.model.utils.GenericUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -280,18 +282,18 @@ public class GameBoard {
         }
         rep.append(newline);
         for(int i = 0; i < clouds.length; i++){
-            rep.append("Cloud #").append(i+1).append("\n")
+            rep.append(GenericUtils.toBold("Cloud #" + (i+1))).append("\n")
                 .append(clouds[i].toString());
         }
-        rep.append(newline).append("Characters:\n");
 
+        rep.append(newline).append(GenericUtils.toBold("Characters") + ":\n");
         try { //magari migliora la formattazione
             CharacterCard c1 = character_cards.getActiveCard(0);
-            rep.append("\t"+ (c1.getID()+1)+") "+c1+"\n");
+            rep.append("\t"+ (c1.getID()+1)+") "+c1+"\n\n");
             CharacterCard c2 = character_cards.getActiveCard(1);
-            rep.append("\t"+ (c2.getID()+1)+") "+c2+"\n");
+            rep.append("\t"+ (c2.getID()+1)+") "+c2+"\n\n");
             CharacterCard c3 = character_cards.getActiveCard(2);
-            rep.append("\t"+ (c3.getID()+1)+") "+c3+"\n");
+            rep.append("\t"+ (c3.getID()+1)+") "+c3+"\n\n");
         } catch (EriantysException e) {
             e.printStackTrace();
         }

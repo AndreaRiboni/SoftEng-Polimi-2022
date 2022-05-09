@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.entities.cards;
 
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.GenericUtils;
 
 public class CharacterCard {
     private boolean onBoard;
@@ -58,17 +59,17 @@ public class CharacterCard {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
+        sb.append(" " + GenericUtils.toBold("Name") + ": ").append(name).append("\n");
         if(price > 1){
-            sb.append("Price ").append(price).append(" coins");
-        }else{ sb.append("Price ").append(price).append(" coin");}
-        sb.append("\nName ").append(name).append("\n");
+            sb.append("\t\t" + GenericUtils.toBold("Price") + ": ").append(price).append(" coins");
+        }else{ sb.append("\t\t" + GenericUtils.toBold("Price") + ": ").append(price).append(" coin");}
         if(behavior instanceof StudentBehavior){
             //stampo studenti
             //migliora
-            sb.append("studenti:\n");
+            sb.append("\n\t\t" + GenericUtils.toBold("Students") + ":\n");
             for(int i = 0; i < behavior.getAvailableStudents().length; i++)
-                sb.append("\t").append(i+1).append(") ").append(behavior.getAvailableStudents()[i]).append("\n");
-            sb.append("locks: ").append(behavior.getAvailableLocks());
+                sb.append("\t\t\t").append(i+1).append(") ").append(behavior.getAvailableStudents()[i]).append("\n");
+            sb.append("\t\t" + GenericUtils.toBold("Locks") + ": ").append(behavior.getAvailableLocks());
         }
         sb.append(behavior);
         return sb.toString();

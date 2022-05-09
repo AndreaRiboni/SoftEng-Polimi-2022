@@ -15,6 +15,7 @@ public class ConsoleColors {
     public static final String WHITE = "\033[0;37m";   // WHITE
 
     // Bold
+    public static final String BOLD = "\033[1;4m";           // BOLD
     public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
     public static final String RED_BOLD = "\033[1;31m";    // RED
     public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
@@ -73,4 +74,5 @@ public class ConsoleColors {
     public static final String BLUE_BACKGROUND_BRIGHT = "\033[0;104m";// BLUE
     public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
+
 }

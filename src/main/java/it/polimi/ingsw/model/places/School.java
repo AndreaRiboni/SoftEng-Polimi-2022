@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
+import it.polimi.ingsw.model.utils.GenericUtils;
 
 import java.util.Map;
 
@@ -87,9 +88,9 @@ public class School {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("entrance:\n").append(entrance).append("\n");
-        sb.append("dininghall:\n").append(dining_hall).append("\n");
-        sb.append("towerhall:\n").append(tower_hall).append("\n");
+        sb.append("\t\t").append(GenericUtils.toBold("Entrance")).append(":\n").append(entrance).append("\n");
+        sb.append("\t\t").append(GenericUtils.toBold("Dining Hall")).append(":\n").append(dining_hall).append("\n");
+        sb.append("\t\t").append(GenericUtils.toBold("Tower Hall")).append(":\n").append(tower_hall).append("\n");
         return sb.toString();
     }
 

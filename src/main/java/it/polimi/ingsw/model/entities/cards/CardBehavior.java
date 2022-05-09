@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.entities.cards;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
+import it.polimi.ingsw.model.utils.GenericUtils;
 
 public abstract class CardBehavior {
     protected GameBoard gameboard;
@@ -75,7 +76,7 @@ public abstract class CardBehavior {
 
     public String toString(){
         return String.format(
-                "CardBehavior info:\n\texchange students: %d,\n\tdrop students: %d,\n\tnof students: %d,\n\textra steps: %d,\n\textra points: %d,\n\tnof locks: %d\n\tavoid color: %b,\n\tpick island: %b,\n\tavoid tower: %b",
+                "\n\t\t" + GenericUtils.toBold("CardBehavior info") + ":\n\t\t\texchange students: %d,\n\t\t\tdrop students: %d,\n\t\t\tnof students: %d,\n\t\t\textra steps: %d,\n\t\t\textra points: %d,\n\t\t\tnof locks: %d\n\t\t\tavoid color: %b,\n\t\t\tpick island: %b,\n\t\t\tavoid tower: %b",
                 exchange_students,
                 drop_students,
                 nof_students,

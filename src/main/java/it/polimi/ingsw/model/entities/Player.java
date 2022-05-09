@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.places.School;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
+import it.polimi.ingsw.model.utils.GenericUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -173,7 +174,7 @@ public class Player {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("player #").append(ID+1);
+        sb.append(GenericUtils.toBold("Player #" + (ID+1)));
         if(username != null){
             sb.append(" \"").append(username).append("\"");
         }
@@ -181,13 +182,13 @@ public class Player {
                 .append("\tTower Color: ").append(Color.colorToString(color)).append("\n")
                 .append("\tCoins: ").append(coins).append("\n")
                 .append("\tTurn value: ").append(turn_value);
-        sb.append("\nplayer's school (below):\n").append(school).append("\nAlready played assist card:\n");
+        sb.append("\n\n\t" + GenericUtils.toBold("Player's school (below)")).append(":\n").append(school).append("\t" + GenericUtils.toBold("Already played assist card") + ":\n");
         if(getNofPlayableCards() == wizard.getCards().length) {
-            sb.append("\tNone");
+            sb.append("\t\tNone");
             return sb.toString();
         }
         for(AssistCard ac : wizard.getCards()){
-            if(ac.isPlayed()) sb.append("\t[").append(ac.getName()).append("]\n");
+            if(ac.isPlayed()) sb.append("\t\t[").append(ac.getName()).append("]\n");
         }
         return sb.toString();
     }

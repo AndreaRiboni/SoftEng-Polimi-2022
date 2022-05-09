@@ -56,9 +56,11 @@ public class GenericUtils {
                 return "ninth";
             case 10:
                 return "tenth";
-
             default:
                 throw new UnsupportedOperationException();
         }
+    }
+    public static String toBold(String s){
+        return ConsoleColors.BOLD + s + ConsoleColors.RESET;
     }
 }

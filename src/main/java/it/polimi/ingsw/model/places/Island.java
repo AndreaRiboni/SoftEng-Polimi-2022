@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
+import it.polimi.ingsw.model.utils.GenericUtils;
 import it.polimi.ingsw.model.utils.Printer;
 
 import java.util.HashMap;
@@ -210,7 +211,7 @@ public class Island extends StudentPlace implements TowerPlace {
         Map<Color, Integer> towers = new HashMap<>();
         if(tower != null)
             towers.put(tower, 1);
-        StringBuilder sb = new StringBuilder("Island #").append(index+1).append("\n");
+        StringBuilder sb = new StringBuilder(GenericUtils.toBold("Island #" + (index+1))).append("\n");
         if(locked) sb.append("<<<LOCKED>>>\n");
         String mother_nature = has_mothernature ? "\n\tmother nature is relaxing here" : "";
         return sb.append("\tstudents:\n")
