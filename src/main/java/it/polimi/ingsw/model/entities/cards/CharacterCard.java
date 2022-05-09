@@ -7,18 +7,20 @@ import it.polimi.ingsw.model.utils.GenericUtils;
 public class CharacterCard {
     private boolean onBoard;
     private int price;
-    private String name;
+    private final String name;
     private final int id;
     private final CardBehavior behavior;
     private final GameBoard gameboard;
+    private final String effect;
 
-    public CharacterCard(GameBoard gameboard, int price, CardBehavior behavior, int id, String name){
+    public CharacterCard(GameBoard gameboard, int price, CardBehavior behavior, int id, String name, String effect){
         this.gameboard = gameboard;
         onBoard = false;
         this.price = price;
         this.behavior = behavior;
         this.id = id;
         this.name = name;
+        this.effect = effect;
     }
 
     public boolean isOnBoard(){
@@ -63,6 +65,7 @@ public class CharacterCard {
         if(price > 1){
             sb.append("\t\t" + GenericUtils.toBold("Price") + ": ").append(price).append(" coins");
         }else{ sb.append("\t\t" + GenericUtils.toBold("Price") + ": ").append(price).append(" coin");}
+        sb.append("\n\t\t").append(GenericUtils.toBold("Effect")).append(": ").append(effect);
         if(behavior instanceof StudentBehavior){
             //stampo studenti
             //migliora

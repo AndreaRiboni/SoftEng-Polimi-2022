@@ -76,6 +76,7 @@ public class CharacterDeck {
                 int id = (int)(long)card.get("id");
                 int price = id%3 + 1;
                 String name = (String)card.get("name");
+                String effect = (String)card.get("effect");
                 switch((String)card.get("type")){
                     case "student":
                         behavior = new StudentBehavior(
@@ -117,7 +118,8 @@ public class CharacterDeck {
                         price,
                         behavior,
                         id,
-                        name
+                        name,
+                        effect
                 );
             }
         } catch (IOException | ParseException e) {
