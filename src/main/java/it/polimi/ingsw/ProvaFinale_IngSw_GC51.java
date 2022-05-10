@@ -1,6 +1,8 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.global.client.ClientLauncher;
 import it.polimi.ingsw.global.server.MultiServerLauncher;
+import it.polimi.ingsw.model.utils.InputUtils;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -13,29 +15,20 @@ public class ProvaFinale_IngSw_GC51 {
 
     public static void main(String[] args) throws IOException {
         PropertyConfigurator.configure("log4j.properties");
-        log.info("Application has started");
-        
-        System.out.println("Hi! Welcome to Eryantis!\nWhat do you want to launch?");
-        System.out.println("0. SERVER\n1. CLIENT (CLI INTERFACE)\n2. CLIENT (GUI INTERFACE)");
-        System.out.print(">");
 
-        Scanner scanner = new Scanner(System.in);
-        int input = 0;
-        try{
-            input = scanner.nextInt();
-        } catch (InputMismatchException e){
-            System.err.println("Something went wrong");
-            System.exit(-1);
-        }
+        int input = InputUtils.getInt(
+                "Hi! Welcome to Eryantis!\nWhat do you want to launch?\n0. SERVER\n1. CLIENT (CLI INTERFACE)\n2. CLIENT (GUI INTERFACE)",
+                "Error. Retry",
+                new int[]{0, 1, 2}
+        );
         switch (input) {
-            case 0 ->{   MultiServerLauncher hub = new MultiServerLauncher();
+            case 0:
+                MultiServerLauncher hub = new MultiServerLauncher();
                 hub.startServer();
-            }
-            case 1 -> ClientLauncher.main(null);
-            /*case 2 -> {System.out.println("You selected the GUI interface, have fun!\nStarting...");
-                   GUI.main(null);
-            }*/
-            default -> System.err.println("Oh oh, be careful. You have to choose between:\n0.server\n1.client (CLI INTERFACE)\n2.client (GUI INTERFACE)");
+            case 1:
+                ClientLauncher.main(null);
+            case 2:
+                System.out.println("to be done");
         }
     }
 }
