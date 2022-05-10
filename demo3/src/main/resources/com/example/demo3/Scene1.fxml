@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.HelloController">
+    <top>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <HBox spacing="10.0">
+                    <children>
+                        <TextField promptText="Insert a nickname" />
+                        <ChoiceBox fx:id="nof_Players" prefWidth="150.0" />
+                        <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#switchScene2" text="Log in" />
+                    </children>
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+</BorderPane>
