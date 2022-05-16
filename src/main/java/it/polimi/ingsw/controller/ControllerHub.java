@@ -193,6 +193,9 @@ public class ControllerHub {
         log.info("Getting next (automatic) [keep going: " + keep_going + ", follow neutral: " + follow_neutral_order);
         return keep_going ? getLastPlaying() : follow_neutral_order ? getNextNeutralOrder() : getNextWeightedOrder();
     }
-    public FlowChecker getFlow(){return flow;}
+
+    public boolean hasGameEnded(){
+        return g_controller.checkForEnd();
+    }
 
 }

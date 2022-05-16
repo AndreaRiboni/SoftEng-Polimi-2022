@@ -4,9 +4,10 @@ import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class LockBehavior extends CardBehavior{
+public class LockBehavior extends CardBehavior implements Serializable {
 
     public LockBehavior(GameBoard gameboard, int id, int nof_locks, Behaviors behavior_name) {
         super(gameboard, id, 0, 0, 0, 0, 0, nof_locks, false, false, false, behavior_name, 0);

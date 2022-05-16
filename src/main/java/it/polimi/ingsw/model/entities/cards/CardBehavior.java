@@ -5,7 +5,9 @@ import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GenericUtils;
 
-public abstract class CardBehavior {
+import java.io.Serializable;
+
+public abstract class CardBehavior implements Serializable {
     protected GameBoard gameboard;
     protected Color color;
     protected int island_index, available_students;

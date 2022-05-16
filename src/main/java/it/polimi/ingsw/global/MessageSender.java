@@ -1,6 +1,7 @@
 package it.polimi.ingsw.global;
 
 import it.polimi.ingsw.global.server.MultiServerLauncher;
+import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GamePhase;
 import it.polimi.ingsw.model.utils.Printer;
@@ -10,6 +11,7 @@ import org.apache.log4j.Logger;
 import java.io.*;
 import java.net.ConnectException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.List;
 
 public class MessageSender {
@@ -36,36 +38,42 @@ public class MessageSender {
         input = in;
     }
 
-    public void send(Action action) {
+    public void send(Action action) throws SocketException {
         log.info("currently sending " + action.getGamePhase());
         try {
             output.writeObject(action);
             output.flush();
             output.reset();
         } catch (IOException e){
-            e.printStackTrace();
+            if(e instanceof SocketException){
+                throw new SocketException();
+            } else e.printStackTrace();
         }
     }
 
-    public void send(List<GamePhase> gamephase) {
+    public void send(List<GamePhase> gamephase) throws SocketException {
         log.info("currently sending " + gamephase);
         try {
             output.writeObject(gamephase);
             output.flush();
             output.reset();
         } catch (IOException e){
-            e.printStackTrace();
+            if(e instanceof SocketException){
+                throw new SocketException();
+        } else e.printStackTrace();
         }
     }
 
-    public void send(String model) {
+    public void send(GameBoard model) throws SocketException {
         log.info("currently sending the new model representation to " + Printer.socketToString(socket));
         try {
             output.writeObject(model);
             output.flush();
             output.reset();
         } catch (IOException e){
-            e.printStackTrace();
+            if(e instanceof SocketException){
+                throw new SocketException();
+            } else e.printStackTrace();
         }
     }
 

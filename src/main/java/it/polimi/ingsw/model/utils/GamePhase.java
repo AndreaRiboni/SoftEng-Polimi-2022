@@ -10,5 +10,6 @@ public enum GamePhase {
     USE_CHARACTER_CARD,
     ERROR_PHASE,
     CORRECT,
-    END_GAME
+    END_GAME,
+    CONNECTION_ERROR
 }

@@ -2,17 +2,15 @@ package it.polimi.ingsw.global.client;
 
 import it.polimi.ingsw.global.MessageSender;
 import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.cards.CharacterCard;
-import it.polimi.ingsw.model.entities.cards.CharacterDeck;
-import it.polimi.ingsw.model.places.DiningHall;
-import it.polimi.ingsw.model.places.Island;
+import it.polimi.ingsw.model.entities.cards.AssistCard;
+import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.places.Places;
-import it.polimi.ingsw.model.places.StudentPlace;
 import it.polimi.ingsw.model.utils.*;
-//import jdk.tools.jlink.internal.JmodArchive;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientLogic {
@@ -20,16 +18,19 @@ public class ClientLogic {
     private final NetworkListener listener;
     private static final Logger log = LogManager.getRootLogger();
     private int nof_players;
+    private GameBoard model;
+    private String username;
 
     public ClientLogic(){
         msg = new MessageSender();
-        listener = new NetworkListener(msg.getSocket(), msg.getInput());
+        model = null;
+        username = null;
+        listener = new NetworkListener(msg.getSocket(), msg.getInput(), this);
         listener.start();
     }
 
     private List<GamePhase> waitForAvailableGamephases() {
         List<GamePhase> gamephase = null;
-
         while((gamephase = listener.getPhasesIfReady()) == null){
             //do nothing
         }
@@ -44,88 +45,23 @@ public class ClientLogic {
         return response;
     }
 
-    public void fakeStart(){
-        log.info("client has started. sending 2 players request");
-        Action start = new Action();
-        start.setGamePhase(GamePhase.START);
-        start.setNOfPlayers(2);
-        msg.send(start);
-        log.info("sent 2 players request. waiting for response");
-        List<GamePhase> current_gamephases = waitForAvailableGamephases();
-        log.info("available gamephases: \t" + current_gamephases);
+    public synchronized void setGameBoard(GameBoard model){
+        this.model = model;
+    }
 
-        Action draw_assist_card = new Action();
-        draw_assist_card.setGamePhase(GamePhase.DRAW_ASSIST_CARD);
-        int assist_card_index = (int)(Math.random() * 10);
-        draw_assist_card.setAssistCardIndex(assist_card_index);
-        msg.send(draw_assist_card);
-        log.info("sent draw assist card. waiting for response");
-        List<GamePhase> response = waitForAvailableGamephases(); //CORRECT vs ERROR
-        current_gamephases = waitForAvailableGamephases();
-        log.info("available gamephases: \t" + current_gamephases);
+    private synchronized GameBoard getGameBoard(){
+        return model == null ? createDefaultGameBoard() : model;
+    }
 
-        log.info("sending move 3 students");
-        Action move3studs = new Action();
-        move3studs.setGamePhase(GamePhase.MOVE_3_STUDENTS);
-        do {
-            Color[] chosen = new Color[]{
-                    Color.getRandomStudentColor(),
-                    Color.getRandomStudentColor(),
-                    Color.getRandomStudentColor()
-            };
-            move3studs.setThreeStudents(chosen);
-            int island_index = (int)(Math.random()*12);
-            log.info("Chosen 3 colors: " + chosen[0] + ", " + chosen[1] + ", " + chosen[2]);
-            log.info("Chosen 3 places: dining, dining, island (" + island_index + ")");
-            move3studs.setThreeStudentPlaces(
-                    new Places[]{
-                            Places.DINING_HALL,
-                            Places.DINING_HALL,
-                            Places.ISLAND
-                    }
-            );
-            move3studs.setIslandIndexes(new int[]{0,0,island_index});
-            msg.send(move3studs);
-            log.info("sent move 3 students. waiting for response");
-            response = waitForAvailableGamephases();
-            if(response.contains(GamePhase.ERROR_PHASE)) log.error("There was an error. Retrying");
-        } while (response.contains(GamePhase.ERROR_PHASE));
-        current_gamephases = waitForAvailableGamephases();
-        log.info("available gamephases: \t" + current_gamephases);
-
-        Action move_mothernature = new Action();
-        move_mothernature.setGamePhase(GamePhase.MOVE_MOTHERNATURE);
-        move_mothernature.setMothernatureIncrement((int)(Math.random() * Math.floor((assist_card_index+1)/2)) + 1);
-        msg.send(move_mothernature);
-        log.info("sent move mother nature. waiting for response");
-        response = waitForAvailableGamephases(); //CORRECT vs ERROR
-        current_gamephases = waitForAvailableGamephases();
-        log.info("available gamephases: \t" + current_gamephases);
-
-        log.info("sending drain cloud");
-        Action draincloud = new Action();
-        draincloud.setGamePhase(GamePhase.DRAIN_CLOUD);
-        do {
-            int index = Math.random() > 0.5 ? 0 : 1;
-            draincloud.setCloudIndex(index);
-            log.info("Chosen cloud index: " + index);
-            msg.send(draincloud);
-            log.info("sent drain cloud. waiting for response");
-            response = waitForAvailableGamephases();
-            if(response.contains(GamePhase.ERROR_PHASE)) log.error("There was an error. Retrying");
-        } while (response.contains(GamePhase.ERROR_PHASE));
-        current_gamephases = waitForAvailableGamephases();
-        log.info("available gamephases: \t" + current_gamephases);
-
-        if(current_gamephases.contains(GamePhase.PUT_ON_CLOUDS)){ //new turn
-            Action putonclouds = new Action();
-            putonclouds.setGamePhase(GamePhase.PUT_ON_CLOUDS);
-            msg.send(putonclouds);
-            log.info("sent turn end notification. waiting for response");
-            response = waitForAvailableGamephases(); //CORRECT vs ERROR
-            current_gamephases = waitForAvailableGamephases();
-            log.info("available gamephases: \t" + current_gamephases);
+    private GameBoard createDefaultGameBoard(){
+        GameBoard gb = new GameBoard();
+        try {
+            gb.initialize(nof_players, 1);
+            gb.getPlayers()[0].setUsername(username);
+        } catch (EriantysException e) {
+            e.printStackTrace();
         }
+        return gb;
     }
 
     private int askGamePhase(List <GamePhase> current_gamephases){
@@ -144,7 +80,7 @@ public class ClientLogic {
         }
     }
 
-    private String getFeedback(Action action){
+    private String getFeedback(Action action) throws SocketException {
         msg.send(action);
         System.out.println("Sent. Waiting for response");
         Action response = waitForResponse();
@@ -153,29 +89,36 @@ public class ClientLogic {
     }
 
     private void manageDrawAssistCard(Action act){
-        System.out.println("1) Sir Cheetuh, 1 step");
-        System.out.println("2) Lord Duckoff, 1 step");
-        System.out.println("3) Ms. Meowsie, 2 steps");
-        System.out.println("4) Messire Sparrown, 2 steps");
-        System.out.println("5) Lady Foxine, 3 steps");
-        System.out.println("6) Ms. Liza, 3 steps");
-        System.out.println("7) Donna Octavia, 4 steps");
-        System.out.println("8) Don Bulldon, 4 steps");
-        System.out.println("9) Ms. Helena, 5 steps");
-        System.out.println("10) Sir Shelliferg, 5 steps");
+        Player playing = getGameBoard().getPlayerByUsername(username);
+        AssistCard[] player_cards = playing.getWizard().getCards();
+        StringBuilder sb = new StringBuilder();
+        List<AssistCard> accepted_cards_list = new ArrayList<>();
+        for(int i = 0; i < player_cards.length; i++){
+            if(!player_cards[i].isPlayed()){
+                String plural = player_cards[i].getSteps() > 1 ? "s\n" : "\n";
+                sb.append(player_cards[i].getValue())
+                        .append(") ")
+                        .append(player_cards[i].getName())
+                        .append(" -> ")
+                        .append(player_cards[i].getSteps())
+                        .append(" step")
+                        .append(plural);
+                accepted_cards_list.add(player_cards[i]);
+            }
+        }
+        int[] accepted_cards_index = new int[accepted_cards_list.size()];
+        for(int i = 0; i < accepted_cards_index.length; i++){
+            accepted_cards_index[i] = accepted_cards_list.get(i).getValue();
+        }
         int assist_index = InputUtils.getInt(
-                "Enter the index of the assist card you want to play",
+                "Enter the index of the assist card you want to play\n" + sb.toString(),
                 "Invalid index",
-                new int[]{1,2,3,4,5,6,7,8,9,10}
+                accepted_cards_index
         );
         act.setAssistCardIndex(assist_index-1);
     }
 
     private void manageMove3Students(Action act){
-        Color students_colors[] = new Color[5];
-        for(int i=0; i<5; i++){
-            students_colors[i] = Color.getFromInt(i);
-        }
         Color chosen_colors[] = new Color[nof_players+1];
         Places chosen_places[] = new Places[nof_players+1];
         int chosen_island_indexes[] = new int[nof_players+1];
@@ -184,7 +127,7 @@ public class ClientLogic {
             chosen_colors[i] = InputUtils.getColor(
                     "Enter the color of the "+ GenericUtils.getOrdinal(i+1)+" student you want to move",
                     "Invalid color",
-                    students_colors
+                    Color.getStudentColors()
             );
             int chosen_place = InputUtils.getInt(
                     "Pick a place\n\t[1] Island\n\t[2] Dining hall",
@@ -394,7 +337,12 @@ public class ClientLogic {
         }
     }
 
-    private String processGamePhase(GamePhase chosen){
+    private void manageConnectionError(){
+        System.err.println("Someone playing your match has had a problem! The match can not continue");
+        System.exit(0);
+    }
+
+    private String processGamePhase(GamePhase chosen) throws SocketException {
         Action act = new Action();
         act.setGamePhase(chosen);
         switch(chosen){
@@ -413,11 +361,13 @@ public class ClientLogic {
             case USE_CHARACTER_CARD:
                 manageUseCharacterCard(act);
                 break;
+            case CONNECTION_ERROR:
+                manageConnectionError();
         }
         return getFeedback(act);
     }
 
-    public void start() {
+    public void start() throws SocketException {
         System.out.println("client has started");
         String username = InputUtils.getString("Choose an username");
         nof_players = InputUtils.getInt("How many players?", "Invalid number", new int[]{2,3,4});
@@ -430,6 +380,7 @@ public class ClientLogic {
         System.out.println("Sent. Waiting for response");
         Action username_comunicator = waitForResponse();
         System.out.println("Match has started. My username is " + username_comunicator.getUsername());
+        this.username = username_comunicator.getUsername();
         do {
             boolean succeeded = false;
             do {

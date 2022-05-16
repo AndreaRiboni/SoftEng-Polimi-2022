@@ -4,9 +4,10 @@ import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GenericUtils;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class School {
+public class School implements Serializable {
     private final Entrance entrance;
     private final DiningHall dining_hall;
     private final TowerHall tower_hall;

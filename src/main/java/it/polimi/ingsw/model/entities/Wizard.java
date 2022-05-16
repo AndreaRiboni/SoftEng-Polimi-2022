@@ -2,7 +2,9 @@ package it.polimi.ingsw.model.entities;
 
 import it.polimi.ingsw.model.entities.cards.AssistCard;
 
-public class Wizard {
+import java.io.Serializable;
+
+public class Wizard implements Serializable {
     private final AssistCard[] cards;
     public static final int NOF_ASSIST_CARDS = 10;
 
@@ -13,7 +15,7 @@ public class Wizard {
 
     private void createCards(){
         for(int i = 0; i < cards.length; i++){
-            cards[i] = new AssistCard(i+1,(int)Math.floor((i+1)/2), getName(i));
+            cards[i] = new AssistCard(i+1, (int)Math.floor((i+2)/2), getName(i));
         }
     }
 

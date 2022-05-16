@@ -47,6 +47,28 @@ public enum Color {
     public static String colorToString(Color col){
         switch(col){
             case YELLOW:
+                return "yellow";
+            case BLUE:
+                return "blue";
+            case GREEN:
+                return "green";
+            case RED:
+                return "red";
+            case PINK:
+                return "pink";
+            case BLACK:
+                return "black";
+            case GREY:
+                return "grey";
+            case WHITE:
+                return "white";
+        }
+        return null;
+    }
+
+    public static String colorToViewString(Color col){
+        switch(col){
+            case YELLOW:
                 return ConsoleColors.YELLOW_BACKGROUND + "yellow" + ConsoleColors.RESET;
             case BLUE:
                 return ConsoleColors.BLUE_BACKGROUND + "blue" + ConsoleColors.RESET;

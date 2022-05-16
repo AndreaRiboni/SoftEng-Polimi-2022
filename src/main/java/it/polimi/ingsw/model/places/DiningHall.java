@@ -3,7 +3,9 @@ package it.polimi.ingsw.model.places;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
-public class DiningHall extends StudentPlace {
+import java.io.Serializable;
+
+public class DiningHall extends StudentPlace implements Serializable {
     public static final int STUDENTS_PER_COLOR = 10;
 
     public DiningHall(){

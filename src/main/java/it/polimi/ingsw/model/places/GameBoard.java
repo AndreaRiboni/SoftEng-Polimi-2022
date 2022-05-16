@@ -4,16 +4,16 @@ import it.polimi.ingsw.model.entities.*;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
 import it.polimi.ingsw.model.utils.Color;
-import it.polimi.ingsw.model.utils.ConsoleColors;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GenericUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
-public class GameBoard {
+public class GameBoard implements Serializable {
     private Cloud[] clouds;
     private Player[] players;
     public int NOF_PLAYERS;
@@ -45,8 +45,6 @@ public class GameBoard {
         initializeIslands();
         initalizePlayers();
         initializeCharacterDeck();
-
-
     }
 
     private void initializeIslands() throws EriantysException {
@@ -286,8 +284,8 @@ public class GameBoard {
                 .append(clouds[i].toString());
         }
 
-        rep.append(newline).append(GenericUtils.toBold("Characters") + ":\n");
-        try { //magari migliora la formattazione
+        rep.append(newline).append(GenericUtils.toBold("Characters")).append(":\n");
+        try {
             CharacterCard c1 = character_cards.getActiveCard(0);
             rep.append("\t"+ (c1.getID()+1)+") "+c1+"\n\n");
             CharacterCard c2 = character_cards.getActiveCard(1);
@@ -305,6 +303,13 @@ public class GameBoard {
         for(int i = 0; i < players.length; i++){
             players[i].setUsername(usernames[i]);
         }
+    }
+
+    public Player getPlayerByUsername(String username){
+        for(Player player : players)
+            if(player.getUsername().equals(username))
+                return player;
+        return null;
     }
 
     public CharacterCard getCharacterCard(int index) throws EriantysException {

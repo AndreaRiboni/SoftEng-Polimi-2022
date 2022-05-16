@@ -16,19 +16,29 @@ public class ProvaFinale_IngSw_GC51 {
     public static void main(String[] args) throws IOException {
         PropertyConfigurator.configure("log4j.properties");
 
+        System.out.println("Welcome to\n" +
+                "\n" +
+                "  ___     _          _           \n" +
+                " | __|_ _(_)__ _ _ _| |_ _  _ ___\n" +
+                " | _|| '_| / _` | ' \\  _| || (_-<\n" +
+                " |___|_| |_\\__,_|_||_\\__|\\_, /__/\n" +
+                "                         |__/    \n");
         int input = InputUtils.getInt(
-                "Hi! Welcome to Eryantis!\nWhat do you want to launch?\n0. SERVER\n1. CLIENT (CLI INTERFACE)\n2. CLIENT (GUI INTERFACE)",
+                "What do you want to launch?\n1. SERVER\n2. CLIENT (CLI)\n3. CLIENT (GUI)",
                 "Error. Retry",
-                new int[]{0, 1, 2}
+                new int[]{1, 2, 3}
         );
         switch (input) {
-            case 0:
+            case 1:
                 MultiServerLauncher hub = new MultiServerLauncher();
                 hub.startServer();
-            case 1:
-                ClientLauncher.main(null);
+                break;
             case 2:
+                ClientLauncher.main(null);
+                break;
+            case 3:
                 System.out.println("to be done");
+                break;
         }
     }
 }

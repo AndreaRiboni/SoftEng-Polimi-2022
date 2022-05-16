@@ -6,7 +6,9 @@ import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.places.Island;
 
-public class MotherNature {
+import java.io.Serializable;
+
+public class MotherNature implements Serializable {
     private int island_index;
     private final GameBoard gameboard;
     private boolean avoid_towers;

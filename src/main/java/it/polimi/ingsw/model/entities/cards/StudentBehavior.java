@@ -3,7 +3,9 @@ package it.polimi.ingsw.model.entities.cards;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
 
-public class StudentBehavior extends CardBehavior {
+import java.io.Serializable;
+
+public class StudentBehavior extends CardBehavior implements Serializable {
 
     public StudentBehavior(GameBoard gameboard, int id, int nof_student, int available_students, int exchange_students, int drop_student, Behaviors behavior_name) {
         super(gameboard, id, exchange_students, drop_student, nof_student, available_students, 0, 0, false, false, false, behavior_name, 0);

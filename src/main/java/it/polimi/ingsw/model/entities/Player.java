@@ -10,10 +10,13 @@ import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GenericUtils;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
-public class Player {
+public class Player implements Serializable {
     private int turn_value, coins;
     private final Color color;
     private String username;
@@ -179,7 +182,7 @@ public class Player {
             sb.append(" \"").append(username).append("\"");
         }
         sb.append(":\n")
-                .append("\tTower Color: ").append(Color.colorToString(color)).append("\n")
+                .append("\tTower Color: ").append(Color.colorToViewString(color)).append("\n")
                 .append("\tCoins: ").append(coins).append("\n")
                 .append("\tTurn value: ").append(turn_value);
         sb.append("\n\n\t" + GenericUtils.toBold("Player's school (below)")).append(":\n").append(school).append("\t" + GenericUtils.toBold("Already played assist card") + ":\n");
@@ -206,7 +209,7 @@ public class Player {
     }
 
     public String getUsername(){
-        return username == null ? Color.colorToString(color) : username;
+        return username == null ? Color.colorToString(color).toUpperCase() : username;
     }
 
     public boolean equals(Object obj){

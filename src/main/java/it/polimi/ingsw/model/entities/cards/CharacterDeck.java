@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class CharacterDeck {
+public class CharacterDeck implements Serializable{
     private final GameBoard gameboard;
     private final CharacterCard[] cards;
 
@@ -46,17 +46,14 @@ public class CharacterDeck {
     }
 
     public void draw3Cards() {
-        cards[5].setActive();
-        cards[6].setActive();
-        cards[7].setActive();
-        /*int found = 0;
+        int found = 0;
         do {
             int index = (int)(Math.random() * cards.length);
             if(!cards[index].isOnBoard()){
                 found++;
                 cards[index].setActive();
             }
-        } while(found < 3);*/
+        } while(found < 3);
     }
 
     private void createDeck(){

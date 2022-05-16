@@ -16,7 +16,7 @@ public class Printer {
         StringBuilder sb = new StringBuilder();
         for(Color c : towers.keySet()){
             String tab = ":\t\t";
-            sb.append("\t\t\t").append("[").append(Color.colorToString(c)).append(tab).append(towers.get(c)).append("]\n");
+            sb.append("\t\t\t").append("[").append(Color.colorToViewString(c)).append(tab).append(towers.get(c)).append("]\n");
         }
         return sb.toString();
     }
@@ -29,7 +29,7 @@ public class Printer {
             if(c.equals(Color.YELLOW)){
                 tab = ":\t";
             }
-            sb.append("\t\t\t").append("[").append(Color.colorToString(c)).append(tab).append(students.get(c)).append("]\n");
+            sb.append("\t\t\t").append("[").append(Color.colorToViewString(c)).append(tab).append(students.get(c)).append("]\n");
         }
         return sb.toString();
     }

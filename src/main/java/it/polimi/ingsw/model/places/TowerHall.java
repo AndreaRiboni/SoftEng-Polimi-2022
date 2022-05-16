@@ -4,12 +4,13 @@ import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.Printer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TowerHall implements TowerPlace {
+public class TowerHall implements TowerPlace, Serializable {
     private int towers;
     private final Color color;
     private static final int MAX_TOWERS_2_4 = 8, MAX_TOWERS_3 = 6;

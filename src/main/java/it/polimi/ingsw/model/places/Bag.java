@@ -2,10 +2,11 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.utils.Color;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Bag  {
+public class Bag implements Serializable {
     private Map<Color, Integer> remaining;
 
     public Bag(){

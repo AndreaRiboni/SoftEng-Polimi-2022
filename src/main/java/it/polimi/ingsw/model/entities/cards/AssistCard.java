@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.entities.cards;
 
-public class AssistCard {
+import java.io.Serializable;
+
+public class AssistCard implements Serializable {
     private final int value, steps, id;
     public static final int MAX_STEPS = 5;
     private boolean played;

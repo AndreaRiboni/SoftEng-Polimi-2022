@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,11 +46,13 @@ public class GameHandler implements Runnable {
         controller.update(start_game);
     }
 
-    private Action readAction(int client_index){
+    private Action readAction(int client_index) throws SocketException {
         synchronized (ins[client_index]) {
             try {
                 return (Action) ins[client_index].readObject();
             } catch (IOException | ClassNotFoundException e) {
+                if(e instanceof SocketException)
+                    throw new SocketException();
                 e.printStackTrace();
                 return null;
             }
@@ -60,54 +63,74 @@ public class GameHandler implements Runnable {
         return controller.getNextAutomaticOrder();
     }
 
-    private void sendAction(int player, List<GamePhase> gamephases){
+    private void sendAction(int player, List<GamePhase> gamephases) throws SocketException {
         out[player].send(gamephases);
     }
 
-    private void sendAction(int player, Action action){
+    private void sendAction(int player, Action action) throws SocketException {
         out[player].send(action);
     }
 
-    private void sendGameBoard(){
+    private void sendGameBoard() throws SocketException {
         for(MessageSender msg_send : out){
-            msg_send.send(model.toString());
+            msg_send.send(model);
+        }
+    }
+
+    private void sendConnectionError(int index) {
+        try {
+            Action connect_err = new Action();
+            connect_err.setGamePhase(GamePhase.CONNECTION_ERROR);
+            if(index < 0 || index >= out.length) return;
+            out[index].send(connect_err);
+            sendConnectionError(index+1);
+        } catch (SocketException ex) {
+            log.warn("Couldn't reach a client");
+            sendConnectionError(index+1);
         }
     }
 
     @Override
     public void run() {
-        boolean game_ended = false;
-        log.info("New match has started [" + players.length + " players]");
-        for(int i = 0; i < players.length; i++){
-            Action official_start = new Action();
-            official_start.setGamePhase(GamePhase.CORRECT);
-            official_start.setUsername(usernames[i]);
-            sendAction(i, official_start);
-        }
-        do {
-            System.out.println(); //new turn
-            int player_playing = getWhoIsPlaying();
-            log.info("player " + player_playing + " has to play");
-            //send the correct client what action we need from him
-            sendAction(player_playing, controller.getAcceptedGamephases());
-            log.info("The available gamephases have been sent to the client (player " + player_playing + ")");
-            //get the action
-            Action client_action = readAction(player_playing);
-            client_action.setPlayerID(player_playing);
-            //process the action
-            String str_response = controller.update(client_action);
-            Action response = new Action();
-            //send the response
-            if(str_response.equalsIgnoreCase("true")){
-                response.setGamePhase(GamePhase.CORRECT);
-                sendAction(player_playing, response);
-                //send the updated gameboard to every client
-                sendGameBoard();
-            } else {
-                response.setGamePhase(GamePhase.ERROR_PHASE);
-                response.setErrorMessage(str_response);
-                sendAction(player_playing, response);
+        try {
+            boolean game_ended = false;
+            log.info("New match has started [" + players.length + " players]");
+            for (int i = 0; i < players.length; i++) {
+                Action official_start = new Action();
+                official_start.setGamePhase(GamePhase.CORRECT);
+                official_start.setUsername(usernames[i]);
+                sendAction(i, official_start);
             }
-        } while(!game_ended);
+            do {
+                System.out.println(); //new turn
+                int player_playing = getWhoIsPlaying();
+                log.info("player " + player_playing + " has to play");
+                //send the correct client what action we need from him
+                sendAction(player_playing, controller.getAcceptedGamephases());
+                log.info("The available gamephases have been sent to the client (player " + player_playing + ")");
+                //get the action
+                Action client_action = readAction(player_playing);
+                client_action.setPlayerID(player_playing);
+                //process the action
+                String str_response = controller.update(client_action);
+                Action response = new Action();
+                //send the response
+                if (str_response.equalsIgnoreCase("true")) {
+                    response.setGamePhase(GamePhase.CORRECT);
+                    sendAction(player_playing, response);
+                    //send the updated gameboard to every client
+                    sendGameBoard();
+                } else {
+                    response.setGamePhase(GamePhase.ERROR_PHASE);
+                    response.setErrorMessage(str_response);
+                    sendAction(player_playing, response);
+                }
+                game_ended = controller.hasGameEnded();
+            } while (!game_ended);
+        } catch (SocketException se){
+            log.warn("An error occurred during this match");
+            //sending connection-errors to everyone connected
+            sendConnectionError(0);
+        }
     }
 }

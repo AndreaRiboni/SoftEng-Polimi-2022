@@ -3,7 +3,9 @@ package it.polimi.ingsw.model.entities;
 import it.polimi.ingsw.model.places.School;
 import it.polimi.ingsw.model.utils.Color;
 
-public class Professor {
+import java.io.Serializable;
+
+public class Professor implements Serializable {
     private final Color color;
     private Player player;
     private Player temp_player;
@@ -36,7 +38,7 @@ public class Professor {
 
     public String toString(){
         StringBuilder sb = new StringBuilder("prof-");
-        sb.append(Color.colorToString(color));
+        sb.append(Color.colorToViewString(color));
         if(temp_player!=null)
             sb.append(" is (temporarily) in player-").append(player.getUsername()).append("'s school");
         else if(player!=null)

@@ -7,10 +7,11 @@ import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GenericUtils;
 import it.polimi.ingsw.model.utils.Printer;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Island extends StudentPlace implements TowerPlace {
+public class Island extends StudentPlace implements TowerPlace, Serializable {
     private boolean locked;
     private Island next; //da usare quando si ha un gruppo di isole. Se l'isola è singola, viene settato a null
     private Color tower;

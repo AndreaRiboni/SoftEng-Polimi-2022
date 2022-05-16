@@ -60,7 +60,16 @@ public class GenericUtils {
                 throw new UnsupportedOperationException();
         }
     }
+
     public static String toBold(String s){
         return ConsoleColors.BOLD + s + ConsoleColors.RESET;
+    }
+
+    public static String[] toViewColors(Color[] colors){
+        String[] viewcol = new String[colors.length];
+        for(int i = 0; i < viewcol.length; i++){
+            viewcol[i] = Color.colorToViewString(colors[i]);
+        }
+        return viewcol;
     }
 }

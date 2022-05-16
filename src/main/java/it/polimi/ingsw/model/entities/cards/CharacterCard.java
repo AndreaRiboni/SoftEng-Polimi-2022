@@ -4,7 +4,9 @@ import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.GenericUtils;
 
-public class CharacterCard {
+import java.io.Serializable;
+
+public class CharacterCard implements Serializable {
     private boolean onBoard;
     private int price;
     private final String name;
@@ -67,14 +69,12 @@ public class CharacterCard {
         }else{ sb.append("\t\t" + GenericUtils.toBold("Price") + ": ").append(price).append(" coin");}
         sb.append("\n\t\t").append(GenericUtils.toBold("Effect")).append(": ").append(effect);
         if(behavior instanceof StudentBehavior){
-            //stampo studenti
-            //migliora
             sb.append("\n\t\t" + GenericUtils.toBold("Students") + ":\n");
             for(int i = 0; i < behavior.getAvailableStudents().length; i++)
-                sb.append("\t\t\t").append(i+1).append(") ").append(behavior.getAvailableStudents()[i]).append("\n");
+                sb.append("\t\t\t").append(i+1).append(") ").append(Color.colorToViewString(behavior.getAvailableStudents()[i])).append("\n");
+        } else if(behavior instanceof LockBehavior){
             sb.append("\t\t" + GenericUtils.toBold("Locks") + ": ").append(behavior.getAvailableLocks());
         }
-        //sb.append(behavior);
         return sb.toString();
     }
 
