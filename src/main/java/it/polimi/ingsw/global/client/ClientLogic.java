@@ -66,13 +66,13 @@ public class ClientLogic {
 
     private int askGamePhase(List <GamePhase> current_gamephases){
         if(current_gamephases.size()!=1) {
-            System.out.println("Here's what you can do:");
+            System.out.println(StringViewUtility.getViewString("what_can_do"));
             int gamephase_indexes[] = new int[current_gamephases.size()];
             for (int i = 0; i < current_gamephases.size(); i++) {
                 gamephase_indexes[i] = i + 1;
                 System.out.println("\tGamephase #" + (i + 1) + ": " + GamePhase.gamePhaseToString(current_gamephases.get(i)));
             }
-            int chosen = InputUtils.getInt("Which gamephase do you want to play?", "Invalid number", gamephase_indexes) - 1;
+            int chosen = InputUtils.getInt(StringViewUtility.getViewString("gamephase_to_play"), StringViewUtility.getViewString("invalid_num"), gamephase_indexes) - 1;
             return chosen;
         }
         else{
@@ -82,7 +82,7 @@ public class ClientLogic {
 
     private String getFeedback(Action action) throws SocketException {
         msg.send(action);
-        System.out.println("Sent. Waiting for response");
+        System.out.println(StringViewUtility.getViewString("waiting_response"));
         Action response = waitForResponse();
         if(response.getGamePhase().equals(GamePhase.CORRECT)) return "true";
         return response.getErrorMessage();
@@ -111,8 +111,8 @@ public class ClientLogic {
             accepted_cards_index[i] = accepted_cards_list.get(i).getValue();
         }
         int assist_index = InputUtils.getInt(
-                "Enter the index of the assist card you want to play\n" + sb.toString(),
-                "Invalid index",
+                StringViewUtility.getViewString("index_assist_card") + sb.toString(),
+                StringViewUtility.getViewString("invalid_index"),
                 accepted_cards_index
         );
         act.setAssistCardIndex(assist_index-1);
@@ -125,20 +125,20 @@ public class ClientLogic {
 
         for(int i=0; i<nof_players + 1; i++) {
             chosen_colors[i] = InputUtils.getColor(
-                    "Enter the color of the "+ GenericUtils.getOrdinal(i+1)+" student you want to move",
-                    "Invalid color",
+                    StringViewUtility.getViewString("color_of_choice")+ GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_to_move"),
+                    StringViewUtility.getViewString("invalid_color"),
                     Color.getStudentColors()
             );
             int chosen_place = InputUtils.getInt(
-                    "Pick a place\n\t[1] Island\n\t[2] Dining hall",
-                    "Invalid place",
+                    StringViewUtility.getViewString("places_choice"),
+                    StringViewUtility.getViewString("invalid_place"),
                     new int[]{1, 2}
             );
             if(chosen_place==1){
                 chosen_places[i] = Places.ISLAND;
                 chosen_island_indexes[i] = InputUtils.getInt(
-                        "Enter the index of the island (from 1 to 12)",
-                        "Invalid index",
+                        StringViewUtility.getViewString("island_enter_index"),
+                        StringViewUtility.getViewString("invalid_index"),
                         InputUtils.EVERY_ISLAND
                 ) - 1;
             } else{
@@ -152,8 +152,8 @@ public class ClientLogic {
 
     private void manageMoveMotherNature(Action act){
         int steps = InputUtils.getInt(
-                "Choose a number of steps for Mother Nature",
-                "Invalid number", new int[] {1,2,3,4,5, 6, 7, 8}
+                StringViewUtility.getViewString("choice_steps"),
+                StringViewUtility.getViewString("invalid_number"), new int[] {1,2,3,4,5, 6, 7, 8}
         );
         act.setMothernatureIncrement(steps);
     }
@@ -183,11 +183,11 @@ public class ClientLogic {
             case 0:
                 int[] island_ids = new int[1];
                 island_ids[0] = InputUtils.getInt("Choose the island you want to put the student on",
-                        "Invalid island index",
+                        "Invalid index",
                         new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}) - 1;
                 int[] student_ids = new int[1];
                 student_ids[0] = InputUtils.getInt("Choose the student to put on the island",
-                        "Invalid student index",
+                        "Invalid index",
                         new int[]{1, 2, 3}) - 1;
                 act.setIslandIndexes(island_ids);
                 act.setStudentIndexes(student_ids);

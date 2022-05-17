@@ -14,7 +14,109 @@
   "username_declaration": {
     "value": "Match has started. My username is "
   },
-  "waiting": {
-    "value": "Waiting..."
+  "invalid_num": {
+    "value": "Invalid number"
+  },
+  "other_player_problem": {
+    "value": "Someone playing your match has had a problem! The match can not continue"
+  },
+  "chosen_cc_index": {
+    "value": "Chosen Character Card index: "
+  },
+  "character_index_choice": {
+    "value": "Choose the character's index you want to use"
+  },
+  "invalid_index": {
+    "value": "Invalid index"
+  },
+  "island_to_lock": {
+    "value": "Which island do you want to lock?"
+  },
+  "not_considered_color": {
+    "value": "Choose which color won't be considered when calculating the influence"
+  },
+  "invalid_color": {
+    "value": "Invalid color"
+  },
+  "2_points_to_influence": {
+    "value": "You'll get 2 additional points when calculating the influence"
+  },
+  "no_consider_towers": {
+    "value": "Towers won't be considered when calculating the influence"
+  },
+  "2_extra_steps": {
+    "value": "You can now move mother nature up to 2 extra steps (for this turn)"
+  },
+  "pick_island_influence": {
+    "value": "Pick an island to calculate its influence"
+  },
+  "prof_behav": {
+    "value": "You are now in control of the professors even if the number of their student's color is equal to someone else's.\nThe effect will disappear the next turn"
+  },
+  "3_studs_choice": {
+    "value": "Choose the color of the students (up to 3) you want everyone to put back in the bag"
+  },
+  "stud_to_pick_up": {
+    "value": "Choose the index of the student you want to pick up from the character card"
+  },
+  "color_of_choice": {
+    "value": "Enter the color of the "
+  },
+  "stud_from_entrance": {
+    "value": " student you want to pick up from your entrance"
+  },
+  "stud_from_dining": {
+    "value": " student you want to pick up from your dining hall"
+  },
+  "studs_to_exchange": {
+    "value": "Choose the number of students you want to exchange"
+  },
+  "index_of_choice": {
+    "value": "Choose the index of the "
+  },
+  "stud_from_ccard": {
+    "value": " student you want to pick up from the character card"
+  },
+  "island_index_sent": {
+    "value": "Sending island_index: "
+  },
+  "and_stud_index": {
+    "value": " and student_index: "
+  },
+  "choice_stud_put_island": {
+    "value": "Choose the student to put on the island"
+  },
+  "choice_isl_put_stud_on": {
+    "value": "Choose the island you want to put the student on"
+  },
+  "choice_3_studs_drain_cloud": {
+    "value": "Choose the cloud to get drain the students from (1 or 2 or 3)"
+  },
+  "choice_2_studs_drain_cloud": {
+    "value": "Choose the cloud to get drain the students from (1 or 2)"
+  },
+  "choice_steps": {
+    "value": "Choose a number of steps for Mother Nature"
+  },
+  "island_enter_index": {
+    "value": "Enter the index of the island (from 1 to 12)"
+  },
+  "invalid_place": {
+    "value": "Invalid place"
+  },
+  "places_choice": {
+    "value": "Choose a place\n\t[1] Island\n\t[2] Dining hall"
+  },
+  "stud_to_move": {
+    "value": " student you want to move"
+  },
+  "index_assist_card": {
+    "value": "Enter the index of the assist card you want to play"
+  },
+  "gamephase_to_play": {
+    "value": "Which gamephase do you want to play?"
+  },
+  "what_can_do": {
+    "value": "Here's what you can do:"
   }
 }
