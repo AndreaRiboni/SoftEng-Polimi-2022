@@ -1,0 +1,20 @@
+{
+  "username_choice": {
+    "value" : "Choose a username"
+  },
+  "number_players": {
+    "value" : "How many players?"
+  },
+  "sending_nofplayers": {
+    "value" : "Sending number of players"
+  },
+  "waiting_response": {
+    "value": "Sent. Waiting for response"
+  },
+  "username_declaration": {
+    "value": "Match has started. My username is "
+  },
+  "waiting": {
+    "value": "Waiting..."
+  }
+}
