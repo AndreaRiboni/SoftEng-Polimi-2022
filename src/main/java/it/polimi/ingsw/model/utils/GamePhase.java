@@ -11,5 +11,25 @@ public enum GamePhase {
     ERROR_PHASE,
     CORRECT,
     END_GAME,
-    CONNECTION_ERROR
+    CONNECTION_ERROR;
+
+    public static String gamePhaseToString(GamePhase gp){
+        switch(gp){
+            case START:
+                return "Start";
+            case PUT_ON_CLOUDS:
+                return "Put students on cloud";
+            case DRAW_ASSIST_CARD:
+                return "Draw an assist card";
+            case MOVE_3_STUDENTS:
+                return "Move 3 students from the clouds to your Islands or your Dining Room";
+            case MOVE_MOTHERNATURE:
+                return "Move Mother Nature to an Island";
+            case DRAIN_CLOUD:
+                return "Take all the Students from a Cloud and place them on your Entrance";
+            case USE_CHARACTER_CARD:
+                return "Use a Character ability (by paying its cost)";
+        }
+        return null;
+    }
 }

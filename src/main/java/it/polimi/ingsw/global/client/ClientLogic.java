@@ -70,7 +70,7 @@ public class ClientLogic {
             int gamephase_indexes[] = new int[current_gamephases.size()];
             for (int i = 0; i < current_gamephases.size(); i++) {
                 gamephase_indexes[i] = i + 1;
-                System.out.println("\tGamephase #" + (i + 1) + ": " + current_gamephases.get(i));
+                System.out.println("\tGamephase #" + (i + 1) + ": " + GamePhase.gamePhaseToString(current_gamephases.get(i)));
             }
             int chosen = InputUtils.getInt("Which gamephase do you want to play?", "Invalid number", gamephase_indexes) - 1;
             return chosen;
