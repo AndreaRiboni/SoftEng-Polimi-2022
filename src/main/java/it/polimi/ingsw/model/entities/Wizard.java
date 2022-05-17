@@ -1,51 +1,55 @@
 package it.polimi.ingsw.model.entities;
 
-import it.polimi.ingsw.model.entities.cards.AssistCard;
+import it.polimi.ingsw.model.entities.cards.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Wizard implements Serializable {
     private final AssistCard[] cards;
     public static final int NOF_ASSIST_CARDS = 10;
+    private final List<String> assistCardNames;
 
     public Wizard(){
         cards = new AssistCard[NOF_ASSIST_CARDS];
+        assistCardNames = new ArrayList<>();
+        loadNames();
         createCards();
     }
 
     private void createCards(){
         for(int i = 0; i < cards.length; i++){
-            cards[i] = new AssistCard(i+1, (int)Math.floor((i+2)/2), getName(i));
+            cards[i] = new AssistCard(i+1, (int)Math.floor((i+2)/2), assistCardNames.get(i));
         }
     }
 
-    //può essere reso un JSON
-    private String getName(int index){
-        switch(index){
-            case 0:
-                return "Sir Cheetuh";
-            case 1:
-                return "Lord Duckoff";
-            case 2:
-                return "Ms. Meowsie";
-            case 3:
-                return "Messire Sparrown";
-            case 4:
-                return "Lady Foxine";
-            case 5:
-                return "Ms. Liza";
-            case 6:
-                return "Donna Octavia";
-            case 7:
-                return "Don Bulldon";
-            case 8:
-                return "Ms. Helena";
-            case 9:
-                return "Sir Shelliferg";
-        }
-        return null;
-    }
+    private void loadNames(){
+        //load from json
+        JSONParser parser = new JSONParser();
 
+        try (Reader reader = new FileReader("AssistCards.json")) {
+
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+
+            // loop array
+            JSONArray card_list = (JSONArray) jsonObject.get("assist_cards");
+            for (Object o : card_list) {
+                JSONObject card = (JSONObject)o;
+                String name = (String)card.get("name");
+                assistCardNames.add(name);
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
     public AssistCard[] getCards() {
         return cards;
     }
