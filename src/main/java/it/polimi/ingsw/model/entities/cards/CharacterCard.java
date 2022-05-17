@@ -63,17 +63,17 @@ public class CharacterCard implements Serializable {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append(" " + GenericUtils.toBold("Name") + ": ").append(name).append("\n");
+        sb.append(GenericUtils.toBold("Name") + ":\t").append(name).append("\n");
         if(price > 1){
-            sb.append("\t\t" + GenericUtils.toBold("Price") + ": ").append(price).append(" coins");
-        }else{ sb.append("\t\t" + GenericUtils.toBold("Price") + ": ").append(price).append(" coin");}
-        sb.append("\n\t\t").append(GenericUtils.toBold("Effect")).append(": ").append(effect);
+            sb.append("\t\t" + GenericUtils.toBold("Price") + ":\t").append(price).append(" coins");
+        }else{ sb.append("\t\t" + GenericUtils.toBold("Price") + ":\t").append(price).append(" coin");}
+        sb.append("\n\t\t").append(GenericUtils.toBold("Effect")).append(":\t").append(effect);
         if(behavior instanceof StudentBehavior){
             sb.append("\n\t\t" + GenericUtils.toBold("Students") + ":\n");
             for(int i = 0; i < behavior.getAvailableStudents().length; i++)
-                sb.append("\t\t\t").append(i+1).append(") ").append(Color.colorToViewString(behavior.getAvailableStudents()[i])).append("\n");
+                sb.append("\t\t\t").append(i+1).append(")\t").append(Color.colorToViewString(behavior.getAvailableStudents()[i])).append("\n");
         } else if(behavior instanceof LockBehavior){
-            sb.append("\t\t" + GenericUtils.toBold("Locks") + ": ").append(behavior.getAvailableLocks());
+            sb.append("\t\t" + GenericUtils.toBold("Locks") + ":\t").append(behavior.getAvailableLocks());
         }
         return sb.toString();
     }

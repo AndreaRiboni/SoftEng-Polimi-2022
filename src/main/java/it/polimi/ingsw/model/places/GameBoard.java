@@ -287,11 +287,11 @@ public class GameBoard implements Serializable {
         rep.append(newline).append(GenericUtils.toBold("Characters")).append(":\n");
         try {
             CharacterCard c1 = character_cards.getActiveCard(0);
-            rep.append("\t"+ (c1.getID()+1)+") "+c1+"\n\n");
+            rep.append("\t"+ (c1.getID()+1)+")\t"+c1+"\n\n");
             CharacterCard c2 = character_cards.getActiveCard(1);
-            rep.append("\t"+ (c2.getID()+1)+") "+c2+"\n\n");
+            rep.append("\t"+ (c2.getID()+1)+")\t"+c2+"\n\n");
             CharacterCard c3 = character_cards.getActiveCard(2);
-            rep.append("\t"+ (c3.getID()+1)+") "+c3+"\n\n");
+            rep.append("\t"+ (c3.getID()+1)+")\t"+c3+"\n\n");
         } catch (EriantysException e) {
             e.printStackTrace();
         }
