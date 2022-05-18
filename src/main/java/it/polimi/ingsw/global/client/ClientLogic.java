@@ -70,9 +70,13 @@ public class ClientLogic {
             int gamephase_indexes[] = new int[current_gamephases.size()];
             for (int i = 0; i < current_gamephases.size(); i++) {
                 gamephase_indexes[i] = i + 1;
-                System.out.println("\tGamephase #" + (i + 1) + ": " + GamePhase.gamePhaseToString(current_gamephases.get(i)));
+                String gp_desc = GamePhase.gamePhaseToString(current_gamephases.get(i));
+                if(nof_players == 3 && current_gamephases.get(i).equals(GamePhase.MOVE_3_STUDENTS)){
+                    gp_desc = gp_desc.replace("3", "4");
+                }
+                System.out.println("\tGamephase #" + (i + 1) + ": " + gp_desc);
             }
-            int chosen = InputUtils.getInt(StringViewUtility.getViewString("gamephase_to_play"), StringViewUtility.getViewString("invalid_num"), gamephase_indexes) - 1;
+            int chosen = InputUtils.getInt(StringViewUtility.getViewString("gamephase_to_play"), StringViewUtility.getViewString("invalid_number"), gamephase_indexes) - 1;
             return chosen;
         }
         else{
@@ -123,7 +127,7 @@ public class ClientLogic {
         Places chosen_places[] = new Places[nof_players+1];
         int chosen_island_indexes[] = new int[nof_players+1];
 
-        for(int i=0; i<nof_players + 1; i++) {
+        for(int i=0; i < nof_players + 1; i++) {
             chosen_colors[i] = InputUtils.getColor(
                     StringViewUtility.getViewString("color_of_choice")+ GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_to_move"),
                     StringViewUtility.getViewString("invalid_color"),
@@ -153,7 +157,7 @@ public class ClientLogic {
     private void manageMoveMotherNature(Action act){
         int steps = InputUtils.getInt(
                 StringViewUtility.getViewString("choice_steps"),
-                StringViewUtility.getViewString("invalid_num"), new int[] {1,2,3,4,5, 6, 7, 8}
+                StringViewUtility.getViewString("invalid_number"), new int[] {1,2,3,4,5, 6, 7, 8}
         );
         act.setMothernatureIncrement(steps);
     }
@@ -191,11 +195,11 @@ public class ClientLogic {
                         new int[]{1, 2, 3}) - 1;
                 act.setIslandIndexes(island_ids);
                 act.setStudentIndexes(student_ids);
-                log.info(StringViewUtility.getViewString("island_index_sent") + island_ids[0] + StringViewUtility.getViewString("and_stud_index") + student_ids[0]);
+                //log.info(StringViewUtility.getViewString("island_index_sent") + island_ids[0] + StringViewUtility.getViewString("and_stud_index") + student_ids[0]);
                 break;
             case 6:
                 num_studs_to_exchange = InputUtils.getInt(StringViewUtility.getViewString("studs_to_exchange"),
-                        StringViewUtility.getViewString("invalid_num"),
+                        StringViewUtility.getViewString("invalid_number"),
                         new int[]{1,2,3});
                 act.setDesiredNofStudents(num_studs_to_exchange);
 
@@ -218,7 +222,7 @@ public class ClientLogic {
                 break;
             case 9:
                 num_studs_to_exchange = InputUtils.getInt(StringViewUtility.getViewString("studs_to_exchange"),
-                        StringViewUtility.getViewString("invalid_num"),
+                        StringViewUtility.getViewString("invalid_number"),
                         new int[]{1,2});
                 act.setDesiredNofStudents(num_studs_to_exchange);
                 //2 - array colori degli studenti da mettere sulla carta che stanno sulla mia entrance
@@ -368,9 +372,13 @@ public class ClientLogic {
     }
 
     public void start() throws SocketException {
-        System.out.println( StringViewUtility.getViewString("client_started"));
-        String username = InputUtils.getString( StringViewUtility.getViewString("username_choice"));
-        nof_players = InputUtils.getInt( StringViewUtility.getViewString("number_players"),  StringViewUtility.getViewString("invalid_number"), new int[]{2,3,4});
+        System.out.println(StringViewUtility.getViewString("client_started"));
+        String username = InputUtils.getString(StringViewUtility.getViewString("username_choice"));
+        nof_players = InputUtils.getInt(
+                StringViewUtility.getViewString("number_players"),
+                StringViewUtility.getViewString("invalid_number"),
+                new int[]{2,3,4}
+        );
         System.out.println( StringViewUtility.getViewString("sending_nofplayers"));
         Action start = new Action();
         start.setGamePhase(GamePhase.START);

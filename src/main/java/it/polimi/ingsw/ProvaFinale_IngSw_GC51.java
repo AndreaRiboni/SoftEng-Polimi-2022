@@ -18,11 +18,14 @@ public class ProvaFinale_IngSw_GC51 {
 
         System.out.println("Welcome to\n" +
                 "\n" +
-                "  ___     _          _           \n" +
-                " | __|_ _(_)__ _ _ _| |_ _  _ ___\n" +
-                " | _|| '_| / _` | ' \\  _| || (_-<\n" +
-                " |___|_| |_\\__,_|_||_\\__|\\_, /__/\n" +
-                "                         |__/    \n");
+                " _____     _             _             \n" +
+                "|  ___|   (_)           | |            \n" +
+                "| |__ _ __ _  __ _ _ __ | |_ _   _ ___ \n" +
+                "|  __| '__| |/ _` | '_ \\| __| | | / __|\n" +
+                "| |__| |  | | (_| | | | | |_| |_| \\__ \\\n" +
+                "\\____/_|  |_|\\__,_|_| |_|\\__|\\__, |___/\n" +
+                "                              __/ |    \n" +
+                "                             |___/     \n");
         int input = InputUtils.getInt(
                 "What do you want to launch?\n1. SERVER\n2. CLIENT (CLI)\n3. CLIENT (GUI)",
                 "Error. Retry",

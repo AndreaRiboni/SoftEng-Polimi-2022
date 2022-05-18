@@ -12,15 +12,13 @@ public class School implements Serializable {
     private final DiningHall dining_hall;
     private final TowerHall tower_hall;
     private final Color tower_color;
-    private final GameBoard gameboard;
 
     public School(Color color, boolean three_players, GameBoard gameboard) throws EriantysException {
         tower_color = color;
-        entrance = new Entrance();
+        entrance = new Entrance(three_players);
         dining_hall = new DiningHall();
         tower_hall = new TowerHall(tower_color, three_players);
-        this.gameboard = gameboard;
-        for(int i=0; i<7; i++) addStudent(gameboard.drawFromBag(), Places.ENTRANCE);
+        for(int i=0; i < (three_players ? 9 : 7); i++) addStudent(gameboard.drawFromBag(), Places.ENTRANCE);
     }
 
     public int addStudent(Color student, Places place) throws EriantysException{

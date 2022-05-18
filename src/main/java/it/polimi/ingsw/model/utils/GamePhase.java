@@ -28,7 +28,7 @@ public enum GamePhase {
             case DRAIN_CLOUD:
                 return "Take all the Students from a Cloud and place them on your Entrance";
             case USE_CHARACTER_CARD:
-                return "Use a Character ability (by paying its cost)";
+                return "Use a Character Card";
         }
         return null;
     }

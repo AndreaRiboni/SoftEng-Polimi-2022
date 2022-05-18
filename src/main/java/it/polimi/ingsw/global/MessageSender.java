@@ -23,6 +23,7 @@ public class MessageSender {
     public MessageSender(){
         try {
             socket = new Socket("localhost", MultiServerLauncher.PORT);
+            //socket = new Socket("10.168.72.134", MultiServerLauncher.PORT);
             output = new ObjectOutputStream(socket.getOutputStream());
             output.flush();
             output.reset();
@@ -39,7 +40,7 @@ public class MessageSender {
     }
 
     public void send(Action action) throws SocketException {
-        log.info("currently sending " + action.getGamePhase());
+        //log.info("currently sending " + action.getGamePhase());
         try {
             output.writeObject(action);
             output.flush();
@@ -52,7 +53,7 @@ public class MessageSender {
     }
 
     public void send(List<GamePhase> gamephase) throws SocketException {
-        log.info("currently sending " + gamephase);
+        //log.info("currently sending " + gamephase);
         try {
             output.writeObject(gamephase);
             output.flush();
@@ -65,7 +66,7 @@ public class MessageSender {
     }
 
     public void send(GameBoard model) throws SocketException {
-        log.info("currently sending the new model representation to " + Printer.socketToString(socket));
+        //log.info("currently sending the new model representation to " + Printer.socketToString(socket));
         try {
             output.writeObject(model);
             output.flush();

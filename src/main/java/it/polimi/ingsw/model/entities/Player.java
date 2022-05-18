@@ -63,10 +63,6 @@ public class Player implements Serializable {
         addCoins(coins);
         gameboard.checkProf(student, ID, false);
     }
-    
-     public int numOfStudentInDiningHall(Color color){
-        return school.getNumberOfStudents(color, Places.DINING_HALL);
-    }
 
     public void moveStudentInIsland(int island_index, Color student) throws EriantysException {
         gameboard.getIsland(island_index).addStudent(student);

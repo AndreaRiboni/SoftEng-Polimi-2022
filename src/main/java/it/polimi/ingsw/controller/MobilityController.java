@@ -30,17 +30,11 @@ public class MobilityController extends Controller {
     public void move3Studs() throws EriantysException {
         //get the three students' colors and places
         Player player = model.getPlayers()[action.getPlayerID()];
-        System.out.println("player " + player.getID());
         Map<Color, Integer> students = player.getEntranceStudents();
-        System.out.println("entrance students: " + students);
         Color[] colors = action.getThreeStudents();
-        System.out.println("colors: " + colors[0] + ", " + colors[1] + ", " + colors[2]);
         Places[] places = action.getThreeStudentPlaces();
-        System.out.println("places: " + places[0] + ", " + places[1] + ", " + places[2]);
         int[] island_indexes = action.getIslandIndexes();
-        System.out.println("islands: " + island_indexes[0] + ", " + island_indexes[1] + ", " + island_indexes[2]);
         if(!checkPlaces(places)){
-            System.out.println("wrong places");
             throw new EriantysException(EriantysException.INVALID_PLACE);
         }
         //check that the selected students exist in the entrance
@@ -48,13 +42,12 @@ public class MobilityController extends Controller {
                 students,
                 GenericUtils.listToMap(Arrays.asList(colors))
         );
-        System.out.println("new students: " + new_students);
         if(!GenericUtils.isAllPositive(new_students)){
             log.error("Not enough students");
             throw new EriantysException(EriantysException.NOT_ENOUGH_STUDENTS);
         }
         //these 3 studs have to be moved according to the corresponding studplace
-        StringBuilder desc = new StringBuilder("Moving 3 students ");
+        StringBuilder desc = new StringBuilder("Moving the students ");
         int NOF_Players = model.getNofPlayers();
         for(int i = 0; i < NOF_Players + 1; i++){
             Color stud = colors[i];
@@ -68,7 +61,7 @@ public class MobilityController extends Controller {
             }
             desc.append(") ");
         }
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < NOF_Players + 1; i++){
             player.removeEntranceStudent(colors[i]);
         }
         log.info(desc.toString());

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Entrance extends StudentPlace implements Serializable {
 
-    public Entrance(){
-        super(7);
+    public Entrance(boolean three_players){
+        super(three_players ? 9 : 7);
     }
 }

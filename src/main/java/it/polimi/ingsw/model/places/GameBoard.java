@@ -265,37 +265,41 @@ public class GameBoard implements Serializable {
     }
 
     public String toString(){
-        String newline = "--------------------------------------------\n";
+        String full_line = "▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩\n";
+        String half_line = "▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦\n";
+        String quarter_line = "▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤\n";
         StringBuilder rep = new StringBuilder();
+        rep.append(full_line).append(half_line).append(quarter_line);
         for(Player p : players){
             rep.append(p.toString()).append("\n");
+            rep.append(quarter_line);
         }
-        rep.append(newline);
+        rep.append(half_line);
         for(Professor p : professors){
             rep.append(p.toString()).append("\n");
         }
-        rep.append(newline);
+        rep.append(half_line);
         for(Island i : islands){
             rep.append(i.toString()).append("\n");
         }
-        rep.append(newline);
+        rep.append(half_line);
         for(int i = 0; i < clouds.length; i++){
             rep.append(GenericUtils.toBold("Cloud #" + (i+1))).append("\n")
                 .append(clouds[i].toString());
         }
-
-        rep.append(newline).append(GenericUtils.toBold("Characters")).append(":\n");
+        rep.append(half_line).append(GenericUtils.toBold("Characters")).append(":\n");
         try {
             CharacterCard c1 = character_cards.getActiveCard(0);
-            rep.append("\t"+ (c1.getID()+1)+")\t"+c1+"\n\n");
+            rep.append("\t"+ (c1.getID()+1)+")\t"+c1+"\n");
             CharacterCard c2 = character_cards.getActiveCard(1);
-            rep.append("\t"+ (c2.getID()+1)+")\t"+c2+"\n\n");
+            rep.append("\t"+ (c2.getID()+1)+")\t"+c2+"\n");
             CharacterCard c3 = character_cards.getActiveCard(2);
-            rep.append("\t"+ (c3.getID()+1)+")\t"+c3+"\n\n");
+            rep.append("\t"+ (c3.getID()+1)+")\t"+c3+"\n");
         } catch (EriantysException e) {
             e.printStackTrace();
         }
-        rep.append(newline).append("waiting...\n");
+        rep.append(quarter_line).append(half_line).append(full_line);
+        rep.append("waiting...\n");
         return rep.toString();
     }
 
