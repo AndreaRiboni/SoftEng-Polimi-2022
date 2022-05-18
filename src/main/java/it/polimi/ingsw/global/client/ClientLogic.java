@@ -175,7 +175,6 @@ public class ClientLogic {
                     StringViewUtility.getViewString("invalid_index"), new int[]{1, 2, 3}
             ) - 1;
         }
-
         act.setCloudIndex(cloud_id);
     }
 
