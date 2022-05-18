@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.ConnectException;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
@@ -20,10 +21,16 @@ public class MessageSender {
     private ObjectInputStream input;
     private static final Logger log = LogManager.getRootLogger();
 
-    public MessageSender(){
+    public MessageSender(String ip_address){
         try {
-            socket = new Socket("localhost", MultiServerLauncher.PORT);
-            //socket = new Socket("10.168.72.134", MultiServerLauncher.PORT);
+            if(ip_address.isEmpty()){
+                ip_address = "localhost";
+            }
+            if(!InetAddress.getByName(ip_address).isReachable(2000)){
+                System.out.println("This server is unreachable. You're now being connected to localhost");
+                ip_address = "localhost";
+            }
+            socket = new Socket(ip_address, MultiServerLauncher.PORT);
             output = new ObjectOutputStream(socket.getOutputStream());
             output.flush();
             output.reset();

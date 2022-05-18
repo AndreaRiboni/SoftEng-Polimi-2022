@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class MultiServerLauncher {
             System.err.println(e.getMessage()); //port not available
             return;
         }
-        log.info("MultiServerLauncher ready");
+        log.info("MultiServerLauncher ready on IP: " + InetAddress.getLocalHost() + ", PORT: " + PORT);
         while (true){
             try{
                 Socket socket = serverSocket.accept();

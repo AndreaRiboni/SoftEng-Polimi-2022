@@ -63,19 +63,19 @@ public class NetworkListener extends Thread{
         while(!game_ended){
             try {
                 Object received = in.readObject();
-                log.info("Received an object");
+                //log.info("Received an object");
                 if (received instanceof GameBoard) {
-                    log.info("the received object is the model");
+                    //log.info("the received object is the model");
                     setGameBoardResponse((GameBoard)received);
                     System.out.println(received);
                 } else if(received instanceof Action) {
                     Action act_rec = (Action)received;
                     if(act_rec.getGamePhase().equals(GamePhase.CONNECTION_ERROR)) throw new IOException();
-                    log.info("Received a response");
+                    //log.info("Received a response");
                     setResponse(act_rec);
                 } else {
                     List<GamePhase> gamephases = (List<GamePhase>) received;
-                    log.info("the received object is the game-phases list: " + gamephases);
+                    //log.info("the received object is the game-phases list: " + gamephases);
                     setGamephasesResponse(gamephases);
                     for (GamePhase gp : gamephases) {
                         if (gp.equals(GamePhase.END_GAME)) game_ended = true;

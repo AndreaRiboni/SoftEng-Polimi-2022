@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.utils.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,8 @@ public class ClientLogic {
     private String username;
 
     public ClientLogic(){
-        msg = new MessageSender();
+        String ip_address = InputUtils.getString("If you don't want to connect to localhost, type the correct ip now. Otherwise, press ENTER");
+        msg = new MessageSender(ip_address);
         model = null;
         username = null;
         listener = new NetworkListener(msg.getSocket(), msg.getInput(), this);
