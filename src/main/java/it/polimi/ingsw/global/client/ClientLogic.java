@@ -153,7 +153,7 @@ public class ClientLogic {
     private void manageMoveMotherNature(Action act){
         int steps = InputUtils.getInt(
                 StringViewUtility.getViewString("choice_steps"),
-                StringViewUtility.getViewString("invalid_number"), new int[] {1,2,3,4,5, 6, 7, 8}
+                StringViewUtility.getViewString("invalid_num"), new int[] {1,2,3,4,5, 6, 7, 8}
         );
         act.setMothernatureIncrement(steps);
     }
@@ -162,13 +162,13 @@ public class ClientLogic {
         int cloud_id = 0;
         if(nof_players%2 == 0) {
             cloud_id = InputUtils.getInt(
-                    "Choose the cloud to get drain the students from (1 or 2)",
-                    "Invalid index", new int[]{1, 2}
+                    StringViewUtility.getViewString("choice_2_studs_drain_cloud"),
+                    StringViewUtility.getViewString("invalid_index"), new int[]{1, 2}
             ) - 1;
         }else {
             cloud_id = InputUtils.getInt(
-                    "Choose the cloud to get drain the students from (1 or 2 or 3)",
-                    "Invalid index", new int[]{1, 2, 3}
+                    StringViewUtility.getViewString("choice_3_studs_drain_cloud"),
+                    StringViewUtility.getViewString("invalid_index"), new int[]{1, 2, 3}
             ) - 1;
         }
 
@@ -182,57 +182,57 @@ public class ClientLogic {
         switch(chosen_id){
             case 0:
                 int[] island_ids = new int[1];
-                island_ids[0] = InputUtils.getInt("Choose the island you want to put the student on",
-                        "Invalid index",
+                island_ids[0] = InputUtils.getInt(StringViewUtility.getViewString("choice_isl_put_stud_on"),
+                        StringViewUtility.getViewString("invalid_index"),
                         new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}) - 1;
                 int[] student_ids = new int[1];
-                student_ids[0] = InputUtils.getInt("Choose the student to put on the island",
-                        "Invalid index",
+                student_ids[0] = InputUtils.getInt(StringViewUtility.getViewString("choice_stud_put_island"),
+                        StringViewUtility.getViewString("invalid_index"),
                         new int[]{1, 2, 3}) - 1;
                 act.setIslandIndexes(island_ids);
                 act.setStudentIndexes(student_ids);
-                log.info("Sending island_index: " + island_ids[0] + " and student_index: " + student_ids[0]);
+                log.info(StringViewUtility.getViewString("island_index_sent") + island_ids[0] + StringViewUtility.getViewString("and_stud_index") + student_ids[0]);
                 break;
             case 6:
-                num_studs_to_exchange = InputUtils.getInt("Choose the number of students you want to exchange",
-                        "Invalid number",
+                num_studs_to_exchange = InputUtils.getInt(StringViewUtility.getViewString("studs_to_exchange"),
+                        StringViewUtility.getViewString("invalid_num"),
                         new int[]{1,2,3});
                 act.setDesiredNofStudents(num_studs_to_exchange);
 
                 //2 - array colori degli studenti da mettere sulla carta che stanno sulla mia entrance
                 colors = new Color[num_studs_to_exchange];
                 for(int i = 0; i < num_studs_to_exchange; i++){
-                    colors[i] = InputUtils.getColor("Choose the color of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from your entrance",
-                            "Invalid color",
+                    colors[i] = InputUtils.getColor(StringViewUtility.getViewString("color_of_choice")+GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_from_entrance"),
+                            StringViewUtility.getViewString("invalid_color"),
                             new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
                 }
                 act.setEntranceColors(colors);
                 //3 - array di indici degli studenti da prelevare dalla carta
                 indexes = new int[num_studs_to_exchange];
                 for(int i=0; i<num_studs_to_exchange; i++){
-                    indexes[i] = InputUtils.getInt("Choose the index of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from the character card",
-                            "Invalid index",
+                    indexes[i] = InputUtils.getInt(StringViewUtility.getViewString("index_of_choice")+GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_to_pick_up"),
+                            StringViewUtility.getViewString("invalid_index"),
                             new int[]{1, 2, 3, 4, 5, 6}) - 1;
                 }
                 act.setStudentIndexes(indexes);
                 break;
             case 9:
-                num_studs_to_exchange = InputUtils.getInt("Choose the number of students you want to exchange",
-                        "Invalid number",
+                num_studs_to_exchange = InputUtils.getInt(StringViewUtility.getViewString("studs_to_exchange"),
+                        StringViewUtility.getViewString("invalid_num"),
                         new int[]{1,2});
                 act.setDesiredNofStudents(num_studs_to_exchange);
                 //2 - array colori degli studenti da mettere sulla carta che stanno sulla mia entrance
                 Color[] entrance_colors = new Color[num_studs_to_exchange];
                 Color[] dining_colors = new Color[num_studs_to_exchange];
                 for(int i = 0; i < num_studs_to_exchange; i++){
-                    entrance_colors[i] = InputUtils.getColor("Choose the color of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from your entrance",
-                            "Invalid color",
+                    entrance_colors[i] = InputUtils.getColor(StringViewUtility.getViewString("color_of_choice")+GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_from_entrance"),
+                            StringViewUtility.getViewString("invalid_color"),
                             new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
                 }
                 act.setEntranceColors(entrance_colors);
                 for(int i = 0; i < num_studs_to_exchange; i++){
-                    dining_colors[i] = InputUtils.getColor("Choose the color of the "+GenericUtils.getOrdinal(i+1)+" student you want to pick up from your dining hall",
-                            "Invalid color",
+                    dining_colors[i] = InputUtils.getColor(StringViewUtility.getViewString("color_of_choice")+GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_from_dining"),
+                            StringViewUtility.getViewString("invalid_color"),
                             new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
                 }
                 act.setDiningColors(dining_colors);
@@ -240,15 +240,15 @@ public class ClientLogic {
             case 10:
                 indexes = new int[1];
                 indexes[0] = InputUtils.getInt(
-                        "Choose the index of the student you want to pick up from the character card",
-                        "Invalid index",
+                        StringViewUtility.getViewString("stud_to_pick_up"),
+                        StringViewUtility.getViewString("invalid_index"),
                         new int[]{1, 2, 3, 4}
                 ) - 1;
                 act.setStudentIndexes(indexes);
                 break;
             case 11:
-                Color PutBackIn = InputUtils.getColor("Choose the color of the students (up to 3) you want everyone to put back in the bag",
-                        "Invalid color",
+                Color PutBackIn = InputUtils.getColor(StringViewUtility.getViewString("3_studs_choice"),
+                        StringViewUtility.getViewString("invalid_color"),
                         new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
                 act.setColor(PutBackIn);
                 break;
@@ -257,7 +257,7 @@ public class ClientLogic {
     }
 
     private void manageProfessorBehavior() {
-        System.out.println("You are now in control of the professors even if the number of their student's color is equal to someone else's.\nThe effect will disappear the next turn");
+        System.out.println(StringViewUtility.getViewString("prof_behav"));
     }
 
     private void manageMotherNatureBehavior(int chosen_id, Action act){
@@ -265,26 +265,26 @@ public class ClientLogic {
             case 2: //pick an island and calculate its influence
                 act.setIslandIndex(
                         InputUtils.getInt(
-                                "Pick an island to calculate its influence",
-                                "Invalid index",
+                                StringViewUtility.getViewString("pick_island_influence"),
+                                StringViewUtility.getViewString("invalid_index"),
                                 InputUtils.EVERY_ISLAND
                         ) - 1
                 );
                 break;
             case 3:
-                System.out.println("You can now move mother nature up to 2 extra steps (for this turn)");
+                System.out.println(StringViewUtility.getViewString("2_extra_steps"));
                 break;
             case 5:
-                System.out.println("Towers won't be considered when calculating the influence");
+                System.out.println(StringViewUtility.getViewString("no_consider_towers"));
                 break;
             case 7:
-                System.out.println("You'll get 2 additional points when calculating the influence");
+                System.out.println(StringViewUtility.getViewString("2_points_to_influence"));
                 break;
             case 8:
                 act.setColor(
                         InputUtils.getColor(
-                                "Choose which color won't be considered when calculating the influence",
-                                "Invalid color",
+                                StringViewUtility.getViewString("not_considered_color"),
+                                StringViewUtility.getViewString("invalid_color"),
                                 InputUtils.EVERY_STUD_COLOR
                         )
                 );
@@ -297,8 +297,8 @@ public class ClientLogic {
             case 4:
                 act.setIslandIndex(
                         InputUtils.getInt(
-                                "Which island do you want to lock?",
-                                "Invalid index",
+                                StringViewUtility.getViewString("island_to_lock"),
+                                StringViewUtility.getViewString("invalid_index"),
                                 InputUtils.EVERY_ISLAND
                         ) - 1
                 );
@@ -308,10 +308,10 @@ public class ClientLogic {
 
     private void manageUseCharacterCard(Action act){
         int chosen_id = InputUtils.getInt(
-                "Choose the character's index you want to use", "Invalid index",
+                StringViewUtility.getViewString("character_index_choice"), StringViewUtility.getViewString("invalid_index"),
                 new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
         ) - 1;
-        System.out.println("Chosen cc index: " + chosen_id);
+        System.out.println( StringViewUtility.getViewString("chosen_cc_index") + chosen_id);
         act.setCharacterCardIndex(chosen_id);
         switch(chosen_id){
             case 0:
@@ -338,7 +338,7 @@ public class ClientLogic {
     }
 
     private void manageConnectionError(){
-        System.err.println("Someone playing your match has had a problem! The match can not continue");
+        System.err.println( StringViewUtility.getViewString("other_player_problem"));
         System.exit(0);
     }
 
@@ -368,18 +368,18 @@ public class ClientLogic {
     }
 
     public void start() throws SocketException {
-        System.out.println("client has started");
-        String username = InputUtils.getString("Choose an username");
-        nof_players = InputUtils.getInt("How many players?", "Invalid number", new int[]{2,3,4});
-        System.out.println("sending number of players");
+        System.out.println( StringViewUtility.getViewString("client_started"));
+        String username = InputUtils.getString( StringViewUtility.getViewString("username_choice"));
+        nof_players = InputUtils.getInt( StringViewUtility.getViewString("number_players"),  StringViewUtility.getViewString("invalid_number"), new int[]{2,3,4});
+        System.out.println( StringViewUtility.getViewString("sending_nofplayers"));
         Action start = new Action();
         start.setGamePhase(GamePhase.START);
         start.setNOfPlayers(nof_players);
         start.setUsername(username);
         msg.send(start);
-        System.out.println("Sent. Waiting for response");
+        System.out.println( StringViewUtility.getViewString("waiting_response"));
         Action username_comunicator = waitForResponse();
-        System.out.println("Match has started. My username is " + username_comunicator.getUsername());
+        System.out.println( StringViewUtility.getViewString("username_declaration") + username_comunicator.getUsername());
         this.username = username_comunicator.getUsername();
         do {
             boolean succeeded = false;

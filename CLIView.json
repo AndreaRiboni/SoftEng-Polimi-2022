@@ -118,5 +118,9 @@
   },
   "what_can_do": {
     "value": "Here's what you can do:"
+  },
+  "client_started": {
+    "value": "Client has started"
   }
+
 }
