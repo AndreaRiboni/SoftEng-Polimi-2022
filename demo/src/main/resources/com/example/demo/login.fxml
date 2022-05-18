@@ -22,8 +22,8 @@
                 <Font name="System Bold" size="19.0" />
             </font>
         </Label>
-        <TextField layoutX="378.0" layoutY="115.0" />
-        <ChoiceBox layoutX="378.0" layoutY="179.0" prefWidth="150.0" />
+        <TextField fx:id="nickname" layoutX="378.0" layoutY="115.0" />
+        <ChoiceBox fx:id="choiceBox" layoutX="378.0" layoutY="179.0" prefWidth="150.0" />
         <Button layoutX="274.0" layoutY="304.0" mnemonicParsing="false" onAction="#switchScene" text="Join">
             <font>
                 <Font name="Bookshelf Symbol 7" size="29.0" />
