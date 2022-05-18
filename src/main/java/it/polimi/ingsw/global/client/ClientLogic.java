@@ -368,9 +368,9 @@ public class ClientLogic {
     }
 
     public void start() throws SocketException {
-        System.out.println( StringViewUtility.getViewString("client_started"));
-        String username = InputUtils.getString( StringViewUtility.getViewString("username_choice"));
-        nof_players = InputUtils.getInt( StringViewUtility.getViewString("number_players"),  StringViewUtility.getViewString("invalid_number"), new int[]{2,3,4});
+        System.out.println(StringViewUtility.getViewString("client_started"));
+        String username = InputUtils.getString(StringViewUtility.getViewString("username_choice"));
+        nof_players = InputUtils.getInt( StringViewUtility.getViewString("number_players"),  StringViewUtility.getViewString("invalid_num"), new int[]{2,3,4});
         System.out.println( StringViewUtility.getViewString("sending_nofplayers"));
         Action start = new Action();
         start.setGamePhase(GamePhase.START);

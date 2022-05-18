@@ -12,7 +12,6 @@ import java.io.Reader;
 
 public class StringViewUtility {
     public static String getViewString(String name){
-
         JSONParser parser = new JSONParser();
         try (Reader reader = new FileReader("CLIView.json")) {
             return (String) ((JSONObject) ((JSONObject) parser.parse(reader)).get(name)).get("value");
