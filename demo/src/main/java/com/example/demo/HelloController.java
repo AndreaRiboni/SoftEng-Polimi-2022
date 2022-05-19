@@ -55,5 +55,4 @@ public class HelloController implements Initializable {
     public void getNof_players(ActionEvent event){
         String nof_players = choiceBox.getValue();
     }
-
 }

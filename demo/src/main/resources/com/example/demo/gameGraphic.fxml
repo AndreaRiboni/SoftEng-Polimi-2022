@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.gameGraphicController">
@@ -189,11 +190,16 @@
                               <ChoiceBox fx:id="assistant_choice" layoutX="373.0" layoutY="473.0" prefWidth="150.0" />
                               <Label layoutX="373.0" layoutY="449.0" text="Which assistant do you want to use?" />
                               <Button layoutX="373.0" layoutY="518.0" mnemonicParsing="false" onAction="#used" prefHeight="53.0" prefWidth="115.0" styleClass="joinButton" stylesheets="@../../../css/login.css" text="PLAY" textFill="#f6f6f6" />
-                              <Label fx:id="Used" layoutX="83.0" layoutY="55.0" text="X">
-                                 <font>
-                                    <Font size="76.0" />
-                                 </font>
-                              </Label>
+                              <Rectangle fx:id="used_1" arcHeight="5.0" arcWidth="5.0" fill="#798086" height="151.0" layoutX="55.0" layoutY="35.0" opacity="0.65" smooth="false" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+                              <Rectangle fx:id="used_3" arcHeight="5.0" arcWidth="5.0" fill="#798086" height="151.0" layoutX="332.0" layoutY="35.0" opacity="0.65" smooth="false" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+                              <Rectangle fx:id="used_2" arcHeight="5.0" arcWidth="5.0" fill="#798086" height="151.0" layoutX="196.0" layoutY="36.0" opacity="0.65" smooth="false" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+                              <Rectangle fx:id="used_4" arcHeight="5.0" arcWidth="5.0" fill="#798086" height="151.0" layoutX="472.0" layoutY="36.0" opacity="0.65" smooth="false" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+                              <Rectangle fx:id="used_5" arcHeight="5.0" arcWidth="5.0" fill="#798086" height="151.0" layoutX="55.0" layoutY="234.0" opacity="0.65" smooth="false" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+                              <Rectangle fx:id="used_6" arcHeight="5.0" arcWidth="5.0" fill="#798086" height="151.0" layoutX="196.0" layoutY="234.0" opacity="0.65" smooth="false" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+                              <Rectangle fx:id="used_7" arcHeight="5.0" arcWidth="5.0" fill="#798086" height="151.0" layoutX="334.0" layoutY="234.0" opacity="0.65" smooth="false" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+                              <Rectangle fx:id="used_8" arcHeight="5.0" arcWidth="5.0" fill="#798086" height="151.0" layoutX="472.0" layoutY="234.0" opacity="0.65" smooth="false" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+                              <Rectangle fx:id="used_9" arcHeight="5.0" arcWidth="5.0" fill="#798086" height="151.0" layoutX="55.0" layoutY="423.0" opacity="0.65" smooth="false" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+                              <Rectangle fx:id="used_10" arcHeight="5.0" arcWidth="5.0" fill="#798086" height="151.0" layoutX="196.0" layoutY="424.0" opacity="0.65" smooth="false" stroke="BLACK" strokeType="INSIDE" width="102.0" />
                                     </children>
                                 </AnchorPane>
                             </content>
