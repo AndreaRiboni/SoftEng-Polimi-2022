@@ -3,9 +3,7 @@ package it.polimi.ingsw.model.places;
 import it.polimi.ingsw.model.entities.*;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
-import it.polimi.ingsw.model.utils.Color;
-import it.polimi.ingsw.model.utils.EriantysException;
-import it.polimi.ingsw.model.utils.GenericUtils;
+import it.polimi.ingsw.model.utils.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -82,8 +80,8 @@ public class GameBoard implements Serializable {
 
         for(int i = 0; i < NOF_CLOUD; i++) {
             if (nof_players == 3)
-                clouds[i] = Cloud.create3PlayerCloud();
-            else clouds[i] = Cloud.create2or4PlayerCloud();
+                clouds[i] = new Cloud(Cloud.SIDE_3, i);
+            else clouds[i] = new Cloud(Cloud.SIDE_2_4, i);
         }
         for(int i = 0; i < NOF_ISLAND; i++){
             islands[i] = new Island(this, i);
@@ -265,29 +263,31 @@ public class GameBoard implements Serializable {
     }
 
     public String toString(){
-        String full_line = "▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩▩\n";
-        String half_line = "▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦\n";
-        String quarter_line = "▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤▤\n";
         StringBuilder rep = new StringBuilder();
-        rep.append(full_line).append(half_line).append(quarter_line);
-        for(Player p : players){
+        /*for(Player p : players){
             rep.append(p.toString()).append("\n");
             rep.append(quarter_line);
         }
-        rep.append(half_line);
-        for(Professor p : professors){
+        */
+        rep.append(Printer.playersToString(players)).append("\n");
+        /*for(Professor p : professors){
             rep.append(p.toString()).append("\n");
         }
-        rep.append(half_line);
-        for(Island i : islands){
+         */
+        rep.append(Printer.professorsToString(professors)).append("\n");
+        rep.append(Printer.islandsToString(islands)).append("\n");
+
+        /*for(Island i : islands){
             rep.append(i.toString()).append("\n");
-        }
-        rep.append(half_line);
+        }*/
+        /*
         for(int i = 0; i < clouds.length; i++){
             rep.append(GenericUtils.toBold("Cloud #" + (i+1))).append("\n")
                 .append(clouds[i].toString());
         }
-        rep.append(half_line).append(GenericUtils.toBold("Characters")).append(":\n");
+        */
+        rep.append(Printer.cloudsToString(clouds));
+        rep.append(GenericUtils.toBold("Characters")).append(":\n");
         try {
             CharacterCard c1 = character_cards.getActiveCard(0);
             rep.append("\t"+ (c1.getID()+1)+")\t"+c1+"\n");
@@ -298,7 +298,6 @@ public class GameBoard implements Serializable {
         } catch (EriantysException e) {
             e.printStackTrace();
         }
-        rep.append(quarter_line).append(half_line).append(full_line);
         rep.append("waiting...\n");
         return rep.toString();
     }

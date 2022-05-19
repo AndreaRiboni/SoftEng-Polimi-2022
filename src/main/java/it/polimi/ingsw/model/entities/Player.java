@@ -78,6 +78,10 @@ public class Player implements Serializable {
         return nof_total_towers - school.getNumberOfTowers();
     }
 
+    public int getNumberOfUnplacedTowers(){
+        return school.getNumberOfTowers();
+    }
+
     public void addCoins(int qty){
         if(qty > 0)
             coins += qty;

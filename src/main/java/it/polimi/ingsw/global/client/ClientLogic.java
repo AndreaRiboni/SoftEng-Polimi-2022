@@ -117,7 +117,7 @@ public class ClientLogic {
             accepted_cards_index[i] = accepted_cards_list.get(i).getValue();
         }
         int assist_index = InputUtils.getInt(
-                StringViewUtility.getViewString("index_assist_card") + sb.toString(),
+                StringViewUtility.getViewString("index_assist_card") + "\n" + sb.toString(),
                 StringViewUtility.getViewString("invalid_index"),
                 accepted_cards_index
         );

@@ -51,9 +51,9 @@ public class GameHandler implements Runnable {
             try {
                 return (Action) ins[client_index].readObject();
             } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
                 if(e instanceof SocketException)
                     throw new SocketException();
-                e.printStackTrace();
                 return null;
             }
         }
@@ -128,6 +128,7 @@ public class GameHandler implements Runnable {
                 game_ended = controller.hasGameEnded();
             } while (!game_ended);
         } catch (SocketException se){
+            se.printStackTrace();
             log.warn("An error occurred during this match");
             //sending connection-errors to everyone connected
             sendConnectionError(0);

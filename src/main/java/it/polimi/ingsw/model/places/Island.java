@@ -2,10 +2,7 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
-import it.polimi.ingsw.model.utils.Color;
-import it.polimi.ingsw.model.utils.EriantysException;
-import it.polimi.ingsw.model.utils.GenericUtils;
-import it.polimi.ingsw.model.utils.Printer;
+import it.polimi.ingsw.model.utils.*;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -18,7 +15,7 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
     private final int index;
     private final GameBoard gameboard;
     private Color influent;
-    private boolean has_mothernature;
+    public boolean has_mothernature;
 
     public Island(GameBoard gameboard, int index){
         super(Integer.MAX_VALUE);
@@ -208,6 +205,11 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
 
     public boolean hasNext(){ return next!=null; }
 
+    public boolean hasMotherNature(){
+        return has_mothernature;
+    }
+
+    /*
     public String toString(){
         Map<Color, Integer> towers = new HashMap<>();
         if(tower != null)
@@ -220,6 +222,11 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
                 .append("\ttowers:\n")
                 .append(Printer.towerPlaceToString(this, towers))
                 .append(mother_nature).toString();
+    }
+     */
+
+    public String toString(){
+        return StringViewUtility.getIsland(this);
     }
 
     public void setMotherNature() {

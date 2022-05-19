@@ -81,7 +81,6 @@ public class GameBoardTest {
             gameBoard.setTowerOn(5, Color.BLACK);
         });
         assertTrue(gameBoard.getIsland(5).hasTower());
-
     }
 
     @Test
