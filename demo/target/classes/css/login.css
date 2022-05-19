@@ -1,0 +1,7 @@
+.joinButton {
+    -fx-background-image: url("../graphics/blue_button.png");
+    -fx-background-size: stretch;
+    -fx-background-color: transparent;
+    -fx-font-family: "Dalek Pinpoint";
+    -fx-font-size: 30px;
+}

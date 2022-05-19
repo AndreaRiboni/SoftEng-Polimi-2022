@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -53,4 +55,5 @@ public class HelloController implements Initializable {
     public void getNof_players(ActionEvent event){
         String nof_players = choiceBox.getValue();
     }
+
 }
