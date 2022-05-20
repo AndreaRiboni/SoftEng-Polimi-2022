@@ -61,7 +61,6 @@ public class gameGraphicController implements Initializable {
         String assistant_chosen = assistant_choice.getValue();
         ColorAdjust grayscale = new ColorAdjust();
         grayscale.setSaturation(-1);
-
         ImageView[] crosses = { cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10};
         ImageView[] assistants = {assistant_1, assistant_2, assistant_3, assistant_4, assistant_5, assistant_6, assistant_7, assistant_8, assistant_9, assistant_10};
 

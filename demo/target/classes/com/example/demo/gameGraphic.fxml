@@ -24,81 +24,6 @@
                   <Image url="@../../../graphics/wallpaper.jpg" />
                </image>
             </ImageView>
-                <ImageView fitHeight="103.0" fitWidth="132.0" layoutX="142.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="103.0" fitWidth="132.0" layoutX="385.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="103.0" fitWidth="132.0" layoutX="470.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="103.0" fitWidth="132.0" layoutX="53.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="122.0" fitWidth="115.0" layoutX="263.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="122.0" fitWidth="115.0" layoutX="507.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="122.0" fitWidth="115.0" layoutX="259.0" layoutY="546.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="122.0" fitWidth="115.0" layoutX="13.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="119.0" fitWidth="115.0" layoutX="385.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="119.0" fitWidth="115.0" layoutX="464.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="119.0" fitWidth="115.0" layoutX="135.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="119.0" fitWidth="115.0" layoutX="51.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="129.0" fitWidth="115.0" layoutX="178.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="123.0" fitWidth="115.0" layoutX="358.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
             </children></AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
@@ -107,21 +32,31 @@
                         <Tab text="My school">
                             <content>
                                 <AnchorPane>
-                                    <children>
-                                        <ImageView fitHeight="281.0" fitWidth="636.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-
-                                            </image>
-                                        </ImageView>
-                                    </children></AnchorPane>
+                           <children>
+                              <ImageView fitHeight="772.0" fitWidth="636.0" layoutY="-3.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../../graphics/wood.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="257.0" fitWidth="697.0" layoutX="-165.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                 <image>
+                                    <Image url="@../../../graphics/Plancia_DEF3.png" />
+                                 </image>
+                              </ImageView>
+                           </children></AnchorPane>
                             </content>
                         </Tab>
                         <Tab text="Players school">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
+                              <ImageView fitHeight="772.0" fitWidth="642.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../../graphics/wood.jpg" />
+                                 </image>
+                              </ImageView>
                                         <ChoiceBox fx:id="schools" layoutX="25.0" layoutY="43.0" prefWidth="150.0" />
-                                        <Label layoutX="25.0" layoutY="14.0" text="Which school do you want to visit?" />
+                                        <Label layoutX="25.0" layoutY="14.0" text="Which school do you want to visit?" textFill="WHITE" />
                                         <TextArea layoutX="28.0" layoutY="109.0" prefHeight="200.0" prefWidth="200.0" text="VARIE SPECIFICHE&#10;&#10;PROF 1&#10;&#10;STUD. X" />
                                     </children>
                                 </AnchorPane>
