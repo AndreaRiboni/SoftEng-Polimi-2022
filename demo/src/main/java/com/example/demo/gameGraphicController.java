@@ -6,15 +6,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.SubScene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -47,10 +48,18 @@ public class gameGraphicController implements Initializable {
     private final String[] players = {"Player 2","Player 3"};
 
     private Group[] islands;
-    private final int ISLAND_SIZE = 80;
+    private final int ISLAND_SIZE = 200;
+    private final int STUDENT_SIZE = ISLAND_SIZE/15;
+
+    @FXML
+    SplitPane splitpane;
+    @FXML
+    AnchorPane leftpane, rightpane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        leftpane.maxWidthProperty().bind(splitpane.widthProperty().multiply(0.5));
+        rightpane.maxWidthProperty().bind(splitpane.widthProperty().multiply(0.5));
         ImageView[] crosses = { cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10};
         Description.setVisible(false);
         schools.getItems().addAll(players);
@@ -65,6 +74,7 @@ public class gameGraphicController implements Initializable {
         //creates the 12 islands
         islands = new Group[12];
         Group islands_container = new Group();
+        String[] colors = {"yellow", "pink", "green", "blue", "red"};
         for(int i = 0; i < islands.length; i++){
             islands[i] = new Group();
             ImageView island_icon  = new ImageView(
@@ -73,29 +83,37 @@ public class gameGraphicController implements Initializable {
             island_icon.setFitHeight(ISLAND_SIZE);
             island_icon.setFitWidth(ISLAND_SIZE);
 
-            Group students = new Group();
-            for(int o = 0; o < 5; o++){
-                Circle student = new Circle();
-                student.setFill(Color.RED);
-                student.setRadius(3);
-                student.setCenterX(ISLAND_SIZE / 2);
-                student.setCenterY(ISLAND_SIZE / 2);
-                students.getChildren().add(student);
-            }
-            students.setVisible(false);
+            GridPane students = new GridPane();
+            students.setHgap(2);
+            students.setVgap(2);
+            int nof_stud = (int)(Math.random() * 20);
 
-            islands[i].setOnMouseEntered(t -> {
-                students.setVisible(true);
-            });
-            islands[i].setOnMouseExited(t -> {
-                students.setVisible(false);
-                System.out.println("bye bye");
-            });
+            for(int o = 0; o < nof_stud; o++){
+                int index = (int)(Math.random() * colors.length);
+                ImageView student = new ImageView(
+                        new Image(String.valueOf(getClass().getResource("/Students/"+colors[index]+"stud.png")))
+                );
+                student.setFitHeight(STUDENT_SIZE);
+                student.setFitWidth(STUDENT_SIZE);
+                students.add(student, o%8, o/8);
+            }
+
             islands[i].getChildren().addAll(island_icon, students);
             islands_container.getChildren().add(islands[i]);
         }
-        subscene.setRoot(islands_container);
-        subscene.setFill(Color.AQUAMARINE);
+        Pane pane = new Pane(islands_container);
+        pane.setPrefWidth(subscene.getWidth() * 2);
+        pane.setPrefHeight(subscene.getHeight() * 2);
+        pane.setTranslateX(-pane.getWidth() / 2);
+        pane.setTranslateY(-pane.getHeight() / 2);
+        ScrollPane sp = new ScrollPane(pane);
+        sp.setFitToHeight(true);
+        sp.setFitToWidth(true);
+        BorderPane bp = new BorderPane(sp);
+        subscene.setRoot(bp);
+        zoom(pane);
+        forceZoom(pane, 300);
+        navigate(pane);
 
         //alignIslands(new int[]{4, 4, 4});
         //alignIslands(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
@@ -130,26 +148,60 @@ public class gameGraphicController implements Initializable {
         }
     }
 
-    void setIslandPos(Group island, double x, double y){
-        Translate translate = new Translate();
-        translate.setX(x);
-        translate.setY(y);
+    private void zoom(Pane pane) {
+        pane.setOnScroll(
+                event -> {
+                    forceZoom(pane, event.getDeltaY());
+                    event.consume();
+                });
+    }
+
+    private void forceZoom(Pane pane, double deltaY){
+        double zoomFactor = 1.05;
+        if (deltaY < 0) {
+            zoomFactor = 0.95;
+        }
+        pane.setScaleX(pane.getScaleX() * zoomFactor);
+        pane.setScaleY(pane.getScaleY() * zoomFactor);
+    }
+
+    private void navigate(Pane pane){
+        final double[] start = new double[2];
+        pane.setOnDragDetected(event -> {
+            start[0] = event.getX();
+            start[1] = event.getY();
+            event.consume();
+        });
+        pane.setOnMouseDragged(event -> {
+            Translate t = new Translate();
+            t.setX((event.getX() - start[0]) / 10);
+            t.setY((event.getY() - start[1]) / 10);
+            pane.getTransforms().add(t);
+        });
+    }
+
+    private void setIslandPos(Group island, double x, double y){
         for(Node child : island.getChildren()){
             if(child instanceof Group){
                 setIslandPos((Group) child, x, y);
             } else {
-                island.getChildren().get(0).getTransforms().add(translate);
-                island.getChildren().get(1).getTransforms().add(translate);
+                if(child instanceof GridPane){
+                    x += ISLAND_SIZE / 5;
+                    y += ISLAND_SIZE / 5;
+                }
+                child.setLayoutX(x);
+                child.setLayoutY(y);
             }
         }
     }
 
-    void resetIslandPos(Group island){
+    private void resetIslandPos(Group island){
         for(Node child : island.getChildren()){
             if(child instanceof Group){
                 resetIslandPos((Group) child);
             } else {
-                child.getTransforms().clear();
+                child.setLayoutX(0);
+                child.setLayoutY(0);
             }
         }
     }
