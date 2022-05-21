@@ -28,14 +28,13 @@ public class HelloApplication extends Application {
 
     public void start_game() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gameGraphic.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load(), 1290, 690);
         Stage stage = new Stage();
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/Copertina.jpg")));
         stage.setTitle("Gameboard");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        stage.setMaximized(true);
     }
 
    public static void main(String[] args) {
