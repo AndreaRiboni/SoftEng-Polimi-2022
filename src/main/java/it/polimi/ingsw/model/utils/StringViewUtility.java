@@ -177,7 +177,7 @@ public class StringViewUtility {
 
     public static String getCloud(Cloud cloud){
         String cloud_txt = CLOUD_BOX;
-        cloud_txt = cloud_txt.replace("NN", cloud.getIndex()+"");
+        cloud_txt = cloud_txt.replace("NN", cloud.getIndex()+1+"");
         //adding colors
         cloud_txt = addStudentColors(cloud_txt);
         //adding student numbers
