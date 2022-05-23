@@ -72,4 +72,15 @@ public class GenericUtils {
         }
         return viewcol;
     }
+
+    public static String printColorsArray(Color[] colors){
+        StringBuilder s = new StringBuilder();
+        s.append("[");
+        for(Color c : colors){
+            s.append(c);
+            if(c!=(colors[colors.length-1])) s.append(", ");
+        }
+        s.append("]");
+        return s.toString();
+    }
 }

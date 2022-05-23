@@ -119,11 +119,6 @@ public class Player implements Serializable {
         return school.getEntranceStudents(); //TODO: pass a copy
     }
 
-    public Color[] availableEntranceColors(){
-        Object[] entrance_colors = school.getEntranceStudents().keySet().toArray();
-        return Arrays.copyOf(entrance_colors, entrance_colors.length, Color[].class);
-    }
-
     public void removeEntranceStudent(Color student){
         school.removeStudent(student, Places.ENTRANCE);
         //TODO: checks

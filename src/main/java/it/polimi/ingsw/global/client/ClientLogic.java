@@ -133,7 +133,7 @@ public class ClientLogic {
             chosen_colors[i] = InputUtils.getColor(
                     StringViewUtility.getViewString("color_of_choice")+ GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_to_move"),
                     StringViewUtility.getViewString("invalid_color"),
-                    Color.getStudentColors()
+                    InputUtils.getAvailableEntranceColors(model, username)
             );
             int chosen_place = InputUtils.getInt(
                     StringViewUtility.getViewString("places_choice"),

@@ -95,14 +95,14 @@ public class InputUtils {
         return false;
     }
 
-    public static String printColorsArray(Color[] colors){
-        StringBuilder s = new StringBuilder();
-        s.append("[");
-        for(Color c : colors){
-            s.append(c);
-            if(c!=(colors[colors.length-1])) s.append(", ");
+    public static Color[] getAvailableEntranceColors(GameBoard gameboard, String user){
+        Map<Color, Integer> map = gameboard.getPlayerByUsername(user).getEntranceStudents();
+        List<Color> entrance_colors = new ArrayList<>();
+        for(Map.Entry<Color, Integer> entry : map.entrySet()){
+            if(entry.getValue()>0){
+                entrance_colors.add(entry.getKey());
+            }
         }
-        s.append("]");
-        return s.toString();
+        return entrance_colors.toArray(new Color[0]);
     }
 }
