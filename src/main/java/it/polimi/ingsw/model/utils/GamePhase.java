@@ -22,7 +22,7 @@ public enum GamePhase {
             case DRAW_ASSIST_CARD:
                 return "Draw an assist card";
             case MOVE_3_STUDENTS:
-                return "Move 3 students from the clouds to your Islands or your Dining Room";
+                return "Move 3 students from the entrance to your Islands or your Dining Room";
             case MOVE_MOTHERNATURE:
                 return "Move Mother Nature to an Island";
             case DRAIN_CLOUD:

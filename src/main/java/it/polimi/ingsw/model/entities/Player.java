@@ -11,10 +11,7 @@ import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GenericUtils;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 public class Player implements Serializable {
     private int turn_value, coins;
@@ -120,6 +117,11 @@ public class Player implements Serializable {
 
     public Map<Color, Integer> getEntranceStudents(){
         return school.getEntranceStudents(); //TODO: pass a copy
+    }
+
+    public Color[] availableEntranceColors(){
+        Object[] entrance_colors = school.getEntranceStudents().keySet().toArray();
+        return Arrays.copyOf(entrance_colors, entrance_colors.length, Color[].class);
     }
 
     public void removeEntranceStudent(Color student){

@@ -1,14 +1,13 @@
 package it.polimi.ingsw.model.utils;
 
+import it.polimi.ingsw.model.entities.Player;
+import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class InputUtils {
     private static BufferedReader kb_input;
@@ -94,5 +93,16 @@ public class InputUtils {
         for(Color c : array)
             if(c.equals(val)) return true;
         return false;
+    }
+
+    public static String printColorsArray(Color[] colors){
+        StringBuilder s = new StringBuilder();
+        s.append("[");
+        for(Color c : colors){
+            s.append(c);
+            if(c!=(colors[colors.length-1])) s.append(", ");
+        }
+        s.append("]");
+        return s.toString();
     }
 }
