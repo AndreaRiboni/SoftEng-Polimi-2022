@@ -51,7 +51,7 @@ public class GameController extends Controller {
             if (playing.getNumberOfPlacedTowers() == 8 || playing.getNofPlayableCards() == 0) {
                 return playing.getUsername();
             }
-            else if(getNofGroupsOfIslands() == 3 || model.getBag().getRemaining() < 105){
+            else if(getNofGroupsOfIslands() == 3 || model.getBag().getRemaining() == 0){
                 int sum = 0;
                 int profsum = 0;
                 String winner = null;

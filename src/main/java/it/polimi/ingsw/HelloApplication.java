@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-
+    public static int NOF_PLAYERS;
 
     @Override
     public void start(Stage stage) throws IOException{

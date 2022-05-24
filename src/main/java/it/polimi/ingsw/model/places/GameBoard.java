@@ -30,6 +30,8 @@ public class GameBoard implements Serializable {
     public static final int NOF_STUDENT_COLOR = 5;
     public static final int NOF_CHAR_CARDS = 12;
     public static final int NOF_PROFS = 5;
+    private boolean game_ended;
+    private String winner;
 
     public GameBoard() {
         islands = new Island[NOF_ISLAND];
@@ -40,6 +42,8 @@ public class GameBoard implements Serializable {
         }
         character_cards = null;
         mother_nature = null;
+        game_ended = false;
+        winner = null;
     }
 
     public void initialize(int nof_players, int island_index) throws EriantysException {
@@ -270,7 +274,7 @@ public class GameBoard implements Serializable {
     public int getNofProfsFromPlayer(Player p){
         int num = 0;
         for(Professor prof : getProfessors()){
-            if(prof.getPlayer().equals(p)){
+            if(prof.getPlayer() != null && prof.getPlayer().equals(p)){
                 num++;
             }
         }
@@ -332,5 +336,22 @@ public class GameBoard implements Serializable {
 
     public CharacterCard getCharacterCard(int index) throws EriantysException {
         return character_cards.getCharacterCard(index);
+    }
+
+    public void setGameEnded(String user){
+        game_ended = true;
+        winner = user;
+    }
+
+    public boolean isGameEnded(){
+        return game_ended;
+    }
+
+    public String getWinner(){
+        return winner;
+    }
+
+    public void setWinner(String user){
+        winner = user;
     }
 }

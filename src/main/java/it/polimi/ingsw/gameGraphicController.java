@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -45,7 +46,7 @@ public class gameGraphicController implements Initializable {
     ChoiceBox<String> schools;
     private final String[] players = {"Player 2","Player 3"};
 
-    private Group[] islands;
+    private Group[] islands, clouds;
     private final int ISLAND_SIZE = 200;
     private final int STUDENT_SIZE = ISLAND_SIZE/15;
 
@@ -68,7 +69,6 @@ public class gameGraphicController implements Initializable {
         for(int i = 0; i<crosses.length; i++){
             crosses[i].setVisible(false);
         }
-
         //creates the 12 islands
         islands = new Group[12];
         Group islands_container = new Group();
@@ -95,11 +95,23 @@ public class gameGraphicController implements Initializable {
                 student.setFitWidth(STUDENT_SIZE);
                 students.add(student, o%8, o/8);
             }
-
             islands[i].getChildren().addAll(island_icon, students);
             islands_container.getChildren().add(islands[i]);
         }
-        Pane pane = new Pane(islands_container);
+        //creates the clouds
+        Group clouds_container = new Group();
+        clouds = new Group[2];
+        for(int i = 0; i < clouds.length; i++){
+            clouds[i] = new Group();
+            ImageView cloud_icon  = new ImageView(
+                    new Image(String.valueOf(getClass().getResource("/Clouds/cloud" + (clouds.length-2) + ".png")))
+            );
+            cloud_icon.setFitHeight(ISLAND_SIZE);
+            cloud_icon.setFitWidth(ISLAND_SIZE);
+            clouds[i].getChildren().add(cloud_icon);
+            clouds_container.getChildren().add(clouds[i]);
+        }
+        Pane pane = new Pane(islands_container, clouds_container);
         pane.setPrefWidth(subscene.getWidth() * 2);
         pane.setPrefHeight(subscene.getHeight() * 2);
         pane.setTranslateX(-pane.getWidth() / 2);
@@ -110,7 +122,6 @@ public class gameGraphicController implements Initializable {
         BorderPane bp = new BorderPane(sp);
         subscene.setRoot(bp);
         zoom(pane);
-        forceZoom(pane, 300);
         navigate(pane);
 
         subscene.setOnMouseClicked(e -> {
@@ -137,6 +148,7 @@ public class gameGraphicController implements Initializable {
         //alignIslands(new int[]{4, 4, 4});
         //alignIslands(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
         alignIslands(new int[]{2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
+        alignClouds();
         //alignIslands(new int[]{1, 1, 1, 1, 8});
     }
 
@@ -219,6 +231,16 @@ public class gameGraphicController implements Initializable {
                 //child.setLayoutX(x);
                 //child.setLayoutY(y);
             }
+        }
+    }
+
+    void alignClouds(){
+        float angle = 0;
+        for(int i = 0; i < clouds.length; i++){
+            double x = subscene.getWidth()/2 + Math.cos(angle) * ISLAND_SIZE - ISLAND_SIZE/2;
+            double y = subscene.getHeight()/2 + Math.sin(angle) * ISLAND_SIZE - ISLAND_SIZE/2;
+            setIslandPos(clouds[i], x, y);
+            angle += 2*Math.PI/clouds.length;
         }
     }
 

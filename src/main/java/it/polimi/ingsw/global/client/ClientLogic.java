@@ -51,6 +51,8 @@ public class ClientLogic {
 
     public synchronized void setGameBoard(GameBoard model){
         this.model = model;
+        System.out.println(model);
+        if(model.isGameEnded()) manageEndGame();
     }
 
     private synchronized GameBoard getGameBoard(){
@@ -354,8 +356,8 @@ public class ClientLogic {
         System.exit(0);
     }
 
-    private void manageEndGame(Action act){
-        System.out.println("The game has ended. The winner is: " + act.getUsername());
+    private void manageEndGame(){
+        System.out.println("The game has ended. The winner is: " + model.getWinner());
         System.exit(0);
     }
 
@@ -380,9 +382,6 @@ public class ClientLogic {
                 break;
             case CONNECTION_ERROR:
                 manageConnectionError();
-                break;
-            case END_GAME:
-                manageEndGame(act);
                 break;
         }
         return getFeedback(act);
@@ -410,10 +409,6 @@ public class ClientLogic {
             boolean succeeded = false;
             do {
                 List<GamePhase> current_gamephases = waitForAvailableGamephases();
-                if(current_gamephases.contains(GamePhase.END_GAME)){
-                    processGamePhase(GamePhase.END_GAME);
-                    return;
-                }
                 int chosen = askGamePhase(current_gamephases);
                 //ask the user the needed inputs and send the related Action to the server
                 String response = processGamePhase(current_gamephases.get(chosen));

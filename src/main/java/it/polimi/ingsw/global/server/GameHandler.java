@@ -118,20 +118,14 @@ public class GameHandler implements Runnable {
                     response.setGamePhase(GamePhase.CORRECT);
                     sendAction(player_playing, response);
                     //send the updated gameboard to every client
+                    game_ended = controller.hasGameEnded();
                     sendGameBoard();
                 } else {
                     response.setGamePhase(GamePhase.ERROR_PHASE);
                     response.setErrorMessage(str_response);
                     sendAction(player_playing, response);
                 }
-                game_ended = controller.hasGameEnded();
             } while (game_ended==null);
-            Action end_game = new Action();
-            end_game.setGamePhase(GamePhase.END_GAME);
-            end_game.setUsername(game_ended);
-            for (int i = 0; i < players.length; i++) {
-                sendAction(i, end_game);
-            }
         } catch (SocketException se){
             se.printStackTrace();
             log.warn("An error occurred during this match");

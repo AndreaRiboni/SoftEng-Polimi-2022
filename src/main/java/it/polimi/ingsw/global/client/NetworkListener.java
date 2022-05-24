@@ -67,7 +67,7 @@ public class NetworkListener extends Thread{
                 if (received instanceof GameBoard) {
                     //log.info("the received object is the model");
                     setGameBoardResponse((GameBoard)received);
-                    System.out.println(received);
+                    //System.out.println(received);
                 } else if(received instanceof Action) {
                     Action act_rec = (Action)received;
                     if(act_rec.getGamePhase().equals(GamePhase.CONNECTION_ERROR)) throw new IOException();

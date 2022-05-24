@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.utils.GamePhase;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -134,7 +135,6 @@ public class ControllerHub {
                     flow.deleteSubCount("started with usecharcard");
                     flow.deleteSubCount("started with move3students");
                     g_controller.resetAdditionalEffects();
-                    g_controller.checkForEnd();
                     break;
                 case USE_CHARACTER_CARD: //problema se uso CC e la sbaglio e poi faccio move3
                     //we are in the correct order if no one has entered move3students yet AND we have the lowest turn_value OR
@@ -161,7 +161,6 @@ public class ControllerHub {
                     g_controller.updatePlayer(action.getPlayerID());
                     flow.setLastGamePhase(GamePhase.USE_CHARACTER_CARD);
                     keep_going = true; //turn start -> move3 / turn end -> drain cloud
-                    g_controller.checkForEnd();
                     break;
             }
         } catch (EriantysException erex){
@@ -169,6 +168,7 @@ public class ControllerHub {
             log.error(erex.getMessage());
             return erex.getMessage();
         }
+        log.info("Returning correct");
         return "true";
     }
 
@@ -193,10 +193,10 @@ public class ControllerHub {
     }
 
     public String hasGameEnded(){
-        if(g_controller.checkForEnd()!=null){
-            System.out.println("FINITO");
-        }
-        return g_controller.checkForEnd();
+        String str = g_controller.checkForEnd();
+        if(str == null) return null;
+        model.setGameEnded(str);
+        return str;
     }
 
 }

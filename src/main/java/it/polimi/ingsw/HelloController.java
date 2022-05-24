@@ -37,7 +37,7 @@ public class HelloController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("waiting.fxml"));
         SubScene.setVisible(true);
         SubScene.setRoot(fxmlLoader.load());
-
+        HelloApplication.NOF_PLAYERS = Integer.parseInt(choiceBox.getValue());
     }
 
     @Override
