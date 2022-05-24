@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane fx:id="splitpane" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.gameGraphicController">
+<SplitPane fx:id="splitpane" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gameGraphicController">
     <items>
         <AnchorPane fx:id="leftpane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
@@ -37,12 +37,12 @@
                                     <children>
                                         <ImageView fitHeight="772.0" fitWidth="636.0" layoutY="-3.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/wood.jpg" />
+                                                <Image url="@../../../../graphics/wood.jpg" />
                                             </image>
                                         </ImageView>
                                         <ImageView fitHeight="257.0" fitWidth="697.0" layoutX="-165.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                                             <image>
-                                                <Image url="@../../../graphics/Plancia_DEF3.png" />
+                                                <Image url="@../../../../graphics/Plancia_DEF3.png" />
                                             </image>
                                         </ImageView>
                                     </children></AnchorPane>
@@ -54,7 +54,7 @@
                                     <children>
                                         <ImageView fitHeight="772.0" fitWidth="642.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/wood.jpg" />
+                                                <Image url="@../../../../graphics/wood.jpg" />
                                             </image>
                                         </ImageView>
                                         <ChoiceBox fx:id="schools" layoutX="25.0" layoutY="43.0" prefWidth="150.0" />
@@ -70,110 +70,110 @@
                                     <children>
                                         <ImageView fitHeight="771.0" fitWidth="643.0" layoutX="-4.0">
                                             <image>
-                                                <Image url="@../../../graphics/wood.jpg" />
+                                                <Image url="@../../../../graphics/wood.jpg" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="assistant_1" fitHeight="150.0" fitWidth="200.0" layoutX="55.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../Assistenti/Assistente_1.png" />
+                                                <Image url="@../../../../Assistenti/Assistente_1.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="assistant_2" fitHeight="150.0" fitWidth="200.0" layoutX="196.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../Assistenti/Assistente_2.png" />
+                                                <Image url="@../../../../Assistenti/Assistente_2.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="assistant_3" fitHeight="150.0" fitWidth="200.0" layoutX="332.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../Assistenti/Assistente_3.png" />
+                                                <Image url="@../../../../Assistenti/Assistente_3.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="assistant_4" fitHeight="150.0" fitWidth="200.0" layoutX="472.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../Assistenti/Assistente_4.png" />
+                                                <Image url="@../../../../Assistenti/Assistente_4.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="assistant_5" fitHeight="150.0" fitWidth="200.0" layoutX="55.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../Assistenti/Assistente_5.png" />
+                                                <Image url="@../../../../Assistenti/Assistente_5.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="assistant_6" fitHeight="150.0" fitWidth="200.0" layoutX="196.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../Assistenti/Assistente_6.png" />
+                                                <Image url="@../../../../Assistenti/Assistente_6.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="assistant_7" fitHeight="150.0" fitWidth="200.0" layoutX="334.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../Assistenti/Assistente_7.png" />
+                                                <Image url="@../../../../Assistenti/Assistente_7.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="assistant_8" fitHeight="150.0" fitWidth="200.0" layoutX="472.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../Assistenti/Assistente_8.png" />
+                                                <Image url="@../../../../Assistenti/Assistente_8.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="assistant_9" fitHeight="150.0" fitWidth="200.0" layoutX="55.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../Assistenti/Assistente_9.png" />
+                                                <Image url="@../../../../Assistenti/Assistente_9.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="assistant_10" fitHeight="150.0" fitWidth="200.0" layoutX="196.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../Assistenti/Assistente_10.png" />
+                                                <Image url="@../../../../Assistenti/Assistente_10.png" />
                                             </image>
                                         </ImageView>
                                         <ChoiceBox fx:id="assistant_choice" layoutX="373.0" layoutY="473.0" prefWidth="150.0" />
                                         <Label layoutX="373.0" layoutY="449.0" text="Which assistant do you want to use?" />
-                                        <Button layoutX="373.0" layoutY="518.0" mnemonicParsing="false" onAction="#used" prefHeight="53.0" prefWidth="115.0" styleClass="joinButton" stylesheets="@../../../css/login.css" text="PLAY" textFill="#f6f6f6" />
+                                        <Button layoutX="373.0" layoutY="518.0" mnemonicParsing="false" onAction="#used" prefHeight="53.0" prefWidth="115.0" styleClass="joinButton" stylesheets="@../../../../css/login.css" text="PLAY" textFill="#f6f6f6" />
                                         <ImageView fx:id="cross_1" fitHeight="119.0" fitWidth="102.0" layoutX="54.0" layoutY="58.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/cross.png" />
+                                                <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="cross_2" fitHeight="119.0" fitWidth="102.0" layoutX="196.0" layoutY="58.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/cross.png" />
+                                                <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="cross_3" fitHeight="119.0" fitWidth="102.0" layoutX="332.0" layoutY="58.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/cross.png" />
+                                                <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="cross_4" fitHeight="119.0" fitWidth="102.0" layoutX="472.0" layoutY="52.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/cross.png" />
+                                                <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="cross_5" fitHeight="119.0" fitWidth="102.0" layoutX="55.0" layoutY="250.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/cross.png" />
+                                                <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="cross_6" fitHeight="119.0" fitWidth="102.0" layoutX="196.0" layoutY="250.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/cross.png" />
+                                                <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="cross_7" fitHeight="119.0" fitWidth="102.0" layoutX="334.0" layoutY="249.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/cross.png" />
+                                                <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="cross_8" fitHeight="119.0" fitWidth="102.0" layoutX="472.0" layoutY="250.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/cross.png" />
+                                                <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="cross_9" fitHeight="119.0" fitWidth="102.0" layoutX="54.0" layoutY="440.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/cross.png" />
+                                                <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
                                         <ImageView fx:id="cross_10" fitHeight="119.0" fitWidth="102.0" layoutX="196.0" layoutY="440.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@../../../graphics/cross.png" />
+                                                <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
                                     </children>
@@ -186,26 +186,26 @@
                                     <children>
                                         <ImageView fitHeight="771.0" fitWidth="636.0" layoutY="-1.0">
                                             <image>
-                                                <Image url="@../../../graphics/wood.jpg" />
+                                                <Image url="@../../../../graphics/wood.jpg" />
                                             </image>
                                         </ImageView>
                                         <HBox layoutX="27.0" layoutY="72.0" prefHeight="206.0" prefWidth="582.0">
                                             <children>
                                                 <ImageView fitHeight="207.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
-                                                        <Image url="@../../../characters/character_1.jpg" />
+                                                        <Image url="@../../../../characters/character_1.jpg" />
                                                     </image>
                                                 </ImageView>
                                                 <Region prefHeight="207.0" prefWidth="109.0" />
                                                 <ImageView fitHeight="207.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
-                                                        <Image url="@../../../characters/character_2.jpg" />
+                                                        <Image url="@../../../../characters/character_2.jpg" />
                                                     </image>
                                                 </ImageView>
                                                 <Region prefHeight="207.0" prefWidth="109.0" />
                                                 <ImageView fitHeight="207.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
-                                                        <Image url="@../../../characters/character_3.jpg" />
+                                                        <Image url="@../../../../characters/character_3.jpg" />
                                                     </image>
                                                     <HBox.margin>
                                                         <Insets />

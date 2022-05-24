@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.LoginController">
     <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.73" pickOnBounds="true">
          <image>
-            <Image url="@../../../graphics/Copertina.jpg" />
+            <Image url="@../../../../graphics/Copertina.jpg" />
          </image>
       </ImageView>
         <Label layoutX="59.0" layoutY="113.0" text="Insert your nickname">
@@ -30,7 +30,7 @@
         </Label>
         <TextField fx:id="nickname" layoutX="378.0" layoutY="115.0" />
         <ChoiceBox fx:id="choiceBox" layoutX="378.0" layoutY="179.0" prefWidth="150.0" />
-        <Button layoutX="242.0" layoutY="301.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="65.0" prefWidth="131.0" styleClass="joinButton" stylesheets="@../../../css/login.css" text="Join" textFill="WHITE">
+        <Button layoutX="242.0" layoutY="301.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="65.0" prefWidth="131.0" styleClass="joinButton" stylesheets="@../../../../css/login.css" text="Join" textFill="WHITE">
             <font>
                 <Font name="Bookshelf Symbol 7" size="29.0" />
             </font>
