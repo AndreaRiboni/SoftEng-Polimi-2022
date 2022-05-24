@@ -184,9 +184,7 @@ public class ControllerHub {
         return g_controller.getNextNeutralOrder();
     }
 
-    private int getLastPlaying(){
-        return g_controller.getLastPlaying();
-    }
+    private int getLastPlaying(){ return g_controller.getLastPlaying(); }
 
     public int getNextAutomaticOrder(){
         //TODO: dopo il primo turno l'ordine di gioco è una versione modificara di NeutralOrder
@@ -194,7 +192,10 @@ public class ControllerHub {
         return keep_going ? getLastPlaying() : follow_neutral_order ? getNextNeutralOrder() : getNextWeightedOrder();
     }
 
-    public boolean hasGameEnded(){
+    public String hasGameEnded(){
+        if(g_controller.checkForEnd()!=null){
+            System.out.println("FINITO");
+        }
         return g_controller.checkForEnd();
     }
 

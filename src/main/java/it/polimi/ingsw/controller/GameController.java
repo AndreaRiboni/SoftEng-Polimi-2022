@@ -47,17 +47,29 @@ public class GameController extends Controller {
     }
 
     //TODO: test checkForEnd
-    public boolean checkForEnd(){
+    public String checkForEnd(){
         for(Player playing : model.getPlayers()) {
-            if (playing.getNumberOfPlacedTowers() == 8) {
-                return true;
-            } else if (getNofGroupsOfIslands() == 3) {
-                return true;
-            } else if (model.getBag().getRemaining() == 0) {
-                return true;
+            if (playing.getNumberOfPlacedTowers() == 8 || playing.getNofPlayableCards() == 0) {
+                return playing.getUsername();
+            }
+            else if(getNofGroupsOfIslands() == 3 || model.getBag().getRemaining() < 105){
+                int sum = 0;
+                int profsum = 0;
+                String winner = null;
+                for(Player p : model.getPlayers()){
+                    if(p.getNumberOfPlacedTowers()>sum) {
+                        sum = p.getNumberOfPlacedTowers();
+                        profsum = model.getNofProfsFromPlayer(p);
+                        winner = p.getUsername();
+                    }else if(p.getNumberOfPlacedTowers()==sum && model.getNofProfsFromPlayer(p)>profsum){
+                        profsum = model.getNofProfsFromPlayer(p);
+                        winner = p.getUsername();
+                    }
+                }
+                return winner;
             }
         }
-        return false;
+        return null;
     }
 
     public void updatePlayer(int player_id){

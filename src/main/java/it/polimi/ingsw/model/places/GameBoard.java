@@ -263,6 +263,16 @@ public class GameBoard implements Serializable {
         }
     }
 
+    public int getNofProfsFromPlayer(Player p){
+        int num = 0;
+        for(Professor prof : getProfessors()){
+            if(prof.getPlayer().equals(p)){
+                num++;
+            }
+        }
+        return num;
+    }
+
     public String toString(){
         StringBuilder rep = new StringBuilder();
         /*for(Player p : players){

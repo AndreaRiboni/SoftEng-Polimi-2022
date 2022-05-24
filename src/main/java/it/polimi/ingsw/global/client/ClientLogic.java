@@ -1,5 +1,6 @@
 package it.polimi.ingsw.global.client;
 
+import it.polimi.ingsw.controller.ControllerHub;
 import it.polimi.ingsw.global.MessageSender;
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.cards.AssistCard;
@@ -354,6 +355,11 @@ public class ClientLogic {
         System.exit(0);
     }
 
+    private void manageEndGame(Action act){
+        System.out.println("The game has ended. The winner is: " + act.getUsername());
+        System.exit(0);
+    }
+
     private String processGamePhase(GamePhase chosen) throws SocketException {
         Action act = new Action();
         act.setGamePhase(chosen);
@@ -375,6 +381,10 @@ public class ClientLogic {
                 break;
             case CONNECTION_ERROR:
                 manageConnectionError();
+                break;
+            case END_GAME:
+                manageEndGame(act);
+                break;
         }
         return getFeedback(act);
     }
@@ -401,6 +411,10 @@ public class ClientLogic {
             boolean succeeded = false;
             do {
                 List<GamePhase> current_gamephases = waitForAvailableGamephases();
+                if(current_gamephases.contains(GamePhase.END_GAME)){
+                    processGamePhase(GamePhase.END_GAME);
+                    return;
+                }
                 int chosen = askGamePhase(current_gamephases);
                 //ask the user the needed inputs and send the related Action to the server
                 String response = processGamePhase(current_gamephases.get(chosen));
