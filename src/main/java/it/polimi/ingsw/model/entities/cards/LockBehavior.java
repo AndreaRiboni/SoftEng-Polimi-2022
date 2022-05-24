@@ -1,11 +1,8 @@
 package it.polimi.ingsw.model.entities.cards;
 
 import it.polimi.ingsw.model.places.GameBoard;
-import it.polimi.ingsw.model.utils.Color;
-import it.polimi.ingsw.model.utils.EriantysException;
 
 import java.io.Serializable;
-import java.util.Map;
 
 public class LockBehavior extends CardBehavior implements Serializable {
 

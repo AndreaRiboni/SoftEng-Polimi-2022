@@ -3,8 +3,6 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.global.client.ClientLauncher;
 import it.polimi.ingsw.global.server.MultiServerLauncher;
 import it.polimi.ingsw.model.utils.InputUtils;
-import it.polimi.ingsw.model.utils.StringViewUtility;
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -40,7 +38,8 @@ public class ProvaFinale_IngSw_GC51 {
                 ClientLauncher.main(null);
                 break;
             case 3:
-                System.out.println("to be done");
+               // System.out.println("to be done");
+                HelloApplication.main(null);
                 break;
         }
     }

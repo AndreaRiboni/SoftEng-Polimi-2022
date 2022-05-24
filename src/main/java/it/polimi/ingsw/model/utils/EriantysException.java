@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.utils;
 
-import it.polimi.ingsw.model.entities.cards.AssistCard;
 import it.polimi.ingsw.model.places.GameBoard;
 
 public class EriantysException extends Exception {

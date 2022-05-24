@@ -4,12 +4,12 @@ import it.polimi.ingsw.global.server.MultiServerLauncher;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GamePhase;
-import it.polimi.ingsw.model.utils.Printer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.io.*;
-import java.net.ConnectException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;

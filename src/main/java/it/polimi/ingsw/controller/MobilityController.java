@@ -10,7 +10,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class MobilityController extends Controller {

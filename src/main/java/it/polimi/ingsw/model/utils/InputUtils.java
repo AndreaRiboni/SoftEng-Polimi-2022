@@ -1,13 +1,13 @@
 package it.polimi.ingsw.model.utils;
 
-import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.places.GameBoard;
-import it.polimi.ingsw.model.utils.Color;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class InputUtils {
     private static BufferedReader kb_input;

@@ -2,7 +2,6 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.entities.cards.AssistCard;
 import it.polimi.ingsw.model.places.GameBoard;
-import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

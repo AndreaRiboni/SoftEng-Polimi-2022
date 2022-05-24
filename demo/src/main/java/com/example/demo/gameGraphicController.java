@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,9 +22,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Translate;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class gameGraphicController implements Initializable {
@@ -115,6 +120,27 @@ public class gameGraphicController implements Initializable {
         forceZoom(pane, 300);
         navigate(pane);
 
+        subscene.setOnMouseClicked(e -> {
+            List<Integer> fake_islands = new ArrayList<>();
+            int sum = 0;
+            Random rand = new Random();
+            do {
+                if(fake_islands.size() == 11) {
+                    fake_islands.add(12 - sum);
+                    sum = 12;
+                }
+                int val = (int) (Math.log(1-rand.nextDouble())/(-0.5));
+                if(val == 0 || sum + val > 12) continue;
+                sum += val;
+                fake_islands.add(val);
+            } while (sum < 12);
+            int[] array = new int[fake_islands.size()];
+            for(int i = 0; i < fake_islands.size(); i++){
+                array[i] = fake_islands.get(i);
+            }
+            System.out.println(fake_islands);
+            alignIslands(array);
+        });
         //alignIslands(new int[]{4, 4, 4});
         //alignIslands(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
         alignIslands(new int[]{2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
@@ -174,8 +200,8 @@ public class gameGraphicController implements Initializable {
         });
         pane.setOnMouseDragged(event -> {
             Translate t = new Translate();
-            t.setX((event.getX() - start[0]) / 10);
-            t.setY((event.getY() - start[1]) / 10);
+            t.setX((event.getX() - start[0]) / 20);
+            t.setY((event.getY() - start[1]) / 20);
             pane.getTransforms().add(t);
         });
     }
@@ -189,19 +215,16 @@ public class gameGraphicController implements Initializable {
                     x += ISLAND_SIZE / 5;
                     y += ISLAND_SIZE / 5;
                 }
-                child.setLayoutX(x);
-                child.setLayoutY(y);
-            }
-        }
-    }
-
-    private void resetIslandPos(Group island){
-        for(Node child : island.getChildren()){
-            if(child instanceof Group){
-                resetIslandPos((Group) child);
-            } else {
-                child.setLayoutX(0);
-                child.setLayoutY(0);
+                TranslateTransition translate = new TranslateTransition();
+                translate.setDuration(Duration.millis(1000));
+                translate.setFromX(child.getTranslateX());
+                translate.setFromY(child.getTranslateY());
+                translate.setToX(x);
+                translate.setToY(y);
+                translate.setNode(child);
+                translate.play();
+                //child.setLayoutX(x);
+                //child.setLayoutY(y);
             }
         }
     }
@@ -219,15 +242,15 @@ public class gameGraphicController implements Initializable {
                 } else if(o > 0){
                     xoff += ISLAND_SIZE * 0.7;
                 }
-                resetIslandPos(islands[count]);
+                //resetIslandPos(islands[count]);
                 int temp_yoff = 0;
                 if(o % 2 == 1 && islands_groups[i] > 1){
                     temp_yoff += ISLAND_SIZE * 0.45;
                 }
-                double x = subscene.getWidth()/2 + Math.cos(angle) * ISLAND_SIZE * 2.5 + xoff - ISLAND_SIZE/2;
-                double y = subscene.getHeight()/2 + Math.sin(angle) * ISLAND_SIZE * 2.5 + yoff - ISLAND_SIZE/2 + temp_yoff;
+                double x = subscene.getWidth()/2 + Math.cos(angle) * ISLAND_SIZE * 4 + xoff - ISLAND_SIZE/2;
+                double y = subscene.getHeight()/2 + Math.sin(angle) * ISLAND_SIZE * 4 + yoff - ISLAND_SIZE/2 + temp_yoff;
                 setIslandPos(islands[count], x, y);
-                System.out.println("[i=" + count + "] x:\t" + (int)x + ",\ty:\t" + (int)y);
+                //System.out.println("[i=" + count + "] x:\t" + (int)x + ",\ty:\t" + (int)y);
                 count++;
             }
             angle += 2*Math.PI/islands_groups.length;

@@ -5,10 +5,11 @@ import it.polimi.ingsw.model.utils.Printer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
-import java.util.Scanner;
 
 public class ServerDispatcher extends Thread {
     private List<WaitingRoom> two_players, three_players, four_players;

@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model.utils;
 
-import java.util.Locale;
-
 public enum Color {
     YELLOW(0),
     BLUE(1),
