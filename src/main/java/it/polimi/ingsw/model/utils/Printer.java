@@ -103,4 +103,37 @@ public class Printer {
         ).append("\n");
         return sb.toString();
     }
+
+    public static String printColorsArray(Color[] colors){
+        StringBuilder s = new StringBuilder();
+        s.append("(Available: ");
+        for(Color c : colors){
+            s.append(Color.colorToViewString(c));
+            if(c!=(colors[colors.length-1])) s.append(", ");
+        }
+        s.append(")");
+        return s.toString();
+    }
+
+    public static String printMotherSteps(int[] steps){
+        StringBuilder s = new StringBuilder();
+        s.append("(");
+        if(steps.length==1){
+            s.append(1);
+        }
+        else if(steps.length==2){
+            s.append("1 or 2");
+        }
+        else{
+            s.append("From ").append(1).append(" to ").append(steps.length);
+        }
+        s.append(")");
+        return s.toString();
+    }
+
+    public static String printAvailableClouds(){
+        StringBuilder s = new StringBuilder();
+        s.append("(");
+        return s.toString();
+    }
 }

@@ -95,14 +95,38 @@ public class InputUtils {
         return false;
     }
 
-    public static Color[] getAvailableEntranceColors(GameBoard gameboard, String user){
+    /**
+     * Returns the available students' colors in the school entrance
+     * @param gameboard model of reference
+     * @param user player's username
+     * @param chosen
+     * @return Color array
+     */
+    public static Color[] getAvailableEntranceColors(GameBoard gameboard, String user, Map<Color, Integer> chosen){
         Map<Color, Integer> map = gameboard.getPlayerByUsername(user).getEntranceStudents();
         List<Color> entrance_colors = new ArrayList<>();
-        for(Map.Entry<Color, Integer> entry : map.entrySet()){
-            if(entry.getValue()>0){
-                entrance_colors.add(entry.getKey());
+        for(Color key : map.keySet()){
+            if(map.getOrDefault(key,0) - chosen.getOrDefault(key,0) > 0 ){
+                entrance_colors.add(key);
             }
         }
         return entrance_colors.toArray(new Color[0]);
     }
+
+    /**
+     * Returns the available mother nature's steps
+     * @param gameboard model of reference
+     * @param user player's username
+     * @return Integer array
+     */
+    public static int[] getAvailableSteps(GameBoard gameboard, String user){
+        int steps = gameboard.getPlayerByUsername(user).getLastPlayedCard().getSteps();
+        steps += gameboard.getPlayerByUsername(user).getMotherNatureExtraSteps();
+        int[] available_steps = new int[steps];
+        for(int i=0; i<steps; i++){
+            available_steps[i] = i+1;
+        }
+        return available_steps;
+    }
+
 }

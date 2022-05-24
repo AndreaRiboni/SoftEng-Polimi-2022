@@ -12,7 +12,9 @@ import org.apache.log4j.Logger;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ClientLogic {
     private final MessageSender msg;
@@ -129,12 +131,16 @@ public class ClientLogic {
         Places chosen_places[] = new Places[nof_players+1];
         int chosen_island_indexes[] = new int[nof_players+1];
 
+        Map<Color, Integer> chosen = new HashMap<>();
+
         for(int i=0; i < nof_players + 1; i++) {
+            Color available_colors[] = InputUtils.getAvailableEntranceColors(model, username, chosen);
             chosen_colors[i] = InputUtils.getColor(
-                    StringViewUtility.getViewString("color_of_choice")+ GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_to_move"),
+                    StringViewUtility.getViewString("color_of_choice")+ GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_to_move")+" "+Printer.printColorsArray(available_colors),
                     StringViewUtility.getViewString("invalid_color"),
-                    InputUtils.getAvailableEntranceColors(model, username)
+                    available_colors
             );
+            GenericUtils.incrementMapValue(chosen, chosen_colors[i]);
             int chosen_place = InputUtils.getInt(
                     StringViewUtility.getViewString("places_choice"),
                     StringViewUtility.getViewString("invalid_place"),
@@ -157,9 +163,10 @@ public class ClientLogic {
     }
 
     private void manageMoveMotherNature(Action act){
+        int[] mother_steps = InputUtils.getAvailableSteps(model, username);
         int steps = InputUtils.getInt(
-                StringViewUtility.getViewString("choice_steps"),
-                StringViewUtility.getViewString("invalid_number"), new int[] {1,2,3,4,5, 6, 7, 8}
+                StringViewUtility.getViewString("choice_steps") + " " + Printer.printMotherSteps(mother_steps),
+                StringViewUtility.getViewString("invalid_number"), mother_steps
         );
         act.setMothernatureIncrement(steps);
     }

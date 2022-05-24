@@ -73,14 +73,13 @@ public class GenericUtils {
         return viewcol;
     }
 
-    public static String printColorsArray(Color[] colors){
-        StringBuilder s = new StringBuilder();
-        s.append("[");
-        for(Color c : colors){
-            s.append(c);
-            if(c!=(colors[colors.length-1])) s.append(", ");
+    public static void incrementMapValue(Map<Color, Integer> map, Color key){
+        if(map.containsKey(key)){
+            int val = map.get(key);
+            map.put(key, val+1);
+        } else {
+            map.put(key, 1);
         }
-        s.append("]");
-        return s.toString();
     }
+
 }
