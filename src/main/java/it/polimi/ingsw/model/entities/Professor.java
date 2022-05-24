@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.entities;
 
-import it.polimi.ingsw.model.places.School;
 import it.polimi.ingsw.model.utils.Color;
 
 import java.io.Serializable;

@@ -2,10 +2,8 @@ package it.polimi.ingsw.model.utils;
 
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
-import it.polimi.ingsw.model.entities.cards.*;
 import it.polimi.ingsw.model.places.Cloud;
 import it.polimi.ingsw.model.places.Island;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -13,7 +11,6 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.Map;
 
 public class StringViewUtility {
 

@@ -1,10 +1,6 @@
 package it.polimi.ingsw.model.places;
 
-import it.polimi.ingsw.model.utils.Color;
-import it.polimi.ingsw.model.utils.EriantysException;
-
 import java.io.Serializable;
-import java.util.Map;
 
 public class Cloud extends StudentPlace implements Serializable {
     public static final boolean SIDE_2_4 = true, SIDE_3 = false;

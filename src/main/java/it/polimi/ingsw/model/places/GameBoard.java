@@ -1,13 +1,17 @@
 package it.polimi.ingsw.model.places;
 
-import it.polimi.ingsw.model.entities.*;
+import it.polimi.ingsw.model.entities.MotherNature;
+import it.polimi.ingsw.model.entities.Player;
+import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
-import it.polimi.ingsw.model.utils.*;
+import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.EriantysException;
+import it.polimi.ingsw.model.utils.GenericUtils;
+import it.polimi.ingsw.model.utils.Printer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 

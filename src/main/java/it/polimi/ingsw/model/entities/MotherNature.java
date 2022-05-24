@@ -2,9 +2,9 @@ package it.polimi.ingsw.model.entities;
 
 import it.polimi.ingsw.model.entities.cards.AssistCard;
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.places.Island;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
-import it.polimi.ingsw.model.places.Island;
 
 import java.io.Serializable;
 

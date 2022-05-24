@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model.entities;
 
 import it.polimi.ingsw.model.entities.cards.AssistCard;
-import it.polimi.ingsw.model.entities.cards.CharacterCard;
-import it.polimi.ingsw.model.places.Bag;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.places.School;
@@ -11,7 +9,7 @@ import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GenericUtils;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Map;
 
 public class Player implements Serializable {
     private int turn_value, coins;

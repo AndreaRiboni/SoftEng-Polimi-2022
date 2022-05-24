@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.entities;
 
-import it.polimi.ingsw.model.entities.cards.*;
+import it.polimi.ingsw.model.entities.cards.AssistCard;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

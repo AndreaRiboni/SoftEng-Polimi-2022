@@ -2,11 +2,11 @@ package it.polimi.ingsw.model.places;
 
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
-import it.polimi.ingsw.model.utils.*;
+import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.EriantysException;
+import it.polimi.ingsw.model.utils.StringViewUtility;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Island extends StudentPlace implements TowerPlace, Serializable {
     private boolean locked;

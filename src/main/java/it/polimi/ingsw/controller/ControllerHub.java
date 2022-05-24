@@ -1,14 +1,14 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.places.*;
+import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.util.*;
+import java.util.List;
 
 /*
 TODO: we should avoid accessing directly to the data structures (i.e. the students list)

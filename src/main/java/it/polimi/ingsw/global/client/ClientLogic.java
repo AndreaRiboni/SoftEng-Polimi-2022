@@ -9,7 +9,6 @@ import it.polimi.ingsw.model.utils.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
