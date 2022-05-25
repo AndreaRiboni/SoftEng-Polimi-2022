@@ -2,7 +2,9 @@ package it.polimi.ingsw.global.client;
 
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
+import it.polimi.ingsw.model.utils.GameBoardContainer;
 import it.polimi.ingsw.model.utils.GamePhase;
+import it.polimi.ingsw.view.GameGraphicController;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -18,14 +20,20 @@ public class NetworkListener extends Thread{
     private List<GamePhase> gamephases_response;
     private Action act_response;
     private static final Logger log = LogManager.getRootLogger();
-    private final ClientLogic client_logic;
+    private final GameBoardContainer client_logic;
+    private boolean isForGUI;
 
-    public NetworkListener(Socket socket, ObjectInputStream in, ClientLogic client_logic){
+    public NetworkListener(Socket socket, ObjectInputStream in, GameBoardContainer client_logic){
         this.socket = socket;
         this.in = in;
         gamephases_response = null;
         response_ready = false;
         this.client_logic = client_logic;
+        isForGUI = false;
+    }
+
+    public void setForGUI(){
+        isForGUI = true;
     }
 
     public synchronized List<GamePhase> getPhasesIfReady(){
@@ -50,8 +58,12 @@ public class NetworkListener extends Thread{
     }
 
     public synchronized void setResponse(Action detailed_response){
-        act_response = detailed_response;
-        response_ready = true;
+        if(isForGUI){
+            client_logic.notifyResponse(detailed_response);
+        } else {
+            act_response = detailed_response;
+            response_ready = true;
+        }
     }
 
     public synchronized void setGameBoardResponse(GameBoard model){
@@ -84,6 +96,7 @@ public class NetworkListener extends Thread{
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException | NullPointerException ex){
+                ex.printStackTrace();
                 System.err.println("An error occurred while communicating with the server! Someone could have had a problem or the server could be unavailable");
                 System.exit(0);
             }

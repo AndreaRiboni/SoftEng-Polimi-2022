@@ -1,5 +1,8 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.utils.Action;
+import it.polimi.ingsw.model.utils.GameBoardContainer;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +27,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-public class GameGraphicController implements Initializable {
+public class GameGraphicController implements Initializable, GameBoardContainer {
     @FXML
     public ChoiceBox<String> assistant_choice;
     private final String[] assistants_id = {"1", "2", "3", "4", "5","6","7","8","9","10"};
@@ -151,6 +154,11 @@ public class GameGraphicController implements Initializable {
         alignClouds();
         //alignIslands(new int[]{1, 1, 1, 1, 8});
     }
+
+    public void setGameBoard(GameBoard model){}
+
+    @Override
+    public void notifyResponse(Action action) {}
 
     public void schools(ActionEvent event){
         String players = schools.getValue();

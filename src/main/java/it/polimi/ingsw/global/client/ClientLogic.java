@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ClientLogic {
+public class ClientLogic implements GameBoardContainer {
     private final MessageSender msg;
     private final NetworkListener listener;
     private static final Logger log = LogManager.getRootLogger();
@@ -25,7 +25,7 @@ public class ClientLogic {
     private String username;
 
     public ClientLogic(){
-        String ip_address = InputUtils.getString("If you don't want to connect to localhost, type the correct ip now. Otherwise, press ENTER");
+        String ip_address = InputUtils.getString(StringViewUtility.getViewString("ask_for_ip"));
         msg = new MessageSender(ip_address);
         model = null;
         username = null;
@@ -53,6 +53,11 @@ public class ClientLogic {
         this.model = model;
         System.out.println(model);
         if(model.isGameEnded()) manageEndGame();
+    }
+
+    @Override
+    public void notifyResponse(Action action) {
+        return; //used for gui
     }
 
     private synchronized GameBoard getGameBoard(){

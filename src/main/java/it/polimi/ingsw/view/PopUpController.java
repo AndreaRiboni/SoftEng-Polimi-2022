@@ -12,6 +12,7 @@ import javafx.scene.control.TextArea;
 
 
 public class PopUpController implements Initializable{
+    private String title, message;
 
     @FXML
     private TextArea errorMessage;
@@ -25,21 +26,33 @@ public class PopUpController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        errorTitle.setText(PopUpLauncher.getTitle());
-        errorMessage.setText(PopUpLauncher.getMessage());
         errorMessage.setEditable(false);
+        forceInitialize();
+    }
+
+    public void forceInitialize(){
+        errorTitle.setText(title);
+        errorMessage.setText(message);
     }
 
     @FXML
     private void delete(ActionEvent event) {
         confirmed = false;
-        PopUpLauncher.close();
+        //PopUpLauncher.close();
     }
 
     @FXML
     private void confirmed(ActionEvent event) {
         confirmed = true;
-        PopUpLauncher.close();
+        //PopUpLauncher.close();
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public void setMessage(String msg){
+        message = msg;
     }
 
 }

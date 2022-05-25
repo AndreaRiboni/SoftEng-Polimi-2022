@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GUILauncher extends Application {
-    public static int NOF_PLAYERS;
 
     @Override
     public void start(Stage stage) throws IOException{
@@ -20,18 +19,8 @@ public class GUILauncher extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        start_game();
-    }
-
-    public void start_game() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("gameGraphic.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1290, 690);
-        Stage stage = new Stage();
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/Copertina.jpg")));
-        stage.setTitle("Gameboard");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        LoginController loginController = fxmlLoader.getController();
+        loginController.setOwnStage(stage);
     }
 
    public static void main(String[] args) {

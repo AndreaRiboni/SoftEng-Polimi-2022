@@ -15,14 +15,6 @@
             <Image url="@../../../../graphics/Copertina.jpg" />
          </image></ImageView>
         <ProgressBar layoutX="-1.0" layoutY="362.0" prefHeight="20.0" prefWidth="600.0" />
-        <Label contentDisplay="TOP" layoutX="240.0" layoutY="183.0" text="LOADING..." textFill="WHITE">
-            <font>
-                <Font size="24.0" />
-            </font>
-            <effect>
-                <Blend />
-            </effect>
-        </Label>
         <ImageView fitHeight="29.0" fitWidth="35.0" layoutX="557.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
 
         </ImageView>

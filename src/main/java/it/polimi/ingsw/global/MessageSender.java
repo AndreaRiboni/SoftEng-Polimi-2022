@@ -20,6 +20,7 @@ public class MessageSender {
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private static final Logger log = LogManager.getRootLogger();
+    private String ip;
 
     public MessageSender(String ip_address){
         try {
@@ -30,6 +31,7 @@ public class MessageSender {
                 System.out.println("This server is unreachable. You're now being connected to localhost");
                 ip_address = "localhost";
             }
+            ip = ip_address;
             socket = new Socket(ip_address, MultiServerLauncher.PORT);
             output = new ObjectOutputStream(socket.getOutputStream());
             output.flush();
@@ -37,6 +39,7 @@ public class MessageSender {
             input = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             log.error("Unable to initialize socket");
+            ip = "none";
         }
     }
 
@@ -91,6 +94,10 @@ public class MessageSender {
 
     public ObjectInputStream getInput(){
         return input;
+    }
+
+    public String getIP(){
+        return ip;
     }
 
 }

@@ -6,14 +6,16 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
 public class PopUpLauncher {
-
-    private static String title, message;
-    private static Stage window;
+    private Stage window;
+    private PopUpController controller;
+    private String title, message;
 
     public PopUpLauncher(String title, String message) {
         this.title = title;
@@ -21,21 +23,25 @@ public class PopUpLauncher {
     }
 
     public PopUpLauncher() {
-        this.title = "";
-        this.message = "";
+        this("", "");
     }
 
     private void init() {
-        Parent root = null;
+        Pane root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("popUp.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUp.fxml"));
+            root = fxmlLoader.load();
+            controller = fxmlLoader.getController();
+            controller.setTitle(title);
+            controller.setMessage(message);
         } catch (IOException ex) {
-            System.out.println("error");
+            System.out.println("Could not instatiate the pop up window");
         }
         Scene s = new Scene(root, 412, 257);
+        controller.forceInitialize();
         window = new Stage();
         window.setScene(s);
-        window.setTitle("ERROR");
+        window.setTitle(this.title);
     }
 
 
@@ -44,6 +50,7 @@ public class PopUpLauncher {
         window.setAlwaysOnTop(true);
         window.setResizable(false);
         window.initModality(Modality.APPLICATION_MODAL);
+        System.out.println("launching");
         window.showAndWait();
     }
 
@@ -56,26 +63,11 @@ public class PopUpLauncher {
         this.message = message;
     }
 
-    public static boolean choice() {
+    public boolean choice() {
         return PopUpController.confirmed;
     }
 
-
-    public static void close() {
+    public void close() {
         window.close();
-    }
-
-
-    public static String getTitle() {
-        return title;
-    }
-
-    public static String getMessage() {
-        return message;
-    }
-
-
-    public static boolean getChoice() {
-        return PopUpController.confirmed;
     }
 }
