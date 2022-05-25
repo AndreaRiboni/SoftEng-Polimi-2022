@@ -34,12 +34,18 @@ public class LoginController implements Initializable {
     private final String[] nof_players = {"2","3"};
 
     public void switchScene(ActionEvent event) throws IOException {
+        error invalid_nickname = new error("NICKNAME ERROR", "you chose an invalid nickname or another player is using this nickname");
         System.out.println("Number of players: "+choiceBox.getValue());
         System.out.println("Nickname: "+nickname.getText());
-        FXMLLoader fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("waiting.fxml"));
-        SubScene.setVisible(true);
-        SubScene.setRoot(fxmlLoader.load());
-        GUILauncher.NOF_PLAYERS = Integer.parseInt(choiceBox.getValue());
+        if(nickname.getText() == ""){
+            invalid_nickname.show();
+        }
+        else {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("waiting.fxml"));
+            SubScene.setVisible(true);
+            SubScene.setRoot(fxmlLoader.load());
+            GUILauncher.NOF_PLAYERS = Integer.parseInt(choiceBox.getValue());
+        }
     }
 
     @Override
