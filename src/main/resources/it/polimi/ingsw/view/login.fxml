@@ -29,6 +29,12 @@
             </font>
         </Label>
         <TextField fx:id="nickname" layoutX="378.0" layoutY="115.0" />
+        <Label layoutX="59.0" layoutY="169.0" text="Choose ip server">
+            <font>
+                <Font name="System Bold" size="19.0" />
+            </font>
+        </Label>
+        <TextField fx:id="ip" layoutX="378.0" layoutY="170.0" />
         <ChoiceBox fx:id="choiceBox" layoutX="378.0" layoutY="221.0" prefWidth="150.0" />
         <Button layoutX="242.0" layoutY="301.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="65.0" prefWidth="131.0" styleClass="joinButton" stylesheets="@../../../../css/login.css" text="Join" textFill="WHITE">
             <font>
@@ -40,11 +46,5 @@
                 <Region />
             </root>
         </SubScene>
-        <Label layoutX="59.0" layoutY="169.0" text="Choose ip server">
-            <font>
-                <Font name="System Bold" size="19.0" />
-            </font>
-        </Label>
-        <TextField fx:id="ip" layoutX="378.0" layoutY="170.0" />
     </children>
 </AnchorPane>
