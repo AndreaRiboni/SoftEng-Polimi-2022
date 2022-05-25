@@ -122,6 +122,7 @@ public class gameGraphicController implements Initializable {
         BorderPane bp = new BorderPane(sp);
         subscene.setRoot(bp);
         zoom(pane);
+        forceZoom(pane, 300, true);
         navigate(pane);
 
         subscene.setOnMouseClicked(e -> {
@@ -182,13 +183,15 @@ public class gameGraphicController implements Initializable {
     private void zoom(Pane pane) {
         pane.setOnScroll(
                 event -> {
-                    forceZoom(pane, event.getDeltaY());
+                    forceZoom(pane, event.getDeltaY(), false);
                     event.consume();
                 });
     }
 
-    private void forceZoom(Pane pane, double deltaY){
-        double zoomFactor = 1.05;
+    private void forceZoom(Pane pane, double deltaY, boolean start){
+        double zoomFactor;
+        if(start)  zoomFactor = 0.3;
+        else{ zoomFactor = 1.05;}
         if (deltaY < 0) {
             zoomFactor = 0.95;
         }
