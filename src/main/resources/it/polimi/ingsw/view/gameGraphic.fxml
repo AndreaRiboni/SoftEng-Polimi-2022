@@ -24,14 +24,14 @@
                     <tabs>
                         <Tab text="My school">
                             <content>
-                                <AnchorPane>
+                                <AnchorPane fx:id="player_container">
                                     <children>
                                         <ImageView fitHeight="772.0" fitWidth="636.0" layoutY="-3.0" pickOnBounds="true">
                                             <image>
                                                 <Image url="@../../../../graphics/wood.jpg" />
                                             </image>
                                         </ImageView>
-                                        <ImageView fitHeight="311.0" fitWidth="741.0" layoutX="-40.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" fx:id="my_school">
+                                        <ImageView fx:id="my_school" fitHeight="311.0" fitWidth="741.0" layoutX="-40.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                                             <image>
                                                 <Image url="@../../../../graphics/Plancia_DEF3.png" />
                                             </image>
@@ -116,7 +116,7 @@
                                         </ImageView>
                                         <ChoiceBox fx:id="assistant_choice" layoutX="373.0" layoutY="473.0" prefWidth="150.0" />
                                         <Label layoutX="373.0" layoutY="449.0" text="Which assistant do you want to use?" />
-                                        <Button layoutX="373.0" layoutY="518.0" mnemonicParsing="false" onAction="#used" prefHeight="53.0" prefWidth="115.0" styleClass="joinButton" stylesheets="@../../../../css/login.css" text="PLAY" textFill="#f6f6f6" />
+                                        <Button layoutX="373.0" layoutY="518.0" mnemonicParsing="false" onAction="#applyPlayedAssistCardEffect" prefHeight="53.0" prefWidth="115.0" styleClass="joinButton" stylesheets="@../../../../css/login.css" text="PLAY" textFill="#f6f6f6" />
                                         <ImageView fx:id="cross_1" fitHeight="119.0" fitWidth="102.0" layoutX="54.0" layoutY="58.0" pickOnBounds="true">
                                             <image>
                                                 <Image url="@../../../../graphics/cross.png" />
@@ -211,7 +211,7 @@
                                             <font>
                                                 <Font size="21.0" />
                                             </font></Label>
-                                        <Button fx:id="Info" layoutX="27.0" layoutY="307.0" mnemonicParsing="false" onAction="#changevisible" text="Button" />
+                                        <Button fx:id="Info" layoutX="27.0" layoutY="307.0" mnemonicParsing="false" onAction="#toggleDescriptionVisibility" text="Button" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>

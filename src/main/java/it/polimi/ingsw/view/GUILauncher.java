@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -21,6 +22,18 @@ public class GUILauncher extends Application {
         stage.show();
         LoginController loginController = fxmlLoader.getController();
         loginController.setOwnStage(stage);
+
+        fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("gameGraphic.fxml"));
+            Stage stage2 = new Stage();
+            stage2.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/Copertina.jpg")));
+            stage2.setTitle("Eriantys Match");
+            try {
+                stage2.setScene(new Scene(fxmlLoader.load(), 1290, 690));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            stage2.setResizable(true);
+            stage2.show();
     }
 
    public static void main(String[] args) {

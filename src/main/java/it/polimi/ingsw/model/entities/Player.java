@@ -216,4 +216,8 @@ public class Player implements Serializable {
     public void resetAssistCard() {
         played_assistcard = -1;
     }
+
+    public School getSchool(){
+        return school;
+    }
 }

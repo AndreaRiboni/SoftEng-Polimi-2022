@@ -125,7 +125,7 @@ public class LoginController implements Initializable, GameBoardContainer {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    stage.setResizable(false);
+                    stage.setResizable(true);
                     stage.show();
                     this.stage.close();
                 });

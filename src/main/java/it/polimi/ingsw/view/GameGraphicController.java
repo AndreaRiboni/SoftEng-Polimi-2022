@@ -1,10 +1,12 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.places.School;
 import it.polimi.ingsw.model.utils.Action;
+import it.polimi.ingsw.model.utils.Color;
+import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GameBoardContainer;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -14,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -31,6 +34,9 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     private Group[] islands, clouds;
     private final int ISLAND_SIZE = 200;
     private final int STUDENT_SIZE = ISLAND_SIZE/15;
+    private ImageView last_selected;
+    private GameBoard model;
+    private String username;
 
     @FXML
     ChoiceBox<String> assistant_choice;
@@ -53,6 +59,9 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     AnchorPane leftpane, rightpane;
     @FXML
     ImageView my_school;
+    @FXML
+    AnchorPane player_container;
+
     private final String[] players = {"Player 2","Player 3"};
 
     @Override
@@ -66,9 +75,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         Description.setVisible(false);
         schools.getItems().addAll(players);
         schools.setValue("Player 2");
-        schools.setOnAction(this::schools);
         assistant_choice.getItems().addAll(assistants_id);
-        assistant_choice.setOnAction(this::get_assistant);
         for(int i = 0; i<crosses.length; i++){
             crosses[i].setVisible(false);
         }
@@ -83,12 +90,10 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             );
             island_icon.setFitHeight(ISLAND_SIZE);
             island_icon.setFitWidth(ISLAND_SIZE);
-
             GridPane students = new GridPane();
             students.setHgap(2);
             students.setVgap(2);
-            int nof_stud = (int)(Math.random() * 20);
-
+            /*int nof_stud = (int)(Math.random() * 20);
             for(int o = 0; o < nof_stud; o++){
                 int index = (int)(Math.random() * colors.length);
                 ImageView student = new ImageView(
@@ -98,6 +103,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 student.setFitWidth(STUDENT_SIZE);
                 students.add(student, o%8, o/8);
             }
+             */
             islands[i].getChildren().addAll(island_icon, students);
             islands_container.getChildren().add(islands[i]);
         }
@@ -124,9 +130,9 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         sp.setFitToWidth(true);
         BorderPane bp = new BorderPane(sp);
         subscene.setRoot(bp);
-        zoom(pane);
+        addZoomListener(pane);
         forceZoom(pane, 300, true);
-        navigate(pane);
+        applyNavigationListener(pane);
 
         subscene.setOnMouseClicked(e -> {
             List<Integer> fake_islands = new ArrayList<>();
@@ -155,26 +161,75 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             System.out.println(e.getX() + ", " + e.getY());
         });
 
+        model = new GameBoard();
+        try {
+            model.initialize(2, 1);
+        } catch (EriantysException e) {
+            e.printStackTrace();
+        }
+        username = "white";
+        setGameBoard(model);
     }
 
-    public void setGameBoard(GameBoard model){}
+    @Override
+    public void setGameBoard(GameBoard model){
+        this.model = model;
+        //copying my school
+        //copySchool(model.getPlayerByUsername(username).getSchool(), true);
+        copySchool(model.getPlayers()[0].getSchool(), true);
+    }
+
+    private void copySchool(School school, boolean mine){
+        AnchorPane pane = mine ? player_container : null;
+        //removes each non-imageview child
+        if(pane.getChildren().size() > 2) pane.getChildren().remove(2);
+        Group school_elements = new Group();
+        //TODO: towers (needs pngs)
+        //Colors in the correct order
+        Color[] sorted_stud_colors = {Color.GREEN, Color.RED, Color.YELLOW, Color.PINK, Color.BLUE};
+        //Professors TODO: need professors pngs
+        for(int i = 0; i < sorted_stud_colors.length; i++){
+            ImageView prof = new ImageView(
+                    new Image(String.valueOf(getClass().getResource("/Students/"+Color.colorToString(sorted_stud_colors[i])+"stud.png")))
+            );
+            prof.setFitWidth(Positions.PROFESSORS.getSize());
+            prof.setFitHeight(Positions.PROFESSORS.getSize());
+            prof.setTranslateX(Positions.PROFESSORS.getX() + i * Positions.PROFESSORS.getXOff());
+            prof.setTranslateY(Positions.PROFESSORS.getY() + i * Positions.PROFESSORS.getYOff());
+            prof.setOnMouseClicked(e -> selectMovingSubject(prof));
+            school_elements.getChildren().add(prof);
+        }
+        pane.getChildren().add(school_elements);
+    }
+
+    private void selectMovingSubject(ImageView img) {
+        applySelectedEffect(img);
+        if(last_selected != null){
+            removeSelectedEffect(last_selected);
+        }
+        last_selected = img;
+    }
 
     @Override
     public void notifyResponse(Action action) {}
 
-    public void schools(ActionEvent event){
-        String players = schools.getValue();
+    public void toggleDescriptionVisibility(){
+        Description.setVisible(!Description.isVisible());
     }
 
-    public void get_assistant(ActionEvent event){
-        String assistant_id = assistant_choice.getValue();
-    }
-    public void changevisible(){
-        if(Description.isVisible()){Description.setVisible(false);}
-        else{Description.setVisible(true);}
+    private void applySelectedEffect(ImageView img){
+        ColorAdjust selected_effect = new ColorAdjust();
+        selected_effect.setSaturation(0.2);
+        selected_effect.setBrightness(0.8);
+        img.setEffect(selected_effect);
     }
 
-    public void used(){
+    private void removeSelectedEffect(ImageView img){
+        img.setEffect(null);
+    }
+
+    @FXML
+    void applyPlayedAssistCardEffect(){
         String assistant_chosen = assistant_choice.getValue();
         ColorAdjust grayscale = new ColorAdjust();
         grayscale.setSaturation(-1);
@@ -189,7 +244,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         }
     }
 
-    private void zoom(Pane pane) {
+    private void addZoomListener(Pane pane) {
         pane.setOnScroll(
                 event -> {
                     forceZoom(pane, event.getDeltaY(), false);
@@ -208,7 +263,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         pane.setScaleY(pane.getScaleY() * zoomFactor);
     }
 
-    private void navigate(Pane pane){
+    private void applyNavigationListener(Pane pane){
         final double[] start = new double[2];
         pane.setOnDragDetected(event -> {
             start[0] = event.getX();
@@ -240,47 +295,45 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 translate.setToY(y);
                 translate.setNode(child);
                 translate.play();
-                //child.setLayoutX(x);
-                //child.setLayoutY(y);
             }
         }
     }
 
-    void alignClouds(){
+    private void alignClouds(){
         float angle = 0;
-        for(int i = 0; i < clouds.length; i++){
-            double x = subscene.getWidth()/2 + Math.cos(angle) * ISLAND_SIZE - ISLAND_SIZE/2;
-            double y = subscene.getHeight()/2 + Math.sin(angle) * ISLAND_SIZE - ISLAND_SIZE/2;
-            setIslandPos(clouds[i], x, y);
-            angle += 2*Math.PI/clouds.length;
+        for (Group cloud : clouds) {
+            double x = subscene.getWidth() / 2 + Math.cos(angle) * ISLAND_SIZE - ISLAND_SIZE / 2;
+            double y = subscene.getHeight() / 2 + Math.sin(angle) * ISLAND_SIZE - ISLAND_SIZE / 2;
+            setIslandPos(cloud, x, y);
+            angle += 2 * Math.PI / clouds.length;
         }
     }
 
-    void alignIslands(int[] islands_groups){
+    private void alignIslands(int[] islands_groups){
         float angle = 0;
         int count = 0;
-        for(int i = 0; i < islands_groups.length; i++){
+        for (int islands_group : islands_groups) {
             int xoff = 0;
             int yoff = 0;
-            for(int o = 0; o < islands_groups[i]; o++){
-                if(o % 4 == 0 && o > 0){
+            for (int o = 0; o < islands_group; o++) {
+                if (o % 4 == 0 && o > 0) {
                     yoff += ISLAND_SIZE * 0.9;
                     xoff = 0;
-                } else if(o > 0){
+                } else if (o > 0) {
                     xoff += ISLAND_SIZE * 0.7;
                 }
                 //resetIslandPos(islands[count]);
                 int temp_yoff = 0;
-                if(o % 2 == 1 && islands_groups[i] > 1){
+                if (o % 2 == 1) {
                     temp_yoff += ISLAND_SIZE * 0.45;
                 }
-                double x = subscene.getWidth()/2 + Math.cos(angle) * ISLAND_SIZE * 4 + xoff - ISLAND_SIZE/2;
-                double y = subscene.getHeight()/2 + Math.sin(angle) * ISLAND_SIZE * 4 + yoff - ISLAND_SIZE/2 + temp_yoff;
+                double x = subscene.getWidth() / 2 + Math.cos(angle) * ISLAND_SIZE * 4 + xoff - ISLAND_SIZE / 2;
+                double y = subscene.getHeight() / 2 + Math.sin(angle) * ISLAND_SIZE * 4 + yoff - ISLAND_SIZE / 2 + temp_yoff;
                 setIslandPos(islands[count], x, y);
                 //System.out.println("[i=" + count + "] x:\t" + (int)x + ",\ty:\t" + (int)y);
                 count++;
             }
-            angle += 2*Math.PI/islands_groups.length;
+            angle += 2 * Math.PI / islands_groups.length;
         }
     }
 }
