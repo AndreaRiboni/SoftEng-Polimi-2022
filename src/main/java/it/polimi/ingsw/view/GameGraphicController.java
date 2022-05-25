@@ -28,8 +28,12 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class GameGraphicController implements Initializable, GameBoardContainer {
+    private Group[] islands, clouds;
+    private final int ISLAND_SIZE = 200;
+    private final int STUDENT_SIZE = ISLAND_SIZE/15;
+
     @FXML
-    public ChoiceBox<String> assistant_choice;
+    ChoiceBox<String> assistant_choice;
     private final String[] assistants_id = {"1", "2", "3", "4", "5","6","7","8","9","10"};
     @FXML
     Label Description;
@@ -37,31 +41,28 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     Button Info;
     @FXML
     ImageView assistant_1, assistant_2, assistant_3, assistant_4, assistant_5, assistant_6, assistant_7, assistant_8, assistant_9, assistant_10;
-
     @FXML
     SubScene subscene;
-
     @FXML
     ImageView cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10;
-
     @FXML
     ChoiceBox<String> schools;
-    private final String[] players = {"Player 2","Player 3"};
-
-    private Group[] islands, clouds;
-    private final int ISLAND_SIZE = 200;
-    private final int STUDENT_SIZE = ISLAND_SIZE/15;
-
     @FXML
     SplitPane splitpane;
     @FXML
     AnchorPane leftpane, rightpane;
+    @FXML
+    ImageView my_school;
+    private final String[] players = {"Player 2","Player 3"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //lock tabpane
         leftpane.maxWidthProperty().bind(splitpane.widthProperty().multiply(0.5));
         rightpane.maxWidthProperty().bind(splitpane.widthProperty().multiply(0.5));
+        //put images into an array
         ImageView[] crosses = { cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10};
+        //show descriptions and images
         Description.setVisible(false);
         schools.getItems().addAll(players);
         schools.setValue("Player 2");
@@ -148,11 +149,12 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             System.out.println(fake_islands);
             alignIslands(array);
         });
-        //alignIslands(new int[]{4, 4, 4});
-        //alignIslands(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
-        alignIslands(new int[]{2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
+        alignIslands(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
         alignClouds();
-        //alignIslands(new int[]{1, 1, 1, 1, 8});
+        my_school.setOnMouseClicked(e->{
+            System.out.println(e.getX() + ", " + e.getY());
+        });
+
     }
 
     public void setGameBoard(GameBoard model){}
