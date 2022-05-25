@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+//import it.polimi.ingsw.error;
 import it.polimi.ingsw.global.MessageSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,17 +30,26 @@ public class LoginController implements Initializable {
     private TextField nickname;
 
     @FXML
+    private TextField ip;
+
+    @FXML
     private ChoiceBox<String> choiceBox;
 
     private final String[] nof_players = {"2","3"};
 
     public void switchScene(ActionEvent event) throws IOException {
+        PopUpLauncher invalid_nickname = new PopUpLauncher("NICKNAME ERROR", "You chose an invalid nickname or another player is using this nickname");
         System.out.println("Number of players: "+choiceBox.getValue());
         System.out.println("Nickname: "+nickname.getText());
-        FXMLLoader fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("waiting.fxml"));
-        SubScene.setVisible(true);
-        SubScene.setRoot(fxmlLoader.load());
-        GUILauncher.NOF_PLAYERS = Integer.parseInt(choiceBox.getValue());
+        if(nickname.getText() == ""){
+            invalid_nickname.show();
+        }
+        else {
+            FXMLLoader fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("waiting.fxml"));
+            SubScene.setVisible(true);
+            SubScene.setRoot(fxmlLoader.load());
+            GUILauncher.NOF_PLAYERS = Integer.parseInt(choiceBox.getValue());
+        }
     }
 
     @Override
