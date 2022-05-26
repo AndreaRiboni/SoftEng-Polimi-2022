@@ -141,7 +141,7 @@ public class LoginController implements Initializable, GameBoardContainer {
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/Copertina.jpg")));
                     stage.setTitle("Eriantys Match");
                     stage.setScene(new Scene(gameparent, 1290, 690));
-                    stage.setResizable(true);
+                    stage.setResizable(false);
                     stage.show();
                     this.stage.close();
                 });
