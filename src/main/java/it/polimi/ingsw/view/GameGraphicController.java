@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -245,8 +246,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             //copying islands and clouds
             copyIslands();
             copyClouds();
-            System.out.println("My user is " + username);
             copyOtherSchools();
+            copyMotherNature();
         });
     }
 
@@ -330,6 +331,13 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 count++;
             }
         }
+    }
+
+    private void copyMotherNature(){
+        int island_index = model.getMotherNature().getIslandIndex();
+        Glow glow = new Glow();
+        glow.setLevel(2);
+        islands[island_index].getChildren().get(0).setEffect(glow);
     }
 
     private void copyClouds(){
