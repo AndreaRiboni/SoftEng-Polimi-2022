@@ -1,12 +1,13 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.places.Island;
+import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.places.School;
-import it.polimi.ingsw.model.utils.Action;
-import it.polimi.ingsw.model.utils.Color;
-import it.polimi.ingsw.model.utils.EriantysException;
-import it.polimi.ingsw.model.utils.GameBoardContainer;
+import it.polimi.ingsw.model.utils.*;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -16,7 +17,6 @@ import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -25,10 +25,7 @@ import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GameGraphicController implements Initializable, GameBoardContainer {
     private Group[] islands, clouds;
@@ -36,7 +33,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     private final int STUDENT_SIZE = ISLAND_SIZE/15;
     private ImageView last_selected;
     private GameBoard model;
-    private String username;
+    public static String username;
+    public static int nof_players;
 
     @FXML
     ChoiceBox<String> assistant_choice;
@@ -93,23 +91,13 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             GridPane students = new GridPane();
             students.setHgap(2);
             students.setVgap(2);
-            /*int nof_stud = (int)(Math.random() * 20);
-            for(int o = 0; o < nof_stud; o++){
-                int index = (int)(Math.random() * colors.length);
-                ImageView student = new ImageView(
-                        new Image(String.valueOf(getClass().getResource("/Students/"+colors[index]+"stud.png")))
-                );
-                student.setFitHeight(STUDENT_SIZE);
-                student.setFitWidth(STUDENT_SIZE);
-                students.add(student, o%8, o/8);
-            }
-             */
             islands[i].getChildren().addAll(island_icon, students);
             islands_container.getChildren().add(islands[i]);
         }
         //creates the clouds
         Group clouds_container = new Group();
-        clouds = new Group[2];
+        clouds = new Group[nof_players];
+        System.out.println("players: " + nof_players);
         for(int i = 0; i < clouds.length; i++){
             clouds[i] = new Group();
             ImageView cloud_icon  = new ImageView(
@@ -117,7 +105,10 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             );
             cloud_icon.setFitHeight(ISLAND_SIZE);
             cloud_icon.setFitWidth(ISLAND_SIZE);
-            clouds[i].getChildren().add(cloud_icon);
+            GridPane students = new GridPane();
+            students.setHgap(2);
+            students.setVgap(2);
+            clouds[i].getChildren().addAll(cloud_icon, students);
             clouds_container.getChildren().add(clouds[i]);
         }
         Pane pane = new Pane(islands_container, clouds_container);
@@ -133,50 +124,138 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         addZoomListener(pane);
         forceZoom(pane, 300, true);
         applyNavigationListener(pane);
-
-        subscene.setOnMouseClicked(e -> {
-            List<Integer> fake_islands = new ArrayList<>();
-            int sum = 0;
-            Random rand = new Random();
-            do {
-                if(fake_islands.size() == 11) {
-                    fake_islands.add(12 - sum);
-                    sum = 12;
-                }
-                int val = (int) (Math.log(1-rand.nextDouble())/(-0.5));
-                if(val == 0 || sum + val > 12) continue;
-                sum += val;
-                fake_islands.add(val);
-            } while (sum < 12);
-            int[] array = new int[fake_islands.size()];
-            for(int i = 0; i < fake_islands.size(); i++){
-                array[i] = fake_islands.get(i);
-            }
-            System.out.println(fake_islands);
-            alignIslands(array);
-        });
-        alignIslands(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1});
-        alignClouds();
-        my_school.setOnMouseClicked(e->{
-            System.out.println(e.getX() + ", " + e.getY());
-        });
-
-        model = new GameBoard();
-        try {
-            model.initialize(2, 1);
-        } catch (EriantysException e) {
-            e.printStackTrace();
-        }
-        username = "white";
-        setGameBoard(model);
+        System.out.println("Controller created");
     }
 
     @Override
     public void setGameBoard(GameBoard model){
+        System.out.println("Received gameboard");
         this.model = model;
-        //copying my school
-        //copySchool(model.getPlayerByUsername(username).getSchool(), true);
-        copySchool(model.getPlayers()[0].getSchool(), true);
+        Platform.runLater(() -> {
+            //copying my school
+            copySchool(model.getPlayerByUsername(username).getSchool(), true);
+            //copying islands and clouds
+            copyIslands();
+            copyClouds();
+        });
+    }
+
+    private void drawTowers(Group school_elements, School school){
+        Color tower_color = school.getTowerColor();
+        int xoff = 0, yoff = 0;
+        for(int i = 0; i < school.getNumberOfTowers(); i++){
+            ImageView tower = new ImageView(
+                    new Image(String.valueOf(getClass().getResource("/Towers/"+Color.colorToString(tower_color)+"tower.png")))
+            );
+            tower.setFitWidth(Positions.TOWERS.getWidth());
+            tower.setFitHeight(Positions.TOWERS.getHeight());
+            tower.setTranslateX(Positions.TOWERS.getX() + xoff * Positions.TOWERS.getXOff());
+            tower.setTranslateY(Positions.TOWERS.getY() + yoff * Positions.TOWERS.getYOff());
+            school_elements.getChildren().add(tower);
+            xoff++;
+            if(i == 3){
+                yoff++;
+                xoff = 0;
+            }
+        }
+    }
+
+    private void drawProfessors(Group school_elements, Color[] sorted_stud_colors){
+        for(int i = 0; i < sorted_stud_colors.length; i++){
+            Player reference = model.getProfFromColor(sorted_stud_colors[i]).getPlayer();
+            if(reference != null && reference.getUsername().equals(username)) {
+                ImageView prof = new ImageView(
+                        new Image(String.valueOf(getClass().getResource("/Professors/" + Color.colorToString(sorted_stud_colors[i]) + "prof.png")))
+                );
+                prof.setFitWidth(Positions.PROFESSORS.getWidth());
+                prof.setFitHeight(Positions.PROFESSORS.getHeight());
+                prof.setTranslateX(Positions.PROFESSORS.getX() + i * Positions.PROFESSORS.getXOff());
+                prof.setTranslateY(Positions.PROFESSORS.getY() + i * Positions.PROFESSORS.getYOff());
+                school_elements.getChildren().add(prof);
+            }
+        }
+    }
+
+    private void drawDiningHall(Group school_elements, School school) {
+        float off = Positions.DINING_HALL_STUDENTS.getXOff();
+        float[] xoff = {0, off, 2*off, 3*off, 4*off};
+        float[] yoff = new float[5];
+        int index_col = 0;
+        Map<Color, Integer> students = school.getDiningStudents();
+        for(Color color : students.keySet()){ //for each color
+            for(int i = 0; i < students.getOrDefault(color, 0); i++){ //as many as the nof students of that color
+                ImageView student = new ImageView(
+                        new Image(String.valueOf(getClass().getResource("/Students/"+Color.colorToString(color)+"stud.png")))
+                );
+                student.setFitWidth(Positions.DINING_HALL_STUDENTS.getWidth());
+                student.setFitHeight(Positions.DINING_HALL_STUDENTS.getHeight());
+                student.setTranslateX(Positions.DINING_HALL_STUDENTS.getX() + xoff[index_col]);
+                student.setTranslateY(Positions.DINING_HALL_STUDENTS.getY() + yoff[index_col]);
+                school_elements.getChildren().add(student);
+                yoff[index_col] += Positions.DINING_HALL_STUDENTS.getYOff();
+            }
+            index_col++;
+        }
+    }
+
+    private void drawEntrance(Group school_elements, School school){
+        int xoff = 0, yoff = 0, count = 0;
+        Map<Color, Integer> students = school.getEntranceStudents();
+        for(Color col : students.keySet()){
+            for(int i = 0; i < students.getOrDefault(col, 0); i++){
+                ImageView student = new ImageView(
+                        new Image(String.valueOf(getClass().getResource("/Students/"+Color.colorToString(col)+"stud.png")))
+                );
+                student.setFitWidth(Positions.ENTRANCE_STUDENTS.getWidth());
+                student.setFitHeight(Positions.ENTRANCE_STUDENTS.getHeight());
+                student.setTranslateX(Positions.ENTRANCE_STUDENTS.getX() + xoff * Positions.ENTRANCE_STUDENTS.getXOff());
+                student.setTranslateY(Positions.ENTRANCE_STUDENTS.getY() + yoff * Positions.ENTRANCE_STUDENTS.getYOff());
+                student.setOnMouseClicked(e -> selectMovingSubject(student));
+                school_elements.getChildren().add(student);
+                xoff++;
+                if(count == 4){
+                    yoff++;
+                    xoff = 0;
+                }
+                count++;
+            }
+        }
+    }
+
+    private void copyClouds(){
+        alignClouds();
+        for(int i = 0; i < nof_players; i++){
+            try {
+                Map<Color, Integer> cloud_stud = model.getCloud(i).getStudents();
+                GridPane cloud_grid = (GridPane) clouds[i].getChildren().get(1);
+                int count = 0;
+                for(Color color : cloud_stud.keySet()) {
+                    for (int o = 0; o < cloud_stud.getOrDefault(color, 0); o++) {
+                        ImageView student = new ImageView(
+                                new Image(String.valueOf(getClass().getResource("/Students/" + Color.colorToString(color) + "stud.png")))
+                        );
+                        student.setFitHeight(STUDENT_SIZE * 5);
+                        student.setFitWidth(STUDENT_SIZE * 5);
+                        cloud_grid.add(student, count % 2, count / 2);
+                        count++;
+                    }
+                }
+            } catch (EriantysException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void copyIslands(){
+        int count = 0;
+        int[] island_groups = new int[model.getNofGroupsOfIslands()];
+        int linked = 0;
+        for(int i = 0; i < island_groups.length; i+=linked){
+            linked = model.getIslands()[count].countNextLinked();
+            island_groups[i] = linked;
+            count += linked;
+        }
+        alignIslands(island_groups);
     }
 
     private void copySchool(School school, boolean mine){
@@ -184,21 +263,15 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         //removes each non-imageview child
         if(pane.getChildren().size() > 2) pane.getChildren().remove(2);
         Group school_elements = new Group();
-        //TODO: towers (needs pngs)
+        //Towers
+        drawTowers(school_elements, school);
         //Colors in the correct order
         Color[] sorted_stud_colors = {Color.GREEN, Color.RED, Color.YELLOW, Color.PINK, Color.BLUE};
-        //Professors TODO: need professors pngs
-        for(int i = 0; i < sorted_stud_colors.length; i++){
-            ImageView prof = new ImageView(
-                    new Image(String.valueOf(getClass().getResource("/Students/"+Color.colorToString(sorted_stud_colors[i])+"stud.png")))
-            );
-            prof.setFitWidth(Positions.PROFESSORS.getSize());
-            prof.setFitHeight(Positions.PROFESSORS.getSize());
-            prof.setTranslateX(Positions.PROFESSORS.getX() + i * Positions.PROFESSORS.getXOff());
-            prof.setTranslateY(Positions.PROFESSORS.getY() + i * Positions.PROFESSORS.getYOff());
-            prof.setOnMouseClicked(e -> selectMovingSubject(prof));
-            school_elements.getChildren().add(prof);
-        }
+        //Professors
+        drawProfessors(school_elements, sorted_stud_colors);
+        //Students
+        drawDiningHall(school_elements, school);
+        drawEntrance(school_elements, school);
         pane.getChildren().add(school_elements);
     }
 
@@ -211,7 +284,14 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     }
 
     @Override
-    public void notifyResponse(Action action) {}
+    public void notifyResponse(Action action) {
+        System.out.println("Received action " + action.getGamePhase());
+    }
+
+    @Override
+    public void notifyResponse(List<GamePhase> gamephases) {
+        System.out.println("Received gamephases list");
+    }
 
     public void toggleDescriptionVisibility(){
         Description.setVisible(!Description.isVisible());
@@ -309,6 +389,27 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         }
     }
 
+    private void fillIslands(){
+        Island[] model_islands = model.getIslands();
+        for(int i = 0; i < model_islands.length; i++){
+            GridPane island_grid = (GridPane) islands[i].getChildren().get(1);
+            Map<Color, Integer> island_studs = model_islands[i].getStudents();
+            int total = GenericUtils.sumValues(island_studs);
+            int count = 0;
+            for(Color color : island_studs.keySet()) {
+                for (int o = 0; o < island_studs.getOrDefault(color, 0); o++) {
+                    ImageView student = new ImageView(
+                            new Image(String.valueOf(getClass().getResource("/Students/" + Color.colorToString(color) + "stud.png")))
+                    );
+                    student.setFitHeight(STUDENT_SIZE);
+                    student.setFitWidth(STUDENT_SIZE);
+                    island_grid.add(student, count % 8, count / 8);
+                    count++;
+                }
+            }
+        }
+    }
+
     private void alignIslands(int[] islands_groups){
         float angle = 0;
         int count = 0;
@@ -335,5 +436,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             }
             angle += 2 * Math.PI / islands_groups.length;
         }
+        fillIslands();
     }
 }

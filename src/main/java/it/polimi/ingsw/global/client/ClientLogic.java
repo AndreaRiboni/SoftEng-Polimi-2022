@@ -60,6 +60,11 @@ public class ClientLogic implements GameBoardContainer {
         return; //used for gui
     }
 
+    @Override
+    public void notifyResponse(List<GamePhase> gamephases) {
+        return; //used for gui
+    }
+
     private synchronized GameBoard getGameBoard(){
         return model == null ? createDefaultGameBoard() : model;
     }

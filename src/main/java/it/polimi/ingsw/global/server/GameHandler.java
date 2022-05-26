@@ -98,8 +98,10 @@ public class GameHandler implements Runnable {
                 Action official_start = new Action();
                 official_start.setGamePhase(GamePhase.CORRECT);
                 official_start.setUsername(usernames[i]);
+                official_start.setNOfPlayers(players.length);
                 sendAction(i, official_start);
             }
+            sendGameBoard();
             do {
                 System.out.println(); //new turn
                 int player_playing = getWhoIsPlaying();

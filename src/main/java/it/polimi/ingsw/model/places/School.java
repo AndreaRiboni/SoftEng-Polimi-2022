@@ -96,4 +96,8 @@ public class School implements Serializable {
     public void addTower(Color tower) throws EriantysException {
         tower_hall.addTower(tower);
     }
+
+    public Color getTowerColor(){
+        return tower_color;
+    }
 }

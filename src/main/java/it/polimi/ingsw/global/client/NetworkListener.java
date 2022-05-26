@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NetworkListener extends Thread{
@@ -20,7 +21,7 @@ public class NetworkListener extends Thread{
     private List<GamePhase> gamephases_response;
     private Action act_response;
     private static final Logger log = LogManager.getRootLogger();
-    private final GameBoardContainer client_logic;
+    private List<GameBoardContainer> client_logic;
     private boolean isForGUI;
 
     public NetworkListener(Socket socket, ObjectInputStream in, GameBoardContainer client_logic){
@@ -28,7 +29,8 @@ public class NetworkListener extends Thread{
         this.in = in;
         gamephases_response = null;
         response_ready = false;
-        this.client_logic = client_logic;
+        this.client_logic = new ArrayList<>();
+        this.client_logic.add(client_logic);
         isForGUI = false;
     }
 
@@ -53,13 +55,21 @@ public class NetworkListener extends Thread{
     }
 
     public synchronized void setGamephasesResponse(List<GamePhase> gamephases){
-        gamephases_response = gamephases;
-        response_ready = true;
+        if(isForGUI){
+            for(GameBoardContainer gbc : client_logic)
+                if(gbc != null)
+                    gbc.notifyResponse(gamephases);
+        } else {
+            gamephases_response = gamephases;
+            response_ready = true;
+        }
     }
 
     public synchronized void setResponse(Action detailed_response){
         if(isForGUI){
-            client_logic.notifyResponse(detailed_response);
+            for(GameBoardContainer gbc : client_logic)
+                if(gbc != null)
+                    gbc.notifyResponse(detailed_response);
         } else {
             act_response = detailed_response;
             response_ready = true;
@@ -67,7 +77,9 @@ public class NetworkListener extends Thread{
     }
 
     public synchronized void setGameBoardResponse(GameBoard model){
-        client_logic.setGameBoard(model);
+        for(GameBoardContainer gbc : client_logic)
+            if(gbc != null)
+                gbc.setGameBoard(model);
     }
 
     public void run(){
@@ -101,5 +113,9 @@ public class NetworkListener extends Thread{
                 System.exit(0);
             }
         }
+    }
+
+    public void addGameBoardContainer(GameBoardContainer container){
+        client_logic.add(container);
     }
 }

@@ -354,4 +354,12 @@ public class GameBoard implements Serializable {
     public void setWinner(String user){
         winner = user;
     }
+
+    public int getNofGroupsOfIslands(){
+        int links = 0;
+        for(Island island : getIslands()){
+            if(island.hasNext()) links++;
+        }
+        return 12 - links;
+    }
 }

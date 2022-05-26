@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -35,6 +36,9 @@ public class LoginController implements Initializable, GameBoardContainer {
     private MessageSender msg;
     private NetworkListener listener;
     private GamePhase last_sent;
+    private FXMLLoader gameloader;
+    private GameGraphicController game_controller;
+    private Parent gameparent;
 
     //fxml variables
     @FXML
@@ -60,12 +64,27 @@ public class LoginController implements Initializable, GameBoardContainer {
     }
 
     private void sendLogInRequest() throws SocketException {
+        //Creating the action
         Action act = new Action();
         act.setGamePhase(GamePhase.START);
         act.setUsername(nickname.getText());
         act.setNOfPlayers(Integer.parseInt(choiceBox.getValue()));
+        //Initializing the game controller
+        GameGraphicController.username = act.getUsername();
+        GameGraphicController.nof_players = act.getNOfPlayers();
+        gameloader = new FXMLLoader(GUILauncher.class.getResource("gameGraphic.fxml"));
+        try {
+            gameparent = gameloader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        game_controller = gameloader.getController();
+        listener.addGameBoardContainer(game_controller);
+        System.out.println("Added game controller to listener");
+        //Sending the message
         msg.send(act);
         last_sent = act.getGamePhase();
+        System.out.println("Variables set. Initializing graphics");
     }
 
     public void switchScene(ActionEvent event) throws IOException {
@@ -95,6 +114,7 @@ public class LoginController implements Initializable, GameBoardContainer {
         choiceBox.getItems().addAll(nof_players);
         choiceBox.setValue("2");
         waiting_communication.setVisible(false);
+
         FXMLLoader fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("waiting.fxml"));
         try {
             SubScene.setRoot(fxmlLoader.load());
@@ -105,26 +125,22 @@ public class LoginController implements Initializable, GameBoardContainer {
 
     @Override
     public void setGameBoard(GameBoard model) {
-        return;
+        System.out.println("logincontroller has received the gameboard");
     }
 
     @Override
     public void notifyResponse(Action action) {
-        System.out.println("RECEIVED AN ACTION!");
+        System.out.println("LOGINCONTROLLER RECEIVED AN ACTION!");
         PopUpLauncher error = new PopUpLauncher();
         error.setTitle("Error!");
         switch(action.getGamePhase()){
             case CORRECT:
-                FXMLLoader fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("gameGraphic.fxml"));
+                System.out.println("Action is CORRECT");
                 Platform.runLater(() -> {
                     Stage stage = new Stage();
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/Copertina.jpg")));
                     stage.setTitle("Eriantys Match");
-                    try {
-                        stage.setScene(new Scene(fxmlLoader.load(), 1290, 690));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    stage.setScene(new Scene(gameparent, 1290, 690));
                     stage.setResizable(true);
                     stage.show();
                     this.stage.close();
@@ -140,6 +156,11 @@ public class LoginController implements Initializable, GameBoardContainer {
                 System.exit(0);
                 break;
         }
+    }
+
+    @Override
+    public void notifyResponse(List<GamePhase> gamephases) {
+        return;
     }
 
     public void setOwnStage(Stage stage) {

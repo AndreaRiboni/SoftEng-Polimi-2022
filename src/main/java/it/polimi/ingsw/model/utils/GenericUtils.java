@@ -82,4 +82,11 @@ public class GenericUtils {
         }
     }
 
+    public static int sumValues(Map<Color, Integer> map){
+        int count = 0;
+        for(Color c : map.keySet())
+            count += map.getOrDefault(c, 0);
+        return count;
+    }
+
 }

@@ -246,4 +246,14 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
     public void setNext(Island island){
         next = island;
     }
+
+    public int countNextLinked(){
+        int count = 1;
+        Island start = this;
+        while(start.hasNext()){
+            start = start.next;
+            count++;
+        }
+        return count;
+    }
 }
