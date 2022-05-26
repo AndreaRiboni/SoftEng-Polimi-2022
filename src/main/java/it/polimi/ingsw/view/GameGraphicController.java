@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.entities.Player;
+import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.places.Island;
 import it.polimi.ingsw.model.places.Places;
@@ -17,10 +18,8 @@ import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 
@@ -50,8 +49,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     @FXML
     ImageView cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10;
     @FXML
-    ChoiceBox<String> schools;
-    @FXML
     SplitPane splitpane;
     @FXML
     AnchorPane leftpane, rightpane;
@@ -59,6 +56,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     ImageView my_school;
     @FXML
     AnchorPane player_container;
+    @FXML
+    Pane other_schools_container;
 
     private final String[] players = {"Player 2","Player 3"};
 
@@ -71,8 +70,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         ImageView[] crosses = { cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10};
         //show descriptions and images
         Description.setVisible(false);
-        schools.getItems().addAll(players);
-        schools.setValue("Player 2");
         assistant_choice.getItems().addAll(assistants_id);
         for(int i = 0; i<crosses.length; i++){
             crosses[i].setVisible(false);
@@ -125,6 +122,115 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         forceZoom(pane, 300, true);
         applyNavigationListener(pane);
         System.out.println("Controller created");
+
+        model = new GameBoard();
+        try {
+            model.initialize(2, 1);
+            model.getPlayers()[0].setUsername("WHITE");
+            username = "WHITE";
+            for(Professor p : model.getProfessors())
+                p.setPlayer(model.getPlayerByUsername("WHITE"));
+            for(int i = 0; i < 20; i++)
+            model.getPlayerByUsername("WHITE").getSchool().addStudent(Color.getRandomStudentColor(), Places.DINING_HALL);
+        } catch (EriantysException e) {
+            e.printStackTrace();
+        }
+        setGameBoard(model);
+    }
+
+    private ImageView getTowerImage(Color tower_color){
+        ImageView tower = new ImageView(
+                new Image(String.valueOf(getClass().getResource("/Towers/"+Color.colorToString(tower_color)+"tower.png")))
+        );
+        tower.setFitWidth(Positions.TOWERS.getWidth());
+        tower.setFitHeight(Positions.TOWERS.getHeight());
+        return tower;
+    }
+
+    private ImageView getProfessorImage(Color prof_color){
+        ImageView prof = new ImageView(
+                new Image(String.valueOf(getClass().getResource("/Professors/" + Color.colorToString(prof_color) + "prof.png")))
+        );
+        prof.setFitWidth(Positions.PROFESSORS.getWidth());
+        prof.setFitHeight(Positions.PROFESSORS.getHeight());
+        return prof;
+    }
+
+    private ImageView getStudentImage(Color color){
+        ImageView student = new ImageView(
+                new Image(String.valueOf(getClass().getResource("/Students/"+Color.colorToString(color)+"stud.png")))
+        );
+        student.setFitWidth(Positions.DINING_HALL_STUDENTS.getWidth());
+        student.setFitHeight(Positions.DINING_HALL_STUDENTS.getHeight());
+        return student;
+    }
+
+    private Label getWhiteLabel(String text){
+        Label l = new Label(text);
+        l.setTextFill(Paint.valueOf("#ffffff"));
+        return l;
+    }
+
+    private void copyOtherSchools(){
+        other_schools_container.getChildren().clear();
+        GridPane grid = new GridPane();
+        Player[] others = model.getPlayersNotCalledLike(username);
+        VBox[] others_container = new VBox[others.length];
+        for(int i = 0; i < others.length; i++){
+            others_container[i] = new VBox();
+            //User
+            others_container[i].getChildren().add(getWhiteLabel(others[i].getUsername() + "'s school"));
+            //Towers
+            others_container[i].getChildren().add(getWhiteLabel("Tower Hall"));
+            HBox towers = new HBox();
+            for(int t = 0; t < others[i].getNumberOfUnplacedTowers(); t++){
+                towers.getChildren().add(getTowerImage(others[i].getColor()));
+            }
+            others_container[i].getChildren().add(towers);
+            //Professors
+            others_container[i].getChildren().add(getWhiteLabel("Professors Room"));
+            HBox professors = new HBox();
+            for(int t = 0; t < model.getProfessors().length; t++){
+                Color prof_col = model.getProfessors()[t].getColor();
+                ImageView prof_img = getProfessorImage(prof_col);
+                if(!model.getProfessors()[t].getPlayer().equals(others[i]))
+                    applySelectedEffect(prof_img);
+                professors.getChildren().add(prof_img);
+            }
+            others_container[i].getChildren().add(professors);
+            //Dining hall
+            others_container[i].getChildren().add(getWhiteLabel("Dining Hall"));
+            Map<Color, Integer> dining = others[i].getDiningStudents();
+            for(Color col : Color.getStudentColors()) {
+                HBox diningbox = new HBox();
+                if(dining.getOrDefault(col, 0) == 0){
+                    ImageView empty_stud = getStudentImage(col);
+                    applySelectedEffect(empty_stud);
+                    diningbox.getChildren().add(empty_stud);
+                } else {
+                    for (int t = 0; t < dining.getOrDefault(col, 0); t++) {
+                        diningbox.getChildren().add(getStudentImage(col));
+                    }
+                }
+                others_container[i].getChildren().add(diningbox);
+            }
+            //Entrance
+            others_container[i].getChildren().add(getWhiteLabel("Entrance"));
+            Map<Color, Integer> entrance = others[i].getEntranceStudents();
+            HBox entrancebox = new HBox();
+            for(Color col : Color.getStudentColors()) {
+                for (int t = 0; t < entrance.getOrDefault(col, 0); t++) {
+                    entrancebox.getChildren().add(getStudentImage(col));
+                }
+            }
+            others_container[i].getChildren().add(entrancebox);
+            //Final
+            grid.add(others_container[i], i, 0);
+        }
+        grid.setGridLinesVisible(true);
+        grid.setHgap(3);
+        grid.setVgap(3);
+        other_schools_container.getChildren().add(grid);
     }
 
     @Override
@@ -137,6 +243,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             //copying islands and clouds
             copyIslands();
             copyClouds();
+            System.out.println("My user is " + username);
+            copyOtherSchools();
         });
     }
 
@@ -144,11 +252,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         Color tower_color = school.getTowerColor();
         int xoff = 0, yoff = 0;
         for(int i = 0; i < school.getNumberOfTowers(); i++){
-            ImageView tower = new ImageView(
-                    new Image(String.valueOf(getClass().getResource("/Towers/"+Color.colorToString(tower_color)+"tower.png")))
-            );
-            tower.setFitWidth(Positions.TOWERS.getWidth());
-            tower.setFitHeight(Positions.TOWERS.getHeight());
+            ImageView tower = getTowerImage(tower_color);
             tower.setTranslateX(Positions.TOWERS.getX() + xoff * Positions.TOWERS.getXOff());
             tower.setTranslateY(Positions.TOWERS.getY() + yoff * Positions.TOWERS.getYOff());
             school_elements.getChildren().add(tower);
@@ -164,11 +268,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         for(int i = 0; i < sorted_stud_colors.length; i++){
             Player reference = model.getProfFromColor(sorted_stud_colors[i]).getPlayer();
             if(reference != null && reference.getUsername().equals(username)) {
-                ImageView prof = new ImageView(
-                        new Image(String.valueOf(getClass().getResource("/Professors/" + Color.colorToString(sorted_stud_colors[i]) + "prof.png")))
-                );
-                prof.setFitWidth(Positions.PROFESSORS.getWidth());
-                prof.setFitHeight(Positions.PROFESSORS.getHeight());
+                ImageView prof = getProfessorImage(sorted_stud_colors[i]);
                 prof.setTranslateX(Positions.PROFESSORS.getX() + i * Positions.PROFESSORS.getXOff());
                 prof.setTranslateY(Positions.PROFESSORS.getY() + i * Positions.PROFESSORS.getYOff());
                 school_elements.getChildren().add(prof);
@@ -184,11 +284,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         Map<Color, Integer> students = school.getDiningStudents();
         for(Color color : students.keySet()){ //for each color
             for(int i = 0; i < students.getOrDefault(color, 0); i++){ //as many as the nof students of that color
-                ImageView student = new ImageView(
-                        new Image(String.valueOf(getClass().getResource("/Students/"+Color.colorToString(color)+"stud.png")))
-                );
-                student.setFitWidth(Positions.DINING_HALL_STUDENTS.getWidth());
-                student.setFitHeight(Positions.DINING_HALL_STUDENTS.getHeight());
+                ImageView student = getStudentImage(color);
                 student.setTranslateX(Positions.DINING_HALL_STUDENTS.getX() + xoff[index_col]);
                 student.setTranslateY(Positions.DINING_HALL_STUDENTS.getY() + yoff[index_col]);
                 school_elements.getChildren().add(student);

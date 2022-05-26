@@ -1,10 +1,10 @@
 package it.polimi.ingsw.view;
 
 public enum Positions {
-    TOWERS(219, 68, 51.4f, 55, 45, 37),
-    PROFESSORS(199, 204, 50.8f, 0, 35, 30),
-    DINING_HALL_STUDENTS(200, 270, 51.2f, 34.35f, 33, 35),
-    ENTRANCE_STUDENTS(405, 645, -51.2f, 42.4f, 33, 35);
+    TOWERS(236, 81, 41.857f, 45, 37, 32),
+    PROFESSORS(219, 193, 42, 0, 30, 27),
+    DINING_HALL_STUDENTS(222.5f, 249.5f, 41.7f, 28, 25, 25),
+    ENTRANCE_STUDENTS(389.5f, 557.3f, -41.75f, 35, 25, 25);
 
     private final float x, y, xoff, yoff, width, height;
     Positions(float x, float y, float xoff, float yoff, float width, float height){

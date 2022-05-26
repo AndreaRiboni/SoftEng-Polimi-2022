@@ -334,6 +334,18 @@ public class GameBoard implements Serializable {
         return null;
     }
 
+    public Player[] getPlayersNotCalledLike(String username){
+        int user = 0;
+        if(getPlayerByUsername(username) != null) user++;
+        Player[] others = new Player[players.length - user];
+        user = 0;
+        for(int i = 0; i < players.length; i++){
+            if(players[i].getUsername().equals(username)) continue;
+            others[user++] = players[i];
+        }
+        return others;
+    }
+
     public CharacterCard getCharacterCard(int index) throws EriantysException {
         return character_cards.getCharacterCard(index);
     }
