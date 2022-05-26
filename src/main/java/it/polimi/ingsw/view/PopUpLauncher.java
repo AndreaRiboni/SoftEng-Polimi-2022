@@ -3,6 +3,7 @@ package it.polimi.ingsw.view;
 import java.io.IOException;
 
 //import it.polimi.ingsw.errorController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -46,12 +47,14 @@ public class PopUpLauncher {
 
 
     public void show() {
-        init();
-        window.setAlwaysOnTop(true);
-        window.setResizable(false);
-        window.initModality(Modality.APPLICATION_MODAL);
-        System.out.println("launching");
-        window.showAndWait();
+        Platform.runLater(() -> {
+            init();
+            window.setAlwaysOnTop(true);
+            window.setResizable(false);
+            window.initModality(Modality.APPLICATION_MODAL);
+            System.out.println("launching");
+            window.showAndWait();
+        });
     }
 
 

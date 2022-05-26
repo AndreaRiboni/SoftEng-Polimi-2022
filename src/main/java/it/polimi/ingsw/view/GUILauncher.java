@@ -23,7 +23,7 @@ public class GUILauncher extends Application {
         LoginController loginController = fxmlLoader.getController();
         loginController.setOwnStage(stage);
 
-
+/*
         fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("gameGraphic.fxml"));
             Stage stage2 = new Stage();
             stage2.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/Copertina.jpg")));
@@ -35,6 +35,8 @@ public class GUILauncher extends Application {
             }
             stage2.setResizable(true);
             stage2.show();
+
+ */
 
 
     }

@@ -21,8 +21,10 @@ public class MessageSender {
     private ObjectInputStream input;
     private static final Logger log = LogManager.getRootLogger();
     private String ip;
+    private boolean disabled;
 
     public MessageSender(String ip_address){
+        disabled = false;
         try {
             if(ip_address.isEmpty()){
                 ip_address = "localhost";
@@ -50,6 +52,7 @@ public class MessageSender {
     }
 
     public void send(Action action) throws SocketException {
+        if(disabled) return;
         //log.info("currently sending " + action.getGamePhase());
         try {
             output.writeObject(action);
@@ -63,6 +66,7 @@ public class MessageSender {
     }
 
     public void send(List<GamePhase> gamephase) throws SocketException {
+        if(disabled) return;
         //log.info("currently sending " + gamephase);
         try {
             output.writeObject(gamephase);
@@ -76,6 +80,7 @@ public class MessageSender {
     }
 
     public void send(GameBoard model) throws SocketException {
+        if(disabled) return;
         //log.info("currently sending the new model representation to " + Printer.socketToString(socket));
         try {
             output.writeObject(model);
@@ -98,6 +103,14 @@ public class MessageSender {
 
     public String getIP(){
         return ip;
+    }
+
+    public void disable(){
+        disabled = true;
+    }
+
+    public void enable(){
+        disabled = false;
     }
 
 }

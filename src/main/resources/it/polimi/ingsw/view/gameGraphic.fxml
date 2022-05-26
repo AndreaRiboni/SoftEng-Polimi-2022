@@ -112,9 +112,6 @@
                                                 <Image url="@../../../../Assistenti/Assistente_10.png" />
                                             </image>
                                         </ImageView>
-                                        <ChoiceBox fx:id="assistant_choice" layoutX="373.0" layoutY="473.0" prefWidth="150.0" />
-                                        <Label layoutX="373.0" layoutY="449.0" text="Which assistant do you want to use?" />
-                                        <Button layoutX="373.0" layoutY="518.0" mnemonicParsing="false" onAction="#applyPlayedAssistCardEffect" prefHeight="53.0" prefWidth="115.0" styleClass="joinButton" stylesheets="@../../../../css/login.css" text="PLAY" textFill="#f6f6f6" />
                                         <ImageView fx:id="cross_1" fitHeight="119.0" fitWidth="102.0" layoutX="54.0" layoutY="58.0" pickOnBounds="true">
                                             <image>
                                                 <Image url="@../../../../graphics/cross.png" />
@@ -165,6 +162,10 @@
                                                 <Image url="@../../../../graphics/cross.png" />
                                             </image>
                                         </ImageView>
+                                        <ChoiceBox fx:id="assistant_choice" layoutX="373.0" layoutY="473.0" prefWidth="150.0" />
+                                        <Label layoutX="373.0" layoutY="449.0" text="Which assistant do you want to use?" />
+                                        <Button layoutX="373.0" layoutY="518.0" mnemonicParsing="false" onAction="#sendAssistCardRequest" prefHeight="53.0" prefWidth="115.0" styleClass="joinButton" stylesheets="@../../../../css/login.css" text="PLAY" textFill="#f6f6f6" />
+
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -213,6 +214,19 @@
                                     </children></AnchorPane>
                             </content>
                         </Tab>
+                  <Tab text="Match status">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <children>
+                              <Label fx:id="TurnStatus" layoutX="132.0" layoutY="401.0" prefHeight="149.0" prefWidth="429.0" text="Aspetta il tuo turno">
+                              <font>
+                                  <Font size="21.0" />
+                              </font></Label>
+                              <ProgressBar fx:id="TurnStatusBar" layoutX="-1.0" layoutY="362.0" prefHeight="20.0" prefWidth="600.0" />
+                          </children>
+                      </AnchorPane>
+                    </content>
+                  </Tab>
                     </tabs>
                 </TabPane>
             </children></AnchorPane>

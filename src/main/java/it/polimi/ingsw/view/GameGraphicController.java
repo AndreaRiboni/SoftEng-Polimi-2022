@@ -1,12 +1,13 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.global.MessageSender;
 import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.places.Island;
 import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.places.School;
 import it.polimi.ingsw.model.utils.*;
+import it.polimi.ingsw.model.utils.packets.StudentLocation;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -20,9 +21,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 
+import java.net.SocketException;
 import java.net.URL;
 import java.util.*;
 
@@ -34,6 +37,10 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     private GameBoard model;
     public static String username;
     public static int nof_players;
+    public static MessageSender msg;
+    private Action last_sent;
+    private List<StudentLocation> move_students;
+    private boolean disabled;
 
     @FXML
     ChoiceBox<String> assistant_choice;
@@ -58,11 +65,16 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     AnchorPane player_container;
     @FXML
     Pane other_schools_container;
+    @FXML
+    Label TurnStatus;
+    @FXML
+    ProgressBar TurnStatusBar;
 
     private final String[] players = {"Player 2","Player 3"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        disabled = false;
         //lock tabpane
         leftpane.maxWidthProperty().bind(splitpane.widthProperty().multiply(0.5));
         rightpane.maxWidthProperty().bind(splitpane.widthProperty().multiply(0.5));
@@ -90,6 +102,9 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             students.setVgap(2);
             islands[i].getChildren().addAll(island_icon, students);
             islands_container.getChildren().add(islands[i]);
+            island_icon.setOnMouseClicked(e -> {if(!disabled) selectMovingSubject(island_icon); else showWrongTurnPopUp();});
+            island_icon.getProperties().put("type", "island");
+            island_icon.getProperties().put("index", i);
         }
         //creates the clouds
         Group clouds_container = new Group();
@@ -121,21 +136,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         addZoomListener(pane);
         forceZoom(pane, 300, true);
         applyNavigationListener(pane);
-        System.out.println("Controller created");
-
-        model = new GameBoard();
-        try {
-            model.initialize(2, 1);
-            model.getPlayers()[0].setUsername("WHITE");
-            username = "WHITE";
-            for(Professor p : model.getProfessors())
-                p.setPlayer(model.getPlayerByUsername("WHITE"));
-            for(int i = 0; i < 20; i++)
-            model.getPlayerByUsername("WHITE").getSchool().addStudent(Color.getRandomStudentColor(), Places.DINING_HALL);
-        } catch (EriantysException e) {
-            e.printStackTrace();
-        }
-        setGameBoard(model);
+        move_students = new ArrayList<>();
     }
 
     private ImageView getTowerImage(Color tower_color){
@@ -193,7 +194,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             for(int t = 0; t < model.getProfessors().length; t++){
                 Color prof_col = model.getProfessors()[t].getColor();
                 ImageView prof_img = getProfessorImage(prof_col);
-                if(!model.getProfessors()[t].getPlayer().equals(others[i]))
+                Player detained = model.getProfessors()[t].getPlayer();
+                if(detained != null && !detained.equals(others[i]))
                     applySelectedEffect(prof_img);
                 professors.getChildren().add(prof_img);
             }
@@ -292,6 +294,16 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             }
             index_col++;
         }
+        Rectangle dining_area = new Rectangle();
+        dining_area.setOpacity(0);
+        dining_area.setX(223);
+        dining_area.setY(250);
+        dining_area.setWidth(200);
+        dining_area.setHeight(290);
+        ImageView iv = new ImageView();
+        iv.getProperties().put("type", "dining");
+        dining_area.setOnMouseClicked(e -> {if(!disabled) selectMovingSubject(iv); else showWrongTurnPopUp();});
+        school_elements.getChildren().add(dining_area);
     }
 
     private void drawEntrance(Group school_elements, School school){
@@ -306,7 +318,9 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 student.setFitHeight(Positions.ENTRANCE_STUDENTS.getHeight());
                 student.setTranslateX(Positions.ENTRANCE_STUDENTS.getX() + xoff * Positions.ENTRANCE_STUDENTS.getXOff());
                 student.setTranslateY(Positions.ENTRANCE_STUDENTS.getY() + yoff * Positions.ENTRANCE_STUDENTS.getYOff());
-                student.setOnMouseClicked(e -> selectMovingSubject(student));
+                student.setOnMouseClicked(e -> {if(!disabled) selectMovingSubject(student); else showWrongTurnPopUp();});
+                student.getProperties().put("type", "student");
+                student.getProperties().put("color", col);
                 school_elements.getChildren().add(student);
                 xoff++;
                 if(count == 4){
@@ -372,21 +386,89 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     }
 
     private void selectMovingSubject(ImageView img) {
-        applySelectedEffect(img);
-        if(last_selected != null){
-            removeSelectedEffect(last_selected);
+        if(move_students.isEmpty()) move_students.add(new StudentLocation()); //adding first packet eventually
+        if(img.getProperties().get("type").equals("student")){
+            applySelectedEffect(img);
+            if(move_students.get(move_students.size()-1).getIsland_index() == -1){ //no island selected yet
+                move_students.get(move_students.size()-1).setColor(img); //reset last color
+                if(last_selected != null){
+                    removeSelectedEffect(last_selected);
+                }
+            } else {
+                move_students.add(new StudentLocation(-1, img));
+            }
+        } else if(img.getProperties().get("type").equals("island")) {
+            //it's an island: create the action and move the student there
+            int island_index = (Integer) img.getProperties().get("index");
+            if(last_selected != null) { //if we already selected a student we can set its island destination
+                move_students.get(move_students.size() - 1).setIsland_index(island_index);
+                //lock this student
+                move_students.get(move_students.size() - 1).getColor().setOnMouseClicked(e->{});
+            }
+            last_selected = null;
+        } else { //dining
+            if(last_selected != null) //if we already selected a student we can set its island destination
+                move_students.get(move_students.size()-1).setIsland_index(100);
+            last_selected = null;
+        }
+        if(move_students.size() == nof_players + 1 && move_students.get(move_students.size()-1).getIsland_index() != -1){
+            sendMoveStudentsRequest();
         }
         last_selected = img;
+    }
+
+    private void manageResponse(){
+        if(last_sent == null) return;
+        switch(last_sent.getGamePhase()){
+            case DRAW_ASSIST_CARD:
+                ColorAdjust grayscale = new ColorAdjust();
+                grayscale.setSaturation(-1);
+                ImageView[] crosses = { cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10};
+                ImageView[] assistants = {assistant_1, assistant_2, assistant_3, assistant_4, assistant_5, assistant_6, assistant_7, assistant_8, assistant_9, assistant_10};
+                for(int i = 0; i< assistants.length; i++){
+                    if(last_sent.getAssistCardIndex() == i+1){
+                        assistants[i].setEffect(grayscale);
+                        crosses[i].setVisible(true);
+                    }
+                }
+                break;
+        }
     }
 
     @Override
     public void notifyResponse(Action action) {
         System.out.println("Received action " + action.getGamePhase());
+        Platform.runLater(() -> {
+            if(action.getGamePhase().equals(GamePhase.CORRECT)){
+                disabled = true;
+                TurnStatus.setText("Wait until the other players have finished their turn");
+                TurnStatusBar.setVisible(true);
+                manageResponse();
+            } else if(action.getGamePhase().equals(GamePhase.ERROR_PHASE)){
+                PopUpLauncher error_phase = new PopUpLauncher();
+                error_phase.setTitle("Something went wrong");
+                error_phase.setMessage(action.getErrorMessage());
+                error_phase.show();
+                setGameBoard(model);
+                move_students.clear();
+            }
+        });
+    }
+
+    private void showWrongTurnPopUp(){
+        Platform.runLater(() -> {
+            PopUpLauncher wrongturn = new PopUpLauncher("It's not your turn", "Wait until the other players have finished");
+            wrongturn.show();
+        });
     }
 
     @Override
     public void notifyResponse(List<GamePhase> gamephases) {
-        System.out.println("Received gamephases list");
+        Platform.runLater(() -> {
+            TurnStatus.setText("It's your turn!");
+            disabled = false;
+            TurnStatusBar.setVisible(false);
+        });
     }
 
     public void toggleDescriptionVisibility(){
@@ -405,18 +487,36 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     }
 
     @FXML
-    void applyPlayedAssistCardEffect(){
+    void sendAssistCardRequest() throws SocketException {
         String assistant_chosen = assistant_choice.getValue();
-        ColorAdjust grayscale = new ColorAdjust();
-        grayscale.setSaturation(-1);
-        ImageView[] crosses = { cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10};
-        ImageView[] assistants = {assistant_1, assistant_2, assistant_3, assistant_4, assistant_5, assistant_6, assistant_7, assistant_8, assistant_9, assistant_10};
+        //sendAssistCard
+        Action assist_card = new Action();
+        assist_card.setGamePhase(GamePhase.DRAW_ASSIST_CARD);
+        assist_card.setAssistCardIndex(Integer.parseInt(assistant_chosen));
+        msg.send(assist_card);
+        last_sent = assist_card;
+        System.out.println("Assist card request sent.");
+    }
 
-        for(int i = 0; i< assistants.length; i++){
-            if(Integer.parseInt(assistant_chosen) == i+1){
-                assistants[i].setEffect(grayscale);
-                crosses[i].setVisible(true);
-            }
+    private void sendMoveStudentsRequest() {
+        Action movestud = new Action();
+        movestud.setGamePhase(GamePhase.MOVE_3_STUDENTS);
+        Color[] student = new Color[nof_players + 1];
+        int[] island_indexes = new int[student.length];
+        Places[] destinations = new Places[student.length];
+        for(int i = 0; i < student.length; i++){
+            student[i] = (Color) move_students.get(i).getColor().getProperties().get("color");
+            island_indexes[i] = move_students.get(i).getIsland_index();
+            destinations[i] = island_indexes[i] > 12 ? Places.DINING_HALL : Places.ISLAND;
+            System.out.println("Moving " + student[i] + " in " + island_indexes[i]);
+        }
+        movestud.setThreeStudents(student);
+        movestud.setThreeStudentPlaces(destinations);
+        movestud.setIslandIndexes(island_indexes);
+        try {
+            msg.send(movestud);
+        } catch (SocketException e) {
+            e.printStackTrace();
         }
     }
 
@@ -452,6 +552,20 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             t.setY((event.getY() - start[1]) / 20);
             pane.getTransforms().add(t);
         });
+    }
+
+    private void disableGUI(){
+        msg.disable(); //blocks gui's traffic on the network
+        /*
+        Disabilita:
+        - bottone character card
+        - bottone assist card
+        -
+         */
+    }
+
+    private void enableGUI(){
+        msg.enable(); //allows the gui to communicate through the network
     }
 
     private void setIslandPos(Group island, double x, double y){

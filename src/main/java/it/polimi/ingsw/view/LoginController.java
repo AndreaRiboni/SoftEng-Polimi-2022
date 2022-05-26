@@ -39,6 +39,7 @@ public class LoginController implements Initializable, GameBoardContainer {
     private FXMLLoader gameloader;
     private GameGraphicController game_controller;
     private Parent gameparent;
+    private boolean ignore_network;
 
     //fxml variables
     @FXML
@@ -72,6 +73,7 @@ public class LoginController implements Initializable, GameBoardContainer {
         //Initializing the game controller
         GameGraphicController.username = act.getUsername();
         GameGraphicController.nof_players = act.getNOfPlayers();
+        GameGraphicController.msg = msg;
         gameloader = new FXMLLoader(GUILauncher.class.getResource("gameGraphic.fxml"));
         try {
             gameparent = gameloader.load();
@@ -111,6 +113,7 @@ public class LoginController implements Initializable, GameBoardContainer {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ignore_network = false;
         choiceBox.getItems().addAll(nof_players);
         choiceBox.setValue("2");
         waiting_communication.setVisible(false);
@@ -125,11 +128,13 @@ public class LoginController implements Initializable, GameBoardContainer {
 
     @Override
     public void setGameBoard(GameBoard model) {
+        if(ignore_network) return;
         System.out.println("logincontroller has received the gameboard");
     }
 
     @Override
     public void notifyResponse(Action action) {
+        if(ignore_network) return;
         System.out.println("LOGINCONTROLLER RECEIVED AN ACTION!");
         PopUpLauncher error = new PopUpLauncher();
         error.setTitle("Error!");
@@ -145,6 +150,7 @@ public class LoginController implements Initializable, GameBoardContainer {
                     stage.show();
                     this.stage.close();
                 });
+                ignore_network = true;
                 break;
             case ERROR_PHASE:
                 error.setMessage("Username already taken!");
