@@ -21,6 +21,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -105,17 +106,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             students.setVgap(2);
             islands[i].getChildren().addAll(island_icon, students, getMotherNatureImage());
             islands_container.getChildren().add(islands[i]);
-            island_icon.setOnMouseClicked(e -> {
-                if(!disabled) {
-                    if (e.isPrimaryButtonDown()) {
-                        selectMovingSubject(island_icon);
-                    }
-                } else {
-                    showWrongTurnPopUp();
-                }
-            });
-            island_icon.getProperties().put("type", "island");
-            island_icon.getProperties().put("index", i);
             //Mother nature menu
             ContextMenu mn_menu = new ContextMenu();
             MenuItem request_mn_item = new MenuItem("Move mother nature here");
@@ -124,7 +114,21 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 sendMotherNatureRequest(finalI);
             });
             mn_menu.getItems().add(request_mn_item);
-            island_icon.setOnContextMenuRequested(e -> mn_menu.show(island_icon, e.getScreenX(), e.getScreenY()));
+            students.setOnContextMenuRequested(e -> mn_menu.show(island_icon, e.getScreenX(), e.getScreenY()));
+            island_icon.setOnMouseClicked(e -> {
+                if(!disabled) {
+                    if (e.getButton() == MouseButton.PRIMARY) {
+                        System.out.println("SELECT MOVING SUBJECT (ISLAND ICON)");
+                        selectMovingSubject(island_icon);
+                    } else {
+                        mn_menu.show(island_icon, e.getScreenX(), e.getScreenY());
+                    }
+                } else {
+                    showWrongTurnPopUp();
+                }
+            });
+            island_icon.getProperties().put("type", "island");
+            island_icon.getProperties().put("index", i);
         }
         //creates the clouds
         Group clouds_container = new Group();
@@ -142,6 +146,17 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             students.setVgap(2);
             clouds[i].getChildren().addAll(cloud_icon, students);
             clouds_container.getChildren().add(clouds[i]);
+            //Drain cloud menu
+            ContextMenu dc_menu = new ContextMenu();
+            MenuItem request_dc_item = new MenuItem("Retrieve these students");
+            int finalI = i;
+            request_dc_item.setOnAction(e -> {
+                System.out.println("Requested");
+                sendDrainCloudRequest(finalI);
+            });
+            dc_menu.getItems().add(request_dc_item);
+            cloud_icon.setOnContextMenuRequested(e -> dc_menu.show(cloud_icon, e.getScreenX(), e.getScreenY()));
+            students.setOnContextMenuRequested(e -> dc_menu.show(students, e.getScreenX(), e.getScreenY()));
         }
         Pane pane = new Pane(islands_container, clouds_container);
         pane.setPrefWidth(subscene.getWidth() * 2);
@@ -204,6 +219,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         return l;
     }
 
+    //TODO: FIX
     private void copyOtherSchools(){
         other_schools_container.getChildren().clear();
         GridPane grid = new GridPane();
@@ -216,7 +232,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             //Towers
             others_container[i].getChildren().add(getWhiteLabel("Tower Hall"));
             HBox towers = new HBox();
-            for(int t = 0; t < others[i].getNumberOfUnplacedTowers(); t++){
+            for(int t = 0; t < others[i].getNumberOfUnplacedTowers(); t++){ //TODO: FIX
                 towers.getChildren().add(getTowerImage(others[i].getColor()));
             }
             others_container[i].getChildren().add(towers);
@@ -227,7 +243,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 Color prof_col = model.getProfessors()[t].getColor();
                 ImageView prof_img = getProfessorImage(prof_col);
                 Player detained = model.getProfessors()[t].getPlayer();
-                if(detained != null && !detained.equals(others[i]))
+                if(detained == null || !detained.equals(others[i]))
                     applySelectedEffect(prof_img);
                 professors.getChildren().add(prof_img);
             }
@@ -381,6 +397,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             try {
                 Map<Color, Integer> cloud_stud = model.getCloud(i).getStudents();
                 GridPane cloud_grid = (GridPane) clouds[i].getChildren().get(1);
+                cloud_grid.getChildren().clear();
                 int count = 0;
                 for(Color color : cloud_stud.keySet()) {
                     for (int o = 0; o < cloud_stud.getOrDefault(color, 0); o++) {
@@ -429,6 +446,9 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     }
 
     private void selectMovingSubject(ImageView img) {
+        System.out.println("HERE I AM");
+        if(img.getProperties().get("type") == null) System.out.println("No type property");
+        else System.out.println(img.getProperties().get("type"));
         if(move_students.isEmpty()) move_students.add(new StudentLocation()); //adding first packet eventually
         if(img.getProperties().get("type").equals("student")){
             applySelectedEffect(img);
@@ -441,9 +461,12 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 move_students.add(new StudentLocation(-1, img));
             }
         } else if(img.getProperties().get("type").equals("island")) {
+            System.out.println("It's an island");
             //it's an island: create the action and move the student there
             int island_index = (Integer) img.getProperties().get("index");
+            System.out.println("It's island #" + island_index);
             if(last_selected != null) { //if we already selected a student we can set its island destination
+                System.out.println("Last selected isn't null");
                 move_students.get(move_students.size() - 1).setIsland_index(island_index);
                 //lock this student
                 move_students.get(move_students.size() - 1).getColor().setOnMouseClicked(e->{});
@@ -458,6 +481,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             sendMoveStudentsRequest();
         }
         last_selected = img;
+        System.out.println(move_students);
     }
 
     private void manageResponse(){
@@ -512,6 +536,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             TurnStatus.setText("It's your turn!");
             disabled = false;
             TurnStatusBar.setVisible(false);
+            //TODO: assegno last_sent ogni volta + se mando drain_cloud e ricevo correct e ottengo questa lista allora invio put_on_clouds
         });
     }
 
@@ -569,10 +594,24 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         movemother.setGamePhase(GamePhase.MOVE_MOTHERNATURE);
         //calculate the increment
         int increment = index - model.getMotherNature().getIslandIndex();
+        System.out.println("Clicked index: " + index + ". Actual index: " + model.getMotherNature().getIslandIndex());
+        System.out.println("Increment is " + increment);
         if(increment < 0) increment = GameBoard.NOF_ISLAND - increment;
+        System.out.println("Increment was negative. Now it's " + GameBoard.NOF_ISLAND + "-old_increment = " +increment);
         movemother.setMothernatureIncrement(increment);
         try {
             msg.send(movemother);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendDrainCloudRequest(int index){
+        Action draincloud = new Action();
+        draincloud.setGamePhase(GamePhase.DRAIN_CLOUD);
+        draincloud.setCloudIndex(index);
+        try {
+            msg.send(draincloud);
         } catch (SocketException e) {
             e.printStackTrace();
         }
@@ -662,19 +701,29 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         Island[] model_islands = model.getIslands();
         for(int i = 0; i < model_islands.length; i++){
             GridPane island_grid = (GridPane) islands[i].getChildren().get(1);
+            island_grid.getChildren().clear();
             Map<Color, Integer> island_studs = model_islands[i].getStudents();
-            int total = GenericUtils.sumValues(island_studs);
+            int total = GenericUtils.sumValues(island_studs) + (model.getIslands()[i].hasTower() ? 1 : 0);
+            if(total == 0) total++;
             int count = 0;
+            int nof_col = (int) Math.ceil(total * 0.5);
+            if(nof_col == 0) nof_col++;
             for(Color color : island_studs.keySet()) {
                 for (int o = 0; o < island_studs.getOrDefault(color, 0); o++) {
                     ImageView student = new ImageView(
                             new Image(String.valueOf(getClass().getResource("/Students/" + Color.colorToString(color) + "stud.png")))
                     );
-                    student.setFitHeight(STUDENT_SIZE);
-                    student.setFitWidth(STUDENT_SIZE);
-                    island_grid.add(student, count % 8, count / 8);
+                    student.setFitHeight(ISLAND_SIZE * 0.6 / nof_col);
+                    student.setFitWidth(ISLAND_SIZE * 0.6 / nof_col);
+                    island_grid.add(student, count % nof_col, count / nof_col);
                     count++;
                 }
+            }
+            if(model.getIslands()[i].hasTower()){
+                ImageView tower = getTowerImage(model.getIslands()[i].getTowerColor());
+                tower.setFitHeight(ISLAND_SIZE /  total * 0.75);
+                tower.setFitWidth(ISLAND_SIZE / total * 0.9);
+                island_grid.add(tower, count % nof_col, count / nof_col);
             }
         }
     }
