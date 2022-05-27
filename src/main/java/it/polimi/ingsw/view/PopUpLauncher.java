@@ -1,6 +1,8 @@
 package it.polimi.ingsw.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 //import it.polimi.ingsw.errorController;
 import javafx.application.Platform;
@@ -17,10 +19,12 @@ public class PopUpLauncher {
     private Stage window;
     private PopUpController controller;
     private String title, message;
+    private List<String> choices;
 
     public PopUpLauncher(String title, String message) {
         this.title = title;
         this.message = message;
+        choices = new ArrayList<>();
     }
 
     public PopUpLauncher() {
@@ -29,18 +33,21 @@ public class PopUpLauncher {
 
     private void init() {
         Pane root = null;
+        window = new Stage();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popUp.fxml"));
             root = fxmlLoader.load();
             controller = fxmlLoader.getController();
             controller.setTitle(title);
             controller.setMessage(message);
+            controller.setChoices(choices);
+            controller.setOwnStage(window);
         } catch (IOException ex) {
+            ex.printStackTrace();
             System.out.println("Could not instatiate the pop up window");
         }
         Scene s = new Scene(root, 412, 257);
         controller.forceInitialize();
-        window = new Stage();
         window.setScene(s);
         window.setTitle(this.title);
     }
@@ -66,8 +73,12 @@ public class PopUpLauncher {
         this.message = message;
     }
 
-    public boolean choice() {
-        return PopUpController.confirmed;
+    public void addChoice(String choice){
+        this.choices.add(choice);
+    }
+
+    public void clearChoices(){
+        choices.clear();
     }
 
     public void close() {

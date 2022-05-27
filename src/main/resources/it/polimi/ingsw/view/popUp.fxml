@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.SubScene?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.PopUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="257.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.PopUpController">
     <children>
         <SubScene fill="BLACK" height="257.0" width="412.0">
             <root>
                 <Region />
             </root>
         </SubScene>
-        <ChoiceBox fx:id="errorChoiceBox" layoutX="370.0" layoutY="318.0" prefWidth="150.0" visible="false" />
-        <TextArea fx:id="errorMessage" layoutX="26.0" layoutY="48.0" prefHeight="200.0" prefWidth="357.0" />
-        <Label fx:id="errorTitle" layoutX="178.0" layoutY="23.0" text="Label" />
+        <TextArea fx:id="errorMessage" layoutX="26.0" layoutY="48.0" prefHeight="149.0" prefWidth="357.0" />
+        <Label fx:id="errorTitle" alignment="CENTER" layoutX="28.0" layoutY="23.0" prefHeight="17.0" prefWidth="357.0" text="Label" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <ChoiceBox fx:id="choices" layoutX="26.0" layoutY="209.0" prefHeight="25.0" prefWidth="292.0" />
+      <Button fx:id="choose_button" layoutX="327.0" layoutY="209.0" mnemonicParsing="false" onAction="#choose" text="Choose" />
     </children>
 </AnchorPane>

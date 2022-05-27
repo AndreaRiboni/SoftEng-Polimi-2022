@@ -103,9 +103,26 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             students.setVgap(2);
             islands[i].getChildren().addAll(island_icon, students, getMotherNatureImage());
             islands_container.getChildren().add(islands[i]);
-            island_icon.setOnMouseClicked(e -> {if(!disabled) selectMovingSubject(island_icon); else showWrongTurnPopUp();});
+            island_icon.setOnMouseClicked(e -> {
+                if(!disabled) {
+                    if (e.isPrimaryButtonDown()) {
+                        selectMovingSubject(island_icon);
+                    }
+                } else {
+                    showWrongTurnPopUp();
+                }
+            });
             island_icon.getProperties().put("type", "island");
             island_icon.getProperties().put("index", i);
+            //Mother nature menu
+            ContextMenu mn_menu = new ContextMenu();
+            MenuItem request_mn_item = new MenuItem("Move mother nature here");
+            int finalI = i;
+            request_mn_item.setOnAction(e -> {
+                sendMotherNatureRequest(finalI);
+            });
+            mn_menu.getItems().add(request_mn_item);
+            island_icon.setOnContextMenuRequested(e -> mn_menu.show(island_icon, e.getScreenX(), e.getScreenY()));
         }
         //creates the clouds
         Group clouds_container = new Group();
@@ -468,6 +485,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 TurnStatusBar.setVisible(true);
                 manageResponse();
             } else if(action.getGamePhase().equals(GamePhase.ERROR_PHASE)){
+                disabled = false;
                 PopUpLauncher error_phase = new PopUpLauncher();
                 error_phase.setTitle("Something went wrong");
                 error_phase.setMessage(action.getErrorMessage());
@@ -538,6 +556,20 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         movestud.setIslandIndexes(island_indexes);
         try {
             msg.send(movestud);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendMotherNatureRequest(int index){
+        Action movemother = new Action();
+        movemother.setGamePhase(GamePhase.MOVE_MOTHERNATURE);
+        //calculate the increment
+        int increment = index - model.getMotherNature().getIslandIndex();
+        if(increment < 0) increment = GameBoard.NOF_ISLAND - increment;
+        movemother.setMothernatureIncrement(increment);
+        try {
+            msg.send(movemother);
         } catch (SocketException e) {
             e.printStackTrace();
         }
