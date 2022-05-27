@@ -55,6 +55,16 @@ public class MessageSender {
         if(disabled) return;
         //log.info("currently sending " + action.getGamePhase());
         try {
+            switch(action.getGamePhase()){
+                case START:
+                case ERROR_PHASE:
+                case CONNECTION_ERROR:
+                case CORRECT:
+                case END_GAME:
+                    break;
+                default:
+                    output.writeInt(0);//@@@
+            }
             output.writeObject(action);
             output.flush();
             output.reset();
