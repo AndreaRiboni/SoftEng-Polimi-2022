@@ -89,4 +89,8 @@ public class GenericUtils {
         return count;
     }
 
+    public static double map(double value, double start, double stop, double targetStart, double targetStop) {
+        return targetStart + (targetStop - targetStart) * ((value - start) / (stop - start));
+    }
+
 }

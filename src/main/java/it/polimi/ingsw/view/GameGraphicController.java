@@ -12,6 +12,7 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.SubScene;
@@ -99,6 +100,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             island_icon.setFitHeight(ISLAND_SIZE);
             island_icon.setFitWidth(ISLAND_SIZE);
             GridPane students = new GridPane();
+            students.getProperties().put("type", "island-students");
             students.setHgap(2);
             students.setVgap(2);
             islands[i].getChildren().addAll(island_icon, students, getMotherNatureImage());
@@ -174,6 +176,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         mn.setFitHeight(ISLAND_SIZE);
         mn.setVisible(false);
         mn.getProperties().put("mothernature", true);
+        mn.setEffect(new Glow(1));
         return mn;
     }
 
@@ -595,17 +598,14 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     }
 
     private void applyNavigationListener(Pane pane){
-        final double[] start = new double[2];
-        pane.setOnDragDetected(event -> {
-            start[0] = event.getX();
-            start[1] = event.getY();
-            event.consume();
+        double[] start = new double[2];
+        pane.setOnMousePressed(e -> {
+            start[0] = pane.getTranslateX() - e.getSceneX();
+            start[1] = pane.getTranslateY() - e.getSceneY();
         });
-        pane.setOnMouseDragged(event -> {
-            Translate t = new Translate();
-            t.setX((event.getX() - start[0]) / 20);
-            t.setY((event.getY() - start[1]) / 20);
-            pane.getTransforms().add(t);
+        pane.setOnMouseDragged(e -> {
+            pane.setTranslateX(e.getSceneX() + start[0]);
+            pane.setTranslateY(e.getSceneY() + start[1]);
         });
     }
 
@@ -629,8 +629,9 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 setIslandPos((Group) child, x, y);
             } else {
                 if(child instanceof GridPane){
-                    x += ISLAND_SIZE / 5;
-                    y += ISLAND_SIZE / 5;
+                    int divisor = child.getProperties().get("type") != null ? 5 : 6;
+                    x += ISLAND_SIZE / divisor;
+                    y += ISLAND_SIZE / divisor;
                 } else if(child.getProperties().get("mothernature")!=null){
                     x -= ISLAND_SIZE / 5;
                     y -= ISLAND_SIZE / 5;
