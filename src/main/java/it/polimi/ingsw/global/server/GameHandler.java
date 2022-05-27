@@ -4,6 +4,7 @@ import it.polimi.ingsw.controller.ControllerHub;
 import it.polimi.ingsw.global.MessageSender;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
+import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -24,6 +25,9 @@ public class GameHandler implements Runnable {
     private GameBoard model;
     private ControllerHub controller;
     private static final Logger log = LogManager.getRootLogger();
+    private Action action;
+    private boolean game_ended, received_response;
+    private ServerNetworkListener listener;
 
     public GameHandler(Socket[] players, ObjectInputStream[] inputs, ObjectOutputStream[] outputs, String[] usernames) {
         this.players = players;
@@ -34,7 +38,11 @@ public class GameHandler implements Runnable {
         for(int i = 0; i < players.length; i++){
             out[i] = new MessageSender(players[i], ins[i], outs[i]);
         }
+        listener = new ServerNetworkListener(inputs, this);
+        listener.start();
         model = new GameBoard();
+        game_ended = false;
+        received_response = false;
         controller = new ControllerHub(model);
         Action start_game = new Action();
         start_game.setGamePhase(GamePhase.START);
@@ -76,6 +84,16 @@ public class GameHandler implements Runnable {
         }
     }
 
+    private synchronized void setGameEnded(String status){
+        if(status != null)
+            game_ended = true;
+    }
+
+    private synchronized boolean isGameEnded(){
+        log.info("Game ended: " + game_ended);
+        return game_ended;
+    }
+
     private void sendConnectionError(int index) {
         try {
             Action connect_err = new Action();
@@ -89,10 +107,52 @@ public class GameHandler implements Runnable {
         }
     }
 
+    public synchronized void setAction(Action client_action) throws SocketException {
+        log.info("Received an action!");
+        this.action = client_action;
+        int player_playing = client_action.getPlayerID();
+        int expected = getWhoIsPlaying();
+        log.info("received from: " + client_action.getPlayerID() + ", expected from: " + expected);
+        String str_response = player_playing == expected ? controller.update(client_action) : EriantysException.WRONG_TURN;
+        Action response = new Action();
+        //send the response
+        if (str_response.equalsIgnoreCase("true")) {
+            log.info("Everything went right");
+            response.setGamePhase(GamePhase.CORRECT);
+            sendAction(player_playing, response);
+            //send the updated gameboard to every client
+            setGameEnded(controller.hasGameEnded());
+            sendGameBoard();
+            log.info("Setting response received");
+            setReceivedResponse();
+        } else {
+            log.info("Something went wrong");
+            response.setGamePhase(GamePhase.ERROR_PHASE);
+            response.setErrorMessage(str_response);
+            sendAction(player_playing, response);
+            if(client_action.getPlayerID() == expected){
+                log.info("But still setting response received");
+                setReceivedResponse();
+            }
+        }
+    }
+
+    private synchronized void setReceivedResponse(){
+        log.info("Response received");
+        received_response = true;
+    }
+
+    private synchronized boolean needResponse(){
+        if(received_response){
+            received_response = false;
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void run() {
         try {
-            String game_ended = null;
             log.info("New match has started [" + players.length + " players]");
             for (int i = 0; i < players.length; i++) {
                 Action official_start = new Action();
@@ -105,29 +165,17 @@ public class GameHandler implements Runnable {
             do {
                 System.out.println(); //new turn
                 int player_playing = getWhoIsPlaying();
-                log.info("player " + player_playing + " has to play");
+                log.info("player " + player_playing + " has to play. Sending the actions");
                 //send the correct client what action we need from him
                 sendAction(player_playing, controller.getAcceptedGamephases());
                 log.info("The available gamephases have been sent to the client (player " + player_playing + ")");
                 //get the action
-                Action client_action = readAction(player_playing);
-                client_action.setPlayerID(player_playing);
+                //Action client_action = readAction(player_playing);
+                //client_action.setPlayerID(player_playing);
                 //process the action
-                String str_response = controller.update(client_action);
-                Action response = new Action();
-                //send the response
-                if (str_response.equalsIgnoreCase("true")) {
-                    response.setGamePhase(GamePhase.CORRECT);
-                    sendAction(player_playing, response);
-                    //send the updated gameboard to every client
-                    game_ended = controller.hasGameEnded();
-                    sendGameBoard();
-                } else {
-                    response.setGamePhase(GamePhase.ERROR_PHASE);
-                    response.setErrorMessage(str_response);
-                    sendAction(player_playing, response);
-                }
-            } while (game_ended==null);
+                while(needResponse()){}
+                log.info("Response received. Ending loop");
+            } while (!isGameEnded());
         } catch (SocketException se){
             se.printStackTrace();
             log.warn("An error occurred during this match");
