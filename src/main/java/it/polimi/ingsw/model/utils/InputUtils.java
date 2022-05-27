@@ -59,6 +59,23 @@ public class InputUtils {
         }
     }
 
+    public static String getString(String prompt, String error, String[] accepted_values){
+        if(!initialized) init();
+        String value = null;
+        boolean found = false;
+        do {
+            try {
+                System.out.println(prompt);
+                value = kb_input.readLine();
+                found = accepted_values == null || contains(accepted_values, value);
+                if(!found) System.out.println(error);
+            } catch (Exception e){
+                System.out.println(error);
+            }
+        } while (!found);
+        return value;
+    }
+
     /**
      * get a color input value from user's keyboard
      * @param prompt question to ask the user in order to get the value
@@ -92,6 +109,12 @@ public class InputUtils {
     private static boolean contains(Color[] array, Color val){
         for(Color c : array)
             if(c.equals(val)) return true;
+        return false;
+    }
+
+    private static boolean contains(String[] array, String val){
+        for(String s : array)
+            if(s.equals(val)) return true;
         return false;
     }
 

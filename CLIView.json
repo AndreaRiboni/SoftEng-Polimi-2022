@@ -124,6 +124,9 @@
   },
   "ask_for_ip" : {
     "value" : "If you don't want to connect to localhost, type the correct ip now. Otherwise, press ENTER"
+  },
+  "invalid_username" : {
+    "value" : "Invalid username"
   }
 
 }
