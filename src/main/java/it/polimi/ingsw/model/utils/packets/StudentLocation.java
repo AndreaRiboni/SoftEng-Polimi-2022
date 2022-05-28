@@ -1,17 +1,18 @@
 package it.polimi.ingsw.model.utils.packets;
 
 import it.polimi.ingsw.model.utils.Color;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 public class StudentLocation {
     private int island_index;
-    private ImageView color;
+    private Node color;
 
     public void setIsland_index(int island_index) {
         this.island_index = island_index;
     }
 
-    public void setColor(ImageView color) {
+    public void setColor(Node color) {
         this.color = color;
     }
 
@@ -20,7 +21,7 @@ public class StudentLocation {
         this.island_index = -1;
     }
 
-    public StudentLocation(int island_index, ImageView color) {
+    public StudentLocation(int island_index, Node color) {
         this.island_index = island_index;
         this.color = color;
     }
@@ -29,7 +30,7 @@ public class StudentLocation {
         return island_index;
     }
 
-    public ImageView getColor() {
+    public Node getColor() {
         return color;
     }
 
