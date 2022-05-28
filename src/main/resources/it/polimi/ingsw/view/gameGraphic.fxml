@@ -214,15 +214,26 @@
                                     </children></AnchorPane>
                             </content>
                         </Tab>
-                  <Tab text="Match status">
+                  <Tab text="Turn info">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                           <children>
-                              <Label fx:id="TurnStatus" layoutX="132.0" layoutY="401.0" prefHeight="149.0" prefWidth="429.0" text="Aspetta il tuo turno">
+                              <Label fx:id="TurnStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="14.0" prefHeight="80.0" prefWidth="478.0" text="Aspetta il tuo turno" textAlignment="CENTER">
                               <font>
                                   <Font size="21.0" />
                               </font></Label>
-                              <ProgressBar fx:id="TurnStatusBar" layoutX="-1.0" layoutY="362.0" prefHeight="20.0" prefWidth="600.0" />
+                              <ProgressBar fx:id="TurnStatusBar" layoutX="78.0" layoutY="94.0" prefHeight="20.0" prefWidth="479.0" />
+                              <Accordion layoutX="78.0" layoutY="176.0" prefHeight="51.0" prefWidth="481.0">
+                                <panes>
+                                  <TitledPane animated="false" text="Students to move" />
+                                  <TitledPane animated="false" text="Do we need other information?" />
+                                </panes>
+                              </Accordion>
+                              <Label fx:id="TurnStatus1" alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="130.0" prefHeight="46.0" prefWidth="478.0" text="About this turn" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
                           </children>
                       </AnchorPane>
                     </content>
