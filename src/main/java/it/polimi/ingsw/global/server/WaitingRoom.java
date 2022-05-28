@@ -1,10 +1,14 @@
 package it.polimi.ingsw.global.server;
 
+import it.polimi.ingsw.global.MessageSender;
+import it.polimi.ingsw.model.utils.Action;
+import it.polimi.ingsw.model.utils.GamePhase;
 import it.polimi.ingsw.model.utils.GenericUtils;
 import it.polimi.ingsw.model.utils.Printer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -33,25 +37,25 @@ public class WaitingRoom {
     }
 
     public synchronized void connect(Socket client, ObjectInputStream ois, ObjectOutputStream oos, String username){
+        for(int i = 0; i < connected; i++){
+            if(usernames[i].equalsIgnoreCase(username)){
+                Action bad_user = new Action();
+                bad_user.setGamePhase(GamePhase.ERROR_PHASE);
+                bad_user.setErrorMessage("Username already chosen");
+                try {
+                    MessageSender temp_msg = new MessageSender(client, ois, oos);
+                    temp_msg.send(bad_user);
+                    client.close();
+                    return;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         clients[connected] = client;
         in[connected] = ois;
         out[connected] = oos;
-        String new_username = username;
-        boolean username_found = false;
-        int player_counter = 0;
-        do {
-            username_found = false;
-            if(player_counter == 0){
-                new_username = username;
-            } else{
-                new_username = "Default";
-            }
-            player_counter++;
-            for(int i = 0; i < connected; i++){
-                if(usernames[i].equalsIgnoreCase(new_username)) username_found = true;
-            }
-        } while (username_found);
-        usernames[connected] = new_username;
+        usernames[connected] = username;
         connected++;
         log.info("Connected: " + getNofConnected() + ", Capacity: " + getCapacity());
         log.info(Printer.socketToString(client) + " has joined a match [" + connected + "/" + clients.length + "]");

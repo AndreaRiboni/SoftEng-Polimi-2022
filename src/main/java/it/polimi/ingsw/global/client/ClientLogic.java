@@ -413,6 +413,10 @@ public class ClientLogic implements GameBoardContainer {
         msg.send(start);
         System.out.println( StringViewUtility.getViewString("waiting_response"));
         Action username_comunicator = waitForResponse();
+        if(username_comunicator.getGamePhase().equals(GamePhase.ERROR_PHASE)){
+            System.err.println("Someone already chosen this username!");
+            System.exit(0);
+        }
         System.out.println( StringViewUtility.getViewString("username_declaration") + username_comunicator.getUsername());
         this.username = username_comunicator.getUsername();
         do {
