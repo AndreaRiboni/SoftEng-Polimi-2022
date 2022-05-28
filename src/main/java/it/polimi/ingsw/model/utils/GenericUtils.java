@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.utils;
 
+import it.polimi.ingsw.model.places.Island;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

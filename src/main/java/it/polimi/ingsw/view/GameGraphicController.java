@@ -304,7 +304,11 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             //copying my school
             copySchool(model.getPlayerByUsername(username).getSchool(), true);
             //copying islands and clouds
-            copyIslands();
+            try {
+                copyIslands();
+            } catch (EriantysException e) {
+                e.printStackTrace();
+            }
             copyClouds();
             copyOtherSchools();
             copyMotherNature();
@@ -429,14 +433,21 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         }
     }
 
-    private void copyIslands(){
-        int count = 0;
+    private void copyIslands() throws EriantysException {
+        int count_islands = 0;
+        int count_groups = 0;
         int[] island_groups = new int[model.getNofGroupsOfIslands()];
         int linked;
-        for(int i = 0; i < island_groups.length; i++){
-            linked = model.getIslands()[count].countNextLinked();
-            island_groups[i] = linked;
-            count += linked;
+        while(count_islands < model.getIslands().length && count_groups < model.getNofGroupsOfIslands()){
+            Island isl = model.getIslands()[count_islands];
+            if(!isl.hasPrevious()){
+                linked = isl.countNextLinked();
+                island_groups[count_groups] = linked;
+                count_islands += linked;
+                count_groups++;
+            }else{
+                count_islands++;
+            }
         }
         alignIslands(island_groups);
     }
