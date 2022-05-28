@@ -93,4 +93,18 @@ public class GenericUtils {
         return targetStart + (targetStop - targetStart) * ((value - start) / (stop - start));
     }
 
+    public static boolean alreadyContains(String[] array, String val, int pos){
+        for(int i=0; i< array.length; i++){
+            if(array[i].equals(val) && pos!=i) return true;
+        }
+        return false;
+    }
+
+    public static boolean alreadyContains(String[] array, String val){
+        for(int i = 0; i < array.length; i++){
+            if(array[i].equalsIgnoreCase(val)) return true;
+        }
+        return false;
+    }
+
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.global.server;
 
+import it.polimi.ingsw.model.utils.GenericUtils;
 import it.polimi.ingsw.model.utils.Printer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -37,11 +38,15 @@ public class WaitingRoom {
         out[connected] = oos;
         String new_username = username;
         boolean username_found = false;
-        int extra_char = 0;
+        int player_counter = 0;
         do {
             username_found = false;
-            new_username = extra_char == 0 ? username : username + extra_char;
-            extra_char++;
+            if(player_counter == 0){
+                new_username = username;
+            } else{
+                new_username = "Default";
+            }
+            player_counter++;
             for(int i = 0; i < connected; i++){
                 if(usernames[i].equalsIgnoreCase(new_username)) username_found = true;
             }
