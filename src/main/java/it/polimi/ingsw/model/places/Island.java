@@ -205,6 +205,19 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
 
     public boolean hasNext(){ return next!=null; }
 
+    public Island getPrevious() throws EriantysException {
+        int this_index = getIndex();
+        Island maybe_previous;
+        if(this_index > 0) maybe_previous = gameboard.getIsland(this_index-1);
+        else maybe_previous = gameboard.getIsland(11);
+        if(maybe_previous.hasNext() && maybe_previous.getNext() == this){
+            return maybe_previous;
+        }
+        return null;
+    }
+
+    public boolean hasPrevious() throws EriantysException { return getPrevious()!=null; }
+
     public boolean hasMotherNature(){
         return has_mothernature;
     }
