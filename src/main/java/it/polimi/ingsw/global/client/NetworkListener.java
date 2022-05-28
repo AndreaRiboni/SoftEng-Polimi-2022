@@ -108,9 +108,10 @@ public class NetworkListener extends Thread{
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException | NullPointerException ex){
-                ex.printStackTrace();
-                System.err.println("An error occurred while communicating with the server! Someone could have had a problem or the server could be unavailable");
-                System.exit(0);
+                if(!isForGUI){
+                    System.err.println("An error occurred while communicating with the server. Someone could have had a problem, the server could be unavailable or you're being kicked out from the server");
+                    System.exit(0);
+                }
             }
         }
     }

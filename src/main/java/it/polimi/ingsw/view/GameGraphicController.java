@@ -12,7 +12,6 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.SubScene;
@@ -25,7 +24,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 
 import java.net.SocketException;
@@ -43,7 +41,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     public static MessageSender msg;
     private Action last_sent;
     private List<StudentLocation> move_students;
-    private boolean disabled;
+    private boolean disabled, started;
     private ImageView mothernature_img;
 
     @FXML
@@ -78,6 +76,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        started = false;
         disabled = false;
         //lock tabpane
         leftpane.maxWidthProperty().bind(splitpane.widthProperty().multiply(0.5));
@@ -124,7 +123,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             islands[i].setOnMouseClicked(e -> {
                 if(!disabled) {
                     if (e.getButton() == MouseButton.PRIMARY) {
-                        System.out.println("SELECT MOVING SUBJECT (ISLAND ICON)");
                         selectMovingSubject(islands[finalI1]);
                     } else {
                         mn_menu.show(islands[finalI1], e.getScreenX(), e.getScreenY());
@@ -139,7 +137,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         //creates the clouds
         Group clouds_container = new Group();
         clouds = new Group[nof_players];
-        System.out.println("players: " + nof_players);
         for(int i = 0; i < clouds.length; i++){
             clouds[i] = new Group();
             ImageView cloud_icon  = new ImageView(
@@ -157,7 +154,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             MenuItem request_dc_item = new MenuItem("Retrieve these students");
             int finalI = i;
             request_dc_item.setOnAction(e -> {
-                System.out.println("Requested");
                 sendDrainCloudRequest(finalI);
             });
             dc_menu.getItems().add(request_dc_item);
@@ -178,6 +174,10 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         forceZoom(pane, 300, true);
         applyNavigationListener(pane);
         move_students = new ArrayList<>();
+    }
+
+    public void setStarted(){
+        started = true;
     }
 
     private ImageView getTowerImage(Color tower_color){
@@ -237,7 +237,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             //Towers
             others_container[i].getChildren().add(getWhiteLabel("Tower Hall"));
             HBox towers = new HBox();
-            System.out.println("There are " + others[i].getSchool().getNumberOfTowers() + " towers");
             int tot_tower = others[i].getNumberOfPlacedTowers() + others[i].getNumberOfUnplacedTowers();
             for(int t = 0; t < tot_tower; t++){ //TODO: FIX
                 ImageView tower_img = getTowerImage(others[i].getColor());
@@ -245,7 +244,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                     applyNotPresentEffect(tower_img);
                 }
                 towers.getChildren().add(tower_img);
-                System.out.println("Adding tower " + (t+1));
             }
             others_container[i].getChildren().add(towers);
             //Professors
@@ -298,6 +296,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     @Override
     public void setGameBoard(GameBoard model){
         System.out.println("Received gameboard");
+        System.out.println(model);
         this.model = model;
         move_students.clear();
         Platform.runLater(() -> {
@@ -437,6 +436,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         int count_islands = 0;
         int count_groups = 0;
         int[] island_groups = new int[model.getNofGroupsOfIslands()];
+        //BiInteger[] island = new BiInteger[model.getNofGroupsOfIslands()];
         int linked;
         while(count_islands < model.getIslands().length && count_groups < model.getNofGroupsOfIslands()){
             Island isl = model.getIslands()[count_islands];
@@ -482,12 +482,9 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 move_students.add(new StudentLocation(-1, node));
             }
         } else if(node.getProperties().get("type").equals("island")) {
-            System.out.println("It's an island");
             //it's an island: create the action and move the student there
             int island_index = (Integer) node.getProperties().get("index");
-            System.out.println("It's island #" + island_index);
             if(last_selected != null) { //if we already selected a student we can set its island destination
-                System.out.println("Last selected isn't null");
                 move_students.get(move_students.size() - 1).setIsland_index(island_index);
                 //lock this student
                 move_students.get(move_students.size() - 1).getColor().setOnMouseClicked(e->{});
@@ -525,6 +522,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
 
     @Override
     public void notifyResponse(Action action) {
+        if(!started) return;
         System.out.println("Received action " + action.getGamePhase());
         Platform.runLater(() -> {
             if(action.getGamePhase().equals(GamePhase.CORRECT)){
@@ -595,7 +593,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         assist_card.setAssistCardIndex(Integer.parseInt(assistant_chosen) - 1);
         msg.send(assist_card);
         last_sent = assist_card;
-        System.out.println("Assist card request sent.");
     }
 
     private void sendMoveStudentsRequest() {
@@ -608,7 +605,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             student[i] = (Color) move_students.get(i).getColor().getProperties().get("color");
             island_indexes[i] = move_students.get(i).getIsland_index();
             destinations[i] = island_indexes[i] > 12 ? Places.DINING_HALL : Places.ISLAND;
-            System.out.println("Moving " + student[i] + " in " + island_indexes[i]);
         }
         movestud.setThreeStudents(student);
         movestud.setThreeStudentPlaces(destinations);
@@ -626,10 +622,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         movemother.setGamePhase(GamePhase.MOVE_MOTHERNATURE);
         //calculate the increment
         int increment = index - model.getMotherNature().getIslandIndex();
-        System.out.println("Clicked index: " + index + ". Actual index: " + model.getMotherNature().getIslandIndex());
-        System.out.println("Increment is " + increment);
         if(increment < 0) increment = GameBoard.NOF_ISLAND + increment;
-        System.out.println("Increment was negative. Now it's " + GameBoard.NOF_ISLAND + "-old_increment = " +increment);
         movemother.setMothernatureIncrement(increment);
         try {
             msg.send(movemother);
@@ -769,13 +762,17 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         }
     }
 
-    private void fillIslands(){
+    private void fillIslands(int offset){ //need to subtract this offset
         Island[] model_islands = model.getIslands();
         for(int i = 0; i < model_islands.length; i++){
             GridPane island_grid = (GridPane) islands[i].getChildren().get(1);
             island_grid.getChildren().clear();
-            Map<Color, Integer> island_studs = model_islands[i].getStudents();
-            int total = GenericUtils.sumValues(island_studs) + (model.getIslands()[i].hasTower() ? 1 : 0);
+            int new_index = i - offset;
+            if(new_index < 0){
+                new_index += 12;
+            }
+            Map<Color, Integer> island_studs = model_islands[new_index].getStudents();
+            int total = GenericUtils.sumValues(island_studs) + (model_islands[new_index].hasTower() ? 1 : 0);
             if(total == 0) total++;
             int count = 0;
             int nof_col = (int) Math.ceil(total * 0.5);
@@ -792,8 +789,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                     count++;
                 }
             }
-            if(model.getIslands()[i].hasTower()){
-                ImageView tower = getTowerImage(model.getIslands()[i].getTowerColor());
+            if(model_islands[new_index].hasTower()){
+                ImageView tower = getTowerImage(model_islands[new_index].getTowerColor());
                 tower.setFitHeight(ISLAND_SIZE /  divisor * 0.65);
                 tower.setFitWidth(ISLAND_SIZE / divisor * 0.8);
                 island_grid.add(tower, count % nof_col, count / nof_col);
@@ -803,6 +800,21 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     }
 
     private void alignIslands(int[] islands_groups){
+        /*
+        problema quando l'ultima cella di islands_groups è maggiore di 1
+        perché devo collegare l'isola 12 all'isola 1
+        ma l'algoritmo allinea male (la 11 alla 12)
+         */
+        //Determino quale sia la prima isola da cui partire
+        int new_start = (13 - islands_groups[islands_groups.length - 1]) % 12;
+        System.out.println("Islands groups:");
+        for(int i = 0; i < islands_groups.length; i++){
+            System.out.println(i + ") " + islands_groups[i]);
+        }
+        System.out.println("Islands:");
+        for(int i = 0; i < model.getIslands().length; i++){
+            System.out.println(i + ") " + model.getIslands()[i].hasNext());
+        }
         float angle = 0;
         int count = 0;
         for (int islands_group : islands_groups) {
@@ -823,11 +835,10 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 double x = subscene.getWidth() / 2 + Math.cos(angle) * ISLAND_SIZE * 4 + xoff - ISLAND_SIZE / 2;
                 double y = subscene.getHeight() / 2 + Math.sin(angle) * ISLAND_SIZE * 4 + yoff - ISLAND_SIZE / 2 + temp_yoff;
                 setIslandPos(islands[count], x, y);
-                //System.out.println("[i=" + count + "] x:\t" + (int)x + ",\ty:\t" + (int)y);
                 count++;
             }
             angle += 2 * Math.PI / islands_groups.length;
         }
-        fillIslands();
+        fillIslands(new_start);
     }
 }

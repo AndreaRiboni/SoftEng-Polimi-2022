@@ -1,0 +1,1299 @@
+2022-05-28 18:39:29 INFO  root:25 - Created a waiting room of 2 players
+2022-05-28 18:39:29 INFO  root:25 - Created a waiting room of 3 players
+2022-05-28 18:39:29 INFO  root:25 - Created a waiting room of 4 players
+2022-05-28 18:39:29 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 18:39:44 INFO  root:41 - New client has connected: [/127.0.0.1:58933]
+2022-05-28 18:39:44 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:39:45 INFO  root:53 - A client has sent a message - [/127.0.0.1:58933] [num_of_players: 2, username: a]
+2022-05-28 18:39:45 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:39:45 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 18:39:45 INFO  root:41 - Connected: 1, Capacity: 2
+2022-05-28 18:39:45 INFO  root:42 - [/127.0.0.1:58933] has joined a match [1/2]
+2022-05-28 18:39:48 INFO  root:41 - New client has connected: [/127.0.0.1:58937]
+2022-05-28 18:39:48 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:39:49 INFO  root:53 - A client has sent a message - [/127.0.0.1:58937] [num_of_players: 2, username: g]
+2022-05-28 18:39:49 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:39:49 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 18:39:49 INFO  root:41 - Connected: 2, Capacity: 2
+2022-05-28 18:39:49 INFO  root:42 - [/127.0.0.1:58937] has joined a match [2/2]
+2022-05-28 18:39:49 INFO  root:44 - starting a match...
+2022-05-28 18:39:49 INFO  root:27 - ServerNetworkListener has started
+2022-05-28 18:39:49 INFO  root:49 - Received an update - Analyzing START
+2022-05-28 18:39:49 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 18:39:49 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-28 18:39:49 INFO  root:171 - Returning correct
+2022-05-28 18:39:49 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-28 18:39:49 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 18:39:49 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-28 18:39:49 INFO  root:171 - Returning correct
+2022-05-28 18:39:49 INFO  root:25 - Created a waiting room of 2 players
+2022-05-28 18:39:49 INFO  root:36 - Added a new waiting room
+2022-05-28 18:39:49 INFO  root:156 - New match has started [2 players]
+2022-05-28 18:39:49 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 18:39:49 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 18:39:49 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 18:39:49 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 18:39:53 INFO  root:41 - New client has connected: [/127.0.0.1:58941]
+2022-05-28 18:39:53 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:39:54 INFO  root:53 - A client has sent a message - [/127.0.0.1:58941] [num_of_players: 2, username: 2]
+2022-05-28 18:39:54 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:39:54 INFO  root:32 - Connecting to waiting room 1
+2022-05-28 18:39:54 INFO  root:41 - Connected: 1, Capacity: 2
+2022-05-28 18:39:54 INFO  root:42 - [/127.0.0.1:58941] has joined a match [1/2]
+2022-05-28 18:40:02 INFO  root:41 - New client has connected: [/127.0.0.1:58945]
+2022-05-28 18:40:02 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:40:02 INFO  root:53 - A client has sent a message - [/127.0.0.1:58945] [num_of_players: 2, username: 2]
+2022-05-28 18:40:02 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:40:02 INFO  root:32 - Connecting to waiting room 1
+2022-05-28 18:40:02 INFO  root:41 - Connected: 2, Capacity: 2
+2022-05-28 18:40:02 INFO  root:42 - [/127.0.0.1:58945] has joined a match [2/2]
+2022-05-28 18:40:02 INFO  root:44 - starting a match...
+2022-05-28 18:40:02 INFO  root:49 - Received an update - Analyzing START
+2022-05-28 18:40:02 INFO  root:27 - ServerNetworkListener has started
+2022-05-28 18:40:02 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 18:40:02 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-28 18:40:02 INFO  root:171 - Returning correct
+2022-05-28 18:40:02 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-28 18:40:02 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 18:40:02 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-28 18:40:02 INFO  root:171 - Returning correct
+2022-05-28 18:40:02 INFO  root:25 - Created a waiting room of 2 players
+2022-05-28 18:40:02 INFO  root:36 - Added a new waiting room
+2022-05-28 18:40:02 INFO  root:156 - New match has started [2 players]
+2022-05-28 18:40:02 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 18:40:02 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 18:40:02 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 18:40:02 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 18:41:45 INFO  root:28 - Created a waiting room of 2 players
+2022-05-28 18:41:45 INFO  root:28 - Created a waiting room of 3 players
+2022-05-28 18:41:45 INFO  root:28 - Created a waiting room of 4 players
+2022-05-28 18:41:45 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 18:41:50 INFO  root:41 - New client has connected: [/127.0.0.1:58961]
+2022-05-28 18:41:50 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:41:50 INFO  root:53 - A client has sent a message - [/127.0.0.1:58961] [num_of_players: 2, username: 2]
+2022-05-28 18:41:50 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:41:50 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 18:41:50 INFO  root:58 - Connected: 1, Capacity: 2
+2022-05-28 18:41:50 INFO  root:59 - [/127.0.0.1:58961] has joined a match [1/2]
+2022-05-28 18:41:54 INFO  root:41 - New client has connected: [/127.0.0.1:58965]
+2022-05-28 18:41:54 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:41:58 INFO  root:53 - A client has sent a message - [/127.0.0.1:58965] [num_of_players: 2, username: 2]
+2022-05-28 18:41:58 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:41:58 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 18:43:20 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 18:43:20 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 18:43:20 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 18:43:20 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 18:43:23 INFO  root:41 - New client has connected: [/127.0.0.1:58976]
+2022-05-28 18:43:23 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:43:24 INFO  root:53 - A client has sent a message - [/127.0.0.1:58976] [num_of_players: 2, username: 2]
+2022-05-28 18:43:24 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:43:24 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 18:43:24 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 18:43:24 INFO  root:61 - [/127.0.0.1:58976] has joined a match [1/2]
+2022-05-28 18:43:28 INFO  root:41 - New client has connected: [/127.0.0.1:58980]
+2022-05-28 18:43:28 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:43:28 INFO  root:53 - A client has sent a message - [/127.0.0.1:58980] [num_of_players: 2, username: 2]
+2022-05-28 18:43:28 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:43:28 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 18:44:42 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 18:44:42 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 18:44:42 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 18:44:42 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 18:44:47 INFO  root:41 - New client has connected: [/127.0.0.1:58991]
+2022-05-28 18:44:47 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:44:48 INFO  root:53 - A client has sent a message - [/127.0.0.1:58991] [num_of_players: 2, username: 2]
+2022-05-28 18:44:48 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:44:48 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 18:44:48 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 18:44:48 INFO  root:61 - [/127.0.0.1:58991] has joined a match [1/2]
+2022-05-28 18:44:51 INFO  root:41 - New client has connected: [/127.0.0.1:58995]
+2022-05-28 18:44:51 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:44:52 INFO  root:53 - A client has sent a message - [/127.0.0.1:58995] [num_of_players: 2, username: 2]
+2022-05-28 18:44:52 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:44:52 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 18:45:23 INFO  root:41 - New client has connected: [/127.0.0.1:59001]
+2022-05-28 18:45:23 INFO  root:46 - ServerDispatcher ready
+2022-05-28 18:45:25 INFO  root:53 - A client has sent a message - [/127.0.0.1:59001] [num_of_players: 2, username: 3]
+2022-05-28 18:45:25 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 18:45:25 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 18:45:25 INFO  root:60 - Connected: 2, Capacity: 2
+2022-05-28 18:45:25 INFO  root:61 - [/127.0.0.1:59001] has joined a match [2/2]
+2022-05-28 18:45:25 INFO  root:63 - starting a match...
+2022-05-28 18:45:25 INFO  root:27 - ServerNetworkListener has started
+2022-05-28 18:45:25 INFO  root:49 - Received an update - Analyzing START
+2022-05-28 18:45:25 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 18:45:25 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-28 18:45:25 INFO  root:171 - Returning correct
+2022-05-28 18:45:25 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-28 18:45:25 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 18:45:25 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-28 18:45:25 INFO  root:171 - Returning correct
+2022-05-28 18:45:25 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 18:45:25 INFO  root:36 - Added a new waiting room
+2022-05-28 18:45:25 INFO  root:156 - New match has started [2 players]
+2022-05-28 18:45:25 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 18:45:25 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 18:45:25 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 18:45:25 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 18:45:29 INFO  root:32 - Available stream
+2022-05-28 18:45:29 INFO  root:38 - Received a request
+2022-05-28 18:45:29 INFO  root:111 - Received an action!
+2022-05-28 18:45:29 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 18:45:29 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 18:45:29 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 18:45:29 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 18:45:29 INFO  root:89 - verifying that player 0 is playing in the correct turn
+2022-05-28 18:45:29 INFO  root:24 - Requested assist-card: 0
+2022-05-28 18:45:29 INFO  root:76 - Assist card drawn
+2022-05-28 18:45:29 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 18:45:29 INFO  root:171 - Returning correct
+2022-05-28 18:45:29 INFO  root:120 - Everything went right
+2022-05-28 18:45:29 INFO  root:126 - Setting response received
+2022-05-28 18:45:29 INFO  root:141 - Response received
+2022-05-28 18:45:29 INFO  root:177 - Response received. Ending loop
+2022-05-28 18:45:29 INFO  root:93 - Game ended: false
+2022-05-28 18:45:29 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 18:45:29 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 18:45:29 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 18:45:29 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 18:45:32 INFO  root:32 - Available stream
+2022-05-28 18:45:32 INFO  root:38 - Received a request
+2022-05-28 18:45:32 INFO  root:111 - Received an action!
+2022-05-28 18:45:32 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 18:45:32 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 18:45:32 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 18:45:32 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 18:45:32 INFO  root:89 - verifying that player 1 is playing in the correct turn
+2022-05-28 18:45:32 INFO  root:93 - last player was 0
+2022-05-28 18:45:32 INFO  root:24 - Requested assist-card: 1
+2022-05-28 18:45:32 INFO  root:76 - Assist card drawn
+2022-05-28 18:45:32 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 18:45:32 INFO  root:171 - Returning correct
+2022-05-28 18:45:32 INFO  root:120 - Everything went right
+2022-05-28 18:45:32 INFO  root:126 - Setting response received
+2022-05-28 18:45:32 INFO  root:141 - Response received
+2022-05-28 18:45:32 INFO  root:177 - Response received. Ending loop
+2022-05-28 18:45:32 INFO  root:93 - Game ended: false
+2022-05-28 18:45:32 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 18:45:32 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 18:45:32 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 18:45:32 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 18:45:32 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:26:56 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 20:26:56 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 20:26:56 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 20:26:56 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 20:27:05 INFO  root:41 - New client has connected: [/127.0.0.1:59306]
+2022-05-28 20:27:05 INFO  root:46 - ServerDispatcher ready
+2022-05-28 20:27:06 INFO  root:53 - A client has sent a message - [/127.0.0.1:59306] [num_of_players: 2, username: d]
+2022-05-28 20:27:06 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 20:27:06 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 20:27:06 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 20:27:06 INFO  root:61 - [/127.0.0.1:59306] has joined a match [1/2]
+2022-05-28 20:27:08 INFO  root:41 - New client has connected: [/127.0.0.1:59309]
+2022-05-28 20:27:08 INFO  root:46 - ServerDispatcher ready
+2022-05-28 20:27:09 INFO  root:53 - A client has sent a message - [/127.0.0.1:59309] [num_of_players: 2, username: f]
+2022-05-28 20:27:09 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 20:27:09 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 20:27:09 INFO  root:60 - Connected: 2, Capacity: 2
+2022-05-28 20:27:09 INFO  root:61 - [/127.0.0.1:59309] has joined a match [2/2]
+2022-05-28 20:27:09 INFO  root:63 - starting a match...
+2022-05-28 20:27:09 INFO  root:27 - ServerNetworkListener has started
+2022-05-28 20:27:09 INFO  root:49 - Received an update - Analyzing START
+2022-05-28 20:27:09 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 20:27:09 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-28 20:27:09 INFO  root:171 - Returning correct
+2022-05-28 20:27:09 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-28 20:27:09 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 20:27:09 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-28 20:27:09 INFO  root:171 - Returning correct
+2022-05-28 20:27:09 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 20:27:09 INFO  root:36 - Added a new waiting room
+2022-05-28 20:27:09 INFO  root:156 - New match has started [2 players]
+2022-05-28 20:27:09 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:27:09 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:27:09 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:27:09 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:27:27 INFO  root:32 - Available stream
+2022-05-28 20:27:27 INFO  root:38 - Received a request
+2022-05-28 20:27:27 INFO  root:111 - Received an action!
+2022-05-28 20:27:27 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:27:27 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:27:27 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 20:27:27 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:27:27 INFO  root:89 - verifying that player 0 is playing in the correct turn
+2022-05-28 20:27:27 INFO  root:24 - Requested assist-card: 2
+2022-05-28 20:27:27 INFO  root:76 - Assist card drawn
+2022-05-28 20:27:27 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 20:27:27 INFO  root:171 - Returning correct
+2022-05-28 20:27:27 INFO  root:120 - Everything went right
+2022-05-28 20:27:27 INFO  root:126 - Setting response received
+2022-05-28 20:27:27 INFO  root:141 - Response received
+2022-05-28 20:27:27 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:27:27 INFO  root:93 - Game ended: false
+2022-05-28 20:27:27 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:27:27 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:27:27 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:27:27 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:27:33 INFO  root:32 - Available stream
+2022-05-28 20:27:33 INFO  root:38 - Received a request
+2022-05-28 20:27:33 INFO  root:111 - Received an action!
+2022-05-28 20:27:33 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:27:33 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:27:33 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 20:27:33 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:27:33 INFO  root:89 - verifying that player 1 is playing in the correct turn
+2022-05-28 20:27:33 INFO  root:93 - last player was 0
+2022-05-28 20:27:33 INFO  root:24 - Requested assist-card: 6
+2022-05-28 20:27:33 INFO  root:76 - Assist card drawn
+2022-05-28 20:27:33 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 20:27:33 INFO  root:171 - Returning correct
+2022-05-28 20:27:33 INFO  root:120 - Everything went right
+2022-05-28 20:27:33 INFO  root:126 - Setting response received
+2022-05-28 20:27:33 INFO  root:141 - Response received
+2022-05-28 20:27:33 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:27:33 INFO  root:93 - Game ended: false
+2022-05-28 20:27:33 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:27:33 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:27:33 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:27:33 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:27:33 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:27:44 INFO  root:32 - Available stream
+2022-05-28 20:27:44 INFO  root:38 - Received a request
+2022-05-28 20:27:44 INFO  root:111 - Received an action!
+2022-05-28 20:27:44 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:27:44 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:27:44 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:27:44 INFO  root:49 - Received an update - Analyzing MOVE_3_STUDENTS
+2022-05-28 20:27:44 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:27:44 INFO  root:116 - Verify order
+2022-05-28 20:27:44 INFO  root:120 - HasPlayed list: 
+2022-05-28 20:27:44 INFO  root:134 - valore ok
+2022-05-28 20:27:44 INFO  root:66 - Moving the students (yellow in dining hall) (red in dining hall) (red in island 0) 
+2022-05-28 20:27:44 INFO  root:39 - GamePhase MOVE_3_STUDENTS has been processed correctly
+2022-05-28 20:27:44 INFO  root:171 - Returning correct
+2022-05-28 20:27:44 INFO  root:120 - Everything went right
+2022-05-28 20:27:44 INFO  root:126 - Setting response received
+2022-05-28 20:27:44 INFO  root:141 - Response received
+2022-05-28 20:27:44 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:27:44 INFO  root:93 - Game ended: false
+2022-05-28 20:27:44 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:27:44 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:27:44 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:27:44 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:27:47 INFO  root:32 - Available stream
+2022-05-28 20:27:47 INFO  root:38 - Received a request
+2022-05-28 20:27:47 INFO  root:111 - Received an action!
+2022-05-28 20:27:47 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:27:47 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:27:47 INFO  root:49 - Received an update - Analyzing MOVE_MOTHERNATURE
+2022-05-28 20:27:47 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:27:47 INFO  root:177 - Verifying identity. Player 0 is playing. Last who has played was 0
+2022-05-28 20:27:47 INFO  root:181 - HasPlayed list: 0, 
+2022-05-28 20:27:47 INFO  root:18 - Moving mother nature (1 steps)
+2022-05-28 20:27:47 INFO  root:22 - Steps: 1, TurnValue: 2, Extrasteps: 0
+2022-05-28 20:27:47 INFO  root:39 - GamePhase MOVE_MOTHERNATURE has been processed correctly
+2022-05-28 20:27:47 INFO  root:171 - Returning correct
+2022-05-28 20:27:47 INFO  root:120 - Everything went right
+2022-05-28 20:27:47 INFO  root:126 - Setting response received
+2022-05-28 20:27:47 INFO  root:141 - Response received
+2022-05-28 20:27:47 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:27:47 INFO  root:93 - Game ended: false
+2022-05-28 20:27:47 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:27:47 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:27:47 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:27:47 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:27:50 INFO  root:32 - Available stream
+2022-05-28 20:27:50 INFO  root:38 - Received a request
+2022-05-28 20:27:50 INFO  root:111 - Received an action!
+2022-05-28 20:27:50 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:27:50 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:27:50 INFO  root:49 - Received an update - Analyzing DRAIN_CLOUD
+2022-05-28 20:27:50 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:27:50 INFO  root:177 - Verifying identity. Player 0 is playing. Last who has played was 0
+2022-05-28 20:27:50 INFO  root:181 - HasPlayed list: 0, 
+2022-05-28 20:27:50 INFO  root:39 - GamePhase DRAIN_CLOUD has been processed correctly
+2022-05-28 20:27:50 INFO  root:171 - Returning correct
+2022-05-28 20:27:50 INFO  root:120 - Everything went right
+2022-05-28 20:27:50 INFO  root:126 - Setting response received
+2022-05-28 20:27:50 INFO  root:141 - Response received
+2022-05-28 20:27:50 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:27:50 INFO  root:93 - Game ended: false
+2022-05-28 20:27:50 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:27:50 INFO  root:166 - il valore minore lo ha 1
+2022-05-28 20:27:50 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:27:50 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:27:50 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:28:02 INFO  root:32 - Available stream
+2022-05-28 20:28:02 INFO  root:38 - Received a request
+2022-05-28 20:28:02 INFO  root:111 - Received an action!
+2022-05-28 20:28:02 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:28:02 INFO  root:166 - il valore minore lo ha 1
+2022-05-28 20:28:02 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:28:02 INFO  root:49 - Received an update - Analyzing MOVE_3_STUDENTS
+2022-05-28 20:28:02 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:28:02 INFO  root:116 - Verify order
+2022-05-28 20:28:02 INFO  root:120 - HasPlayed list: 0, 
+2022-05-28 20:28:02 INFO  root:134 - valore ok
+2022-05-28 20:28:02 INFO  root:66 - Moving the students (green in island 0) (green in island 10) (red in island 0) 
+2022-05-28 20:28:02 INFO  root:39 - GamePhase MOVE_3_STUDENTS has been processed correctly
+2022-05-28 20:28:02 INFO  root:171 - Returning correct
+2022-05-28 20:28:02 INFO  root:120 - Everything went right
+2022-05-28 20:28:02 INFO  root:126 - Setting response received
+2022-05-28 20:28:02 INFO  root:141 - Response received
+2022-05-28 20:28:02 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:28:02 INFO  root:93 - Game ended: false
+2022-05-28 20:28:02 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:28:02 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:28:02 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:28:02 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:28:08 INFO  root:32 - Available stream
+2022-05-28 20:28:08 INFO  root:38 - Received a request
+2022-05-28 20:28:08 INFO  root:111 - Received an action!
+2022-05-28 20:28:08 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:28:08 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:28:08 INFO  root:49 - Received an update - Analyzing MOVE_MOTHERNATURE
+2022-05-28 20:28:08 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:28:08 INFO  root:177 - Verifying identity. Player 1 is playing. Last who has played was 1
+2022-05-28 20:28:08 INFO  root:181 - HasPlayed list: 0, 1, 
+2022-05-28 20:28:08 INFO  root:18 - Moving mother nature (1 steps)
+2022-05-28 20:28:08 INFO  root:22 - Steps: 1, TurnValue: 4, Extrasteps: 0
+2022-05-28 20:28:08 INFO  root:39 - GamePhase MOVE_MOTHERNATURE has been processed correctly
+2022-05-28 20:28:08 INFO  root:171 - Returning correct
+2022-05-28 20:28:08 INFO  root:120 - Everything went right
+2022-05-28 20:28:08 INFO  root:126 - Setting response received
+2022-05-28 20:28:08 INFO  root:141 - Response received
+2022-05-28 20:28:08 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:28:08 INFO  root:93 - Game ended: false
+2022-05-28 20:28:08 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:28:08 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:28:08 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:28:08 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:37:15 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 20:37:15 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 20:37:15 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 20:37:15 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 20:37:24 INFO  root:41 - New client has connected: [/127.0.0.1:59384]
+2022-05-28 20:37:24 INFO  root:46 - ServerDispatcher ready
+2022-05-28 20:37:25 INFO  root:53 - A client has sent a message - [/127.0.0.1:59384] [num_of_players: 2, username: d]
+2022-05-28 20:37:25 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 20:37:25 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 20:37:25 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 20:37:25 INFO  root:61 - [/127.0.0.1:59384] has joined a match [1/2]
+2022-05-28 20:37:26 INFO  root:41 - New client has connected: [/127.0.0.1:59385]
+2022-05-28 20:37:26 INFO  root:46 - ServerDispatcher ready
+2022-05-28 20:37:26 INFO  root:53 - A client has sent a message - [/127.0.0.1:59385] [num_of_players: 2, username: f]
+2022-05-28 20:37:26 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 20:37:26 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 20:37:26 INFO  root:60 - Connected: 2, Capacity: 2
+2022-05-28 20:37:26 INFO  root:61 - [/127.0.0.1:59385] has joined a match [2/2]
+2022-05-28 20:37:26 INFO  root:63 - starting a match...
+2022-05-28 20:37:26 INFO  root:27 - ServerNetworkListener has started
+2022-05-28 20:37:26 INFO  root:49 - Received an update - Analyzing START
+2022-05-28 20:37:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 20:37:27 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-28 20:37:27 INFO  root:171 - Returning correct
+2022-05-28 20:37:27 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-28 20:37:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 20:37:27 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-28 20:37:27 INFO  root:171 - Returning correct
+2022-05-28 20:37:27 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 20:37:27 INFO  root:36 - Added a new waiting room
+2022-05-28 20:37:27 INFO  root:156 - New match has started [2 players]
+2022-05-28 20:37:27 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:37:27 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:37:27 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:37:27 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:37:33 INFO  root:32 - Available stream
+2022-05-28 20:37:33 INFO  root:38 - Received a request
+2022-05-28 20:37:33 INFO  root:111 - Received an action!
+2022-05-28 20:37:33 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:37:33 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:37:33 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 20:37:33 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:37:33 INFO  root:89 - verifying that player 0 is playing in the correct turn
+2022-05-28 20:37:33 INFO  root:24 - Requested assist-card: 0
+2022-05-28 20:37:33 INFO  root:76 - Assist card drawn
+2022-05-28 20:37:33 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 20:37:33 INFO  root:171 - Returning correct
+2022-05-28 20:37:33 INFO  root:120 - Everything went right
+2022-05-28 20:37:33 INFO  root:126 - Setting response received
+2022-05-28 20:37:33 INFO  root:141 - Response received
+2022-05-28 20:37:33 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:37:33 INFO  root:93 - Game ended: false
+2022-05-28 20:37:33 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:37:33 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:37:33 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:37:33 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:37:37 INFO  root:32 - Available stream
+2022-05-28 20:37:37 INFO  root:38 - Received a request
+2022-05-28 20:37:37 INFO  root:111 - Received an action!
+2022-05-28 20:37:37 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:37:37 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:37:37 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 20:37:37 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:37:37 INFO  root:89 - verifying that player 1 is playing in the correct turn
+2022-05-28 20:37:37 INFO  root:93 - last player was 0
+2022-05-28 20:37:37 INFO  root:24 - Requested assist-card: 1
+2022-05-28 20:37:37 INFO  root:76 - Assist card drawn
+2022-05-28 20:37:37 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 20:37:37 INFO  root:171 - Returning correct
+2022-05-28 20:37:37 INFO  root:120 - Everything went right
+2022-05-28 20:37:37 INFO  root:126 - Setting response received
+2022-05-28 20:37:37 INFO  root:141 - Response received
+2022-05-28 20:37:37 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:37:37 INFO  root:93 - Game ended: false
+2022-05-28 20:37:37 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:37:37 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:37:37 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:37:37 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:37:37 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:37:48 INFO  root:32 - Available stream
+2022-05-28 20:37:48 INFO  root:38 - Received a request
+2022-05-28 20:37:48 INFO  root:111 - Received an action!
+2022-05-28 20:37:48 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:37:48 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:37:48 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:37:48 INFO  root:49 - Received an update - Analyzing MOVE_3_STUDENTS
+2022-05-28 20:37:48 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:37:48 INFO  root:116 - Verify order
+2022-05-28 20:37:48 INFO  root:120 - HasPlayed list: 
+2022-05-28 20:37:48 INFO  root:134 - valore ok
+2022-05-28 20:37:48 INFO  root:66 - Moving the students (blue in dining hall) (pink in dining hall) (red in dining hall) 
+2022-05-28 20:37:48 INFO  root:39 - GamePhase MOVE_3_STUDENTS has been processed correctly
+2022-05-28 20:37:48 INFO  root:171 - Returning correct
+2022-05-28 20:37:48 INFO  root:120 - Everything went right
+2022-05-28 20:37:48 INFO  root:126 - Setting response received
+2022-05-28 20:37:48 INFO  root:141 - Response received
+2022-05-28 20:37:48 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:37:48 INFO  root:93 - Game ended: false
+2022-05-28 20:37:48 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:37:48 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:37:48 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:37:48 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:37:51 INFO  root:32 - Available stream
+2022-05-28 20:37:51 INFO  root:38 - Received a request
+2022-05-28 20:37:51 INFO  root:111 - Received an action!
+2022-05-28 20:37:51 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:37:51 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:37:51 INFO  root:49 - Received an update - Analyzing MOVE_MOTHERNATURE
+2022-05-28 20:37:51 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:37:51 INFO  root:177 - Verifying identity. Player 0 is playing. Last who has played was 0
+2022-05-28 20:37:51 INFO  root:181 - HasPlayed list: 0, 
+2022-05-28 20:37:51 INFO  root:18 - Moving mother nature (1 steps)
+2022-05-28 20:37:51 INFO  root:22 - Steps: 1, TurnValue: 1, Extrasteps: 0
+2022-05-28 20:37:51 INFO  root:39 - GamePhase MOVE_MOTHERNATURE has been processed correctly
+2022-05-28 20:37:51 INFO  root:171 - Returning correct
+2022-05-28 20:37:51 INFO  root:120 - Everything went right
+2022-05-28 20:37:51 INFO  root:126 - Setting response received
+2022-05-28 20:37:51 INFO  root:141 - Response received
+2022-05-28 20:37:51 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:37:51 INFO  root:93 - Game ended: false
+2022-05-28 20:37:51 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:37:51 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:37:51 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:37:51 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:37:54 INFO  root:32 - Available stream
+2022-05-28 20:37:54 INFO  root:38 - Received a request
+2022-05-28 20:37:54 INFO  root:111 - Received an action!
+2022-05-28 20:37:54 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:37:54 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:37:54 INFO  root:49 - Received an update - Analyzing DRAIN_CLOUD
+2022-05-28 20:37:54 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:37:54 INFO  root:177 - Verifying identity. Player 0 is playing. Last who has played was 0
+2022-05-28 20:37:54 INFO  root:181 - HasPlayed list: 0, 
+2022-05-28 20:37:54 INFO  root:39 - GamePhase DRAIN_CLOUD has been processed correctly
+2022-05-28 20:37:54 INFO  root:171 - Returning correct
+2022-05-28 20:37:54 INFO  root:120 - Everything went right
+2022-05-28 20:37:54 INFO  root:126 - Setting response received
+2022-05-28 20:37:54 INFO  root:141 - Response received
+2022-05-28 20:37:54 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:37:54 INFO  root:93 - Game ended: false
+2022-05-28 20:37:54 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:37:54 INFO  root:166 - il valore minore lo ha 1
+2022-05-28 20:37:54 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:37:54 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:37:54 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:38:05 INFO  root:32 - Available stream
+2022-05-28 20:38:05 INFO  root:38 - Received a request
+2022-05-28 20:38:05 INFO  root:111 - Received an action!
+2022-05-28 20:38:05 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:38:05 INFO  root:166 - il valore minore lo ha 1
+2022-05-28 20:38:05 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:38:05 INFO  root:49 - Received an update - Analyzing MOVE_3_STUDENTS
+2022-05-28 20:38:05 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:38:05 INFO  root:116 - Verify order
+2022-05-28 20:38:05 INFO  root:120 - HasPlayed list: 0, 
+2022-05-28 20:38:05 INFO  root:134 - valore ok
+2022-05-28 20:38:05 INFO  root:66 - Moving the students (pink in island 9) (green in island 10) (green in island 10) 
+2022-05-28 20:38:05 INFO  root:39 - GamePhase MOVE_3_STUDENTS has been processed correctly
+2022-05-28 20:38:05 INFO  root:171 - Returning correct
+2022-05-28 20:38:05 INFO  root:120 - Everything went right
+2022-05-28 20:38:05 INFO  root:126 - Setting response received
+2022-05-28 20:38:05 INFO  root:141 - Response received
+2022-05-28 20:38:05 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:38:05 INFO  root:93 - Game ended: false
+2022-05-28 20:38:05 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:38:05 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:38:05 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:38:05 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:38:09 INFO  root:32 - Available stream
+2022-05-28 20:38:09 INFO  root:38 - Received a request
+2022-05-28 20:38:09 INFO  root:111 - Received an action!
+2022-05-28 20:38:09 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:38:09 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:38:09 INFO  root:49 - Received an update - Analyzing MOVE_MOTHERNATURE
+2022-05-28 20:38:09 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:38:09 INFO  root:177 - Verifying identity. Player 1 is playing. Last who has played was 1
+2022-05-28 20:38:09 INFO  root:181 - HasPlayed list: 0, 1, 
+2022-05-28 20:38:09 INFO  root:18 - Moving mother nature (1 steps)
+2022-05-28 20:38:09 INFO  root:22 - Steps: 1, TurnValue: 1, Extrasteps: 0
+2022-05-28 20:38:09 INFO  root:39 - GamePhase MOVE_MOTHERNATURE has been processed correctly
+2022-05-28 20:38:09 INFO  root:171 - Returning correct
+2022-05-28 20:38:09 INFO  root:120 - Everything went right
+2022-05-28 20:38:09 INFO  root:126 - Setting response received
+2022-05-28 20:38:09 INFO  root:141 - Response received
+2022-05-28 20:38:09 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:38:09 INFO  root:93 - Game ended: false
+2022-05-28 20:38:09 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:38:09 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:38:09 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:38:09 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:38:13 INFO  root:32 - Available stream
+2022-05-28 20:38:13 INFO  root:38 - Received a request
+2022-05-28 20:38:13 INFO  root:111 - Received an action!
+2022-05-28 20:38:13 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:38:13 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:38:13 INFO  root:49 - Received an update - Analyzing DRAIN_CLOUD
+2022-05-28 20:38:13 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:38:13 INFO  root:177 - Verifying identity. Player 1 is playing. Last who has played was 1
+2022-05-28 20:38:13 INFO  root:181 - HasPlayed list: 0, 1, 
+2022-05-28 20:38:13 INFO  root:39 - GamePhase DRAIN_CLOUD has been processed correctly
+2022-05-28 20:38:13 INFO  root:171 - Returning correct
+2022-05-28 20:38:13 INFO  root:120 - Everything went right
+2022-05-28 20:38:13 INFO  root:126 - Setting response received
+2022-05-28 20:38:13 INFO  root:141 - Response received
+2022-05-28 20:38:13 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:38:13 INFO  root:93 - Game ended: false
+2022-05-28 20:38:13 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:38:13 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:38:13 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:38:13 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [PUT_ON_CLOUDS])
+2022-05-28 20:38:13 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:38:13 INFO  root:32 - Available stream
+2022-05-28 20:38:13 INFO  root:38 - Received a request
+2022-05-28 20:38:13 INFO  root:111 - Received an action!
+2022-05-28 20:38:13 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:38:13 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:38:13 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:38:13 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-28 20:38:13 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [PUT_ON_CLOUDS])
+2022-05-28 20:38:13 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-28 20:38:13 INFO  root:171 - Returning correct
+2022-05-28 20:38:13 INFO  root:120 - Everything went right
+2022-05-28 20:38:13 INFO  root:126 - Setting response received
+2022-05-28 20:38:13 INFO  root:141 - Response received
+2022-05-28 20:38:13 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:38:13 INFO  root:93 - Game ended: false
+2022-05-28 20:38:13 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:38:13 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:38:13 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:38:13 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:38:13 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:38:17 INFO  root:32 - Available stream
+2022-05-28 20:38:17 INFO  root:38 - Received a request
+2022-05-28 20:38:17 INFO  root:111 - Received an action!
+2022-05-28 20:38:17 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:38:17 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:38:17 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:38:17 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 20:38:17 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:38:17 INFO  root:89 - verifying that player 0 is playing in the correct turn
+2022-05-28 20:38:17 INFO  root:24 - Requested assist-card: 1
+2022-05-28 20:38:17 INFO  root:76 - Assist card drawn
+2022-05-28 20:38:17 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 20:38:17 INFO  root:171 - Returning correct
+2022-05-28 20:38:17 INFO  root:120 - Everything went right
+2022-05-28 20:38:17 INFO  root:126 - Setting response received
+2022-05-28 20:38:17 INFO  root:141 - Response received
+2022-05-28 20:38:17 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:38:17 INFO  root:93 - Game ended: false
+2022-05-28 20:38:17 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:38:17 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:38:17 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:38:17 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:38:22 INFO  root:32 - Available stream
+2022-05-28 20:38:22 INFO  root:38 - Received a request
+2022-05-28 20:38:22 INFO  root:111 - Received an action!
+2022-05-28 20:38:22 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:38:22 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:38:22 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 20:38:22 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:38:22 INFO  root:89 - verifying that player 1 is playing in the correct turn
+2022-05-28 20:38:22 INFO  root:93 - last player was 0
+2022-05-28 20:38:22 INFO  root:24 - Requested assist-card: 2
+2022-05-28 20:38:22 INFO  root:76 - Assist card drawn
+2022-05-28 20:38:22 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 20:38:22 INFO  root:171 - Returning correct
+2022-05-28 20:38:22 INFO  root:120 - Everything went right
+2022-05-28 20:38:22 INFO  root:126 - Setting response received
+2022-05-28 20:38:22 INFO  root:141 - Response received
+2022-05-28 20:38:22 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:38:22 INFO  root:93 - Game ended: false
+2022-05-28 20:38:22 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:38:22 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:38:22 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:38:22 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:38:22 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:38:35 INFO  root:32 - Available stream
+2022-05-28 20:38:35 INFO  root:38 - Received a request
+2022-05-28 20:38:35 INFO  root:111 - Received an action!
+2022-05-28 20:38:35 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:38:35 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:38:35 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:38:35 INFO  root:49 - Received an update - Analyzing MOVE_3_STUDENTS
+2022-05-28 20:38:35 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:38:35 INFO  root:116 - Verify order
+2022-05-28 20:38:35 INFO  root:120 - HasPlayed list: 
+2022-05-28 20:38:35 INFO  root:134 - valore ok
+2022-05-28 20:38:35 INFO  root:66 - Moving the students (green in dining hall) (yellow in dining hall) (pink in dining hall) 
+2022-05-28 20:38:35 INFO  root:39 - GamePhase MOVE_3_STUDENTS has been processed correctly
+2022-05-28 20:38:35 INFO  root:171 - Returning correct
+2022-05-28 20:38:35 INFO  root:120 - Everything went right
+2022-05-28 20:38:35 INFO  root:126 - Setting response received
+2022-05-28 20:38:35 INFO  root:141 - Response received
+2022-05-28 20:38:35 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:38:35 INFO  root:93 - Game ended: false
+2022-05-28 20:38:35 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:38:35 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:38:35 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:38:35 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:38:37 INFO  root:32 - Available stream
+2022-05-28 20:38:37 INFO  root:38 - Received a request
+2022-05-28 20:38:37 INFO  root:111 - Received an action!
+2022-05-28 20:38:37 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:38:37 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:38:37 INFO  root:49 - Received an update - Analyzing MOVE_MOTHERNATURE
+2022-05-28 20:38:37 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:38:37 INFO  root:177 - Verifying identity. Player 0 is playing. Last who has played was 0
+2022-05-28 20:38:37 INFO  root:181 - HasPlayed list: 0, 
+2022-05-28 20:38:37 INFO  root:18 - Moving mother nature (1 steps)
+2022-05-28 20:38:37 INFO  root:22 - Steps: 1, TurnValue: 1, Extrasteps: 0
+2022-05-28 20:38:37 INFO  root:39 - GamePhase MOVE_MOTHERNATURE has been processed correctly
+2022-05-28 20:38:37 INFO  root:171 - Returning correct
+2022-05-28 20:38:37 INFO  root:120 - Everything went right
+2022-05-28 20:38:37 INFO  root:126 - Setting response received
+2022-05-28 20:38:37 INFO  root:141 - Response received
+2022-05-28 20:38:37 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:38:37 INFO  root:93 - Game ended: false
+2022-05-28 20:38:37 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:38:37 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:38:37 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:38:37 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:38:54 INFO  root:32 - Available stream
+2022-05-28 20:38:54 INFO  root:38 - Received a request
+2022-05-28 20:38:54 INFO  root:111 - Received an action!
+2022-05-28 20:38:54 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:38:54 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:38:54 INFO  root:49 - Received an update - Analyzing DRAIN_CLOUD
+2022-05-28 20:38:54 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:38:54 INFO  root:177 - Verifying identity. Player 0 is playing. Last who has played was 0
+2022-05-28 20:38:54 INFO  root:181 - HasPlayed list: 0, 
+2022-05-28 20:38:54 INFO  root:39 - GamePhase DRAIN_CLOUD has been processed correctly
+2022-05-28 20:38:54 INFO  root:171 - Returning correct
+2022-05-28 20:38:54 INFO  root:120 - Everything went right
+2022-05-28 20:38:54 INFO  root:126 - Setting response received
+2022-05-28 20:38:54 INFO  root:141 - Response received
+2022-05-28 20:38:54 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:38:54 INFO  root:93 - Game ended: false
+2022-05-28 20:38:54 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:38:54 INFO  root:166 - il valore minore lo ha 1
+2022-05-28 20:38:54 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:38:54 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:38:54 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:39:07 INFO  root:32 - Available stream
+2022-05-28 20:39:07 INFO  root:38 - Received a request
+2022-05-28 20:39:07 INFO  root:111 - Received an action!
+2022-05-28 20:39:07 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:39:07 INFO  root:166 - il valore minore lo ha 1
+2022-05-28 20:39:07 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:39:07 INFO  root:49 - Received an update - Analyzing MOVE_3_STUDENTS
+2022-05-28 20:39:07 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:39:07 INFO  root:116 - Verify order
+2022-05-28 20:39:07 INFO  root:120 - HasPlayed list: 0, 
+2022-05-28 20:39:07 INFO  root:134 - valore ok
+2022-05-28 20:39:07 INFO  root:66 - Moving the students (red in island 10) (pink in island 11) (green in island 0) 
+2022-05-28 20:39:07 INFO  root:39 - GamePhase MOVE_3_STUDENTS has been processed correctly
+2022-05-28 20:39:07 INFO  root:171 - Returning correct
+2022-05-28 20:39:07 INFO  root:120 - Everything went right
+2022-05-28 20:39:07 INFO  root:126 - Setting response received
+2022-05-28 20:39:07 INFO  root:141 - Response received
+2022-05-28 20:39:07 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:39:07 INFO  root:93 - Game ended: false
+2022-05-28 20:39:07 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:39:07 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:39:07 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:39:07 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:39:12 INFO  root:32 - Available stream
+2022-05-28 20:39:12 INFO  root:38 - Received a request
+2022-05-28 20:39:12 INFO  root:111 - Received an action!
+2022-05-28 20:39:12 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:39:12 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:39:12 INFO  root:49 - Received an update - Analyzing MOVE_MOTHERNATURE
+2022-05-28 20:39:12 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:39:12 INFO  root:177 - Verifying identity. Player 1 is playing. Last who has played was 1
+2022-05-28 20:39:12 INFO  root:181 - HasPlayed list: 0, 1, 
+2022-05-28 20:39:12 INFO  root:18 - Moving mother nature (2 steps)
+2022-05-28 20:39:12 INFO  root:22 - Steps: 2, TurnValue: 2, Extrasteps: 0
+2022-05-28 20:39:12 INFO  root:39 - GamePhase MOVE_MOTHERNATURE has been processed correctly
+2022-05-28 20:39:12 INFO  root:171 - Returning correct
+2022-05-28 20:39:12 INFO  root:120 - Everything went right
+2022-05-28 20:39:12 INFO  root:126 - Setting response received
+2022-05-28 20:39:12 INFO  root:141 - Response received
+2022-05-28 20:39:12 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:39:12 INFO  root:93 - Game ended: false
+2022-05-28 20:39:12 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:39:12 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:39:12 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:39:12 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:39:16 INFO  root:32 - Available stream
+2022-05-28 20:39:16 INFO  root:38 - Received a request
+2022-05-28 20:39:16 INFO  root:111 - Received an action!
+2022-05-28 20:39:16 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:39:16 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:39:16 INFO  root:49 - Received an update - Analyzing DRAIN_CLOUD
+2022-05-28 20:39:16 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:39:16 INFO  root:177 - Verifying identity. Player 1 is playing. Last who has played was 1
+2022-05-28 20:39:16 INFO  root:181 - HasPlayed list: 0, 1, 
+2022-05-28 20:39:16 INFO  root:39 - GamePhase DRAIN_CLOUD has been processed correctly
+2022-05-28 20:39:16 INFO  root:171 - Returning correct
+2022-05-28 20:39:16 INFO  root:120 - Everything went right
+2022-05-28 20:39:16 INFO  root:126 - Setting response received
+2022-05-28 20:39:16 INFO  root:141 - Response received
+2022-05-28 20:39:16 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:39:16 INFO  root:93 - Game ended: false
+2022-05-28 20:39:16 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:39:16 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:39:16 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:39:16 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [PUT_ON_CLOUDS])
+2022-05-28 20:39:16 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:39:17 INFO  root:32 - Available stream
+2022-05-28 20:39:17 INFO  root:38 - Received a request
+2022-05-28 20:39:17 INFO  root:111 - Received an action!
+2022-05-28 20:39:17 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:39:17 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:39:17 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:39:17 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-28 20:39:17 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [PUT_ON_CLOUDS])
+2022-05-28 20:39:17 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-28 20:39:17 INFO  root:171 - Returning correct
+2022-05-28 20:39:17 INFO  root:120 - Everything went right
+2022-05-28 20:39:17 INFO  root:126 - Setting response received
+2022-05-28 20:39:17 INFO  root:141 - Response received
+2022-05-28 20:39:17 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:39:17 INFO  root:93 - Game ended: false
+2022-05-28 20:39:17 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:39:17 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:39:17 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:39:17 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:39:17 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:39:21 INFO  root:32 - Available stream
+2022-05-28 20:39:21 INFO  root:38 - Received a request
+2022-05-28 20:39:21 INFO  root:111 - Received an action!
+2022-05-28 20:39:21 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:39:21 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:39:21 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:39:21 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 20:39:21 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:39:21 INFO  root:89 - verifying that player 0 is playing in the correct turn
+2022-05-28 20:39:21 INFO  root:24 - Requested assist-card: 2
+2022-05-28 20:39:21 INFO  root:76 - Assist card drawn
+2022-05-28 20:39:21 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 20:39:21 INFO  root:171 - Returning correct
+2022-05-28 20:39:21 INFO  root:120 - Everything went right
+2022-05-28 20:39:21 INFO  root:126 - Setting response received
+2022-05-28 20:39:21 INFO  root:141 - Response received
+2022-05-28 20:39:21 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:39:21 INFO  root:93 - Game ended: false
+2022-05-28 20:39:21 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:39:21 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:39:21 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:39:21 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:39:24 INFO  root:32 - Available stream
+2022-05-28 20:39:24 INFO  root:38 - Received a request
+2022-05-28 20:39:24 INFO  root:111 - Received an action!
+2022-05-28 20:39:24 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:39:24 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:39:24 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 20:39:24 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:39:24 INFO  root:89 - verifying that player 1 is playing in the correct turn
+2022-05-28 20:39:24 INFO  root:93 - last player was 0
+2022-05-28 20:39:24 INFO  root:24 - Requested assist-card: 3
+2022-05-28 20:39:24 INFO  root:76 - Assist card drawn
+2022-05-28 20:39:24 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 20:39:24 INFO  root:171 - Returning correct
+2022-05-28 20:39:24 INFO  root:120 - Everything went right
+2022-05-28 20:39:24 INFO  root:126 - Setting response received
+2022-05-28 20:39:24 INFO  root:141 - Response received
+2022-05-28 20:39:24 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:39:24 INFO  root:93 - Game ended: false
+2022-05-28 20:39:24 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:39:24 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:39:24 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:39:24 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:39:24 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:39:34 INFO  root:32 - Available stream
+2022-05-28 20:39:34 INFO  root:38 - Received a request
+2022-05-28 20:39:34 INFO  root:111 - Received an action!
+2022-05-28 20:39:34 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:39:34 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:39:34 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:39:34 INFO  root:49 - Received an update - Analyzing MOVE_3_STUDENTS
+2022-05-28 20:39:34 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:39:34 INFO  root:116 - Verify order
+2022-05-28 20:39:34 INFO  root:120 - HasPlayed list: 
+2022-05-28 20:39:34 INFO  root:134 - valore ok
+2022-05-28 20:39:34 INFO  root:66 - Moving the students (blue in dining hall) (red in island 11) (pink in island 10) 
+2022-05-28 20:39:34 INFO  root:39 - GamePhase MOVE_3_STUDENTS has been processed correctly
+2022-05-28 20:39:34 INFO  root:171 - Returning correct
+2022-05-28 20:39:34 INFO  root:120 - Everything went right
+2022-05-28 20:39:34 INFO  root:126 - Setting response received
+2022-05-28 20:39:34 INFO  root:141 - Response received
+2022-05-28 20:39:34 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:39:34 INFO  root:93 - Game ended: false
+2022-05-28 20:39:34 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:39:34 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:39:34 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:39:34 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:39:41 INFO  root:32 - Available stream
+2022-05-28 20:39:41 INFO  root:38 - Received a request
+2022-05-28 20:39:41 INFO  root:111 - Received an action!
+2022-05-28 20:39:41 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:39:41 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:39:41 INFO  root:49 - Received an update - Analyzing MOVE_MOTHERNATURE
+2022-05-28 20:39:41 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:39:41 INFO  root:177 - Verifying identity. Player 0 is playing. Last who has played was 0
+2022-05-28 20:39:41 INFO  root:181 - HasPlayed list: 0, 
+2022-05-28 20:39:41 INFO  root:18 - Moving mother nature (1 steps)
+2022-05-28 20:39:41 INFO  root:22 - Steps: 1, TurnValue: 2, Extrasteps: 0
+2022-05-28 20:39:41 INFO  root:39 - GamePhase MOVE_MOTHERNATURE has been processed correctly
+2022-05-28 20:39:41 INFO  root:171 - Returning correct
+2022-05-28 20:39:41 INFO  root:120 - Everything went right
+2022-05-28 20:39:41 INFO  root:126 - Setting response received
+2022-05-28 20:39:41 INFO  root:141 - Response received
+2022-05-28 20:39:41 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:39:41 INFO  root:93 - Game ended: false
+2022-05-28 20:39:41 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:39:41 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:39:41 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:39:41 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:57:09 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 20:57:10 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 20:57:10 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 20:57:10 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 20:57:24 INFO  root:41 - New client has connected: [/127.0.0.1:59418]
+2022-05-28 20:57:24 INFO  root:46 - ServerDispatcher ready
+2022-05-28 20:57:25 INFO  root:53 - A client has sent a message - [/127.0.0.1:59418] [num_of_players: 2, username: a]
+2022-05-28 20:57:25 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 20:57:25 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 20:57:25 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 20:57:25 INFO  root:61 - [/127.0.0.1:59418] has joined a match [1/2]
+2022-05-28 20:57:26 INFO  root:41 - New client has connected: [/127.0.0.1:59419]
+2022-05-28 20:57:26 INFO  root:46 - ServerDispatcher ready
+2022-05-28 20:57:27 INFO  root:53 - A client has sent a message - [/127.0.0.1:59419] [num_of_players: 2, username: f]
+2022-05-28 20:57:27 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 20:57:27 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 20:57:27 INFO  root:60 - Connected: 2, Capacity: 2
+2022-05-28 20:57:27 INFO  root:61 - [/127.0.0.1:59419] has joined a match [2/2]
+2022-05-28 20:57:27 INFO  root:63 - starting a match...
+2022-05-28 20:57:27 INFO  root:49 - Received an update - Analyzing START
+2022-05-28 20:57:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 20:57:27 INFO  root:27 - ServerNetworkListener has started
+2022-05-28 20:57:27 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-28 20:57:27 INFO  root:171 - Returning correct
+2022-05-28 20:57:27 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-28 20:57:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 20:57:27 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-28 20:57:27 INFO  root:171 - Returning correct
+2022-05-28 20:57:27 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 20:57:27 INFO  root:36 - Added a new waiting room
+2022-05-28 20:57:27 INFO  root:156 - New match has started [2 players]
+2022-05-28 20:57:27 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:57:27 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:57:27 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:57:27 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:57:30 INFO  root:32 - Available stream
+2022-05-28 20:57:30 INFO  root:38 - Received a request
+2022-05-28 20:57:30 INFO  root:111 - Received an action!
+2022-05-28 20:57:30 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:57:30 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:57:30 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 20:57:30 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:57:30 INFO  root:89 - verifying that player 0 is playing in the correct turn
+2022-05-28 20:57:30 INFO  root:24 - Requested assist-card: 0
+2022-05-28 20:57:30 INFO  root:76 - Assist card drawn
+2022-05-28 20:57:30 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 20:57:30 INFO  root:171 - Returning correct
+2022-05-28 20:57:30 INFO  root:120 - Everything went right
+2022-05-28 20:57:30 INFO  root:126 - Setting response received
+2022-05-28 20:57:30 INFO  root:141 - Response received
+2022-05-28 20:57:30 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:57:30 INFO  root:93 - Game ended: false
+2022-05-28 20:57:30 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:57:30 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:57:30 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:57:30 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:57:38 INFO  root:32 - Available stream
+2022-05-28 20:57:38 INFO  root:38 - Received a request
+2022-05-28 20:57:38 INFO  root:111 - Received an action!
+2022-05-28 20:57:38 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 20:57:38 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:57:38 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-28 20:57:38 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-28 20:57:38 INFO  root:89 - verifying that player 1 is playing in the correct turn
+2022-05-28 20:57:38 INFO  root:93 - last player was 0
+2022-05-28 20:57:38 INFO  root:24 - Requested assist-card: 1
+2022-05-28 20:57:38 INFO  root:76 - Assist card drawn
+2022-05-28 20:57:38 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-28 20:57:38 INFO  root:171 - Returning correct
+2022-05-28 20:57:38 INFO  root:120 - Everything went right
+2022-05-28 20:57:38 INFO  root:126 - Setting response received
+2022-05-28 20:57:38 INFO  root:141 - Response received
+2022-05-28 20:57:38 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:57:38 INFO  root:93 - Game ended: false
+2022-05-28 20:57:38 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:57:38 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:57:38 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:57:38 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:57:38 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:57:47 INFO  root:32 - Available stream
+2022-05-28 20:57:47 INFO  root:38 - Received a request
+2022-05-28 20:57:47 INFO  root:111 - Received an action!
+2022-05-28 20:57:47 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:57:47 INFO  root:166 - il valore minore lo ha 0
+2022-05-28 20:57:47 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:57:47 INFO  root:49 - Received an update - Analyzing MOVE_3_STUDENTS
+2022-05-28 20:57:47 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:57:47 INFO  root:116 - Verify order
+2022-05-28 20:57:47 INFO  root:120 - HasPlayed list: 
+2022-05-28 20:57:47 INFO  root:134 - valore ok
+2022-05-28 20:57:47 INFO  root:66 - Moving the students (pink in dining hall) (yellow in dining hall) (yellow in island 0) 
+2022-05-28 20:57:47 INFO  root:39 - GamePhase MOVE_3_STUDENTS has been processed correctly
+2022-05-28 20:57:47 INFO  root:171 - Returning correct
+2022-05-28 20:57:47 INFO  root:120 - Everything went right
+2022-05-28 20:57:47 INFO  root:126 - Setting response received
+2022-05-28 20:57:47 INFO  root:141 - Response received
+2022-05-28 20:57:47 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:57:47 INFO  root:93 - Game ended: false
+2022-05-28 20:57:47 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:57:47 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:57:47 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:57:47 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:57:50 INFO  root:32 - Available stream
+2022-05-28 20:57:50 INFO  root:38 - Received a request
+2022-05-28 20:57:50 INFO  root:111 - Received an action!
+2022-05-28 20:57:50 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:57:50 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:57:50 INFO  root:49 - Received an update - Analyzing MOVE_MOTHERNATURE
+2022-05-28 20:57:50 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:57:50 INFO  root:177 - Verifying identity. Player 0 is playing. Last who has played was 0
+2022-05-28 20:57:50 INFO  root:181 - HasPlayed list: 0, 
+2022-05-28 20:57:50 INFO  root:18 - Moving mother nature (1 steps)
+2022-05-28 20:57:50 INFO  root:22 - Steps: 1, TurnValue: 1, Extrasteps: 0
+2022-05-28 20:57:50 INFO  root:39 - GamePhase MOVE_MOTHERNATURE has been processed correctly
+2022-05-28 20:57:50 INFO  root:171 - Returning correct
+2022-05-28 20:57:50 INFO  root:120 - Everything went right
+2022-05-28 20:57:50 INFO  root:126 - Setting response received
+2022-05-28 20:57:50 INFO  root:141 - Response received
+2022-05-28 20:57:50 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:57:50 INFO  root:93 - Game ended: false
+2022-05-28 20:57:50 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:57:50 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 20:57:50 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:57:50 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 20:58:14 INFO  root:32 - Available stream
+2022-05-28 20:58:14 INFO  root:38 - Received a request
+2022-05-28 20:58:14 INFO  root:111 - Received an action!
+2022-05-28 20:58:14 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:58:14 INFO  root:115 - received from: 0, expected from: 0
+2022-05-28 20:58:14 INFO  root:49 - Received an update - Analyzing DRAIN_CLOUD
+2022-05-28 20:58:14 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:58:14 INFO  root:177 - Verifying identity. Player 0 is playing. Last who has played was 0
+2022-05-28 20:58:14 INFO  root:181 - HasPlayed list: 0, 
+2022-05-28 20:58:14 INFO  root:39 - GamePhase DRAIN_CLOUD has been processed correctly
+2022-05-28 20:58:14 INFO  root:171 - Returning correct
+2022-05-28 20:58:14 INFO  root:120 - Everything went right
+2022-05-28 20:58:14 INFO  root:126 - Setting response received
+2022-05-28 20:58:14 INFO  root:141 - Response received
+2022-05-28 20:58:14 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:58:14 INFO  root:93 - Game ended: false
+2022-05-28 20:58:14 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:58:14 INFO  root:166 - il valore minore lo ha 1
+2022-05-28 20:58:14 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:58:14 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:58:14 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:58:34 INFO  root:32 - Available stream
+2022-05-28 20:58:34 INFO  root:38 - Received a request
+2022-05-28 20:58:34 INFO  root:111 - Received an action!
+2022-05-28 20:58:34 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-28 20:58:34 INFO  root:166 - il valore minore lo ha 1
+2022-05-28 20:58:34 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:58:34 INFO  root:49 - Received an update - Analyzing MOVE_3_STUDENTS
+2022-05-28 20:58:34 INFO  root:126 - Calculated next available gamephases (now: DRAIN_CLOUD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-28 20:58:34 INFO  root:116 - Verify order
+2022-05-28 20:58:34 INFO  root:120 - HasPlayed list: 0, 
+2022-05-28 20:58:34 INFO  root:134 - valore ok
+2022-05-28 20:58:34 INFO  root:66 - Moving the students (red in island 11) (green in island 11) (blue in island 11) 
+2022-05-28 20:58:34 INFO  root:39 - GamePhase MOVE_3_STUDENTS has been processed correctly
+2022-05-28 20:58:34 INFO  root:171 - Returning correct
+2022-05-28 20:58:34 INFO  root:120 - Everything went right
+2022-05-28 20:58:34 INFO  root:126 - Setting response received
+2022-05-28 20:58:34 INFO  root:141 - Response received
+2022-05-28 20:58:34 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:58:34 INFO  root:93 - Game ended: false
+2022-05-28 20:58:34 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:58:34 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:58:34 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:58:34 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 20:58:37 INFO  root:32 - Available stream
+2022-05-28 20:58:37 INFO  root:38 - Received a request
+2022-05-28 20:58:37 INFO  root:111 - Received an action!
+2022-05-28 20:58:37 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:58:37 INFO  root:115 - received from: 1, expected from: 1
+2022-05-28 20:58:37 INFO  root:49 - Received an update - Analyzing MOVE_MOTHERNATURE
+2022-05-28 20:58:37 INFO  root:126 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE])
+2022-05-28 20:58:37 INFO  root:177 - Verifying identity. Player 1 is playing. Last who has played was 1
+2022-05-28 20:58:37 INFO  root:181 - HasPlayed list: 0, 1, 
+2022-05-28 20:58:37 INFO  root:18 - Moving mother nature (1 steps)
+2022-05-28 20:58:37 INFO  root:22 - Steps: 1, TurnValue: 1, Extrasteps: 0
+2022-05-28 20:58:37 INFO  root:39 - GamePhase MOVE_MOTHERNATURE has been processed correctly
+2022-05-28 20:58:37 INFO  root:171 - Returning correct
+2022-05-28 20:58:37 INFO  root:120 - Everything went right
+2022-05-28 20:58:37 INFO  root:126 - Setting response received
+2022-05-28 20:58:37 INFO  root:141 - Response received
+2022-05-28 20:58:37 INFO  root:177 - Response received. Ending loop
+2022-05-28 20:58:37 INFO  root:93 - Game ended: false
+2022-05-28 20:58:37 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
+2022-05-28 20:58:37 INFO  root:168 - player 1 has to play. Sending the actions
+2022-05-28 20:58:37 INFO  root:126 - Calculated next available gamephases (now: MOVE_MOTHERNATURE) (next: [USE_CHARACTER_CARD, DRAIN_CLOUD])
+2022-05-28 20:58:37 INFO  root:171 - The available gamephases have been sent to the client (player 1)
+2022-05-28 21:01:42 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:01:42 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:01:42 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:01:42 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:01:51 INFO  root:41 - New client has connected: [/127.0.0.1:59429]
+2022-05-28 21:01:51 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:01:52 INFO  root:53 - A client has sent a message - [/127.0.0.1:59429] [num_of_players: 2, username: d]
+2022-05-28 21:01:52 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:01:52 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:01:52 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:01:52 INFO  root:61 - [/127.0.0.1:59429] has joined a match [1/2]
+2022-05-28 21:01:53 INFO  root:41 - New client has connected: [/127.0.0.1:59430]
+2022-05-28 21:01:53 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:01:54 INFO  root:53 - A client has sent a message - [/127.0.0.1:59430] [num_of_players: 2, username: d]
+2022-05-28 21:01:54 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:01:54 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:03:16 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:03:16 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:03:16 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:03:16 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:03:22 INFO  root:41 - New client has connected: [/127.0.0.1:59438]
+2022-05-28 21:03:22 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:03:23 INFO  root:53 - A client has sent a message - [/127.0.0.1:59438] [num_of_players: 2, username: 2]
+2022-05-28 21:03:23 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:03:23 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:03:23 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:03:23 INFO  root:61 - [/127.0.0.1:59438] has joined a match [1/2]
+2022-05-28 21:03:28 INFO  root:41 - New client has connected: [/127.0.0.1:59442]
+2022-05-28 21:03:28 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:03:28 INFO  root:53 - A client has sent a message - [/127.0.0.1:59442] [num_of_players: 2, username: 2]
+2022-05-28 21:03:28 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:03:28 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:05:02 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:05:02 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:05:02 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:05:02 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:05:05 INFO  root:41 - New client has connected: [/127.0.0.1:59449]
+2022-05-28 21:05:05 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:05:06 INFO  root:53 - A client has sent a message - [/127.0.0.1:59449] [num_of_players: 2, username: 2]
+2022-05-28 21:05:06 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:05:06 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:05:06 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:05:06 INFO  root:61 - [/127.0.0.1:59449] has joined a match [1/2]
+2022-05-28 21:05:11 INFO  root:41 - New client has connected: [/127.0.0.1:59453]
+2022-05-28 21:05:11 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:05:12 INFO  root:53 - A client has sent a message - [/127.0.0.1:59453] [num_of_players: 2, username: 2]
+2022-05-28 21:05:12 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:05:12 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:06:07 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:06:07 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:06:07 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:06:07 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:06:17 INFO  root:41 - New client has connected: [/127.0.0.1:59468]
+2022-05-28 21:06:17 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:06:18 INFO  root:53 - A client has sent a message - [/127.0.0.1:59468] [num_of_players: 2, username: f]
+2022-05-28 21:06:18 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:06:18 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:06:18 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:06:18 INFO  root:61 - [/127.0.0.1:59468] has joined a match [1/2]
+2022-05-28 21:06:18 INFO  root:41 - New client has connected: [/127.0.0.1:59469]
+2022-05-28 21:06:18 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:06:19 INFO  root:53 - A client has sent a message - [/127.0.0.1:59469] [num_of_players: 2, username: f]
+2022-05-28 21:06:19 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:06:19 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:08:15 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:08:15 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:08:15 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:08:15 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:08:24 INFO  root:41 - New client has connected: [/127.0.0.1:59479]
+2022-05-28 21:08:24 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:08:25 INFO  root:53 - A client has sent a message - [/127.0.0.1:59479] [num_of_players: 2, username: d]
+2022-05-28 21:08:25 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:08:25 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:08:25 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:08:25 INFO  root:61 - [/127.0.0.1:59479] has joined a match [1/2]
+2022-05-28 21:08:26 INFO  root:41 - New client has connected: [/127.0.0.1:59480]
+2022-05-28 21:08:26 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:08:27 INFO  root:53 - A client has sent a message - [/127.0.0.1:59480] [num_of_players: 2, username: g]
+2022-05-28 21:08:27 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:08:27 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:08:27 INFO  root:60 - Connected: 2, Capacity: 2
+2022-05-28 21:08:27 INFO  root:61 - [/127.0.0.1:59480] has joined a match [2/2]
+2022-05-28 21:08:27 INFO  root:63 - starting a match...
+2022-05-28 21:08:27 INFO  root:27 - ServerNetworkListener has started
+2022-05-28 21:08:27 INFO  root:49 - Received an update - Analyzing START
+2022-05-28 21:08:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 21:08:27 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-28 21:08:27 INFO  root:171 - Returning correct
+2022-05-28 21:08:27 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-28 21:08:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 21:08:27 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-28 21:08:27 INFO  root:171 - Returning correct
+2022-05-28 21:08:27 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:08:27 INFO  root:36 - Added a new waiting room
+2022-05-28 21:08:27 INFO  root:156 - New match has started [2 players]
+2022-05-28 21:08:27 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 21:08:27 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 21:08:27 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 21:08:27 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-28 21:08:36 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:08:36 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:08:36 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:08:36 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:08:45 INFO  root:41 - New client has connected: [/127.0.0.1:59490]
+2022-05-28 21:08:45 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:08:46 INFO  root:53 - A client has sent a message - [/127.0.0.1:59490] [num_of_players: 2, username: 3]
+2022-05-28 21:08:46 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:08:46 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:08:46 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:08:46 INFO  root:61 - [/127.0.0.1:59490] has joined a match [1/2]
+2022-05-28 21:08:46 INFO  root:41 - New client has connected: [/127.0.0.1:59491]
+2022-05-28 21:08:46 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:08:47 INFO  root:53 - A client has sent a message - [/127.0.0.1:59491] [num_of_players: 2, username: 3]
+2022-05-28 21:08:47 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:08:47 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:09:19 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:09:19 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:09:19 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:09:19 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:09:29 INFO  root:41 - New client has connected: [/127.0.0.1:59501]
+2022-05-28 21:09:29 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:09:29 INFO  root:53 - A client has sent a message - [/127.0.0.1:59501] [num_of_players: 2, username: 3]
+2022-05-28 21:09:29 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:09:29 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:09:29 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:09:29 INFO  root:61 - [/127.0.0.1:59501] has joined a match [1/2]
+2022-05-28 21:09:30 INFO  root:41 - New client has connected: [/127.0.0.1:59502]
+2022-05-28 21:09:30 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:09:31 INFO  root:53 - A client has sent a message - [/127.0.0.1:59502] [num_of_players: 2, username: 3]
+2022-05-28 21:09:31 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:09:31 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:10:01 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:10:01 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:10:01 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:10:01 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:10:12 INFO  root:41 - New client has connected: [/127.0.0.1:59515]
+2022-05-28 21:10:12 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:10:13 INFO  root:53 - A client has sent a message - [/127.0.0.1:59515] [num_of_players: 2, username: d]
+2022-05-28 21:10:13 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:10:13 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:10:13 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:10:13 INFO  root:61 - [/127.0.0.1:59515] has joined a match [1/2]
+2022-05-28 21:10:15 INFO  root:41 - New client has connected: [/127.0.0.1:59516]
+2022-05-28 21:10:15 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:10:16 INFO  root:53 - A client has sent a message - [/127.0.0.1:59516] [num_of_players: 2, username: d]
+2022-05-28 21:10:16 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:10:16 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:15:22 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:15:22 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:15:22 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:15:22 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:15:32 INFO  root:41 - New client has connected: [/127.0.0.1:59574]
+2022-05-28 21:15:32 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:15:33 INFO  root:53 - A client has sent a message - [/127.0.0.1:59574] [num_of_players: 2, username: d]
+2022-05-28 21:15:33 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:15:33 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:15:33 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:15:33 INFO  root:61 - [/127.0.0.1:59574] has joined a match [1/2]
+2022-05-28 21:15:34 INFO  root:41 - New client has connected: [/127.0.0.1:59575]
+2022-05-28 21:15:34 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:15:35 INFO  root:53 - A client has sent a message - [/127.0.0.1:59575] [num_of_players: 2, username: d]
+2022-05-28 21:15:35 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:15:35 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:16:25 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:16:25 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:16:25 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:16:25 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:16:34 INFO  root:41 - New client has connected: [/127.0.0.1:59585]
+2022-05-28 21:16:34 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:16:35 INFO  root:53 - A client has sent a message - [/127.0.0.1:59585] [num_of_players: 2, username: f]
+2022-05-28 21:16:35 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:16:35 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:16:35 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:16:35 INFO  root:61 - [/127.0.0.1:59585] has joined a match [1/2]
+2022-05-28 21:16:38 INFO  root:41 - New client has connected: [/127.0.0.1:59586]
+2022-05-28 21:16:38 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:16:39 INFO  root:53 - A client has sent a message - [/127.0.0.1:59586] [num_of_players: 2, username: f]
+2022-05-28 21:16:39 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:16:39 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:18:40 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:18:40 INFO  root:29 - Created a waiting room of 3 players
+2022-05-28 21:18:40 INFO  root:29 - Created a waiting room of 4 players
+2022-05-28 21:18:40 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-28 21:18:48 INFO  root:41 - New client has connected: [/127.0.0.1:59600]
+2022-05-28 21:18:48 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:18:49 INFO  root:53 - A client has sent a message - [/127.0.0.1:59600] [num_of_players: 2, username: f]
+2022-05-28 21:18:49 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:18:49 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:18:49 INFO  root:60 - Connected: 1, Capacity: 2
+2022-05-28 21:18:49 INFO  root:61 - [/127.0.0.1:59600] has joined a match [1/2]
+2022-05-28 21:18:54 INFO  root:41 - New client has connected: [/127.0.0.1:59601]
+2022-05-28 21:18:54 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:18:55 INFO  root:53 - A client has sent a message - [/127.0.0.1:59601] [num_of_players: 2, username: f]
+2022-05-28 21:18:55 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:18:55 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:19:06 INFO  root:41 - New client has connected: [/127.0.0.1:59605]
+2022-05-28 21:19:06 INFO  root:46 - ServerDispatcher ready
+2022-05-28 21:19:07 INFO  root:53 - A client has sent a message - [/127.0.0.1:59605] [num_of_players: 2, username: g]
+2022-05-28 21:19:07 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-28 21:19:07 INFO  root:32 - Connecting to waiting room 0
+2022-05-28 21:19:07 INFO  root:60 - Connected: 2, Capacity: 2
+2022-05-28 21:19:07 INFO  root:61 - [/127.0.0.1:59605] has joined a match [2/2]
+2022-05-28 21:19:07 INFO  root:63 - starting a match...
+2022-05-28 21:19:07 INFO  root:27 - ServerNetworkListener has started
+2022-05-28 21:19:07 INFO  root:49 - Received an update - Analyzing START
+2022-05-28 21:19:07 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 21:19:07 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-28 21:19:07 INFO  root:171 - Returning correct
+2022-05-28 21:19:07 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-28 21:19:07 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-28 21:19:07 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-28 21:19:07 INFO  root:171 - Returning correct
+2022-05-28 21:19:07 INFO  root:29 - Created a waiting room of 2 players
+2022-05-28 21:19:07 INFO  root:36 - Added a new waiting room
+2022-05-28 21:19:07 INFO  root:156 - New match has started [2 players]
+2022-05-28 21:19:07 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-28 21:19:07 INFO  root:168 - player 0 has to play. Sending the actions
+2022-05-28 21:19:07 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-28 21:19:07 INFO  root:171 - The available gamephases have been sent to the client (player 0)

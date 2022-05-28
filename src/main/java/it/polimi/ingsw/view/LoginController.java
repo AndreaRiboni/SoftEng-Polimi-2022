@@ -134,6 +134,7 @@ public class LoginController implements Initializable, GameBoardContainer {
 
     @Override
     public void notifyResponse(Action action) {
+        System.out.println("notify response " + action.getGamePhase());
         if(ignore_network) return;
         System.out.println("LOGINCONTROLLER RECEIVED AN ACTION!");
         PopUpLauncher error = new PopUpLauncher();
@@ -142,6 +143,7 @@ public class LoginController implements Initializable, GameBoardContainer {
             case CORRECT:
                 System.out.println("Action is CORRECT");
                 Platform.runLater(() -> {
+                    game_controller.setStarted();
                     Stage stage = new Stage();
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/Copertina.jpg")));
                     stage.setTitle("Eriantys Match");
@@ -154,7 +156,7 @@ public class LoginController implements Initializable, GameBoardContainer {
                 break;
             case ERROR_PHASE:
                 error.setMessage("Username already taken!");
-                error.show();
+                error.show(true);
                 break;
             case CONNECTION_ERROR:
                 error.setMessage("A connection error occurred");

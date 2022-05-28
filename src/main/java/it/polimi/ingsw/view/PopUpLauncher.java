@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 public class PopUpLauncher {
@@ -59,7 +60,18 @@ public class PopUpLauncher {
             window.setAlwaysOnTop(true);
             window.setResizable(false);
             window.initModality(Modality.APPLICATION_MODAL);
-            System.out.println("launching");
+            window.showAndWait();
+        });
+    }
+
+    public void show(boolean b) {
+        System.out.println("It's been great");
+        Platform.runLater(() -> {
+            init();
+            window.setAlwaysOnTop(true);
+            window.setResizable(false);
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> System.exit(0));
             window.showAndWait();
         });
     }
