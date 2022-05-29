@@ -123,4 +123,11 @@ public class MessageSender {
         disabled = false;
     }
 
+    public void sendStartSignal() {
+        try {
+            output.writeInt(0);//@@@
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

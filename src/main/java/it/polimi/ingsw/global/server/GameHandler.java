@@ -2,10 +2,12 @@ package it.polimi.ingsw.global.server;
 
 import it.polimi.ingsw.controller.ControllerHub;
 import it.polimi.ingsw.global.MessageSender;
+import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
+import it.polimi.ingsw.model.utils.GenericUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -14,6 +16,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Arrays;
 import java.util.List;
 
 public class GameHandler implements Runnable {
@@ -26,8 +29,10 @@ public class GameHandler implements Runnable {
     private ControllerHub controller;
     private static final Logger log = LogManager.getRootLogger();
     private Action action;
-    private boolean game_ended, received_response;
+    private boolean game_ended, received_response, setup;
     private ServerNetworkListener listener;
+    private boolean[] valid_nicknames;
+    private int received_nicknames = 0;
 
     public GameHandler(Socket[] players, ObjectInputStream[] inputs, ObjectOutputStream[] outputs, String[] usernames) {
         this.players = players;
@@ -38,8 +43,6 @@ public class GameHandler implements Runnable {
         for(int i = 0; i < players.length; i++){
             out[i] = new MessageSender(players[i], ins[i], outs[i]);
         }
-        listener = new ServerNetworkListener(inputs, this);
-        listener.start();
         model = new GameBoard();
         game_ended = false;
         received_response = false;
@@ -51,19 +54,8 @@ public class GameHandler implements Runnable {
         model.setUsernames(usernames);
         start_game.setGamePhase(GamePhase.PUT_ON_CLOUDS);
         controller.update(start_game);
-    }
-
-    private Action readAction(int client_index) throws SocketException {
-        synchronized (ins[client_index]) {
-            try {
-                return (Action) ins[client_index].readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-                if(e instanceof SocketException)
-                    throw new SocketException();
-                return null;
-            }
-        }
+        valid_nicknames = GenericUtils.getUsernamesValidity(usernames);
+        setup = true;
     }
 
     private int getWhoIsPlaying(){
@@ -108,33 +100,72 @@ public class GameHandler implements Runnable {
     }
 
     public synchronized void setAction(Action client_action) throws SocketException {
-        log.info("Received an action!");
-        this.action = client_action;
-        int player_playing = client_action.getPlayerID();
-        int expected = getWhoIsPlaying();
-        log.info("received from: " + client_action.getPlayerID() + ", expected from: " + expected);
-        String str_response = player_playing == expected ? controller.update(client_action) : EriantysException.WRONG_TURN;
+        String str_response;
         Action response = new Action();
-        //send the response
-        if (str_response.equalsIgnoreCase("true")) {
-            log.info("Everything went right");
-            response.setGamePhase(GamePhase.CORRECT);
-            sendAction(player_playing, response);
-            //send the updated gameboard to every client
-            setGameEnded(controller.hasGameEnded());
-            sendGameBoard();
-            log.info("Setting response received");
-            setReceivedResponse();
-        } else {
-            log.info("Something went wrong");
-            response.setGamePhase(GamePhase.ERROR_PHASE);
-            response.setErrorMessage(str_response);
-            sendAction(player_playing, response);
-            if(client_action.getPlayerID() == expected){
-                log.info("But still setting response received");
-                setReceivedResponse();
+        int player_playing = client_action.getPlayerID();
+        int expected;
+        log.info("Setup: " + setup);
+        /*if(setup){ //we still need some nicknames
+            if(!client_action.getGamePhase().equals(GamePhase.START)) { //but we haven't received a nickname
+                log.info("Setup but received isnt start");
+                response.setErrorMessage(EriantysException.INVALID_GAMEFLOW);
+                response.setGamePhase(GamePhase.ERROR_PHASE);
+                sendAction(player_playing, response);
+            } else {
+                log.info("Setup and received nickname");
+                //is the client sending this request asked to do so?
+                if(valid_nicknames[player_playing]){ //no, it was already valid
+                    log.info("but it was already valid");
+                    response.setErrorMessage(EriantysException.INVALID_GAMEFLOW);
+                    response.setGamePhase(GamePhase.ERROR_PHASE);
+                    sendAction(player_playing, response);
+                } else { //yes, let's increment the received usernames
+                    log.info("the user sending this is fine!");
+                    usernames[player_playing] = client_action.getUsername(); //setting the received nickname
+                    incrementReceivedUsernames();
+                }
             }
-        }
+        } else { //we have all the nicknames*/
+            log.info("Received an action!");
+            this.action = client_action;
+            expected = getWhoIsPlaying();
+            log.info("received from: " + client_action.getPlayerID() + ", expected from: " + expected);
+            str_response = player_playing == expected ? controller.update(client_action) : EriantysException.WRONG_TURN;
+            //send the response
+            if (str_response.equalsIgnoreCase("true")) {
+                log.info("Everything went right");
+                response.setGamePhase(GamePhase.CORRECT);
+                sendAction(player_playing, response);
+                //send the updated gameboard to every client
+                setGameEnded(controller.hasGameEnded());
+                sendGameBoard();
+                log.info("Setting response received");
+                setReceivedResponse();
+            } else {
+                log.info("Something went wrong");
+                response.setGamePhase(GamePhase.ERROR_PHASE);
+                response.setErrorMessage(str_response);
+                sendAction(player_playing, response);
+                if (client_action.getPlayerID() == expected) {
+                    log.info("But still setting response received");
+                    setReceivedResponse();
+                }
+            }
+       // }
+    }
+
+    private synchronized void incrementReceivedUsernames(){
+        received_nicknames++;
+        log.info("Incremented");
+    }
+
+    private synchronized void resetReceivedUsernames(){
+        received_nicknames = 0;
+        log.info("Resetted");
+    }
+
+    private synchronized int getReceivedUsernames(){
+        return received_nicknames;
     }
 
     private synchronized void setReceivedResponse(){
@@ -150,9 +181,45 @@ public class GameHandler implements Runnable {
         return true;
     }
 
+    private Action readAction(int client_index) throws SocketException {
+        synchronized (ins[client_index]) {
+            try {
+                return (Action) ins[client_index].readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+                if(e instanceof SocketException)
+                    throw new SocketException();
+                return null;
+            }
+        }
+    }
+
+
     @Override
     public void run() {
         try {
+            log.info("We're in the setup");
+            Action user_response = new Action();
+            for (int i = 0; i < usernames.length; i++) {
+                if (!valid_nicknames[i]){ //user is invalid: sending error
+                    do {
+                        user_response.setGamePhase(GamePhase.ERROR_PHASE);
+                        user_response.setErrorMessage("Duplicate nickname");
+                        //out[i].sendStartSignal();
+                        sendAction(i, user_response);
+                        usernames[i] = readAction(i).getUsername();
+                        valid_nicknames = GenericUtils.getUsernamesValidity(usernames);
+                    } while (!valid_nicknames[i]);
+                }
+            }
+            model.setUsernames(usernames);
+            user_response.setGamePhase(GamePhase.CORRECT);
+            for (int i = 0; i < usernames.length; i++) {
+                user_response.setUsername(usernames[i]);
+                sendAction(i, user_response);
+            }
+            listener = new ServerNetworkListener(ins, this);
+            listener.start();
             log.info("New match has started [" + players.length + " players]");
             for (int i = 0; i < players.length; i++) {
                 Action official_start = new Action();

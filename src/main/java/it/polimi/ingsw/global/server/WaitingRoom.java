@@ -37,6 +37,8 @@ public class WaitingRoom {
     }
 
     public synchronized void connect(Socket client, ObjectInputStream ois, ObjectOutputStream oos, String username){
+        /*
+        this code disconnects the client if an already used username has been chosen
         for(int i = 0; i < connected; i++){
             if(usernames[i].equalsIgnoreCase(username)){
                 Action bad_user = new Action();
@@ -52,6 +54,7 @@ public class WaitingRoom {
                 }
             }
         }
+         */
         clients[connected] = client;
         in[connected] = ois;
         out[connected] = oos;

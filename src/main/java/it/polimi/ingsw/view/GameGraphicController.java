@@ -841,4 +841,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         }
         fillIslands(new_start);
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

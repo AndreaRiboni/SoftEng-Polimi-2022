@@ -1297,3 +1297,1364 @@
 2022-05-28 21:19:07 INFO  root:168 - player 0 has to play. Sending the actions
 2022-05-28 21:19:07 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
 2022-05-28 21:19:07 INFO  root:171 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:01:21 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:01:21 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:01:21 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:01:21 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:01:26 INFO  root:41 - New client has connected: [/127.0.0.1:59935]
+2022-05-29 11:01:26 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:01:27 INFO  root:53 - A client has sent a message - [/127.0.0.1:59935] [num_of_players: 2, username: 2]
+2022-05-29 11:01:27 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:01:27 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:01:27 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:01:27 INFO  root:64 - [/127.0.0.1:59935] has joined a match [1/2]
+2022-05-29 11:01:31 INFO  root:41 - New client has connected: [/127.0.0.1:59939]
+2022-05-29 11:01:31 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:01:32 INFO  root:53 - A client has sent a message - [/127.0.0.1:59939] [num_of_players: 2, username: 3]
+2022-05-29 11:01:32 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:01:32 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:01:32 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:01:32 INFO  root:64 - [/127.0.0.1:59939] has joined a match [2/2]
+2022-05-29 11:01:32 INFO  root:66 - starting a match...
+2022-05-29 11:01:32 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:01:32 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:01:32 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:01:32 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:01:32 INFO  root:171 - Returning correct
+2022-05-29 11:01:32 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:01:32 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:01:32 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:01:32 INFO  root:171 - Returning correct
+2022-05-29 11:01:32 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:01:32 INFO  root:36 - Added a new waiting room
+2022-05-29 11:01:32 INFO  root:183 - We're into setup
+2022-05-29 11:01:32 INFO  root:209 - New match has started [2 players]
+2022-05-29 11:01:32 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:01:32 INFO  root:221 - player 0 has to play. Sending the actions
+2022-05-29 11:01:32 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:01:32 INFO  root:224 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:04:04 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:04:04 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:04:04 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:04:04 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:04:08 INFO  root:41 - New client has connected: [/127.0.0.1:59952]
+2022-05-29 11:04:08 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:04:09 INFO  root:53 - A client has sent a message - [/127.0.0.1:59952] [num_of_players: 2, username: 2]
+2022-05-29 11:04:09 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:04:09 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:04:09 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:04:09 INFO  root:64 - [/127.0.0.1:59952] has joined a match [1/2]
+2022-05-29 11:04:14 INFO  root:41 - New client has connected: [/127.0.0.1:59956]
+2022-05-29 11:04:14 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:04:15 INFO  root:53 - A client has sent a message - [/127.0.0.1:59956] [num_of_players: 2, username: 3]
+2022-05-29 11:04:15 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:04:15 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:04:15 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:04:15 INFO  root:64 - [/127.0.0.1:59956] has joined a match [2/2]
+2022-05-29 11:04:15 INFO  root:66 - starting a match...
+2022-05-29 11:04:15 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:04:15 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:04:15 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:04:15 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:04:15 INFO  root:171 - Returning correct
+2022-05-29 11:04:15 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:04:15 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:04:15 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:04:15 INFO  root:171 - Returning correct
+2022-05-29 11:04:15 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:04:15 INFO  root:183 - We're in the setup
+2022-05-29 11:04:15 INFO  root:36 - Added a new waiting room
+2022-05-29 11:04:15 INFO  root:194 - User 0 has an ok name
+2022-05-29 11:04:15 INFO  root:194 - User 1 has an ok name
+2022-05-29 11:04:15 INFO  root:211 - New match has started [2 players]
+2022-05-29 11:04:15 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:04:15 INFO  root:223 - player 0 has to play. Sending the actions
+2022-05-29 11:04:15 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:04:15 INFO  root:226 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:05:13 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:05:13 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:05:13 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:05:13 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:05:16 INFO  root:41 - New client has connected: [/127.0.0.1:59963]
+2022-05-29 11:05:16 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:05:18 INFO  root:53 - A client has sent a message - [/127.0.0.1:59963] [num_of_players: 2, username: 2]
+2022-05-29 11:05:18 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:05:18 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:05:18 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:05:18 INFO  root:64 - [/127.0.0.1:59963] has joined a match [1/2]
+2022-05-29 11:05:21 INFO  root:41 - New client has connected: [/127.0.0.1:59967]
+2022-05-29 11:05:21 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:05:24 INFO  root:53 - A client has sent a message - [/127.0.0.1:59967] [num_of_players: 3, username: 2]
+2022-05-29 11:05:24 INFO  root:60 - Connecting to one of the 3 players waiting room
+2022-05-29 11:05:24 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:05:24 INFO  root:63 - Connected: 1, Capacity: 3
+2022-05-29 11:05:24 INFO  root:64 - [/127.0.0.1:59967] has joined a match [1/3]
+2022-05-29 11:05:28 INFO  root:41 - New client has connected: [/127.0.0.1:59971]
+2022-05-29 11:05:28 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:05:30 INFO  root:53 - A client has sent a message - [/127.0.0.1:59971] [num_of_players: 2, username: 1]
+2022-05-29 11:05:30 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:05:30 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:05:30 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:05:30 INFO  root:64 - [/127.0.0.1:59971] has joined a match [2/2]
+2022-05-29 11:05:30 INFO  root:66 - starting a match...
+2022-05-29 11:05:30 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:05:30 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:05:30 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:05:30 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:05:30 INFO  root:171 - Returning correct
+2022-05-29 11:05:30 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:05:30 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:05:30 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:05:30 INFO  root:171 - Returning correct
+2022-05-29 11:05:30 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:05:30 INFO  root:36 - Added a new waiting room
+2022-05-29 11:05:30 INFO  root:184 - We're in the setup
+2022-05-29 11:05:30 INFO  root:195 - User 0 has an ok name
+2022-05-29 11:05:30 INFO  root:195 - User 1 has an ok name
+2022-05-29 11:05:30 INFO  root:212 - New match has started [2 players]
+2022-05-29 11:05:30 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:05:30 INFO  root:226 - player 0 has to play. Sending the actions
+2022-05-29 11:05:30 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:05:30 INFO  root:229 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:06:15 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:06:15 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:06:15 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:06:15 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:06:21 INFO  root:41 - New client has connected: [/127.0.0.1:59978]
+2022-05-29 11:06:22 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:06:22 INFO  root:53 - A client has sent a message - [/127.0.0.1:59978] [num_of_players: 2, username: 2]
+2022-05-29 11:06:22 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:06:22 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:06:22 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:06:22 INFO  root:64 - [/127.0.0.1:59978] has joined a match [1/2]
+2022-05-29 11:06:26 INFO  root:41 - New client has connected: [/127.0.0.1:59982]
+2022-05-29 11:06:26 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:06:27 INFO  root:53 - A client has sent a message - [/127.0.0.1:59982] [num_of_players: 2, username: 2]
+2022-05-29 11:06:27 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:06:27 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:06:27 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:06:27 INFO  root:64 - [/127.0.0.1:59982] has joined a match [2/2]
+2022-05-29 11:06:27 INFO  root:66 - starting a match...
+2022-05-29 11:06:27 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:06:27 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:06:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:06:27 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:06:27 INFO  root:171 - Returning correct
+2022-05-29 11:06:27 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:06:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:06:27 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:06:27 INFO  root:171 - Returning correct
+2022-05-29 11:06:27 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:06:27 INFO  root:36 - Added a new waiting room
+2022-05-29 11:06:27 INFO  root:184 - We're in the setup
+2022-05-29 11:06:27 INFO  root:195 - User 0 has an ok name
+2022-05-29 11:06:27 INFO  root:207 - We need to get 1 more usernames
+2022-05-29 11:10:09 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:10:09 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:10:09 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:10:09 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:10:14 INFO  root:41 - New client has connected: [/127.0.0.1:59991]
+2022-05-29 11:10:14 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:10:15 INFO  root:53 - A client has sent a message - [/127.0.0.1:59991] [num_of_players: 2, username: 2]
+2022-05-29 11:10:15 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:10:15 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:10:15 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:10:15 INFO  root:64 - [/127.0.0.1:59991] has joined a match [1/2]
+2022-05-29 11:10:20 INFO  root:41 - New client has connected: [/127.0.0.1:59995]
+2022-05-29 11:10:20 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:10:21 INFO  root:53 - A client has sent a message - [/127.0.0.1:59995] [num_of_players: 2, username: 3]
+2022-05-29 11:10:21 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:10:21 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:10:21 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:10:21 INFO  root:64 - [/127.0.0.1:59995] has joined a match [2/2]
+2022-05-29 11:10:21 INFO  root:66 - starting a match...
+2022-05-29 11:10:21 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:10:21 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:10:21 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:10:21 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:10:21 INFO  root:171 - Returning correct
+2022-05-29 11:10:21 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:10:21 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:10:21 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:10:21 INFO  root:171 - Returning correct
+2022-05-29 11:10:21 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:10:21 INFO  root:36 - Added a new waiting room
+2022-05-29 11:10:21 INFO  root:184 - We're in the setup
+2022-05-29 11:10:21 INFO  root:195 - User 0 has an ok name
+2022-05-29 11:10:21 INFO  root:195 - User 1 has an ok name
+2022-05-29 11:10:21 INFO  root:213 - New match has started [2 players]
+2022-05-29 11:10:21 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:10:21 INFO  root:225 - player 0 has to play. Sending the actions
+2022-05-29 11:10:21 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:10:21 INFO  root:228 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:10:24 INFO  root:32 - Available stream
+2022-05-29 11:10:24 INFO  root:38 - Received a request
+2022-05-29 11:10:24 INFO  root:127 - Received an action!
+2022-05-29 11:10:24 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:10:24 INFO  root:130 - received from: 0, expected from: 0
+2022-05-29 11:10:24 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-29 11:10:24 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:10:24 INFO  root:89 - verifying that player 0 is playing in the correct turn
+2022-05-29 11:10:24 INFO  root:24 - Requested assist-card: 0
+2022-05-29 11:10:24 INFO  root:76 - Assist card drawn
+2022-05-29 11:10:24 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-29 11:10:24 INFO  root:171 - Returning correct
+2022-05-29 11:10:24 INFO  root:134 - Everything went right
+2022-05-29 11:10:24 INFO  root:140 - Setting response received
+2022-05-29 11:10:24 INFO  root:168 - Response received
+2022-05-29 11:10:24 INFO  root:234 - Response received. Ending loop
+2022-05-29 11:10:24 INFO  root:87 - Game ended: false
+2022-05-29 11:10:24 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:10:24 INFO  root:225 - player 1 has to play. Sending the actions
+2022-05-29 11:10:24 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:10:24 INFO  root:228 - The available gamephases have been sent to the client (player 1)
+2022-05-29 11:10:28 INFO  root:32 - Available stream
+2022-05-29 11:10:28 INFO  root:38 - Received a request
+2022-05-29 11:10:28 INFO  root:127 - Received an action!
+2022-05-29 11:10:28 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:10:28 INFO  root:130 - received from: 1, expected from: 1
+2022-05-29 11:10:28 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-29 11:10:28 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:10:28 INFO  root:89 - verifying that player 1 is playing in the correct turn
+2022-05-29 11:10:28 INFO  root:93 - last player was 0
+2022-05-29 11:10:28 INFO  root:24 - Requested assist-card: 1
+2022-05-29 11:10:28 INFO  root:76 - Assist card drawn
+2022-05-29 11:10:28 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-29 11:10:28 INFO  root:171 - Returning correct
+2022-05-29 11:10:28 INFO  root:134 - Everything went right
+2022-05-29 11:10:28 INFO  root:140 - Setting response received
+2022-05-29 11:10:28 INFO  root:168 - Response received
+2022-05-29 11:10:28 INFO  root:234 - Response received. Ending loop
+2022-05-29 11:10:28 INFO  root:87 - Game ended: false
+2022-05-29 11:10:28 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-29 11:10:28 INFO  root:166 - il valore minore lo ha 0
+2022-05-29 11:10:28 INFO  root:225 - player 0 has to play. Sending the actions
+2022-05-29 11:10:28 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-29 11:10:28 INFO  root:228 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:10:32 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:10:32 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:10:32 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:10:32 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:10:37 INFO  root:41 - New client has connected: [/127.0.0.1:60002]
+2022-05-29 11:10:37 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:10:38 INFO  root:53 - A client has sent a message - [/127.0.0.1:60002] [num_of_players: 2, username: 2]
+2022-05-29 11:10:38 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:10:38 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:10:38 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:10:38 INFO  root:64 - [/127.0.0.1:60002] has joined a match [1/2]
+2022-05-29 11:10:41 INFO  root:41 - New client has connected: [/127.0.0.1:60006]
+2022-05-29 11:10:41 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:10:42 INFO  root:53 - A client has sent a message - [/127.0.0.1:60006] [num_of_players: 2, username: 2]
+2022-05-29 11:10:42 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:10:42 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:10:42 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:10:42 INFO  root:64 - [/127.0.0.1:60006] has joined a match [2/2]
+2022-05-29 11:10:42 INFO  root:66 - starting a match...
+2022-05-29 11:10:42 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:10:42 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:10:42 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:10:42 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:10:42 INFO  root:171 - Returning correct
+2022-05-29 11:10:42 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:10:42 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:10:42 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:10:42 INFO  root:171 - Returning correct
+2022-05-29 11:10:42 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:10:42 INFO  root:36 - Added a new waiting room
+2022-05-29 11:10:42 INFO  root:184 - We're in the setup
+2022-05-29 11:10:42 INFO  root:195 - User 0 has an ok name
+2022-05-29 11:10:42 INFO  root:207 - We need to get 1 more usernames
+2022-05-29 11:12:32 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:12:32 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:12:32 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:12:32 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:12:36 INFO  root:41 - New client has connected: [/127.0.0.1:60015]
+2022-05-29 11:12:36 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:12:37 INFO  root:53 - A client has sent a message - [/127.0.0.1:60015] [num_of_players: 2, username: 2]
+2022-05-29 11:12:37 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:12:37 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:12:37 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:12:37 INFO  root:64 - [/127.0.0.1:60015] has joined a match [1/2]
+2022-05-29 11:12:55 INFO  root:41 - New client has connected: [/127.0.0.1:60019]
+2022-05-29 11:12:55 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:12:56 INFO  root:53 - A client has sent a message - [/127.0.0.1:60019] [num_of_players: 2, username: 2]
+2022-05-29 11:12:56 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:12:56 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:12:56 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:12:56 INFO  root:64 - [/127.0.0.1:60019] has joined a match [2/2]
+2022-05-29 11:12:56 INFO  root:66 - starting a match...
+2022-05-29 11:12:56 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:12:56 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:12:56 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:12:56 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:12:56 INFO  root:171 - Returning correct
+2022-05-29 11:12:56 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:12:56 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:12:56 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:12:56 INFO  root:171 - Returning correct
+2022-05-29 11:12:56 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:12:56 INFO  root:36 - Added a new waiting room
+2022-05-29 11:12:56 INFO  root:184 - We're in the setup
+2022-05-29 11:12:56 INFO  root:195 - User 0 has an ok name
+2022-05-29 11:12:56 INFO  root:204 - Setup: true
+2022-05-29 11:12:56 INFO  root:208 - We need to get 1 more usernames
+2022-05-29 11:15:16 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:15:16 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:15:16 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:15:16 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:15:25 INFO  root:41 - New client has connected: [/127.0.0.1:60027]
+2022-05-29 11:15:25 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:15:26 INFO  root:53 - A client has sent a message - [/127.0.0.1:60027] [num_of_players: 2, username: 2]
+2022-05-29 11:15:26 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:15:26 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:15:26 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:15:26 INFO  root:64 - [/127.0.0.1:60027] has joined a match [1/2]
+2022-05-29 11:15:32 INFO  root:41 - New client has connected: [/127.0.0.1:60031]
+2022-05-29 11:15:32 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:15:33 INFO  root:53 - A client has sent a message - [/127.0.0.1:60031] [num_of_players: 2, username: 2]
+2022-05-29 11:15:33 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:15:33 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:15:33 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:15:33 INFO  root:64 - [/127.0.0.1:60031] has joined a match [2/2]
+2022-05-29 11:15:33 INFO  root:66 - starting a match...
+2022-05-29 11:15:33 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:15:33 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:15:33 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:15:33 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:15:33 INFO  root:171 - Returning correct
+2022-05-29 11:15:33 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:15:33 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:15:33 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:15:33 INFO  root:171 - Returning correct
+2022-05-29 11:15:33 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:15:33 INFO  root:36 - Added a new waiting room
+2022-05-29 11:15:33 INFO  root:190 - We're in the setup
+2022-05-29 11:15:33 INFO  root:201 - User 0 has an ok name
+2022-05-29 11:15:33 INFO  root:210 - Setup: true
+2022-05-29 11:15:33 INFO  root:214 - We need to get 1 more usernames
+2022-05-29 11:17:10 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:17:10 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:17:10 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:17:10 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:17:13 INFO  root:41 - New client has connected: [/127.0.0.1:60038]
+2022-05-29 11:17:13 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:17:14 INFO  root:53 - A client has sent a message - [/127.0.0.1:60038] [num_of_players: 2, username: 2]
+2022-05-29 11:17:14 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:17:14 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:17:14 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:17:14 INFO  root:64 - [/127.0.0.1:60038] has joined a match [1/2]
+2022-05-29 11:17:17 INFO  root:41 - New client has connected: [/127.0.0.1:60042]
+2022-05-29 11:17:17 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:17:18 INFO  root:53 - A client has sent a message - [/127.0.0.1:60042] [num_of_players: 2, username: 2]
+2022-05-29 11:17:18 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:17:18 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:17:18 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:17:18 INFO  root:64 - [/127.0.0.1:60042] has joined a match [2/2]
+2022-05-29 11:17:18 INFO  root:66 - starting a match...
+2022-05-29 11:17:18 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:17:18 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:17:18 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:17:18 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:17:18 INFO  root:171 - Returning correct
+2022-05-29 11:17:18 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:17:18 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:17:18 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:17:18 INFO  root:171 - Returning correct
+2022-05-29 11:17:18 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:17:18 INFO  root:36 - Added a new waiting room
+2022-05-29 11:17:18 INFO  root:191 - We're in the setup
+2022-05-29 11:17:18 INFO  root:202 - User 0 has an ok name
+2022-05-29 11:17:18 INFO  root:211 - Setup: true
+2022-05-29 11:17:18 INFO  root:215 - We need to get 1 more usernames
+2022-05-29 11:27:33 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:27:33 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:27:33 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:27:33 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:27:37 INFO  root:41 - New client has connected: [/127.0.0.1:60101]
+2022-05-29 11:27:37 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:27:37 INFO  root:53 - A client has sent a message - [/127.0.0.1:60101] [num_of_players: 2, username: 2]
+2022-05-29 11:27:37 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:27:37 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:27:37 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:27:37 INFO  root:64 - [/127.0.0.1:60101] has joined a match [1/2]
+2022-05-29 11:27:41 INFO  root:41 - New client has connected: [/127.0.0.1:60105]
+2022-05-29 11:27:41 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:27:42 INFO  root:53 - A client has sent a message - [/127.0.0.1:60105] [num_of_players: 2, username: 3]
+2022-05-29 11:27:42 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:27:42 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:27:42 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:27:42 INFO  root:64 - [/127.0.0.1:60105] has joined a match [2/2]
+2022-05-29 11:27:42 INFO  root:66 - starting a match...
+2022-05-29 11:27:42 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:27:42 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:27:42 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:27:42 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:27:42 INFO  root:171 - Returning correct
+2022-05-29 11:27:42 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:27:42 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:27:42 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:27:42 INFO  root:171 - Returning correct
+2022-05-29 11:27:42 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:27:42 INFO  root:36 - Added a new waiting room
+2022-05-29 11:27:42 INFO  root:205 - We're in the setup
+2022-05-29 11:27:42 INFO  root:212 - Nick invalid => re-asking
+2022-05-29 11:28:38 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:28:38 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:28:38 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:28:38 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:28:41 INFO  root:41 - New client has connected: [/127.0.0.1:60112]
+2022-05-29 11:28:41 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:28:42 INFO  root:53 - A client has sent a message - [/127.0.0.1:60112] [num_of_players: 2, username: 2]
+2022-05-29 11:28:42 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:28:42 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:28:42 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:28:42 INFO  root:64 - [/127.0.0.1:60112] has joined a match [1/2]
+2022-05-29 11:28:45 INFO  root:41 - New client has connected: [/127.0.0.1:60116]
+2022-05-29 11:28:45 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:28:46 INFO  root:53 - A client has sent a message - [/127.0.0.1:60116] [num_of_players: 2, username: 3]
+2022-05-29 11:28:46 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:28:46 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:28:46 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:28:46 INFO  root:64 - [/127.0.0.1:60116] has joined a match [2/2]
+2022-05-29 11:28:46 INFO  root:66 - starting a match...
+2022-05-29 11:28:46 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:28:46 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:28:46 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:28:46 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:28:46 INFO  root:171 - Returning correct
+2022-05-29 11:28:46 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:28:46 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:28:46 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:28:46 INFO  root:171 - Returning correct
+2022-05-29 11:28:46 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:28:46 INFO  root:36 - Added a new waiting room
+2022-05-29 11:28:46 INFO  root:204 - We're in the setup
+2022-05-29 11:28:46 INFO  root:220 - User 0 has an ok name
+2022-05-29 11:28:46 INFO  root:220 - User 1 has an ok name
+2022-05-29 11:28:46 INFO  root:241 - New match has started [2 players]
+2022-05-29 11:28:46 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:28:46 INFO  root:253 - player 0 has to play. Sending the actions
+2022-05-29 11:28:46 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:28:46 INFO  root:256 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:28:54 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:28:54 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:28:54 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:28:54 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:28:58 INFO  root:41 - New client has connected: [/127.0.0.1:60123]
+2022-05-29 11:28:58 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:28:58 INFO  root:53 - A client has sent a message - [/127.0.0.1:60123] [num_of_players: 2, username: 2]
+2022-05-29 11:28:58 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:28:58 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:28:58 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:28:58 INFO  root:64 - [/127.0.0.1:60123] has joined a match [1/2]
+2022-05-29 11:29:01 INFO  root:41 - New client has connected: [/127.0.0.1:60128]
+2022-05-29 11:29:01 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:29:02 INFO  root:53 - A client has sent a message - [/127.0.0.1:60128] [num_of_players: 2, username: 2]
+2022-05-29 11:29:02 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:29:02 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:29:02 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:29:02 INFO  root:64 - [/127.0.0.1:60128] has joined a match [2/2]
+2022-05-29 11:29:02 INFO  root:66 - starting a match...
+2022-05-29 11:29:02 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:29:02 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:29:02 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:29:02 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:29:02 INFO  root:171 - Returning correct
+2022-05-29 11:29:02 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:29:02 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:29:02 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:29:02 INFO  root:171 - Returning correct
+2022-05-29 11:29:02 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:29:02 INFO  root:36 - Added a new waiting room
+2022-05-29 11:29:02 INFO  root:204 - We're in the setup
+2022-05-29 11:29:02 INFO  root:220 - User 0 has an ok name
+2022-05-29 11:29:02 INFO  root:211 - Nick invalid => re-asking
+2022-05-29 11:29:11 INFO  root:32 - Available stream
+2022-05-29 11:31:14 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:31:14 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:31:14 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:31:14 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:31:17 INFO  root:41 - New client has connected: [/127.0.0.1:60135]
+2022-05-29 11:31:17 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:31:19 INFO  root:53 - A client has sent a message - [/127.0.0.1:60135] [num_of_players: 2, username: 2]
+2022-05-29 11:31:19 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:31:19 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:31:19 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:31:19 INFO  root:64 - [/127.0.0.1:60135] has joined a match [1/2]
+2022-05-29 11:31:22 INFO  root:41 - New client has connected: [/127.0.0.1:60139]
+2022-05-29 11:31:22 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:31:22 INFO  root:53 - A client has sent a message - [/127.0.0.1:60139] [num_of_players: 2, username: 2]
+2022-05-29 11:31:22 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:31:22 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:31:22 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:31:22 INFO  root:64 - [/127.0.0.1:60139] has joined a match [2/2]
+2022-05-29 11:31:22 INFO  root:66 - starting a match...
+2022-05-29 11:31:22 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:31:22 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:31:22 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:31:22 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:31:22 INFO  root:171 - Returning correct
+2022-05-29 11:31:22 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:31:22 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:31:22 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:31:22 INFO  root:171 - Returning correct
+2022-05-29 11:31:22 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:31:22 INFO  root:36 - Added a new waiting room
+2022-05-29 11:31:22 INFO  root:204 - We're in the setup
+2022-05-29 11:31:22 INFO  root:221 - User 0 has an ok name
+2022-05-29 11:31:22 INFO  root:211 - Nick invalid => re-asking
+2022-05-29 11:31:23 WARN  root:267 - An error occurred during this match
+2022-05-29 11:31:23 WARN  root:99 - Couldn't reach a client
+2022-05-29 11:31:52 INFO  root:41 - New client has connected: [/127.0.0.1:60144]
+2022-05-29 11:31:52 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:31:52 INFO  root:53 - A client has sent a message - [/127.0.0.1:60144] [num_of_players: 2, username: 2]
+2022-05-29 11:31:52 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:31:52 INFO  root:32 - Connecting to waiting room 1
+2022-05-29 11:31:52 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:31:52 INFO  root:64 - [/127.0.0.1:60144] has joined a match [1/2]
+2022-05-29 11:31:55 INFO  root:41 - New client has connected: [/127.0.0.1:60148]
+2022-05-29 11:31:55 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:31:56 INFO  root:53 - A client has sent a message - [/127.0.0.1:60148] [num_of_players: 2, username: 2]
+2022-05-29 11:31:56 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:31:56 INFO  root:32 - Connecting to waiting room 1
+2022-05-29 11:31:56 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:31:56 INFO  root:64 - [/127.0.0.1:60148] has joined a match [2/2]
+2022-05-29 11:31:56 INFO  root:66 - starting a match...
+2022-05-29 11:31:56 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:31:56 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:31:56 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:31:56 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:31:56 INFO  root:171 - Returning correct
+2022-05-29 11:31:56 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:31:56 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:31:56 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:31:56 INFO  root:171 - Returning correct
+2022-05-29 11:31:56 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:31:56 INFO  root:36 - Added a new waiting room
+2022-05-29 11:31:56 INFO  root:204 - We're in the setup
+2022-05-29 11:31:56 INFO  root:221 - User 0 has an ok name
+2022-05-29 11:31:56 INFO  root:211 - Nick invalid => re-asking
+2022-05-29 11:31:56 WARN  root:267 - An error occurred during this match
+2022-05-29 11:31:56 WARN  root:99 - Couldn't reach a client
+2022-05-29 11:33:24 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:33:24 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:33:24 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:33:24 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:33:28 INFO  root:41 - New client has connected: [/127.0.0.1:60160]
+2022-05-29 11:33:28 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:33:28 INFO  root:53 - A client has sent a message - [/127.0.0.1:60160] [num_of_players: 2, username: 2]
+2022-05-29 11:33:28 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:33:28 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:33:28 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:33:28 INFO  root:64 - [/127.0.0.1:60160] has joined a match [1/2]
+2022-05-29 11:33:31 INFO  root:41 - New client has connected: [/127.0.0.1:60165]
+2022-05-29 11:33:31 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:33:32 INFO  root:53 - A client has sent a message - [/127.0.0.1:60165] [num_of_players: 2, username: 2]
+2022-05-29 11:33:32 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:33:32 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:33:32 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:33:32 INFO  root:64 - [/127.0.0.1:60165] has joined a match [2/2]
+2022-05-29 11:33:32 INFO  root:66 - starting a match...
+2022-05-29 11:33:32 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:33:32 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:33:32 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:33:32 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:33:32 INFO  root:171 - Returning correct
+2022-05-29 11:33:32 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:33:32 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:33:32 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:33:32 INFO  root:171 - Returning correct
+2022-05-29 11:33:32 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:33:32 INFO  root:36 - Added a new waiting room
+2022-05-29 11:33:32 INFO  root:204 - We're in the setup
+2022-05-29 11:33:32 INFO  root:221 - User 0 has an ok name
+2022-05-29 11:33:32 INFO  root:211 - Nick invalid => re-asking
+2022-05-29 11:33:38 INFO  root:32 - Available stream
+2022-05-29 11:37:12 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:37:12 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:37:12 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:37:12 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:37:15 INFO  root:41 - New client has connected: [/127.0.0.1:60178]
+2022-05-29 11:37:15 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:37:17 INFO  root:53 - A client has sent a message - [/127.0.0.1:60178] [num_of_players: 2, username: 2]
+2022-05-29 11:37:17 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:37:17 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:37:17 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:37:17 INFO  root:64 - [/127.0.0.1:60178] has joined a match [1/2]
+2022-05-29 11:37:20 INFO  root:41 - New client has connected: [/127.0.0.1:60182]
+2022-05-29 11:37:20 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:37:21 INFO  root:53 - A client has sent a message - [/127.0.0.1:60182] [num_of_players: 2, username: 3]
+2022-05-29 11:37:21 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:37:21 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:37:21 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:37:21 INFO  root:64 - [/127.0.0.1:60182] has joined a match [2/2]
+2022-05-29 11:37:21 INFO  root:66 - starting a match...
+2022-05-29 11:37:21 INFO  root:40 - ServerNetworkListener has started
+2022-05-29 11:37:21 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:37:21 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:37:21 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:37:21 INFO  root:171 - Returning correct
+2022-05-29 11:37:21 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:37:21 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:37:21 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:37:21 INFO  root:171 - Returning correct
+2022-05-29 11:37:21 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:37:21 INFO  root:36 - Added a new waiting room
+2022-05-29 11:37:21 INFO  root:204 - We're in the setup
+2022-05-29 11:37:22 INFO  root:222 - User 0 has an ok name
+2022-05-29 11:37:22 INFO  root:222 - User 1 has an ok name
+2022-05-29 11:37:22 INFO  root:244 - New match has started [2 players]
+2022-05-29 11:37:22 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:37:22 INFO  root:256 - player 0 has to play. Sending the actions
+2022-05-29 11:37:22 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:37:22 INFO  root:259 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:38:50 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:38:50 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:38:50 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:38:50 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:38:54 INFO  root:41 - New client has connected: [/127.0.0.1:60190]
+2022-05-29 11:38:54 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:38:55 INFO  root:53 - A client has sent a message - [/127.0.0.1:60190] [num_of_players: 2, username: 2]
+2022-05-29 11:38:55 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:38:55 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:38:55 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:38:55 INFO  root:64 - [/127.0.0.1:60190] has joined a match [1/2]
+2022-05-29 11:38:58 INFO  root:41 - New client has connected: [/127.0.0.1:60194]
+2022-05-29 11:38:58 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:38:59 INFO  root:53 - A client has sent a message - [/127.0.0.1:60194] [num_of_players: 2, username: 3]
+2022-05-29 11:38:59 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:38:59 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:38:59 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:38:59 INFO  root:64 - [/127.0.0.1:60194] has joined a match [2/2]
+2022-05-29 11:38:59 INFO  root:66 - starting a match...
+2022-05-29 11:38:59 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:38:59 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:38:59 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:38:59 INFO  root:171 - Returning correct
+2022-05-29 11:38:59 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:38:59 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:38:59 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:38:59 INFO  root:171 - Returning correct
+2022-05-29 11:38:59 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:38:59 INFO  root:36 - Added a new waiting room
+2022-05-29 11:38:59 INFO  root:202 - We're in the setup
+2022-05-29 11:38:59 INFO  root:219 - User 0 has an ok name
+2022-05-29 11:38:59 INFO  root:219 - User 1 has an ok name
+2022-05-29 11:38:59 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:38:59 INFO  root:242 - New match has started [2 players]
+2022-05-29 11:38:59 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:38:59 INFO  root:254 - player 0 has to play. Sending the actions
+2022-05-29 11:38:59 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:38:59 INFO  root:257 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:39:03 INFO  root:32 - Available stream
+2022-05-29 11:39:03 INFO  root:38 - Received a request
+2022-05-29 11:39:03 INFO  root:107 - Setup: true
+2022-05-29 11:39:03 INFO  root:129 - Received an action!
+2022-05-29 11:39:03 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:39:03 INFO  root:132 - received from: 0, expected from: 0
+2022-05-29 11:39:03 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-29 11:39:03 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:39:03 INFO  root:89 - verifying that player 0 is playing in the correct turn
+2022-05-29 11:39:03 INFO  root:24 - Requested assist-card: 0
+2022-05-29 11:39:03 INFO  root:76 - Assist card drawn
+2022-05-29 11:39:03 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-29 11:39:03 INFO  root:171 - Returning correct
+2022-05-29 11:39:03 INFO  root:136 - Everything went right
+2022-05-29 11:39:03 INFO  root:142 - Setting response received
+2022-05-29 11:39:03 INFO  root:172 - Response received
+2022-05-29 11:39:03 INFO  root:263 - Response received. Ending loop
+2022-05-29 11:39:03 INFO  root:85 - Game ended: false
+2022-05-29 11:39:03 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:39:03 INFO  root:254 - player 1 has to play. Sending the actions
+2022-05-29 11:39:03 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:39:03 INFO  root:257 - The available gamephases have been sent to the client (player 1)
+2022-05-29 11:39:06 INFO  root:32 - Available stream
+2022-05-29 11:39:06 INFO  root:38 - Received a request
+2022-05-29 11:39:06 INFO  root:107 - Setup: true
+2022-05-29 11:39:06 INFO  root:129 - Received an action!
+2022-05-29 11:39:06 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:39:06 INFO  root:132 - received from: 1, expected from: 1
+2022-05-29 11:39:06 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-29 11:39:06 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:39:06 INFO  root:89 - verifying that player 1 is playing in the correct turn
+2022-05-29 11:39:06 INFO  root:93 - last player was 0
+2022-05-29 11:39:06 INFO  root:24 - Requested assist-card: 1
+2022-05-29 11:39:06 INFO  root:76 - Assist card drawn
+2022-05-29 11:39:06 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-29 11:39:06 INFO  root:171 - Returning correct
+2022-05-29 11:39:06 INFO  root:136 - Everything went right
+2022-05-29 11:39:06 INFO  root:142 - Setting response received
+2022-05-29 11:39:06 INFO  root:172 - Response received
+2022-05-29 11:39:06 INFO  root:263 - Response received. Ending loop
+2022-05-29 11:39:06 INFO  root:85 - Game ended: false
+2022-05-29 11:39:06 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-29 11:39:06 INFO  root:166 - il valore minore lo ha 0
+2022-05-29 11:39:06 INFO  root:254 - player 0 has to play. Sending the actions
+2022-05-29 11:39:06 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-29 11:39:06 INFO  root:257 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:39:12 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:39:12 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:39:12 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:39:12 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:39:16 INFO  root:41 - New client has connected: [/127.0.0.1:60201]
+2022-05-29 11:39:16 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:39:16 INFO  root:53 - A client has sent a message - [/127.0.0.1:60201] [num_of_players: 2, username: 2]
+2022-05-29 11:39:16 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:39:16 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:39:16 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:39:16 INFO  root:64 - [/127.0.0.1:60201] has joined a match [1/2]
+2022-05-29 11:39:19 INFO  root:41 - New client has connected: [/127.0.0.1:60205]
+2022-05-29 11:39:19 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:39:20 INFO  root:53 - A client has sent a message - [/127.0.0.1:60205] [num_of_players: 2, username: 2]
+2022-05-29 11:39:20 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:39:20 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:39:20 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:39:20 INFO  root:64 - [/127.0.0.1:60205] has joined a match [2/2]
+2022-05-29 11:39:20 INFO  root:66 - starting a match...
+2022-05-29 11:39:20 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:39:20 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:39:20 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:39:20 INFO  root:171 - Returning correct
+2022-05-29 11:39:20 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:39:20 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:39:20 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:39:20 INFO  root:171 - Returning correct
+2022-05-29 11:39:20 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:39:20 INFO  root:36 - Added a new waiting room
+2022-05-29 11:39:20 INFO  root:202 - We're in the setup
+2022-05-29 11:39:20 INFO  root:219 - User 0 has an ok name
+2022-05-29 11:39:20 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:39:21 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:39:23 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:39:24 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:39:25 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:41:15 ERROR root:43 - Unable to initialize socket
+2022-05-29 11:41:20 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:41:20 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:41:20 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:41:20 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:41:23 INFO  root:41 - New client has connected: [/127.0.0.1:60216]
+2022-05-29 11:41:23 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:41:24 INFO  root:53 - A client has sent a message - [/127.0.0.1:60216] [num_of_players: 2, username: 2]
+2022-05-29 11:41:24 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:41:24 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:41:24 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:41:24 INFO  root:64 - [/127.0.0.1:60216] has joined a match [1/2]
+2022-05-29 11:41:27 INFO  root:41 - New client has connected: [/127.0.0.1:60220]
+2022-05-29 11:41:27 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:41:27 INFO  root:53 - A client has sent a message - [/127.0.0.1:60220] [num_of_players: 2, username: 2]
+2022-05-29 11:41:27 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:41:27 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:41:27 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:41:27 INFO  root:64 - [/127.0.0.1:60220] has joined a match [2/2]
+2022-05-29 11:41:27 INFO  root:66 - starting a match...
+2022-05-29 11:41:27 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:41:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:41:27 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:41:27 INFO  root:171 - Returning correct
+2022-05-29 11:41:27 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:41:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:41:27 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:41:27 INFO  root:171 - Returning correct
+2022-05-29 11:41:27 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:41:27 INFO  root:202 - We're in the setup
+2022-05-29 11:41:27 INFO  root:36 - Added a new waiting room
+2022-05-29 11:41:27 INFO  root:220 - User 0 has an ok name
+2022-05-29 11:41:27 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:41:37 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:42:37 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:42:37 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:42:37 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:42:37 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:42:39 INFO  root:41 - New client has connected: [/127.0.0.1:60227]
+2022-05-29 11:42:39 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:42:40 INFO  root:53 - A client has sent a message - [/127.0.0.1:60227] [num_of_players: 2, username: 2]
+2022-05-29 11:42:40 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:42:40 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:42:40 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:42:40 INFO  root:64 - [/127.0.0.1:60227] has joined a match [1/2]
+2022-05-29 11:42:42 INFO  root:41 - New client has connected: [/127.0.0.1:60231]
+2022-05-29 11:42:42 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:42:43 INFO  root:53 - A client has sent a message - [/127.0.0.1:60231] [num_of_players: 2, username: 2]
+2022-05-29 11:42:43 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:42:43 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:42:43 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:42:43 INFO  root:64 - [/127.0.0.1:60231] has joined a match [2/2]
+2022-05-29 11:42:43 INFO  root:66 - starting a match...
+2022-05-29 11:42:43 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:42:43 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:42:43 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:42:43 INFO  root:171 - Returning correct
+2022-05-29 11:42:43 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:42:43 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:42:43 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:42:43 INFO  root:171 - Returning correct
+2022-05-29 11:42:43 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:42:43 INFO  root:36 - Added a new waiting room
+2022-05-29 11:42:43 INFO  root:202 - We're in the setup
+2022-05-29 11:42:43 INFO  root:221 - User 0 has an ok name
+2022-05-29 11:42:43 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:42:45 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:43:02 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:43:02 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:43:02 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:43:02 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:43:06 INFO  root:41 - New client has connected: [/127.0.0.1:60238]
+2022-05-29 11:43:06 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:43:06 INFO  root:53 - A client has sent a message - [/127.0.0.1:60238] [num_of_players: 2, username: 2]
+2022-05-29 11:43:06 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:43:06 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:43:06 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:43:06 INFO  root:64 - [/127.0.0.1:60238] has joined a match [1/2]
+2022-05-29 11:43:10 INFO  root:41 - New client has connected: [/127.0.0.1:60242]
+2022-05-29 11:43:10 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:43:11 INFO  root:53 - A client has sent a message - [/127.0.0.1:60242] [num_of_players: 2, username: 2]
+2022-05-29 11:43:11 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:43:11 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:43:11 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:43:11 INFO  root:64 - [/127.0.0.1:60242] has joined a match [2/2]
+2022-05-29 11:43:11 INFO  root:66 - starting a match...
+2022-05-29 11:43:11 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:43:11 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:43:11 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:43:11 INFO  root:171 - Returning correct
+2022-05-29 11:43:11 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:43:11 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:43:11 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:43:11 INFO  root:171 - Returning correct
+2022-05-29 11:43:11 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:43:11 INFO  root:36 - Added a new waiting room
+2022-05-29 11:43:11 INFO  root:202 - We're in the setup
+2022-05-29 11:43:11 INFO  root:219 - User 0 has an ok name
+2022-05-29 11:43:11 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:43:13 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:43:13 INFO  root:242 - New match has started [2 players]
+2022-05-29 11:43:13 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:43:13 INFO  root:254 - player 0 has to play. Sending the actions
+2022-05-29 11:43:13 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:43:13 INFO  root:257 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:45:17 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:45:17 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:45:17 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:45:17 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:45:24 INFO  root:41 - New client has connected: [/127.0.0.1:60252]
+2022-05-29 11:45:24 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:45:25 INFO  root:53 - A client has sent a message - [/127.0.0.1:60252] [num_of_players: 2, username: d]
+2022-05-29 11:45:25 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:45:25 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:45:25 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:45:25 INFO  root:64 - [/127.0.0.1:60252] has joined a match [1/2]
+2022-05-29 11:45:26 INFO  root:41 - New client has connected: [/127.0.0.1:60253]
+2022-05-29 11:45:26 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:45:27 INFO  root:53 - A client has sent a message - [/127.0.0.1:60253] [num_of_players: 2, username: d]
+2022-05-29 11:45:27 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:45:27 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:45:27 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:45:27 INFO  root:64 - [/127.0.0.1:60253] has joined a match [2/2]
+2022-05-29 11:45:27 INFO  root:66 - starting a match...
+2022-05-29 11:45:27 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:45:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:45:27 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:45:27 INFO  root:171 - Returning correct
+2022-05-29 11:45:27 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:45:27 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:45:27 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:45:27 INFO  root:171 - Returning correct
+2022-05-29 11:45:27 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:45:27 INFO  root:36 - Added a new waiting room
+2022-05-29 11:45:27 INFO  root:202 - We're in the setup
+2022-05-29 11:45:27 INFO  root:219 - User 0 has an ok name
+2022-05-29 11:45:27 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:46:42 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:46:42 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:46:42 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:46:42 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:46:51 INFO  root:41 - New client has connected: [/127.0.0.1:60264]
+2022-05-29 11:46:51 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:46:51 INFO  root:53 - A client has sent a message - [/127.0.0.1:60264] [num_of_players: 2, username: d]
+2022-05-29 11:46:51 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:46:51 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:46:51 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:46:51 INFO  root:64 - [/127.0.0.1:60264] has joined a match [1/2]
+2022-05-29 11:46:52 INFO  root:41 - New client has connected: [/127.0.0.1:60265]
+2022-05-29 11:46:52 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:46:53 INFO  root:53 - A client has sent a message - [/127.0.0.1:60265] [num_of_players: 2, username: d]
+2022-05-29 11:46:53 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:46:53 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:46:53 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:46:53 INFO  root:64 - [/127.0.0.1:60265] has joined a match [2/2]
+2022-05-29 11:46:53 INFO  root:66 - starting a match...
+2022-05-29 11:46:53 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:46:53 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:46:53 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:46:53 INFO  root:171 - Returning correct
+2022-05-29 11:46:53 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:46:53 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:46:53 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:46:53 INFO  root:171 - Returning correct
+2022-05-29 11:46:53 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:46:53 INFO  root:36 - Added a new waiting room
+2022-05-29 11:46:53 INFO  root:202 - We're in the setup
+2022-05-29 11:46:53 INFO  root:219 - User 0 has an ok name
+2022-05-29 11:46:53 INFO  root:209 - Nick invalid => re-asking
+2022-05-29 11:49:29 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:49:29 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:49:29 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:49:29 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:49:32 INFO  root:41 - New client has connected: [/127.0.0.1:60275]
+2022-05-29 11:49:32 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:49:32 INFO  root:53 - A client has sent a message - [/127.0.0.1:60275] [num_of_players: 2, username: 2]
+2022-05-29 11:49:32 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:49:32 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:49:32 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:49:32 INFO  root:64 - [/127.0.0.1:60275] has joined a match [1/2]
+2022-05-29 11:49:36 INFO  root:41 - New client has connected: [/127.0.0.1:60279]
+2022-05-29 11:49:36 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:49:38 INFO  root:53 - A client has sent a message - [/127.0.0.1:60279] [num_of_players: 2, username: 3]
+2022-05-29 11:49:38 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:49:38 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:49:38 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:49:38 INFO  root:64 - [/127.0.0.1:60279] has joined a match [2/2]
+2022-05-29 11:49:38 INFO  root:66 - starting a match...
+2022-05-29 11:49:38 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:49:38 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:49:38 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:49:38 INFO  root:171 - Returning correct
+2022-05-29 11:49:38 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:49:38 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:49:38 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:49:38 INFO  root:171 - Returning correct
+2022-05-29 11:49:38 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:49:38 INFO  root:36 - Added a new waiting room
+2022-05-29 11:49:38 INFO  root:201 - We're in the setup
+2022-05-29 11:49:38 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:49:38 INFO  root:223 - New match has started [2 players]
+2022-05-29 11:49:38 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:49:38 INFO  root:235 - player 0 has to play. Sending the actions
+2022-05-29 11:49:38 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:49:38 INFO  root:238 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:49:41 INFO  root:32 - Available stream
+2022-05-29 11:49:41 INFO  root:38 - Received a request
+2022-05-29 11:49:41 INFO  root:107 - Setup: true
+2022-05-29 11:49:41 INFO  root:129 - Received an action!
+2022-05-29 11:49:41 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:49:41 INFO  root:132 - received from: 0, expected from: 0
+2022-05-29 11:49:41 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-29 11:49:41 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:49:41 INFO  root:89 - verifying that player 0 is playing in the correct turn
+2022-05-29 11:49:41 INFO  root:24 - Requested assist-card: 1
+2022-05-29 11:49:41 INFO  root:76 - Assist card drawn
+2022-05-29 11:49:41 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-29 11:49:41 INFO  root:171 - Returning correct
+2022-05-29 11:49:41 INFO  root:136 - Everything went right
+2022-05-29 11:49:41 INFO  root:142 - Setting response received
+2022-05-29 11:49:41 INFO  root:172 - Response received
+2022-05-29 11:49:41 INFO  root:244 - Response received. Ending loop
+2022-05-29 11:49:41 INFO  root:85 - Game ended: false
+2022-05-29 11:49:41 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:49:41 INFO  root:235 - player 1 has to play. Sending the actions
+2022-05-29 11:49:41 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:49:41 INFO  root:238 - The available gamephases have been sent to the client (player 1)
+2022-05-29 11:49:44 INFO  root:32 - Available stream
+2022-05-29 11:49:44 INFO  root:38 - Received a request
+2022-05-29 11:49:44 INFO  root:107 - Setup: true
+2022-05-29 11:49:44 INFO  root:129 - Received an action!
+2022-05-29 11:49:44 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:49:44 INFO  root:132 - received from: 1, expected from: 1
+2022-05-29 11:49:44 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-29 11:49:44 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:49:44 INFO  root:89 - verifying that player 1 is playing in the correct turn
+2022-05-29 11:49:44 INFO  root:93 - last player was 0
+2022-05-29 11:49:44 INFO  root:24 - Requested assist-card: 2
+2022-05-29 11:49:44 INFO  root:76 - Assist card drawn
+2022-05-29 11:49:44 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-29 11:49:44 INFO  root:171 - Returning correct
+2022-05-29 11:49:44 INFO  root:136 - Everything went right
+2022-05-29 11:49:44 INFO  root:142 - Setting response received
+2022-05-29 11:49:44 INFO  root:172 - Response received
+2022-05-29 11:49:44 INFO  root:244 - Response received. Ending loop
+2022-05-29 11:49:44 INFO  root:85 - Game ended: false
+2022-05-29 11:49:44 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-29 11:49:44 INFO  root:166 - il valore minore lo ha 0
+2022-05-29 11:49:44 INFO  root:235 - player 0 has to play. Sending the actions
+2022-05-29 11:49:44 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-29 11:49:44 INFO  root:238 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:49:49 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:49:49 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:49:49 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:49:49 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:49:53 INFO  root:41 - New client has connected: [/127.0.0.1:60286]
+2022-05-29 11:49:53 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:49:53 INFO  root:53 - A client has sent a message - [/127.0.0.1:60286] [num_of_players: 2, username: 2]
+2022-05-29 11:49:53 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:49:53 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:49:53 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:49:53 INFO  root:64 - [/127.0.0.1:60286] has joined a match [1/2]
+2022-05-29 11:49:56 INFO  root:41 - New client has connected: [/127.0.0.1:60290]
+2022-05-29 11:49:56 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:49:56 INFO  root:53 - A client has sent a message - [/127.0.0.1:60290] [num_of_players: 2, username: 2]
+2022-05-29 11:49:56 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:49:56 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:49:56 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:49:56 INFO  root:64 - [/127.0.0.1:60290] has joined a match [2/2]
+2022-05-29 11:49:56 INFO  root:66 - starting a match...
+2022-05-29 11:49:56 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:49:56 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:49:56 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:49:56 INFO  root:171 - Returning correct
+2022-05-29 11:49:56 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:49:56 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:49:56 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:49:56 INFO  root:171 - Returning correct
+2022-05-29 11:49:56 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:49:56 INFO  root:36 - Added a new waiting room
+2022-05-29 11:49:56 INFO  root:201 - We're in the setup
+2022-05-29 11:51:40 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:51:40 INFO  root:223 - New match has started [2 players]
+2022-05-29 11:51:40 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:51:40 INFO  root:235 - player 0 has to play. Sending the actions
+2022-05-29 11:51:40 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:51:40 INFO  root:238 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:51:45 INFO  root:32 - Available stream
+2022-05-29 11:51:45 INFO  root:38 - Received a request
+2022-05-29 11:51:45 INFO  root:107 - Setup: true
+2022-05-29 11:51:45 INFO  root:129 - Received an action!
+2022-05-29 11:51:45 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:51:45 INFO  root:132 - received from: 0, expected from: 0
+2022-05-29 11:51:45 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-29 11:51:45 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:51:45 INFO  root:89 - verifying that player 0 is playing in the correct turn
+2022-05-29 11:51:45 INFO  root:24 - Requested assist-card: 3
+2022-05-29 11:51:45 INFO  root:76 - Assist card drawn
+2022-05-29 11:51:45 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-29 11:51:45 INFO  root:171 - Returning correct
+2022-05-29 11:51:45 INFO  root:136 - Everything went right
+2022-05-29 11:51:45 INFO  root:142 - Setting response received
+2022-05-29 11:51:45 INFO  root:172 - Response received
+2022-05-29 11:51:45 INFO  root:244 - Response received. Ending loop
+2022-05-29 11:51:45 INFO  root:85 - Game ended: false
+2022-05-29 11:51:45 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:51:45 INFO  root:235 - player 1 has to play. Sending the actions
+2022-05-29 11:51:45 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:51:45 INFO  root:238 - The available gamephases have been sent to the client (player 1)
+2022-05-29 11:51:47 INFO  root:32 - Available stream
+2022-05-29 11:51:47 INFO  root:38 - Received a request
+2022-05-29 11:51:47 INFO  root:107 - Setup: true
+2022-05-29 11:51:47 INFO  root:129 - Received an action!
+2022-05-29 11:51:47 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:51:47 INFO  root:132 - received from: 1, expected from: 1
+2022-05-29 11:51:47 INFO  root:49 - Received an update - Analyzing DRAW_ASSIST_CARD
+2022-05-29 11:51:47 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:51:47 INFO  root:89 - verifying that player 1 is playing in the correct turn
+2022-05-29 11:51:47 INFO  root:93 - last player was 0
+2022-05-29 11:51:47 INFO  root:24 - Requested assist-card: 1
+2022-05-29 11:51:47 INFO  root:76 - Assist card drawn
+2022-05-29 11:51:47 INFO  root:39 - GamePhase DRAW_ASSIST_CARD has been processed correctly
+2022-05-29 11:51:47 INFO  root:171 - Returning correct
+2022-05-29 11:51:47 INFO  root:136 - Everything went right
+2022-05-29 11:51:47 INFO  root:142 - Setting response received
+2022-05-29 11:51:47 INFO  root:172 - Response received
+2022-05-29 11:51:47 INFO  root:244 - Response received. Ending loop
+2022-05-29 11:51:47 INFO  root:85 - Game ended: false
+2022-05-29 11:51:47 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: false
+2022-05-29 11:51:47 INFO  root:166 - il valore minore lo ha 1
+2022-05-29 11:51:47 INFO  root:235 - player 1 has to play. Sending the actions
+2022-05-29 11:51:47 INFO  root:126 - Calculated next available gamephases (now: DRAW_ASSIST_CARD) (next: [MOVE_3_STUDENTS, USE_CHARACTER_CARD])
+2022-05-29 11:51:47 INFO  root:238 - The available gamephases have been sent to the client (player 1)
+2022-05-29 11:51:52 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:51:52 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:51:52 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:51:52 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:52:00 INFO  root:41 - New client has connected: [/127.0.0.1:60318]
+2022-05-29 11:52:00 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:52:01 INFO  root:53 - A client has sent a message - [/127.0.0.1:60318] [num_of_players: 2, username: f]
+2022-05-29 11:52:01 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:52:01 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:52:01 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:52:01 INFO  root:64 - [/127.0.0.1:60318] has joined a match [1/2]
+2022-05-29 11:52:03 INFO  root:41 - New client has connected: [/127.0.0.1:60319]
+2022-05-29 11:52:03 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:52:04 INFO  root:53 - A client has sent a message - [/127.0.0.1:60319] [num_of_players: 2, username: f]
+2022-05-29 11:52:04 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:52:04 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:52:04 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:52:04 INFO  root:64 - [/127.0.0.1:60319] has joined a match [2/2]
+2022-05-29 11:52:04 INFO  root:66 - starting a match...
+2022-05-29 11:52:04 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:52:04 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:52:04 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:52:04 INFO  root:171 - Returning correct
+2022-05-29 11:52:04 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:52:04 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:52:04 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:52:04 INFO  root:171 - Returning correct
+2022-05-29 11:52:04 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:52:04 INFO  root:201 - We're in the setup
+2022-05-29 11:52:04 INFO  root:36 - Added a new waiting room
+2022-05-29 11:52:08 INFO  root:41 - New client has connected: [/127.0.0.1:60320]
+2022-05-29 11:52:08 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:52:08 INFO  root:53 - A client has sent a message - [/127.0.0.1:60320] [num_of_players: 2, username: g]
+2022-05-29 11:52:08 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:52:08 INFO  root:32 - Connecting to waiting room 1
+2022-05-29 11:52:08 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:52:08 INFO  root:64 - [/127.0.0.1:60320] has joined a match [1/2]
+2022-05-29 11:55:19 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:55:19 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:55:19 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:55:19 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:55:25 INFO  root:41 - New client has connected: [/127.0.0.1:60331]
+2022-05-29 11:55:25 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:55:26 INFO  root:53 - A client has sent a message - [/127.0.0.1:60331] [num_of_players: 2, username: d]
+2022-05-29 11:55:26 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:55:26 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:55:26 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:55:26 INFO  root:64 - [/127.0.0.1:60331] has joined a match [1/2]
+2022-05-29 11:55:33 INFO  root:41 - New client has connected: [/127.0.0.1:60335]
+2022-05-29 11:55:33 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:55:33 INFO  root:53 - A client has sent a message - [/127.0.0.1:60335] [num_of_players: 2, username: d]
+2022-05-29 11:55:33 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:55:33 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:55:33 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:55:33 INFO  root:64 - [/127.0.0.1:60335] has joined a match [2/2]
+2022-05-29 11:55:33 INFO  root:66 - starting a match...
+2022-05-29 11:55:33 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:55:33 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:55:33 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:55:33 INFO  root:171 - Returning correct
+2022-05-29 11:55:33 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:55:33 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:55:33 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:55:33 INFO  root:171 - Returning correct
+2022-05-29 11:55:33 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:55:33 INFO  root:36 - Added a new waiting room
+2022-05-29 11:55:33 INFO  root:201 - We're in the setup
+2022-05-29 11:55:36 INFO  root:41 - New client has connected: [/127.0.0.1:60336]
+2022-05-29 11:55:36 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:55:37 INFO  root:53 - A client has sent a message - [/127.0.0.1:60336] [num_of_players: 2, username: d]
+2022-05-29 11:55:37 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:55:37 INFO  root:32 - Connecting to waiting room 1
+2022-05-29 11:55:37 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:55:37 INFO  root:64 - [/127.0.0.1:60336] has joined a match [1/2]
+2022-05-29 11:56:30 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:56:30 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:56:30 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:56:30 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:56:40 INFO  root:41 - New client has connected: [/127.0.0.1:60347]
+2022-05-29 11:56:40 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:56:41 INFO  root:53 - A client has sent a message - [/127.0.0.1:60347] [num_of_players: 2, username: d]
+2022-05-29 11:56:41 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:56:41 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:56:41 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:56:41 INFO  root:64 - [/127.0.0.1:60347] has joined a match [1/2]
+2022-05-29 11:56:42 INFO  root:41 - New client has connected: [/127.0.0.1:60348]
+2022-05-29 11:56:42 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:56:42 INFO  root:53 - A client has sent a message - [/127.0.0.1:60348] [num_of_players: 2, username: d]
+2022-05-29 11:56:42 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:56:42 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:56:42 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:56:42 INFO  root:64 - [/127.0.0.1:60348] has joined a match [2/2]
+2022-05-29 11:56:42 INFO  root:66 - starting a match...
+2022-05-29 11:56:42 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:56:42 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:56:42 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:56:42 INFO  root:171 - Returning correct
+2022-05-29 11:56:42 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:56:42 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:56:42 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:56:42 INFO  root:171 - Returning correct
+2022-05-29 11:56:42 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:56:42 INFO  root:36 - Added a new waiting room
+2022-05-29 11:56:42 INFO  root:201 - We're in the setup
+2022-05-29 11:56:46 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:56:46 INFO  root:223 - New match has started [2 players]
+2022-05-29 11:56:46 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:56:46 INFO  root:235 - player 0 has to play. Sending the actions
+2022-05-29 11:56:46 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:56:46 INFO  root:238 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:56:53 INFO  root:32 - Available stream
+2022-05-29 11:56:53 INFO  root:38 - Received a request
+2022-05-29 11:56:53 INFO  root:107 - Setup: true
+2022-05-29 11:56:53 INFO  root:129 - Received an action!
+2022-05-29 11:56:53 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:56:53 INFO  root:132 - received from: 1, expected from: 0
+2022-05-29 11:56:53 INFO  root:145 - Something went wrong
+2022-05-29 11:57:19 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:57:19 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:57:19 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:57:19 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:57:22 INFO  root:41 - New client has connected: [/127.0.0.1:60355]
+2022-05-29 11:57:22 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:57:24 INFO  root:53 - A client has sent a message - [/127.0.0.1:60355] [num_of_players: 2, username: 2]
+2022-05-29 11:57:24 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:57:24 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:57:24 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:57:24 INFO  root:64 - [/127.0.0.1:60355] has joined a match [1/2]
+2022-05-29 11:57:27 INFO  root:41 - New client has connected: [/127.0.0.1:60359]
+2022-05-29 11:57:27 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:57:28 INFO  root:53 - A client has sent a message - [/127.0.0.1:60359] [num_of_players: 2, username: 2]
+2022-05-29 11:57:28 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:57:28 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:57:28 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:57:28 INFO  root:64 - [/127.0.0.1:60359] has joined a match [2/2]
+2022-05-29 11:57:28 INFO  root:66 - starting a match...
+2022-05-29 11:57:28 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:57:28 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:57:28 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:57:28 INFO  root:171 - Returning correct
+2022-05-29 11:57:28 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:57:28 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:57:28 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:57:28 INFO  root:171 - Returning correct
+2022-05-29 11:57:28 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:57:28 INFO  root:36 - Added a new waiting room
+2022-05-29 11:57:28 INFO  root:201 - We're in the setup
+2022-05-29 11:57:29 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:57:29 INFO  root:223 - New match has started [2 players]
+2022-05-29 11:57:29 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:57:29 INFO  root:235 - player 0 has to play. Sending the actions
+2022-05-29 11:57:29 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:57:29 INFO  root:238 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:58:06 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:58:06 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:58:06 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:58:06 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:58:15 INFO  root:41 - New client has connected: [/127.0.0.1:60370]
+2022-05-29 11:58:15 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:58:16 INFO  root:53 - A client has sent a message - [/127.0.0.1:60370] [num_of_players: 2, username: f]
+2022-05-29 11:58:16 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:58:16 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:58:16 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:58:16 INFO  root:64 - [/127.0.0.1:60370] has joined a match [1/2]
+2022-05-29 11:58:17 INFO  root:41 - New client has connected: [/127.0.0.1:60371]
+2022-05-29 11:58:17 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:58:17 INFO  root:53 - A client has sent a message - [/127.0.0.1:60371] [num_of_players: 2, username: h]
+2022-05-29 11:58:17 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:58:17 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:58:17 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:58:17 INFO  root:64 - [/127.0.0.1:60371] has joined a match [2/2]
+2022-05-29 11:58:17 INFO  root:66 - starting a match...
+2022-05-29 11:58:17 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:58:17 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:58:17 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:58:17 INFO  root:171 - Returning correct
+2022-05-29 11:58:17 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:58:17 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:58:17 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:58:17 INFO  root:171 - Returning correct
+2022-05-29 11:58:17 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:58:17 INFO  root:36 - Added a new waiting room
+2022-05-29 11:58:17 INFO  root:201 - We're in the setup
+2022-05-29 11:58:17 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:58:17 INFO  root:223 - New match has started [2 players]
+2022-05-29 11:58:17 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:58:17 INFO  root:235 - player 0 has to play. Sending the actions
+2022-05-29 11:58:17 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:58:17 INFO  root:238 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:58:24 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:58:24 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:58:24 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:58:24 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:58:35 INFO  root:41 - New client has connected: [/127.0.0.1:60381]
+2022-05-29 11:58:35 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:58:35 INFO  root:53 - A client has sent a message - [/127.0.0.1:60381] [num_of_players: 2, username: e]
+2022-05-29 11:58:35 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:58:35 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:58:35 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:58:35 INFO  root:64 - [/127.0.0.1:60381] has joined a match [1/2]
+2022-05-29 11:58:36 INFO  root:41 - New client has connected: [/127.0.0.1:60382]
+2022-05-29 11:58:36 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:58:37 INFO  root:53 - A client has sent a message - [/127.0.0.1:60382] [num_of_players: 2, username: e]
+2022-05-29 11:58:37 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:58:37 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:58:37 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:58:37 INFO  root:64 - [/127.0.0.1:60382] has joined a match [2/2]
+2022-05-29 11:58:37 INFO  root:66 - starting a match...
+2022-05-29 11:58:37 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:58:37 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:58:37 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:58:37 INFO  root:171 - Returning correct
+2022-05-29 11:58:37 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:58:37 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:58:37 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:58:37 INFO  root:171 - Returning correct
+2022-05-29 11:58:37 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:58:37 INFO  root:36 - Added a new waiting room
+2022-05-29 11:58:37 INFO  root:201 - We're in the setup
+2022-05-29 11:58:40 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:58:40 INFO  root:223 - New match has started [2 players]
+2022-05-29 11:58:40 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:58:40 INFO  root:235 - player 0 has to play. Sending the actions
+2022-05-29 11:58:40 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:58:40 INFO  root:238 - The available gamephases have been sent to the client (player 0)
+2022-05-29 11:59:29 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:59:29 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 11:59:29 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 11:59:29 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 11:59:40 INFO  root:41 - New client has connected: [/127.0.0.1:60392]
+2022-05-29 11:59:40 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:59:40 INFO  root:53 - A client has sent a message - [/127.0.0.1:60392] [num_of_players: 2, username: dd]
+2022-05-29 11:59:40 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:59:40 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:59:40 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 11:59:40 INFO  root:64 - [/127.0.0.1:60392] has joined a match [1/2]
+2022-05-29 11:59:42 INFO  root:41 - New client has connected: [/127.0.0.1:60393]
+2022-05-29 11:59:42 INFO  root:46 - ServerDispatcher ready
+2022-05-29 11:59:42 INFO  root:53 - A client has sent a message - [/127.0.0.1:60393] [num_of_players: 2, username: dd]
+2022-05-29 11:59:42 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 11:59:42 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 11:59:42 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 11:59:42 INFO  root:64 - [/127.0.0.1:60393] has joined a match [2/2]
+2022-05-29 11:59:42 INFO  root:66 - starting a match...
+2022-05-29 11:59:42 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 11:59:42 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:59:42 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 11:59:42 INFO  root:171 - Returning correct
+2022-05-29 11:59:42 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 11:59:42 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 11:59:42 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 11:59:42 INFO  root:171 - Returning correct
+2022-05-29 11:59:42 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 11:59:42 INFO  root:201 - We're in the setup
+2022-05-29 11:59:42 INFO  root:36 - Added a new waiting room
+2022-05-29 11:59:45 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 11:59:45 INFO  root:223 - New match has started [2 players]
+2022-05-29 11:59:45 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 11:59:45 INFO  root:235 - player 0 has to play. Sending the actions
+2022-05-29 11:59:45 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 11:59:45 INFO  root:238 - The available gamephases have been sent to the client (player 0)
+2022-05-29 12:01:42 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 12:01:42 INFO  root:29 - Created a waiting room of 3 players
+2022-05-29 12:01:42 INFO  root:29 - Created a waiting room of 4 players
+2022-05-29 12:01:42 INFO  root:37 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.64, PORT: 60125
+2022-05-29 12:01:50 INFO  root:41 - New client has connected: [/127.0.0.1:60403]
+2022-05-29 12:01:50 INFO  root:46 - ServerDispatcher ready
+2022-05-29 12:01:50 INFO  root:53 - A client has sent a message - [/127.0.0.1:60403] [num_of_players: 2, username: d]
+2022-05-29 12:01:50 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 12:01:50 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 12:01:50 INFO  root:63 - Connected: 1, Capacity: 2
+2022-05-29 12:01:50 INFO  root:64 - [/127.0.0.1:60403] has joined a match [1/2]
+2022-05-29 12:01:52 INFO  root:41 - New client has connected: [/127.0.0.1:60404]
+2022-05-29 12:01:52 INFO  root:46 - ServerDispatcher ready
+2022-05-29 12:01:52 INFO  root:53 - A client has sent a message - [/127.0.0.1:60404] [num_of_players: 2, username: d]
+2022-05-29 12:01:52 INFO  root:56 - Connecting to one of the 2 players waiting room
+2022-05-29 12:01:52 INFO  root:32 - Connecting to waiting room 0
+2022-05-29 12:01:52 INFO  root:63 - Connected: 2, Capacity: 2
+2022-05-29 12:01:52 INFO  root:64 - [/127.0.0.1:60404] has joined a match [2/2]
+2022-05-29 12:01:52 INFO  root:66 - starting a match...
+2022-05-29 12:01:52 INFO  root:49 - Received an update - Analyzing START
+2022-05-29 12:01:52 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 12:01:52 INFO  root:39 - GamePhase START has been processed correctly
+2022-05-29 12:01:52 INFO  root:171 - Returning correct
+2022-05-29 12:01:52 INFO  root:49 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-05-29 12:01:52 INFO  root:126 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-05-29 12:01:52 INFO  root:39 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-05-29 12:01:52 INFO  root:171 - Returning correct
+2022-05-29 12:01:52 INFO  root:29 - Created a waiting room of 2 players
+2022-05-29 12:01:52 INFO  root:36 - Added a new waiting room
+2022-05-29 12:01:52 INFO  root:201 - We're in the setup
+2022-05-29 12:01:55 INFO  root:27 - ServerNetworkListener has started
+2022-05-29 12:01:55 INFO  root:223 - New match has started [2 players]
+2022-05-29 12:01:55 INFO  root:191 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-05-29 12:01:55 INFO  root:235 - player 0 has to play. Sending the actions
+2022-05-29 12:01:55 INFO  root:126 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-05-29 12:01:55 INFO  root:238 - The available gamephases have been sent to the client (player 0)

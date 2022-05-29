@@ -39,7 +39,7 @@ public class LoginController implements Initializable, GameBoardContainer {
     private FXMLLoader gameloader;
     private GameGraphicController game_controller;
     private Parent gameparent;
-    private boolean ignore_network;
+    private boolean ignore_network, already_connected;
 
     //fxml variables
     @FXML
@@ -62,35 +62,45 @@ public class LoginController implements Initializable, GameBoardContainer {
         listener = new NetworkListener(msg.getSocket(), msg.getInput(), this);
         listener.setForGUI();
         listener.start();
+        already_connected = false;
     }
 
     private void sendLogInRequest() throws SocketException {
-        //Creating the action
-        Action act = new Action();
-        act.setGamePhase(GamePhase.START);
-        act.setUsername(nickname.getText());
-        act.setNOfPlayers(Integer.parseInt(choiceBox.getValue()));
-        //Initializing the game controller
-        GameGraphicController.username = act.getUsername();
-        GameGraphicController.nof_players = act.getNOfPlayers();
-        GameGraphicController.msg = msg;
-        gameloader = new FXMLLoader(GUILauncher.class.getResource("gameGraphic.fxml"));
-        try {
-            gameparent = gameloader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(already_connected){
+            Action act = new Action();
+            act.setGamePhase(GamePhase.START);
+            act.setUsername(nickname.getText());
+            msg.send(act);
+        } else {
+            //Creating the action
+            Action act = new Action();
+            act.setGamePhase(GamePhase.START);
+            act.setUsername(nickname.getText());
+            act.setNOfPlayers(Integer.parseInt(choiceBox.getValue()));
+            //Initializing the game controller
+            GameGraphicController.username = act.getUsername();
+            GameGraphicController.nof_players = act.getNOfPlayers();
+            GameGraphicController.msg = msg;
+            gameloader = new FXMLLoader(GUILauncher.class.getResource("gameGraphic.fxml"));
+            try {
+                gameparent = gameloader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            game_controller = gameloader.getController();
+            listener.addGameBoardContainer(game_controller);
+            System.out.println("Added game controller to listener");
+            //Sending the message
+            msg.send(act);
+            last_sent = act.getGamePhase();
+            System.out.println("Variables set. Initializing graphics");
+            already_connected = true;
         }
-        game_controller = gameloader.getController();
-        listener.addGameBoardContainer(game_controller);
-        System.out.println("Added game controller to listener");
-        //Sending the message
-        msg.send(act);
-        last_sent = act.getGamePhase();
-        System.out.println("Variables set. Initializing graphics");
     }
 
     public void switchScene(ActionEvent event) throws IOException {
-        initializeNetwork();
+        if(!already_connected)
+            initializeNetwork();
         PopUpLauncher alert = new PopUpLauncher();
         String input_user = nickname.getText();
         if(input_user == null || input_user.isEmpty()){
@@ -142,6 +152,8 @@ public class LoginController implements Initializable, GameBoardContainer {
         switch(action.getGamePhase()){
             case CORRECT:
                 System.out.println("Action is CORRECT");
+                System.out.println("Username: " + action.getUsername());
+                game_controller.setUsername(action.getUsername());
                 Platform.runLater(() -> {
                     game_controller.setStarted();
                     Stage stage = new Stage();
@@ -156,7 +168,10 @@ public class LoginController implements Initializable, GameBoardContainer {
                 break;
             case ERROR_PHASE:
                 error.setMessage("Username already taken!");
-                error.show(true);
+                error.show();
+                showWaitingScene(false);
+                ip.setDisable(true);
+                choiceBox.setDisable(true);
                 break;
             case CONNECTION_ERROR:
                 error.setMessage("A connection error occurred");

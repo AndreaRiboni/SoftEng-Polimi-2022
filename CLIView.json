@@ -2,6 +2,9 @@
   "username_choice": {
     "value" : "Choose a username"
   },
+  "username_choice_after_error": {
+    "value" : "Someone already goes by that username, choose another one"
+  },
   "number_players": {
     "value" : "How many players?"
   },

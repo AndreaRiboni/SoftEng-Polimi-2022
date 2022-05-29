@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.utils;
 
 import it.polimi.ingsw.model.places.Island;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,18 +96,23 @@ public class GenericUtils {
         return targetStart + (targetStop - targetStart) * ((value - start) / (stop - start));
     }
 
-    public static boolean alreadyContains(String[] array, String val, int pos){
-        for(int i=0; i< array.length; i++){
-            if(array[i].equals(val) && pos!=i) return true;
+    public static boolean[] getUsernamesValidity(String[] users){
+        boolean[] validity = new boolean[users.length];
+        Arrays.fill(validity, true);
+        for(int i = validity.length - 1; i >= 0; i--){
+            for(int o = 0; o < i; o++){
+                if(users[i].equalsIgnoreCase(users[o])){
+                    System.out.println(users[i] + " (i=" + i + ") is invalid since it's equals to o=" + o);
+                    validity[i] = false;
+                }
+            }
         }
-        return false;
+        return validity;
     }
 
-    public static boolean alreadyContains(String[] array, String val){
-        for(int i = 0; i < array.length; i++){
-            if(array[i].equalsIgnoreCase(val)) return true;
-        }
-        return false;
+    public static boolean and(boolean[] bools){
+        for(boolean b : bools) if(!b) return false;
+        return true;
     }
 
 }

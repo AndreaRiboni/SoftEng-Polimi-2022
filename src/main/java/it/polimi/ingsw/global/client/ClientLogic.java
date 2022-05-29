@@ -409,16 +409,20 @@ public class ClientLogic implements GameBoardContainer {
         Action start = new Action();
         start.setGamePhase(GamePhase.START);
         start.setNOfPlayers(nof_players);
-        start.setUsername(username);
-        msg.send(start);
-        System.out.println( StringViewUtility.getViewString("waiting_response"));
-        Action username_comunicator = waitForResponse();
-        if(username_comunicator.getGamePhase().equals(GamePhase.ERROR_PHASE)){
-            System.err.println("Someone already chosen this username!");
-            System.exit(0);
-        }
-        System.out.println( StringViewUtility.getViewString("username_declaration") + username_comunicator.getUsername());
-        this.username = username_comunicator.getUsername();
+        boolean valid_nick = true;
+        do {
+            if(!valid_nick){
+                username = InputUtils.getString(StringViewUtility.getViewString("username_choice_after_error"));
+            }
+            start.setUsername(username);
+            msg.send(start);
+            System.out.println(StringViewUtility.getViewString("waiting_response"));
+            Action username_comunicator = waitForResponse();
+            valid_nick = username_comunicator.getGamePhase().equals(GamePhase.CORRECT);
+            if(valid_nick)
+                this.username = username_comunicator.getUsername();
+        } while(!valid_nick);
+        System.out.println( StringViewUtility.getViewString("username_declaration") + this.username);
         do {
             boolean succeeded = false;
             do {
