@@ -47,6 +47,10 @@ public class CharacterDeck implements Serializable{
     }
 
     public void draw3Cards() {
+        cards[6].setActive();
+        cards[4].setActive();
+        cards[0].setActive();
+        /*
         int found = 0;
         do {
             int index = (int)(Math.random() * cards.length);
@@ -55,6 +59,7 @@ public class CharacterDeck implements Serializable{
                 cards[index].setActive();
             }
         } while(found < 3);
+         */
     }
 
     private void createDeck(){

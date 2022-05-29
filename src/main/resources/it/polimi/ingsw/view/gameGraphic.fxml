@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.SubScene?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane fx:id="splitpane" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GameGraphicController">
+<SplitPane fx:id="splitpane" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GameGraphicController">
     <items>
         <AnchorPane fx:id="leftpane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
@@ -26,7 +42,7 @@
                             <content>
                                 <AnchorPane fx:id="player_container">
                                     <children>
-                                        <ImageView fitHeight="690.0" fitWidth="636.0" layoutY="-3.0" pickOnBounds="true">
+                                        <ImageView fitHeight="774.0" fitWidth="636.0" layoutY="-3.0" pickOnBounds="true">
                                             <image>
                                                 <Image url="@../../../../graphics/wood.jpg" />
                                             </image>
@@ -179,38 +195,122 @@
                                                 <Image url="@../../../../graphics/wood.jpg" />
                                             </image>
                                         </ImageView>
-                                        <HBox layoutX="27.0" layoutY="72.0" prefHeight="206.0" prefWidth="582.0">
+                                        <HBox layoutX="27.0" layoutY="72.0" prefHeight="213.0" prefWidth="582.0">
                                             <children>
-                                                <ImageView fitHeight="207.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../../../../characters/character_1.jpg" />
-                                                    </image>
-                                                </ImageView>
+                                    <Group>
+                                       <children>
+                                                      <ImageView fx:id="char_card1" fitHeight="207.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                          <image>
+                                                              <Image url="@../../../../characters/character_1.jpg" />
+                                                          </image>
+                                                      </ImageView>
+                                          <GridPane fx:id="cc1_coins" alignment="CENTER" prefHeight="90.0" prefWidth="138.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                          </GridPane>
+                                          <GridPane fx:id="cc1_content" alignment="CENTER" hgap="70.0" layoutY="100.0" prefHeight="90.0" prefWidth="137.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <padding>
+                                                <Insets left="7.0" />
+                                             </padding>
+                                          </GridPane>
+                                       </children>
+                                    </Group>
                                                 <Region prefHeight="207.0" prefWidth="109.0" />
-                                                <ImageView fitHeight="207.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../../../../characters/character_2.jpg" />
-                                                    </image>
-                                                </ImageView>
+                                    <Group>
+                                       <children>
+                                                      <ImageView fx:id="char_card2" fitHeight="207.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                          <image>
+                                                              <Image url="@../../../../characters/character_2.jpg" />
+                                                          </image>
+                                                      </ImageView>
+                                          <GridPane fx:id="cc2_coins" alignment="CENTER" prefHeight="90.0" prefWidth="138.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                          <GridPane fx:id="cc2_content" alignment="CENTER" hgap="70.0" layoutY="100.0" prefHeight="90.0" prefWidth="137.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <padding>
+                                                <Insets left="7.0" />
+                                             </padding>
+                                          </GridPane>
+                                       </children>
+                                    </Group>
                                                 <Region prefHeight="207.0" prefWidth="109.0" />
-                                                <ImageView fitHeight="207.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../../../../characters/character_3.jpg" />
-                                                    </image>
-                                                    <HBox.margin>
-                                                        <Insets />
-                                                    </HBox.margin>
-                                                </ImageView>
+                                    <Group>
+                                       <children>
+                                                      <ImageView fx:id="char_card3" fitHeight="207.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                          <image>
+                                                              <Image url="@../../../../characters/character_3.jpg" />
+                                                          </image>
+                                                      </ImageView>
+                                          <GridPane fx:id="cc3_coins" alignment="CENTER" prefHeight="90.0" prefWidth="138.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                          <GridPane fx:id="cc3_content" alignment="CENTER" hgap="70.0" layoutY="100.0" prefHeight="90.0" prefWidth="137.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <padding>
+                                                <Insets left="7.0" />
+                                             </padding>
+                                          </GridPane>
+                                       </children>
+                                    </Group>
                                             </children>
                                             <HBox.margin>
                                                 <Insets right="40.0" />
                                             </HBox.margin>
                                         </HBox>
-                                        <Label fx:id="Description" layoutX="132.0" layoutY="401.0" prefHeight="149.0" prefWidth="429.0" text="Qui ci andranno le info della carta">
-                                            <font>
-                                                <Font size="21.0" />
-                                            </font></Label>
-                                        <Button fx:id="Info" layoutX="27.0" layoutY="307.0" mnemonicParsing="false" onAction="#toggleDescriptionVisibility" text="Button" />
+                              <ChoiceBox fx:id="cc_values" layoutX="205.0" layoutY="336.0" prefHeight="25.0" prefWidth="225.0" />
+                              <Button fx:id="cc_play_button" layoutX="431.0" layoutY="336.0" mnemonicParsing="false" onAction="#playCharacterCard" text="Play" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>
