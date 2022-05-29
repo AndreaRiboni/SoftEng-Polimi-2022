@@ -1,39 +1,19 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.global.MessageSender;
-import it.polimi.ingsw.model.entities.Player;
-import it.polimi.ingsw.model.entities.cards.CharacterCard;
-import it.polimi.ingsw.model.entities.cards.CharacterDeck;
-import it.polimi.ingsw.model.entities.cards.LockBehavior;
-import it.polimi.ingsw.model.entities.cards.StudentBehavior;
 import it.polimi.ingsw.model.places.GameBoard;
-import it.polimi.ingsw.model.places.Island;
-import it.polimi.ingsw.model.places.Places;
-import it.polimi.ingsw.model.places.School;
 import it.polimi.ingsw.model.utils.*;
-import it.polimi.ingsw.model.utils.packets.StudentLocation;
 import it.polimi.ingsw.view.main_game.Aligner;
 import it.polimi.ingsw.view.main_game.Deliverer;
 import it.polimi.ingsw.view.main_game.Handler;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Glow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 import java.net.SocketException;
 import java.net.URL;
@@ -55,39 +35,42 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     private Deliverer deliverer;
 
     @FXML
-    ChoiceBox<String> assistant_choice;
+    private ChoiceBox<String> assistant_choice;
     private final String[] assistants_id = {"1", "2", "3", "4", "5","6","7","8","9","10"};
     @FXML
-    ImageView assistant_1, assistant_2, assistant_3, assistant_4, assistant_5, assistant_6, assistant_7, assistant_8, assistant_9, assistant_10;
+    private ImageView assistant_1, assistant_2, assistant_3, assistant_4, assistant_5, assistant_6, assistant_7, assistant_8, assistant_9, assistant_10;
     @FXML
-    SubScene subscene;
+    private SubScene subscene;
     @FXML
-    ImageView cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10;
+    private ImageView cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10;
+    private ImageView[] crosses;
+    private ImageView[] assistants;
     @FXML
-    SplitPane splitpane;
+    private SplitPane splitpane;
     @FXML
-    AnchorPane leftpane, rightpane;
+    private AnchorPane leftpane, rightpane;
     @FXML
-    ImageView my_school;
+    private ImageView my_school;
     @FXML
-    AnchorPane player_container;
+    private AnchorPane player_container;
     @FXML
-    Pane other_schools_container;
+    private Pane other_schools_container;
     @FXML
-    Label TurnStatus;
+    private Label TurnStatus;
     @FXML
-    ProgressBar TurnStatusBar;
+    private ProgressBar TurnStatusBar;
     @FXML
-    GridPane cc1_coins, cc2_coins, cc3_coins, cc1_content, cc2_content, cc3_content;
+    private GridPane cc1_coins, cc2_coins, cc3_coins, cc1_content, cc2_content, cc3_content;
     private GridPane[] cc_content;
     private GridPane[] cc_coins;
     @FXML
-    ImageView char_card1, char_card2, char_card3;
+    private ImageView char_card1, char_card2, char_card3;
     private ImageView[] char_card;
     @FXML
-    ChoiceBox<String> cc_values;
+    private ChoiceBox<String> cc_values;
     @FXML
-    Button cc_play_button;
+    private VBox vbox_card1, vbox_card2, vbox_card3;
+    private VBox[] vbox_card;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -101,7 +84,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         leftpane.maxWidthProperty().bind(splitpane.widthProperty().multiply(0.5));
         rightpane.maxWidthProperty().bind(splitpane.widthProperty().multiply(0.5));
         //put images into an array
-        ImageView[] crosses = {cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10};
+        assistants = new ImageView[]{assistant_1, assistant_2, assistant_3, assistant_4, assistant_5, assistant_6, assistant_7, assistant_8, assistant_9, assistant_10};
+        crosses = new ImageView[]{cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10};
         //show images
         assistant_choice.getItems().addAll(assistants_id);
         for(int i = 0; i<crosses.length; i++){
@@ -111,6 +95,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         cc_content = new GridPane[]{cc1_content, cc2_content, cc3_content};
         cc_coins = new GridPane[]{cc1_coins, cc2_coins, cc3_coins};
         char_card = new ImageView[]{char_card1, char_card2, char_card3};
+        vbox_card = new VBox[]{vbox_card1, vbox_card2, vbox_card3};
         //creates the 12 islands
         islands = new Group[12];
         Group islands_container = new Group();
@@ -154,26 +139,9 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             aligner.copyClouds(nof_players, clouds, subscene, mothernature_img);
             aligner.copyOtherSchools(other_schools_container, username);
             aligner.copyMotherNature(islands);
-            aligner.copyCharacterCards(cc_values, char_card, cc_content, cc_coins);
+            aligner.copyCharacterCards(cc_values, char_card, cc_content, cc_coins, vbox_card);
+            aligner.copyAssistCards(crosses, assistants, username);
         });
-    }
-
-    private void manageResponse(){
-        if(last_sent == null) return;
-        switch(last_sent.getGamePhase()){
-            case DRAW_ASSIST_CARD:
-                ColorAdjust grayscale = new ColorAdjust();
-                grayscale.setSaturation(-1);
-                ImageView[] crosses = { cross_1, cross_2, cross_3, cross_4, cross_5, cross_6, cross_7, cross_8, cross_9, cross_10};
-                ImageView[] assistants = {assistant_1, assistant_2, assistant_3, assistant_4, assistant_5, assistant_6, assistant_7, assistant_8, assistant_9, assistant_10};
-                for(int i = 0; i< assistants.length; i++){
-                    if(last_sent.getAssistCardIndex() == i){
-                        assistants[i].setEffect(grayscale);
-                        crosses[i].setVisible(true);
-                    }
-                }
-                break;
-        }
     }
 
     @Override
@@ -186,7 +154,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 aligner.disable();
                 TurnStatus.setText("Wait until the other players have finished their turn");
                 TurnStatusBar.setVisible(true);
-                manageResponse();
             } else if(action.getGamePhase().equals(GamePhase.ERROR_PHASE)){
                 disabled = false;
                 aligner.enable();
@@ -221,7 +188,13 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
 
     @FXML
     void playCharacterCard(){
-        System.out.println("You're about to play " + cc_values.getValue());
+        if(cc_values.getValue() == null){
+            PopUpLauncher cc_unselected = new PopUpLauncher("Something's missing!", "You need to choose which character card you want to play");
+            cc_unselected.show();
+        } else {
+            int card_index = cc_values.getItems().indexOf(cc_values.getValue());
+            handler.sendCharacterCardRequest(model, card_index);
+        }
     }
 
     private void disableGUI(){

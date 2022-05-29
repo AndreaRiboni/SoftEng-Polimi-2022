@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.main_game;
 
 import it.polimi.ingsw.model.entities.Player;
+import it.polimi.ingsw.model.entities.cards.AssistCard;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.LockBehavior;
 import it.polimi.ingsw.model.entities.cards.StudentBehavior;
@@ -16,6 +17,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -24,6 +26,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Aligner {
@@ -334,14 +338,14 @@ public class Aligner {
         }
     }
 
-    public void copyCharacterCards(ChoiceBox<String> cc_values, ImageView[] char_card, GridPane[] cc_content, GridPane[] cc_coins){
+    public void copyCharacterCards(ChoiceBox<String> cc_values, ImageView[] char_card, GridPane[] cc_content, GridPane[] cc_coins, VBox[] vboxes){
         //Setting the correct images
         cc_values.getItems().clear();
         for(int i = 0; i < 3; i++){
             try {
                 CharacterCard ToRep = model.getActiveCharacterCard(i);
                 //Setting choice
-                System.out.println("adding " + ToRep.getName());
+                System.out.println("adding " + ToRep.getName() + " who has id " + ToRep.getID());
                 cc_values.getItems().add(ToRep.getName() + " (" + GenericUtils.getOrdinal(i+1) + ")");
                 //Setting image
                 char_card[i].setImage(deliverer.getCharacterCardImage(ToRep.getID()));
@@ -358,7 +362,6 @@ public class Aligner {
                 } else if(ToRep.getBehavior() instanceof LockBehavior){
                     row = 0; colm = 0;
                     for(int l = 0; l < ToRep.getBehavior().getAvailableLocks(); l++){
-                        System.out.println("Adding");
                         cc_content[i].add(deliverer.getLockImage(), row, colm);
                         row++;
                         if(row == 2){ colm++; row = 0;}
@@ -372,6 +375,8 @@ public class Aligner {
                     row++;
                     if(row == 4){ colm++; row = 0;}
                 }
+                //Setting form
+                addForm(ToRep.getID(), vboxes[i]);
             } catch (EriantysException e) {
                 e.printStackTrace();
             }
@@ -441,6 +446,38 @@ public class Aligner {
         pane.getChildren().add(school_elements);
     }
 
+    public void copyAssistCards(ImageView[] crosses, ImageView[] assistants, String username) {
+        boolean[] available_assist_cards = new boolean[crosses.length];
+        AssistCard[] player_cards = model.getPlayerByUsername(username).getWizard().getCards();
+        int remaining = crosses.length;
+        for(int i = 0; i < player_cards.length; i++){
+            if(player_cards[i].isPlayed()){
+                available_assist_cards[i] = false; //the ones the player has already played
+                remaining--;
+                handler.setGrayScale(assistants[i]);
+                handler.removeSelectedEffect(crosses[i]);
+                crosses[i].setVisible(true);
+            } else {
+                available_assist_cards[i] = true;
+            }
+        }
+        //now we calculate the ones that are played in this turn by the other players
+        for(Player player : model.getPlayers()){
+            if(player.getUsername().equals(username)) continue;
+            if(player.getLastPlayedCard()!=null){
+                int assist_card_id = player.getLastPlayedCard().getValue() - 1;
+                if(remaining > 1){
+                    available_assist_cards[assist_card_id] = false;
+                    handler.setGrayScale(assistants[assist_card_id]);
+                    handler.setTint(crosses[assist_card_id], javafx.scene.paint.Color.web("#4756ba"));
+                    crosses[assist_card_id].setVisible(true);
+                    remaining--;
+                }
+            }
+        }
+        //now we "delete" the
+    }
+
     private void setIslandPos(Group island, double x, double y, ImageView mothernature_img){
         for(Node child : island.getChildren()){
             if(child instanceof Group){
@@ -469,6 +506,7 @@ public class Aligner {
                         tt2.setNode(mothernature_img);
                         tt2.setFromX(mothernature_img.getTranslateX());
                         tt2.setFromY(mothernature_img.getTranslateY());
+                        tt2.setDuration(Duration.millis(1600));
                         tt2.setToX(x);
                         tt2.setToY(y);
                         tt2.play();
@@ -565,5 +603,40 @@ public class Aligner {
             angle += 2 * Math.PI / islands_groups.length;
         }
         fillIslands(new_start, islands);
+    }
+
+    //TODO: check that each cc has the correct behavior (#7 hasn't)
+    private void addForm(int id, VBox vbox) {
+        switch(id){
+            case 0:
+                //1 island index array
+                vbox.getChildren().add(getWhiteLabel("Destination island"));
+                vbox.getChildren().add(getIntegerChooser("island-0", 1, 12));
+                //1 student index array
+                vbox.getChildren().add(getWhiteLabel("Student index"));
+                vbox.getChildren().add(getIntegerChooser("studentindex-0", 1, 4));
+                break;
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+        }
+    }
+
+    private ChoiceBox<Integer> getIntegerChooser(String id, int min, int max){
+        ChoiceBox<Integer> chooser = new ChoiceBox<>();
+        chooser.setId(id); //scene.lookup
+        for(int i = min; i <= max; i++){
+            chooser.getItems().add(i);
+        }
+        return chooser;
     }
 }

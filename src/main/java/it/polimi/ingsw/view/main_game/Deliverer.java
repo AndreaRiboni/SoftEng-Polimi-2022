@@ -49,6 +49,8 @@ public class Deliverer {
     }
 
     public Image getCharacterCardImage(int id){
+        System.out.println("\tgetting cc image of id " + id + " (character_" + (id+1) + ".jpg)");
+        //why the hell does character_7 returns character_8
         return new Image(String.valueOf(getClass().getResource("/characters/character_" + (id+1) + ".jpg")));
     }
 

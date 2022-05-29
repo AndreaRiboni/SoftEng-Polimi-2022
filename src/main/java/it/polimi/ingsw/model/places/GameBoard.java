@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 public class GameBoard implements Serializable {
     private Cloud[] clouds;
     private Player[] players;

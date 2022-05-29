@@ -1,18 +1,19 @@
 package it.polimi.ingsw.view.main_game;
 
 import it.polimi.ingsw.global.MessageSender;
+import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.places.Places;
-import it.polimi.ingsw.model.utils.Action;
-import it.polimi.ingsw.model.utils.Color;
-import it.polimi.ingsw.model.utils.GamePhase;
+import it.polimi.ingsw.model.utils.*;
 import it.polimi.ingsw.model.utils.packets.StudentLocation;
 import it.polimi.ingsw.view.GameGraphicController;
 import it.polimi.ingsw.view.PopUpLauncher;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 import java.net.SocketException;
 import java.util.ArrayList;
@@ -23,10 +24,12 @@ public class Handler {
     private List<StudentLocation> move_students;
     private GameGraphicController controller;
     private Node last_selected;
+    private CharacterCardsHandler cc_handler;
 
     public Handler(MessageSender msg, GameGraphicController controller){
         this.msg = msg;
         this.controller = controller;
+        cc_handler = new CharacterCardsHandler();
         move_students = new ArrayList<>();
     }
 
@@ -53,6 +56,23 @@ public class Handler {
 
     public void removeSelectedEffect(ImageView img){
         img.setEffect(null);
+    }
+
+    public void setGrayScale(ImageView img){
+        ColorAdjust grayscale = new ColorAdjust();
+        grayscale.setSaturation(-1);
+        img.setEffect(grayscale);
+    }
+
+    public void setTint(ImageView img, javafx.scene.paint.Color targetColor){
+        ColorAdjust colorAdjust = new ColorAdjust();
+        double hue = GenericUtils.map( (targetColor.getHue() + 180) % 360, 0, 360, -1, 1);
+        colorAdjust.setHue(hue);
+        double saturation = targetColor.getSaturation();
+        colorAdjust.setSaturation(saturation);
+        double brightness = GenericUtils.map( targetColor.getBrightness(), 0, 1, -1, 0);
+        colorAdjust.setBrightness(brightness);
+        img.setEffect(colorAdjust);
     }
 
     public void sendAssistCardRequest(String assistant_chosen) throws SocketException {
@@ -122,6 +142,30 @@ public class Handler {
             e.printStackTrace();
         }
         controller.setLastSent(putonclouds);
+    }
+
+    public void sendCharacterCardRequest(GameBoard model, int index) {
+        //checking what parameters do i need
+        CharacterCard chosen_cc = null;
+        try {
+            chosen_cc = model.getActiveCharacterCard(index);
+        } catch (EriantysException e) {
+            e.printStackTrace();
+        }
+        switch(chosen_cc.getBehaviorName()){
+            case STUDENT:
+                cc_handler.manageStudentBehavior(chosen_cc.getID());
+                break;
+            case PROFESSOR:
+                cc_handler.manageProfessorBehavior();
+                break;
+            case MOTHER_NATURE:
+                cc_handler.manageMotherNatureBehavior(chosen_cc.getID());
+                break;
+            case LOCK:
+                cc_handler.manageLockBehavior(chosen_cc.getID());
+                break;
+        }
     }
 
     public void selectMovingSubject(Node node, int nof_players) {

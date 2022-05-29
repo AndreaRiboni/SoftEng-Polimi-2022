@@ -16,8 +16,7 @@ import javafx.stage.Stage;
 
 
 public class PopUpController implements Initializable{
-    private String title, message, chosen;
-    private List<String> str_choices;
+    private String title, message;
     private Stage owned;
 
     @FXML
@@ -25,25 +24,17 @@ public class PopUpController implements Initializable{
     @FXML
     private Label errorTitle;
     @FXML
-    private ChoiceBox<String> choices;
-    @FXML
     private Button choose_button;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         errorMessage.setEditable(false);
-        str_choices = new ArrayList<>();
         forceInitialize();
     }
 
     public void forceInitialize(){
         errorTitle.setText(title);
         errorMessage.setText(message);
-        choices.setDisable(str_choices.isEmpty());
-        choose_button.setDisable(str_choices.isEmpty());
-        for(String s : str_choices){
-            choices.getItems().add(s);
-        }
     }
 
     public void setTitle(String title){
@@ -54,22 +45,8 @@ public class PopUpController implements Initializable{
         message = msg;
     }
 
-    public void setChoices(List<String> choices) {
-        str_choices = choices;
-    }
-
     public void setOwnStage(Stage s){
         owned = s;
-    }
-
-    public String getChosen(){
-        return chosen;
-    }
-
-    @FXML
-    private void choose(){
-        chosen = choices.getValue();
-        owned.close();
     }
 }
 

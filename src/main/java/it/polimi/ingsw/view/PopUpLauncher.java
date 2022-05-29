@@ -20,12 +20,10 @@ public class PopUpLauncher {
     private Stage window;
     private PopUpController controller;
     private String title, message;
-    private List<String> choices;
 
     public PopUpLauncher(String title, String message) {
         this.title = title;
         this.message = message;
-        choices = new ArrayList<>();
     }
 
     public PopUpLauncher() {
@@ -41,7 +39,6 @@ public class PopUpLauncher {
             controller = fxmlLoader.getController();
             controller.setTitle(title);
             controller.setMessage(message);
-            controller.setChoices(choices);
             controller.setOwnStage(window);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -53,7 +50,6 @@ public class PopUpLauncher {
         window.setTitle(this.title);
     }
 
-
     public void show() {
         Platform.runLater(() -> {
             init();
@@ -64,33 +60,12 @@ public class PopUpLauncher {
         });
     }
 
-    public void show(boolean b) {
-        System.out.println("It's been great");
-        Platform.runLater(() -> {
-            init();
-            window.setAlwaysOnTop(true);
-            window.setResizable(false);
-            window.initModality(Modality.APPLICATION_MODAL);
-            window.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, e -> System.exit(0));
-            window.showAndWait();
-        });
-    }
-
-
     public void setTitle(String title) {
         this.title = title;
     }
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public void addChoice(String choice){
-        this.choices.add(choice);
-    }
-
-    public void clearChoices(){
-        choices.clear();
     }
 
     public void close() {
