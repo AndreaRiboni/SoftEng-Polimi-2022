@@ -1,16 +1,16 @@
 package it.polimi.ingsw.model.entities.cards;
 
+import it.polimi.ingsw.global.client.ClientLauncher;
+import it.polimi.ingsw.model.entities.Wizard;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.EriantysException;
+import org.apache.log4j.PropertyConfigurator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +47,6 @@ public class CharacterDeck implements Serializable{
     }
 
     public void draw3Cards() {
-        cards[6].setActive();
-        cards[4].setActive();
-        cards[0].setActive();
         /*
         int found = 0;
         do {
@@ -58,16 +55,20 @@ public class CharacterDeck implements Serializable{
                 found++;
                 cards[index].setActive();
             }
+            System.out.println("Card " + index + " has been chosen!");
         } while(found < 3);
          */
+        cards[0].setActive();
+        cards[1].setActive();
+        cards[2].setActive();
     }
 
     private void createDeck(){
         //load from json
         JSONParser parser = new JSONParser();
 
-        try (Reader reader = new FileReader("CharacterCards.json")) {
-
+        try {
+            Reader reader = new InputStreamReader(CharacterDeck.class.getResourceAsStream("/configs/CharacterCards.json"));
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
             // loop array

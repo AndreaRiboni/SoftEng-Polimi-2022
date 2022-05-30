@@ -212,7 +212,7 @@ public class ClientLogic implements GameBoardContainer {
                 int[] student_ids = new int[1];
                 student_ids[0] = InputUtils.getInt(StringViewUtility.getViewString("choice_stud_put_island"),
                         StringViewUtility.getViewString("invalid_index"),
-                        new int[]{1, 2, 3}) - 1;
+                        new int[]{1, 2, 3, 42}) - 1;
                 act.setIslandIndexes(island_ids);
                 act.setStudentIndexes(student_ids);
                 //log.info(StringViewUtility.getViewString("island_index_sent") + island_ids[0] + StringViewUtility.getViewString("and_stud_index") + student_ids[0]);

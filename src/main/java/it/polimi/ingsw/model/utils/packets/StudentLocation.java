@@ -35,6 +35,7 @@ public class StudentLocation {
     }
 
     public String toString(){
+        if(this.color == null) return "none";
         Color color = (Color) this.color.getProperties().get("color");
         return Color.colorToString(color) + " -> " + island_index;
     }

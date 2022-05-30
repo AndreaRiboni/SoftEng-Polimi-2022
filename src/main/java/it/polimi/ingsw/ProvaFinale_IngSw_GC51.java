@@ -2,7 +2,10 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.global.client.ClientLauncher;
 import it.polimi.ingsw.global.server.MultiServerLauncher;
+import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.InputUtils;
+import it.polimi.ingsw.model.utils.StringViewUtility;
 import it.polimi.ingsw.view.GUILauncher;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -14,7 +17,7 @@ public class ProvaFinale_IngSw_GC51 {
     private static final Logger log = LogManager.getRootLogger();
 
     public static void main(String[] args) throws IOException {
-        PropertyConfigurator.configure("log4j.properties");
+        PropertyConfigurator.configure(ProvaFinale_IngSw_GC51.class.getResourceAsStream("/configs/log4j.properties"));
 
         System.out.println("Welcome to\n" +
                 "\n" +

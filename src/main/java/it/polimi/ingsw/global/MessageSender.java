@@ -29,7 +29,7 @@ public class MessageSender {
             if(ip_address.isEmpty()){
                 ip_address = "localhost";
             }
-            if(!InetAddress.getByName(ip_address).isReachable(2000)){
+            if(!InetAddress.getByName(ip_address).isReachable(2000)){ //TODO: verify that ip_addres contains a valid ip
                 System.out.println("This server is unreachable. You're now being connected to localhost");
                 ip_address = "localhost";
             }
@@ -121,13 +121,5 @@ public class MessageSender {
 
     public void enable(){
         disabled = false;
-    }
-
-    public void sendStartSignal() {
-        try {
-            output.writeInt(0);//@@@
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -21,12 +21,12 @@ public class Deliverer {
 
     public ImageView getMotherNatureImage(){
         ImageView mn = new ImageView(
-                new Image(String.valueOf(getClass().getResource("/MotherNature/mothernature.gif")))
+                new Image(String.valueOf(getClass().getResource("/MotherNature/mother_nature.gif")))
         );
         mn.setFitWidth(ISLAND_SIZE);
         mn.setFitHeight(ISLAND_SIZE);
         mn.getProperties().put("mothernature", true);
-        mn.setEffect(new Glow(1));
+        mn.setEffect(new Glow(0.3));
         return mn;
     }
 

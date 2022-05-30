@@ -1,15 +1,13 @@
 package it.polimi.ingsw.model.entities;
 
+import it.polimi.ingsw.global.client.ClientLauncher;
 import it.polimi.ingsw.model.entities.cards.AssistCard;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +32,8 @@ public class Wizard implements Serializable {
     private void loadNames(){
         //load from json
         JSONParser parser = new JSONParser();
-
-        try (Reader reader = new FileReader("AssistCards.json")) {
-
+        try {
+            Reader reader = new InputStreamReader(Wizard.class.getResourceAsStream("/configs/AssistCards.json"));
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
             // loop array

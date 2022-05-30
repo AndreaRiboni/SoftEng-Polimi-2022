@@ -37,24 +37,6 @@ public class WaitingRoom {
     }
 
     public synchronized void connect(Socket client, ObjectInputStream ois, ObjectOutputStream oos, String username){
-        /*
-        this code disconnects the client if an already used username has been chosen
-        for(int i = 0; i < connected; i++){
-            if(usernames[i].equalsIgnoreCase(username)){
-                Action bad_user = new Action();
-                bad_user.setGamePhase(GamePhase.ERROR_PHASE);
-                bad_user.setErrorMessage("Username already chosen");
-                try {
-                    MessageSender temp_msg = new MessageSender(client, ois, oos);
-                    temp_msg.send(bad_user);
-                    client.close();
-                    return;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-         */
         clients[connected] = client;
         in[connected] = ois;
         out[connected] = oos;
@@ -65,9 +47,6 @@ public class WaitingRoom {
         if(connected == clients.length){
             log.info("starting a match...");
             executor.submit(new GameHandler(clients, in, out, usernames));
-            //threads.add(new Thread(new GameHandler(clients, in, out, usernames)));
-            //threads.get(threads.size() - 1).start();
-            //connected = 0;
         }
     }
 

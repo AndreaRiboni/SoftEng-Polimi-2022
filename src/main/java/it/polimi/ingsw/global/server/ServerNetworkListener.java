@@ -29,13 +29,11 @@ public class ServerNetworkListener extends Thread {
             try {
                 for(int i = 0; i < in.length; i++){
                     if(in[i].available() > 0){
-                        log.info("Available stream");
                         in[i].readInt();
                         Object received = in[i].readObject();
                         if(received instanceof Action) {
                             Action act_rec = (Action)received;
                             act_rec.setPlayerID(i);
-                            log.info("Received a request");
                             game_handler.setAction(act_rec);
                         }
                     }

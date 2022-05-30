@@ -13,6 +13,7 @@ import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GenericUtils;
 import it.polimi.ingsw.view.Positions;
 import javafx.animation.TranslateTransition;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.SubScene;
@@ -22,6 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -125,9 +127,18 @@ public class Aligner {
     }
 
     public void createRoot(ImageView mothernature_img, SubScene subscene, Group islands_container, Group clouds_container) {
-        Pane pane = new Pane(islands_container, clouds_container, new Group(mothernature_img));
-        pane.setPrefWidth(subscene.getWidth() * 2);
-        pane.setPrefHeight(subscene.getHeight() * 2);
+        Image water_img = new Image(String.valueOf(getClass().getResource("/Islands/water.gif")));
+        GridPane bg = new GridPane();
+        for(int row = 0; row < 10; row++){
+            for(int col = 0; col < 10; col++){
+                ImageView water = new ImageView(water_img);
+                bg.add(water, row, col);
+            }
+        }
+        bg.setTranslateX(-800);
+        bg.setTranslateY(-900);
+        Pane pane = new Pane(bg, islands_container, clouds_container, new Group(mothernature_img));
+        pane.setBackground(new Background(new BackgroundFill(javafx.scene.paint.Color.web("#0000FF"), CornerRadii.EMPTY, Insets.EMPTY)));
         pane.setTranslateX(-pane.getWidth() / 2);
         pane.setTranslateY(-pane.getHeight() / 2);
         ScrollPane sp = new ScrollPane(pane);
@@ -135,6 +146,7 @@ public class Aligner {
         sp.setFitToWidth(true);
         BorderPane bp = new BorderPane(sp);
         subscene.setRoot(bp);
+        subscene.setFill(Paint.valueOf("#ff0000"));//new Background(new BackgroundFill(javafx.scene.paint.Color.web("#00FFFF"), CornerRadii.EMPTY, Insets.EMPTY)));
         addZoomListener(pane);
         forceZoom(pane, 300, true);
         applyNavigationListener(pane);
@@ -148,7 +160,7 @@ public class Aligner {
                 });
     }
 
-    private void forceZoom(Pane pane, double deltaY, boolean start){
+    private void forceZoom(Pane pane, double deltaY, boolean start){ //TODO: set max zoom
         double zoomFactor;
         if(start)  zoomFactor = 0.3;
         else{ zoomFactor = 1.05;}
@@ -174,6 +186,12 @@ public class Aligner {
     private Label getWhiteLabel(String text){
         Label l = new Label(text);
         l.setTextFill(Paint.valueOf("#ffffff"));
+        return l;
+    }
+
+    private Label getBlackLabel(String text){
+        Label l = new Label(text);
+        l.setTextFill(Paint.valueOf("#000000"));
         return l;
     }
 
@@ -327,7 +345,7 @@ public class Aligner {
         }
     }
 
-    public void copyMotherNature(Group[] islands){
+    /*public void copyMotherNature(Group[] islands){
         int island_index = model.getMotherNature().getIslandIndex();
         for(int i = 0; i < model.getIslands().length; i++){
             boolean visibility = i == island_index;
@@ -336,11 +354,17 @@ public class Aligner {
                     n.setVisible(visibility);
             }
         }
-    }
+    }*/
 
     public void copyCharacterCards(ChoiceBox<String> cc_values, ImageView[] char_card, GridPane[] cc_content, GridPane[] cc_coins, VBox[] vboxes){
         //Setting the correct images
         cc_values.getItems().clear();
+        for(GridPane gp : cc_coins)
+            gp.getChildren().clear();
+        for(GridPane gp : cc_content)
+            gp.getChildren().clear();
+        for(VBox vb : vboxes)
+            vb.getChildren().clear();
         for(int i = 0; i < 3; i++){
             try {
                 CharacterCard ToRep = model.getActiveCharacterCard(i);
@@ -352,10 +376,14 @@ public class Aligner {
                 //Centering
                 //Setting content
                 int row = 0, colm = 0;
+                int count = 0;
                 if(ToRep.getBehavior() instanceof StudentBehavior){
                     Color[] students = ToRep.getBehavior().getAvailableStudents();
                     for(Color col : students){
-                        cc_content[i].add(deliverer.getStudentImage(col), row, colm);
+                        StackPane sp_stud = new StackPane();
+                        sp_stud.getChildren().addAll(deliverer.getStudentImage(col), getBlackLabel((count+1)+""));
+                        count++;
+                        cc_content[i].add(sp_stud, row, colm);
                         row++;
                         if(row == 2){ colm++; row = 0;}
                     }
@@ -459,6 +487,7 @@ public class Aligner {
                 crosses[i].setVisible(true);
             } else {
                 available_assist_cards[i] = true;
+                crosses[i].setVisible(false);
             }
         }
         //now we calculate the ones that are played in this turn by the other players
@@ -502,6 +531,11 @@ public class Aligner {
                 if(child.getProperties().get("type")!=null && child.getProperties().get("type").equals("island")){
                     int index = (int) child.getProperties().get("index");
                     if(model.getMotherNature().getIslandIndex() == index){
+                        if(index > 4 && index < 8){
+                            handler.mirrorX(mothernature_img);
+                        } else {
+                            handler.unmirrorX(mothernature_img);
+                        }
                         TranslateTransition tt2 = new TranslateTransition();
                         tt2.setNode(mothernature_img);
                         tt2.setFromX(mothernature_img.getTranslateX());
@@ -563,21 +597,8 @@ public class Aligner {
     }
 
     private void alignIslands(int[] islands_groups, SubScene subscene, Group[] islands, ImageView mothernature_img){
-        /*
-        problema quando l'ultima cella di islands_groups è maggiore di 1
-        perché devo collegare l'isola 12 all'isola 1
-        ma l'algoritmo allinea male (la 11 alla 12)
-         */
         //Determino quale sia la prima isola da cui partire
         int new_start = (13 - islands_groups[islands_groups.length - 1]) % 12;
-        System.out.println("Islands groups:");
-        for(int i = 0; i < islands_groups.length; i++){
-            System.out.println(i + ") " + islands_groups[i]);
-        }
-        System.out.println("Islands:");
-        for(int i = 0; i < model.getIslands().length; i++){
-            System.out.println(i + ") " + model.getIslands()[i].hasNext());
-        }
         float angle = 0;
         int count = 0;
         for (int islands_group : islands_groups) {
@@ -613,21 +634,65 @@ public class Aligner {
                 vbox.getChildren().add(getWhiteLabel("Destination island"));
                 vbox.getChildren().add(getIntegerChooser("island-0", 1, 12));
                 //1 student index array
-                vbox.getChildren().add(getWhiteLabel("Student index"));
+                vbox.getChildren().add(getWhiteLabel("This card's students"));
                 vbox.getChildren().add(getIntegerChooser("studentindex-0", 1, 4));
                 break;
             case 1:
+                break;
             case 2:
+                vbox.getChildren().add(getWhiteLabel("Chosen island"));
+                vbox.getChildren().add(getIntegerChooser("island-2", 1, 12));
+                break;
             case 3:
+                break;
             case 4:
+                vbox.getChildren().add(getWhiteLabel("Island to lock"));
+                vbox.getChildren().add(getIntegerChooser("island-4", 1, 12));
+                break;
             case 5:
+                break;
             case 6:
+                //up to 3 students
+                vbox.getChildren().add(getWhiteLabel("Your entrance students"));
+                HBox card6_hbox = new HBox();
+                card6_hbox.getChildren().add(getColorChooser(Color.getStudentColors(), "studentcolor-6-0"));
+                card6_hbox.getChildren().add(getColorChooser(Color.getStudentColors(), "studentcolor-6-1"));
+                card6_hbox.getChildren().add(getColorChooser(Color.getStudentColors(), "studentcolor-6-2"));
+                vbox.getChildren().add(card6_hbox);
+                vbox.getChildren().add(getWhiteLabel("This card's students"));
+                HBox card6_hbox_2 = new HBox();
+                card6_hbox_2.getChildren().add(getIntegerChooser("studentindex-6-0", 1, 6));
+                card6_hbox_2.getChildren().add(getIntegerChooser("studentindex-6-1", 1, 6));
+                card6_hbox_2.getChildren().add(getIntegerChooser("studentindex-6-2", 1, 6));
+                vbox.getChildren().add(card6_hbox_2);
+                break;
             case 7:
-
+                break;
             case 8:
+                vbox.getChildren().add(getWhiteLabel("Chosen color"));
+                vbox.getChildren().add(getColorChooser(Color.getStudentColors(), "studentcolor-8"));
+                break;
             case 9:
+                //up to 2 students
+                vbox.getChildren().add(getWhiteLabel("Your entrance students"));
+                HBox card9_hbox = new HBox();
+                card9_hbox.getChildren().add(getColorChooser(Color.getStudentColors(), "studentcolor-9-0"));
+                card9_hbox.getChildren().add(getColorChooser(Color.getStudentColors(), "studentcolor-9-1"));
+                vbox.getChildren().add(card9_hbox);
+                vbox.getChildren().add(getWhiteLabel("Your Dining hall students"));
+                HBox card9_hbox_2 = new HBox();
+                card9_hbox_2.getChildren().add(getColorChooser(Color.getStudentColors(), "studentcolor-9b-0"));
+                card9_hbox_2.getChildren().add(getColorChooser(Color.getStudentColors(), "studentcolor-9b-1"));
+                vbox.getChildren().add(card9_hbox_2);
+                break;
             case 10:
+                vbox.getChildren().add(getWhiteLabel("This card's students"));
+                vbox.getChildren().add(getIntegerChooser("studentindex-10", 1, 4));
+                break;
             case 11:
+                vbox.getChildren().add(getWhiteLabel("Color to drop off"));
+                vbox.getChildren().add(getColorChooser(Color.getStudentColors(), "studentcolor-11"));
+                break;
         }
     }
 
@@ -636,6 +701,15 @@ public class Aligner {
         chooser.setId(id); //scene.lookup
         for(int i = min; i <= max; i++){
             chooser.getItems().add(i);
+        }
+        return chooser;
+    }
+
+    private ChoiceBox<Color> getColorChooser(Color[] colors, String id){
+        ChoiceBox<Color> chooser = new ChoiceBox<>();
+        chooser.setId(id); //scene.lookup
+        for(Color col : colors){
+            chooser.getItems().add(col);
         }
         return chooser;
     }

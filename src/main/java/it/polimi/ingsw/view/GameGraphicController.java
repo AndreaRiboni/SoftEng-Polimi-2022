@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -33,6 +34,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     private Aligner aligner;
     private Handler handler;
     private Deliverer deliverer;
+    private Scene scene;
 
     @FXML
     private ChoiceBox<String> assistant_choice;
@@ -71,10 +73,13 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     @FXML
     private VBox vbox_card1, vbox_card2, vbox_card3;
     private VBox[] vbox_card;
+    @FXML
+    private AnchorPane char_cards_container;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         handler = new Handler(msg, this);
+        handler.setUsedScene(char_cards_container);
         deliverer = new Deliverer();
         aligner = new Aligner(handler, deliverer);
         started = false;
@@ -138,7 +143,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             }
             aligner.copyClouds(nof_players, clouds, subscene, mothernature_img);
             aligner.copyOtherSchools(other_schools_container, username);
-            aligner.copyMotherNature(islands);
+            //aligner.copyMotherNature(islands);
             aligner.copyCharacterCards(cc_values, char_card, cc_content, cc_coins, vbox_card);
             aligner.copyAssistCards(crosses, assistants, username);
         });
@@ -214,4 +219,5 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     public void setUsername(String username) {
         this.username = username;
     }
+
 }

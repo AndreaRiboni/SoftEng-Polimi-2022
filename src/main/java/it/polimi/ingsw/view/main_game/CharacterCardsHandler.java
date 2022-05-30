@@ -1,103 +1,109 @@
 package it.polimi.ingsw.view.main_game;
 
 import it.polimi.ingsw.model.utils.*;
-import it.polimi.ingsw.view.PopUpLauncher;
+import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.AnchorPane;
 
 public class CharacterCardsHandler {
+    private AnchorPane scene;
 
-    public void manageStudentBehavior(int chosen_id) {
+    private Integer getChosenInteger(String id){
+        ChoiceBox<Integer> choice = (ChoiceBox<Integer>)scene.lookup("#" + id);
+        if(choice.getValue() == null) return Integer.MIN_VALUE;
+        return choice.getValue();
+    }
+
+    private Color getChosenColor(String id){
+        ChoiceBox<Color> choice = (ChoiceBox<Color>)scene.lookup("#" + id);
+        if(choice.getValue() == null) return Color.GREY;
+        return choice.getValue();
+    }
+
+    private int getHowManyAreFilled(String id, int max){
+        int count = 0;
+        for(int i = 0; i < max; i++){
+            Object obj = ((ChoiceBox)scene.lookup("#" + id + "" + i)).getValue();
+            if(obj == null) return count;
+            count++;
+        }
+        return count;
+    }
+
+    public Action manageBehavior(int chosen_id) {
         Action act = new Action();
         act.setGamePhase(GamePhase.USE_CHARACTER_CARD);
-        PopUpLauncher cc_params = new PopUpLauncher();
-        cc_params.setTitle("Complete your request");
-        int num_studs_to_exchange;
+        act.setCharacterCardIndex(chosen_id);
         Color[] colors;
-        int[] indexes;
+        int[] isl_indexes, stud_indexes;
         switch(chosen_id){
             case 0:
-                int[] island_ids = new int[1];
-                cc_params.setMessage(StringViewUtility.getViewString("choice_isl_put_stud_on"));
-                cc_params.show();
-                /*island_ids[0] = InputUtils.getInt(,
-                        StringViewUtility.getViewString("invalid_index"),
-                        new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}) - 1;
-                int[] student_ids = new int[1];
-                student_ids[0] = InputUtils.getInt(StringViewUtility.getViewString("choice_stud_put_island"),
-                        StringViewUtility.getViewString("invalid_index"),
-                        new int[]{1, 2, 3}) - 1;
-                act.setIslandIndexes(island_ids);
-                act.setStudentIndexes(student_ids);
-                //log.info(StringViewUtility.getViewString("island_index_sent") + island_ids[0] + StringViewUtility.getViewString("and_stud_index") + student_ids[0]);
+                isl_indexes = new int[1];
+                isl_indexes[0] = getChosenInteger("island-0") - 1;
+                act.setIslandIndexes(isl_indexes);
+                stud_indexes = new int[1];
+                stud_indexes[0] = getChosenInteger("studentindex-0") - 1;
+                act.setStudentIndexes(stud_indexes);
+                break;
+            case 1:
+                break;
+            case 2:
+                act.setIslandIndex(getChosenInteger("island-2") - 1);
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
                 break;
             case 6:
-                num_studs_to_exchange = InputUtils.getInt(StringViewUtility.getViewString("studs_to_exchange"),
-                        StringViewUtility.getViewString("invalid_number"),
-                        new int[]{1,2,3});
-                act.setDesiredNofStudents(num_studs_to_exchange);
-
-                //2 - array colori degli studenti da mettere sulla carta che stanno sulla mia entrance
-                colors = new Color[num_studs_to_exchange];
-                for(int i = 0; i < num_studs_to_exchange; i++){
-                    colors[i] = InputUtils.getColor(StringViewUtility.getViewString("color_of_choice")+ GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_from_entrance"),
-                            StringViewUtility.getViewString("invalid_color"),
-                            new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
+                int desired_col_6 = getHowManyAreFilled("studentcolor-6-", 3);
+                int desired_stud_6 = getHowManyAreFilled("studentindex-6-", 3);
+                if(desired_col_6 == desired_stud_6){
+                    act.setDesiredNofStudents(desired_col_6);
+                    colors = new Color[desired_col_6];
+                    stud_indexes = new int[desired_stud_6];
+                    for(int i = 0; i < 3; i++){
+                        colors[i] = getChosenColor("studentcolor-6-" + i);
+                        stud_indexes[i] = getChosenInteger("studentindex-6-" + i) - 1;
+                    }
+                    act.setEntranceColors(colors);
+                    act.setStudentIndexes(stud_indexes);
                 }
-                act.setEntranceColors(colors);
-                //3 - array di indici degli studenti da prelevare dalla carta
-                indexes = new int[num_studs_to_exchange];
-                for(int i=0; i<num_studs_to_exchange; i++){
-                    indexes[i] = InputUtils.getInt(StringViewUtility.getViewString("index_of_choice")+GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_to_pick_up"),
-                            StringViewUtility.getViewString("invalid_index"),
-                            new int[]{1, 2, 3, 4, 5, 6}) - 1;
-                }
-                act.setStudentIndexes(indexes);
+                break;
+            case 7:
+                break;
+            case 8:
+                act.setColor(getChosenColor("studentcolor-8"));
                 break;
             case 9:
-                num_studs_to_exchange = InputUtils.getInt(StringViewUtility.getViewString("studs_to_exchange"),
-                        StringViewUtility.getViewString("invalid_number"),
-                        new int[]{1,2});
-                act.setDesiredNofStudents(num_studs_to_exchange);
-                //2 - array colori degli studenti da mettere sulla carta che stanno sulla mia entrance
-                Color[] entrance_colors = new Color[num_studs_to_exchange];
-                Color[] dining_colors = new Color[num_studs_to_exchange];
-                for(int i = 0; i < num_studs_to_exchange; i++){
-                    entrance_colors[i] = InputUtils.getColor(StringViewUtility.getViewString("color_of_choice")+GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_from_entrance"),
-                            StringViewUtility.getViewString("invalid_color"),
-                            new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
+                int desired_stud_9 = getHowManyAreFilled("studentcolor-9-", 2); //entrance
+                int desired_stud_9b = getHowManyAreFilled("studentcolor-9b-", 2); //dining
+                if(desired_stud_9 == desired_stud_9b){
+                    act.setDesiredNofStudents(desired_stud_9);
+                    colors = new Color[desired_stud_9];
+                    Color[] colors_b = new Color[desired_stud_9];
+                    for(int i = 0; i < 2; i++){
+                        colors[i] = getChosenColor("studentcolor-9-" + i);
+                        colors_b[i] = getChosenColor("studentcolor-9b-" + i);
+                    }
+                    act.setEntranceColors(colors);
+                    act.setDiningColors(colors_b);
                 }
-                act.setEntranceColors(entrance_colors);
-                for(int i = 0; i < num_studs_to_exchange; i++){
-                    dining_colors[i] = InputUtils.getColor(StringViewUtility.getViewString("color_of_choice")+GenericUtils.getOrdinal(i+1)+StringViewUtility.getViewString("stud_from_dining"),
-                            StringViewUtility.getViewString("invalid_color"),
-                            new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
-                }
-                act.setDiningColors(dining_colors);
                 break;
             case 10:
-                indexes = new int[1];
-                indexes[0] = InputUtils.getInt(
-                        StringViewUtility.getViewString("stud_to_pick_up"),
-                        StringViewUtility.getViewString("invalid_index"),
-                        new int[]{1, 2, 3, 4}
-                ) - 1;
-                act.setStudentIndexes(indexes);
+                stud_indexes = new int[1];
+                stud_indexes[0] = getChosenInteger("studentindex-10") - 1;
+                act.setStudentIndexes(stud_indexes);
                 break;
             case 11:
-                Color PutBackIn = InputUtils.getColor(StringViewUtility.getViewString("3_studs_choice"),
-                        StringViewUtility.getViewString("invalid_color"),
-                        new Color[] {Color.GREEN, Color.RED, Color.PINK, Color.YELLOW, Color.BLUE});
-                act.setColor(PutBackIn);*/
+                act.setColor(getChosenColor("studentcolor-11"));
                 break;
-
         }
+        return act;
     }
 
-    public void manageProfessorBehavior() {
-    }
-
-    public void manageMotherNatureBehavior(int id) {
-    }
-
-    public void manageLockBehavior(int id) {
+    public void setUsedScene(AnchorPane scene) {
+        this.scene = scene;
     }
 }

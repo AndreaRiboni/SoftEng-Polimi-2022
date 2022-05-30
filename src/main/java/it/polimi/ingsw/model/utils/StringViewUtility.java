@@ -1,7 +1,9 @@
 package it.polimi.ingsw.model.utils;
 
+import it.polimi.ingsw.global.client.ClientLauncher;
 import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
+import it.polimi.ingsw.model.entities.Wizard;
 import it.polimi.ingsw.model.places.Cloud;
 import it.polimi.ingsw.model.places.Island;
 import org.json.simple.JSONObject;
@@ -10,6 +12,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 
 public class StringViewUtility {
@@ -91,7 +94,8 @@ public class StringViewUtility {
 
     public static String getViewString(String name) {
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("CLIView.json")) {
+        try {
+            Reader reader = new InputStreamReader(StringViewUtility.class.getResourceAsStream("/configs/CLIView.json"));
             return (String) ((JSONObject) ((JSONObject) parser.parse(reader)).get(name)).get("value");
         } catch (IOException | ParseException e) {
             e.printStackTrace();

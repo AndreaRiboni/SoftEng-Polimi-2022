@@ -114,7 +114,7 @@ public class Player implements Serializable {
     }
 
     public Map<Color, Integer> getEntranceStudents(){
-        return school.getEntranceStudents(); //TODO: pass a copy
+        return school.getEntranceStudents();
     }
 
     public void removeEntranceStudent(Color student){

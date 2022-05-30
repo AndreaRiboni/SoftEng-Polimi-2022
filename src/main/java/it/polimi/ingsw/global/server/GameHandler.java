@@ -105,27 +105,6 @@ public class GameHandler implements Runnable {
         int player_playing = client_action.getPlayerID();
         int expected;
         log.info("Setup: " + setup);
-        /*if(setup){ //we still need some nicknames
-            if(!client_action.getGamePhase().equals(GamePhase.START)) { //but we haven't received a nickname
-                log.info("Setup but received isnt start");
-                response.setErrorMessage(EriantysException.INVALID_GAMEFLOW);
-                response.setGamePhase(GamePhase.ERROR_PHASE);
-                sendAction(player_playing, response);
-            } else {
-                log.info("Setup and received nickname");
-                //is the client sending this request asked to do so?
-                if(valid_nicknames[player_playing]){ //no, it was already valid
-                    log.info("but it was already valid");
-                    response.setErrorMessage(EriantysException.INVALID_GAMEFLOW);
-                    response.setGamePhase(GamePhase.ERROR_PHASE);
-                    sendAction(player_playing, response);
-                } else { //yes, let's increment the received usernames
-                    log.info("the user sending this is fine!");
-                    usernames[player_playing] = client_action.getUsername(); //setting the received nickname
-                    incrementReceivedUsernames();
-                }
-            }
-        } else { //we have all the nicknames*/
             log.info("Received an action!");
             this.action = client_action;
             expected = getWhoIsPlaying();
@@ -151,21 +130,6 @@ public class GameHandler implements Runnable {
                     setReceivedResponse();
                 }
             }
-       // }
-    }
-
-    private synchronized void incrementReceivedUsernames(){
-        received_nicknames++;
-        log.info("Incremented");
-    }
-
-    private synchronized void resetReceivedUsernames(){
-        received_nicknames = 0;
-        log.info("Resetted");
-    }
-
-    private synchronized int getReceivedUsernames(){
-        return received_nicknames;
     }
 
     private synchronized void setReceivedResponse(){
