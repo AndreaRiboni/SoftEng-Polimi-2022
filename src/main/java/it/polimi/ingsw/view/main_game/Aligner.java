@@ -141,7 +141,7 @@ public class Aligner {
                 bg.add(water, row, col);
             }
         }
-        bg.setTranslateX(-1000);
+        bg.setTranslateX(-1100);
         bg.setTranslateY(-900);
         Pane pane = new Pane(bg, islands_container, clouds_container);
         pane.setBackground(new Background(new BackgroundFill(javafx.scene.paint.Color.web("#0000FF"), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -166,15 +166,19 @@ public class Aligner {
                 });
     }
 
-    private void forceZoom(Pane pane, double deltaY, boolean start){ //TODO: set max zoom
+    private void forceZoom(Pane pane, double deltaY, boolean start){
         double zoomFactor;
         if(start)  zoomFactor = 0.3;
         else{ zoomFactor = 1.05;}
         if (deltaY < 0) {
             zoomFactor = 0.95;
         }
-        pane.setScaleX(pane.getScaleX() * zoomFactor);
-        pane.setScaleY(pane.getScaleY() * zoomFactor);
+        double scalex = pane.getScaleX() * zoomFactor;
+        double scaley = pane.getScaleY() * zoomFactor;
+        if(!(scalex < 0.28 || scaley < 0.28 || scalex > 0.8 || scaley > 0.8)){
+            pane.setScaleX(pane.getScaleX() * zoomFactor);
+            pane.setScaleY(pane.getScaleY() * zoomFactor);
+        }
     }
 
     private void applyNavigationListener(Pane pane){
@@ -184,8 +188,14 @@ public class Aligner {
             start[1] = pane.getTranslateY() - e.getSceneY();
         });
         pane.setOnMouseDragged(e -> {
-            pane.setTranslateX(e.getSceneX() + start[0]);
-            pane.setTranslateY(e.getSceneY() + start[1]);
+            double translatex = e.getSceneX() + start[0];
+            double translatey = e.getSceneY() + start[1];
+            if(!(translatex > 60 || translatex < -130)) {
+                pane.setTranslateX(e.getSceneX() + start[0]);
+            }
+            if(!(translatey > 40 || translatey < -130)) {
+                pane.setTranslateY(e.getSceneY() + start[1]);
+            }
         });
     }
 
@@ -511,6 +521,7 @@ public class Aligner {
             } else {
                 available_assist_cards[i] = true;
                 crosses[i].setVisible(false);
+                handler.removeSelectedEffect(assistants[i]);
             }
         }
         //now we calculate the ones that are played in this turn by the other players
@@ -527,7 +538,6 @@ public class Aligner {
                 }
             }
         }
-        //now we "delete" the
     }
 
     private void setIslandPos(Group island, double x, double y, ImageView mothernature_img){
