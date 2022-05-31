@@ -2,9 +2,37 @@
     -fx-background-image: url("../graphics/blue_button.png");
     -fx-background-size: stretch;
     -fx-background-color: transparent;
-    -fx-font-family: "Dalek Pinpoint";
-    -fx-font-size: 30px;
+    -fx-font-family: "angrybirds";
+    -fx-font-size: 40px;
 }
 .joinButton:pressed {
+    -fx-background-image: url("../graphics/blue_button_pressed.png");
+}
+
+.choiceBox{
+    -fx-background-image: url("../graphics/blue_button.png");
+    -fx-background-size: stretch;
+    -fx-background-color: transparent;
+    -fx-font-family: "angrybirds";
+    -fx-font-size: 10px;
+    -fx-padding: 0 0 0 10;
+}
+.choice-box .menu-item:focused { -fx-background-color: orange; }
+
+.choice-box > .label { -fx-text-fill: white; }
+
+.choiceBox:pressed{
+    -fx-background-image: url("../graphics/blue_button_pressed.png");
+}
+
+.joinButtonCharacter {
+    -fx-background-image: url("../graphics/blue_button.png");
+    -fx-background-size: stretch;
+    -fx-background-color: transparent;
+    -fx-font-family: "angrybirds";
+    -fx-font-size: 8px;
+    -fx-text-fill: WHITE;
+}
+.joinButtonCharacter:pressed {
     -fx-background-image: url("../graphics/blue_button_pressed.png");
 }

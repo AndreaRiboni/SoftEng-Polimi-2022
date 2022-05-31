@@ -17,6 +17,7 @@ public class GUILauncher extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/Copertina.jpg")));
         stage.setTitle("Login");
+        Font.loadFont(getClass().getResourceAsStream("/Fonts/angrybirds-regular.ttf"), 14);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
