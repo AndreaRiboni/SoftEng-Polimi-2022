@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.main_game;
 import it.polimi.ingsw.global.MessageSender;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.places.GameBoard;
+import it.polimi.ingsw.model.places.Island;
 import it.polimi.ingsw.model.places.Places;
 import it.polimi.ingsw.model.utils.*;
 import it.polimi.ingsw.model.utils.packets.StudentLocation;
@@ -98,6 +99,13 @@ public class Handler {
         int[] island_indexes = new int[student.length];
         Places[] destinations = new Places[student.length];
         for(int i = 0; i < student.length; i++){
+            if(move_students.get(i).getColor() == null){
+                PopUpLauncher undefined_error = new PopUpLauncher();
+                undefined_error.setTitle("Something went wrong");
+                undefined_error.setMessage("Please re-move the students");
+                undefined_error.show();
+                return;
+            }
             student[i] = (Color) move_students.get(i).getColor().getProperties().get("color");
             island_indexes[i] = move_students.get(i).getIsland_index();
             destinations[i] = island_indexes[i] > 12 ? Places.DINING_HALL : Places.ISLAND;
@@ -113,12 +121,46 @@ public class Handler {
         controller.setLastSent(movestud);
     }
 
+    private Island getLastOfGroup(Island isl, int target){
+        while(isl.hasNext()){
+            isl = isl.getNext();
+            if(isl.getIndex() == target) {
+                System.out.println("Target is inside the group");
+                return null;
+            }
+        }
+        return isl;
+    }
+
+    private int getRequiredSteps(GameBoard model, int from, int to){
+        Island isl_from = model.getIslands()[from];
+        int steps = 0;
+        boolean found = false;
+        System.out.println("Moving from " + from + " to " + to);
+        do {
+            //going to the end of this group
+            isl_from = getLastOfGroup(isl_from, to);
+            if(isl_from == null) return steps;
+            System.out.println("Last of this group is " + isl_from.getIndex());
+            if(isl_from.getIndex() == to) {
+                System.out.println("Returing steps since we're in " + to);
+                return steps;
+            }
+            from = isl_from.getIndex() + 1;
+            System.out.println("We're now considering from " + from);
+            isl_from = model.getIslands()[from % 12];
+            steps++;
+            System.out.println("Steps are now " + steps);
+            if(steps > 12) found = true;
+        } while (!found);
+        return -1;
+    }
+
     public void sendMotherNatureRequest(int index, GameBoard model){
         Action movemother = new Action();
         movemother.setGamePhase(GamePhase.MOVE_MOTHERNATURE);
         //calculate the increment
-        int increment = index - model.getMotherNature().getIslandIndex();
-        if(increment < 0) increment = GameBoard.NOF_ISLAND + increment;
+        int increment = getRequiredSteps(model, model.getMotherNature().getIslandIndex(), index);
         movemother.setMothernatureIncrement(increment);
         try {
             msg.send(movemother);

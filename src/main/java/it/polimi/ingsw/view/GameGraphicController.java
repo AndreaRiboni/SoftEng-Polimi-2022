@@ -146,7 +146,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
               popUp.show();
             }
             //copying my school
-            aligner.copySchool(model.getPlayerByUsername(username).getSchool(), true, player_container, username);
+            aligner.copySchool(model.getPlayerByUsername(username).getSchool(), true, player_container, username, coin_container);
             //copying islands and clouds
             try {
                 aligner.copyIslands(subscene, islands, mothernature_img);

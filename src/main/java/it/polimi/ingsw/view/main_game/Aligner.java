@@ -490,7 +490,11 @@ public class Aligner {
         alignIslands(island_groups, subscene, islands, mothernature_img);
     }
 
-    public void copySchool(School school, boolean mine, AnchorPane player_container, String username){
+    public void copySchool(School school, boolean mine, AnchorPane player_container, String username, VBox coin_container){
+        int coins = model.getPlayerByUsername(username).getCoins();
+        for(int i = 0; i < coins; i++){
+            coin_container.getChildren().add(deliverer.getCoinImage());
+        }
         AnchorPane pane = mine ? player_container : null;
         //removes each non-imageview child
         if(pane.getChildren().size() > 2) pane.getChildren().remove(2);
@@ -744,6 +748,7 @@ public class Aligner {
     private ChoiceBox<Integer> getIntegerChooser(String id, int min, int max){
         ChoiceBox<Integer> chooser = new ChoiceBox<>();
         chooser.setId(id); //scene.lookup
+        chooser.getStyleClass().add("choiceBox");
         for(int i = min; i <= max; i++){
             chooser.getItems().add(i);
         }
@@ -753,6 +758,7 @@ public class Aligner {
     private ChoiceBox<Color> getColorChooser(Color[] colors, String id){
         ChoiceBox<Color> chooser = new ChoiceBox<>();
         chooser.setId(id); //scene.lookup
+        chooser.getStyleClass().add("choiceBox");
         for(Color col : colors){
             chooser.getItems().add(col);
         }
