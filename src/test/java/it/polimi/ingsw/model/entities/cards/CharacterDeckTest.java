@@ -20,12 +20,16 @@ class CharacterDeckTest {
     @Test
     public void getActiveCardTest() throws EriantysException {
         //there are always 3 active char-card (not less, not more)
-        assertNotNull(gameBoard.getActiveCharacterCard(0));
-        assertNotNull(gameBoard.getActiveCharacterCard(1));
-        assertNotNull(gameBoard.getActiveCharacterCard(2));
+        CharacterCard c1 = gameBoard.getActiveCharacterCard(0);
+        CharacterCard c2 = gameBoard.getActiveCharacterCard(1);
+        CharacterCard c3 = gameBoard.getActiveCharacterCard(2);
+        assertNotNull(c1);
+        assertNotNull(c2);
+        assertNotNull(c3);
         EriantysException thrown = Assertions.assertThrows(EriantysException.class, () -> {
             gameBoard.getActiveCharacterCard(3);
         });
     }
+
 
 }
