@@ -75,6 +75,10 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     private VBox[] vbox_card;
     @FXML
     private AnchorPane char_cards_container;
+    
+    @FXML
+    private VBox coin_container;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
