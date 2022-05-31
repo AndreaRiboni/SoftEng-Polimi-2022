@@ -26,6 +26,7 @@ public class CharacterCardController extends Controller {
     public void manage() throws EriantysException {
         System.out.println("Received character card index: " + action.getCharacterCardIndex());
         CharacterCard temp = model.getCharacterCard(action.getCharacterCardIndex());
+        System.out.println(temp.getID()+" "+temp.isOnBoard());
         if(!temp.isOnBoard()){
             throw new EriantysException(EriantysException.INVALID_CC_INDEX);
         }
@@ -196,6 +197,8 @@ public class CharacterCardController extends Controller {
         int extra_points = behavior.getExtraPoints();
         int extra_steps = behavior.getExtraSteps();
         Player player = model.getPlayers()[action.getPlayerID()];
+
+        System.out.println("Pick island");
 
         if(extra_steps > 0) {
             player.setMotherNatureExtraSteps(extra_steps); //idk
