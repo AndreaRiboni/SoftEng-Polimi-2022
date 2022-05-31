@@ -166,15 +166,6 @@ public class CharacterCardController extends Controller {
         return GenericUtils.isAllPositive(sub);
     }
 
-    private Map<Color, Integer> arrayToMap(Color[] colors, int[] indexes){
-        Map<Color, Integer> map = new HashMap<>();
-        for(int i=0; i< indexes.length; i++){
-            int value = map.getOrDefault(colors[indexes[i]], 0);
-            map.put(colors[i], value+1);
-        }
-        return map;
-    }
-
     private Map<Color, Integer> arrayToMap(Color[] colors){
         Map<Color, Integer> map = new HashMap<>();
         for(int i=0; i<colors.length; i++){

@@ -45,13 +45,12 @@ public class GameController extends Controller {
         }
     }
 
-    //TODO: test checkForEnd
     public String checkForEnd(){
         for(Player playing : model.getPlayers()) {
             if (playing.getNumberOfPlacedTowers() == 8 || playing.getNofPlayableCards() == 0) {
                 return playing.getUsername();
             }
-            else if(model.getNofGroupsOfIslands() == 3 || model.getBag().getRemaining() == 0){
+            else if(model.getNofGroupsOfIslands() <= 3 || model.getBag().getRemaining() == 0){
                 int sum = 0;
                 int profsum = 0;
                 String winner = null;
@@ -60,7 +59,7 @@ public class GameController extends Controller {
                         sum = p.getNumberOfPlacedTowers();
                         profsum = model.getNofProfsFromPlayer(p);
                         winner = p.getUsername();
-                    }else if(p.getNumberOfPlacedTowers()==sum && model.getNofProfsFromPlayer(p)>profsum){
+                    }else if(p.getNumberOfPlacedTowers()==sum && model.getNofProfsFromPlayer(p)>=profsum){
                         profsum = model.getNofProfsFromPlayer(p);
                         winner = p.getUsername();
                     }

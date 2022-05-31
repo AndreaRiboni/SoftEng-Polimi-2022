@@ -13,10 +13,6 @@ public class CloudController extends Controller{
         cloud_index = -1;
     }
 
-    public void setCloudIndex(int cloud_index){
-        this.cloud_index = cloud_index;
-    }
-
     public void putOnCloud() throws EriantysException {
         int NOF_Players = model.getNofPlayers();
 

@@ -112,4 +112,18 @@ public class GameBoardTest {
         });
 
     }
+
+    @Test
+    public void toStringText() throws EriantysException {
+        GameBoard model = new GameBoard();
+        model.initialize(2, 2);
+        assertFalse(model.getIsland(0).toString().isEmpty());
+        assertFalse(model.getPlayers()[0].toString().isEmpty());
+        assertFalse(model.getProfessors()[0].toString().isEmpty());
+        assertFalse(model.getPlayers()[0].getWizard().getCards()[0].toString().isEmpty());
+        assertFalse(model.getActiveCharacterCard(0).toString().isEmpty());
+        assertFalse(model.getActiveCharacterCard(0).getBehavior().toString().isEmpty());
+        assertFalse(model.getCloud(0).toString().isEmpty());
+    }
+
 }

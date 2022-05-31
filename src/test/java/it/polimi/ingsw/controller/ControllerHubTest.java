@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.utils.EriantysException;
 import it.polimi.ingsw.model.utils.GamePhase;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -83,11 +84,11 @@ class ControllerHubTest {
         }while(!response);
     }
 
-    public void putOnClouds(int player_id){
+    public Action putOnClouds(int player_id){
         Action putonclouds = new Action();
         putonclouds.setGamePhase(GamePhase.PUT_ON_CLOUDS);
         putonclouds.setPlayerID(player_id);
-        boolean response = controller.update(putonclouds).equals("true");
+        return putonclouds;
     }
 
     @Test
@@ -102,6 +103,9 @@ class ControllerHubTest {
         //player 0 draws an assist card
         drawAssistCard(0, 0);
         System.out.println("Assistcard drawn");
+
+        Action act = putOnClouds(1);
+        assertNotEquals("true", controller.update(act));
 
         //player 1 draws an assist card
         drawAssistCard(3, 1);

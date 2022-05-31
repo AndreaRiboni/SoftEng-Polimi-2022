@@ -88,8 +88,6 @@ class CharacterCardControllerTest {
         island.addStudent(Color.RED);
         act.setCharacterCardIndex(1);
         controller.manage();
-        System.out.println("Red students of g1: "+g1.getNofStudentInDiningHall(Color.RED));
-        System.out.println("Red students of g2: "+g2.getNofStudentInDiningHall(Color.RED));
         island.calculateInfluence(false, null);
         assertEquals(Color.WHITE, island.getTowerColor());
 
@@ -126,7 +124,43 @@ class CharacterCardControllerTest {
 
         //test of character #8
         act.setCharacterCardIndex(8);
+        act.setColor(Color.BLUE);
         controller.manage();
+        assertEquals(Color.BLUE, gameBoard.getMotherNature().hasToAvoidColor());
+
+        //test of character #9
+        act.setCharacterCardIndex(9);
+        act.setDesiredNofStudents(1);
+        g1.getSchool().getEntranceStudents().clear();
+        g1.getSchool().getDiningStudents().clear();
+        g1.getSchool().addStudent(Color.RED, Places.ENTRANCE);
+        g1.getSchool().addStudent(Color.BLUE, Places.DINING_HALL);
+        act.setEntranceColors(new Color[]{Color.RED});
+        act.setDiningColors(new Color[]{Color.BLUE});
+        controller.manage();
+        assertEquals(1, g1.getEntranceStudents().get(Color.BLUE));
+        assertEquals(1, g1.getDiningStudents().get(Color.RED));
+
+        //test of character 10
+        act.setCharacterCardIndex(10);
+        g1.getSchool().getDiningStudents().clear();
+        Color added_from_card = gameBoard.getCharacterCard(10).getBehavior().getAvailableStudents()[0];
+        act.setStudentIndexes(new int[]{0});
+        controller.manage();
+        assertEquals(1, g1.getDiningStudents().get(added_from_card));
+
+        //test of character 11
+        act.setCharacterCardIndex(11);
+        act.setColor(Color.RED);
+        g1.getSchool().getDiningStudents().clear();
+        g2.getSchool().getDiningStudents().clear();
+        for(int i = 0; i < 3; i++){
+            g1.getSchool().addStudent(Color.RED, Places.DINING_HALL);
+            g2.getSchool().addStudent(Color.RED, Places.DINING_HALL);
+        }
+        controller.manage();
+        assertEquals(0, g1.getDiningStudents().getOrDefault(Color.RED, 0));
+        assertEquals(0, g1.getDiningStudents().getOrDefault(Color.RED, 0));
     }
 
 }
