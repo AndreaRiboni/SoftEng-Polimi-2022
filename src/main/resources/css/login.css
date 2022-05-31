@@ -8,3 +8,15 @@
 .joinButton:pressed {
     -fx-background-image: url("../graphics/blue_button_pressed.png");
 }
+
+.choiceBox{
+    -fx-background-image: url("../graphics/blue_button.png");
+    -fx-background-size: stretch;
+    -fx-background-color: transparent;
+    -fx-font-family: "angrybirds";
+    -fx-font-size: 10px;
+}
+
+.choiceBox:pressed{
+    -fx-background-image: url("../graphics/blue_button_pressed.png");
+}
