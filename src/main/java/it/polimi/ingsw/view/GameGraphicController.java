@@ -111,7 +111,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         clouds = new Group[nof_players];
         aligner.createCloudsGroup(clouds_container, clouds);
         //creates the root
-        aligner.createRoot(mothernature_img, subscene, islands_container, clouds_container);
+        aligner.createRoot(subscene, islands_container, clouds_container);
     }
 
     /**
@@ -146,6 +146,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             //aligner.copyMotherNature(islands);
             aligner.copyCharacterCards(cc_values, char_card, cc_content, cc_coins, vbox_card);
             aligner.copyAssistCards(crosses, assistants, username);
+            aligner.copyMotherNature(islands);
         });
     }
 

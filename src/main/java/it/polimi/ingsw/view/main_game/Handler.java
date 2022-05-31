@@ -187,9 +187,12 @@ public class Handler {
             //it's an island: create the action and move the student there
             int island_index = (Integer) node.getProperties().get("index");
             if(last_selected != null) { //if we already selected a student we can set its island destination
-                move_students.get(move_students.size() - 1).setIsland_index(island_index);
-                //lock this student
-                move_students.get(move_students.size() - 1).getColor().setOnMouseClicked(e->{});
+                if(!move_students.isEmpty()) {
+                    move_students.get(move_students.size() - 1).setIsland_index(island_index);
+                    //lock this student
+                    move_students.get(move_students.size() - 1).getColor().setOnMouseClicked(e -> {
+                    });
+                }
             }
             last_selected = null;
         } else { //dining

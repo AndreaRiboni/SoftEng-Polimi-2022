@@ -26,6 +26,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -71,7 +72,12 @@ public class Aligner {
             students.getProperties().put("type", "island-students");
             students.setHgap(1);
             students.setVgap(2);
-            islands[i].getChildren().addAll(island_icon, students);
+            Label index = getWhiteLabel(" " + (i+1)+ " ");
+            index.setFont(new Font(30)); // set to Label
+            index.setBackground((new Background(new BackgroundFill(javafx.scene.paint.Color.rgb(0, 0, 0), new CornerRadii(0), new Insets(0)))));
+            index.setTranslateY(ISLAND_SIZE * 0.4);
+            StackPane island_icon_indexed = new StackPane(island_icon, index);
+            islands[i].getChildren().addAll(island_icon_indexed, students, deliverer.getMotherNatureImage());
             islands_container.getChildren().add(islands[i]);
             //Mother nature menu
             ContextMenu mn_menu = new ContextMenu();
@@ -126,18 +132,18 @@ public class Aligner {
         }
     }
 
-    public void createRoot(ImageView mothernature_img, SubScene subscene, Group islands_container, Group clouds_container) {
+    public void createRoot(SubScene subscene, Group islands_container, Group clouds_container) {
         Image water_img = new Image(String.valueOf(getClass().getResource("/Islands/water.gif")));
         GridPane bg = new GridPane();
-        for(int row = 0; row < 10; row++){
-            for(int col = 0; col < 10; col++){
+        for(int row = 0; row < 12; row++){
+            for(int col = 0; col < 12; col++){
                 ImageView water = new ImageView(water_img);
                 bg.add(water, row, col);
             }
         }
-        bg.setTranslateX(-800);
+        bg.setTranslateX(-1000);
         bg.setTranslateY(-900);
-        Pane pane = new Pane(bg, islands_container, clouds_container, new Group(mothernature_img));
+        Pane pane = new Pane(bg, islands_container, clouds_container);
         pane.setBackground(new Background(new BackgroundFill(javafx.scene.paint.Color.web("#0000FF"), CornerRadii.EMPTY, Insets.EMPTY)));
         pane.setTranslateX(-pane.getWidth() / 2);
         pane.setTranslateY(-pane.getHeight() / 2);
@@ -209,7 +215,7 @@ public class Aligner {
             HBox towers = new HBox();
             int tot_tower = others[i].getNumberOfPlacedTowers() + others[i].getNumberOfUnplacedTowers();
             for(int t = 0; t < tot_tower; t++){
-                ImageView tower_img = deliverer.getTowerImage(others[i].getColor());
+                ImageView tower_img = deliverer.getPlacedTowerImage(others[i].getColor());
                 if(t >= others[i].getNumberOfUnplacedTowers()){
                     handler.applyNotPresentEffect(tower_img);
                 }
@@ -267,7 +273,7 @@ public class Aligner {
         Color tower_color = school.getTowerColor();
         int xoff = 0, yoff = 0;
         for(int i = 0; i < school.getNumberOfTowers(); i++){
-            ImageView tower = deliverer.getTowerImage(tower_color);
+            ImageView tower = deliverer.getPlacedTowerImage(tower_color);
             tower.setTranslateX(Positions.TOWERS.getX() + xoff * Positions.TOWERS.getXOff());
             tower.setTranslateY(Positions.TOWERS.getY() + yoff * Positions.TOWERS.getYOff());
             school_elements.getChildren().add(tower);
@@ -345,16 +351,33 @@ public class Aligner {
         }
     }
 
-    /*public void copyMotherNature(Group[] islands){
-        int island_index = model.getMotherNature().getIslandIndex();
+    public void copyMotherNature(Group[] islands) {
+        int new_start = 0;
+        boolean found = false;
+        for(int i = 0; i < model.getIslands().length && !found; i++){
+            try {
+                if(!model.getIslands()[i].hasPrevious()){
+                    new_start = i;
+                    found = true;
+                }
+            } catch (EriantysException e) {
+                e.printStackTrace();
+            }
+        }
         for(int i = 0; i < model.getIslands().length; i++){
-            boolean visibility = i == island_index;
-            for(Node n : islands[i].getChildren()){
+            int new_index = i - new_start;
+            if(new_index < 0){
+                new_index = 12 + new_index;
+            } else if(new_index >= 12){
+                new_index %= 12;
+            }
+            boolean visibility = i == model.getMotherNature().getIslandIndex();
+            for(Node n : islands[new_index].getChildren()){
                 if(n instanceof ImageView && n.getProperties().get("mothernature")!=null)
                     n.setVisible(visibility);
             }
         }
-    }*/
+    }
 
     public void copyCharacterCards(ChoiceBox<String> cc_values, ImageView[] char_card, GridPane[] cc_content, GridPane[] cc_coins, VBox[] vboxes){
         //Setting the correct images
@@ -474,7 +497,7 @@ public class Aligner {
         pane.getChildren().add(school_elements);
     }
 
-    public void copyAssistCards(ImageView[] crosses, ImageView[] assistants, String username) {
+    public void copyAssistCards(ImageView[] crosses, ImageView[] assistants, String username) { //TODO: FIX blue
         boolean[] available_assist_cards = new boolean[crosses.length];
         AssistCard[] player_cards = model.getPlayerByUsername(username).getWizard().getCards();
         int remaining = crosses.length;
@@ -528,10 +551,10 @@ public class Aligner {
                 translate.setToY(y);
                 translate.setNode(child);
                 translate.play();
-                if(child.getProperties().get("type")!=null && child.getProperties().get("type").equals("island")){
+                /*if(child.getProperties().get("type")!=null && child.getProperties().get("type").equals("island")){
                     int index = (int) child.getProperties().get("index");
                     if(model.getMotherNature().getIslandIndex() == index){
-                        if(index > 4 && index < 8){
+                        if(index > 6 && index < 12){
                             handler.mirrorX(mothernature_img);
                         } else {
                             handler.unmirrorX(mothernature_img);
@@ -545,7 +568,7 @@ public class Aligner {
                         tt2.setToY(y);
                         tt2.play();
                     }
-                }
+                }*/
             }
         }
     }
@@ -565,10 +588,8 @@ public class Aligner {
         for(int i = 0; i < model_islands.length; i++){
             GridPane island_grid = (GridPane) islands[i].getChildren().get(1);
             island_grid.getChildren().clear();
-            int new_index = i - offset;
-            if(new_index < 0){
-                new_index += 12;
-            }
+            int new_index = i + offset;
+            new_index %= 12;
             Map<Color, Integer> island_studs = model_islands[new_index].getStudents();
             int total = GenericUtils.sumValues(island_studs) + (model_islands[new_index].hasTower() ? 1 : 0);
             if(total == 0) total++;
@@ -588,7 +609,7 @@ public class Aligner {
                 }
             }
             if(model_islands[new_index].hasTower()){
-                ImageView tower = deliverer.getTowerImage(model_islands[new_index].getTowerColor());
+                ImageView tower = deliverer.getPlacedTowerImage(model_islands[new_index].getTowerColor());
                 tower.setFitHeight(ISLAND_SIZE /  divisor * 0.65);
                 tower.setFitWidth(ISLAND_SIZE / divisor * 0.8);
                 island_grid.add(tower, count % nof_col, count / nof_col);
@@ -596,28 +617,42 @@ public class Aligner {
         }
     }
 
-    private void alignIslands(int[] islands_groups, SubScene subscene, Group[] islands, ImageView mothernature_img){
-        //Determino quale sia la prima isola da cui partire
-        int new_start = (13 - islands_groups[islands_groups.length - 1]) % 12;
+    private void alignIslands(int[] islands_groups, SubScene subscene, Group[] islands, ImageView mothernature_img) throws EriantysException {
+        //new start is the first island without a previous
+        int new_start = 0;
+        boolean found = false;
+        for(int i = 0; i < model.getIslands().length && !found; i++){
+            if(!model.getIslands()[i].hasPrevious()){
+                new_start = i;
+                found = true;
+            }
+        }
+        System.out.println("New start: " + new_start);
+        for(int i = 0; i < islands_groups.length; i++)
+            System.out.println(i + ") " + islands_groups[i]);
         float angle = 0;
         int count = 0;
+        int island_number = 0;
         for (int islands_group : islands_groups) {
             int xoff = 0;
             int yoff = 0;
+            island_number += islands_group;
             for (int o = 0; o < islands_group; o++) {
                 if (o % 4 == 0 && o > 0) {
-                    yoff += ISLAND_SIZE * 0.9;
+                    //int direction = (island_number >= 0 && island_number <=4) || (island_number >8 && island_number < 12) ? -1 : 1;
+                    yoff += ISLAND_SIZE * 0.95;
                     xoff = 0;
                 } else if (o > 0) {
-                    xoff += ISLAND_SIZE * 0.7;
+                    int direction = island_number % 2 == 0 ? 1 : -1;
+                    xoff += ISLAND_SIZE * 0.75 * direction;
                 }
                 //resetIslandPos(islands[count]);
                 int temp_yoff = 0;
                 if (o % 2 == 1) {
-                    temp_yoff += ISLAND_SIZE * 0.45;
+                    temp_yoff += ISLAND_SIZE * 0.475;
                 }
-                double x = subscene.getWidth() / 2 + Math.cos(angle) * ISLAND_SIZE * 4 + xoff - ISLAND_SIZE / 2;
-                double y = subscene.getHeight() / 2 + Math.sin(angle) * ISLAND_SIZE * 4 + yoff - ISLAND_SIZE / 2 + temp_yoff;
+                double x = subscene.getWidth() / 2 + Math.cos(angle) * ISLAND_SIZE * 4.4 + xoff - ISLAND_SIZE / 2;
+                double y = subscene.getHeight() / 2 + Math.sin(angle) * ISLAND_SIZE * 4.4 + yoff - ISLAND_SIZE / 2 + temp_yoff;
                 setIslandPos(islands[count], x, y, mothernature_img);
                 count++;
             }

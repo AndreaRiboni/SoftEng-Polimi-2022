@@ -19,6 +19,15 @@ public class Deliverer {
         return tower;
     }
 
+    public ImageView getPlacedTowerImage(Color tower_color){
+        ImageView tower = new ImageView(
+                new Image(String.valueOf(getClass().getResource("/Towers/"+Color.colorToString(tower_color)+"_tower.png")))
+        );
+        tower.setFitWidth(Positions.TOWERS.getWidth());
+        tower.setFitHeight(Positions.TOWERS.getHeight());
+        return tower;
+    }
+
     public ImageView getMotherNatureImage(){
         ImageView mn = new ImageView(
                 new Image(String.valueOf(getClass().getResource("/MotherNature/mother_nature.gif")))
@@ -26,7 +35,7 @@ public class Deliverer {
         mn.setFitWidth(ISLAND_SIZE);
         mn.setFitHeight(ISLAND_SIZE);
         mn.getProperties().put("mothernature", true);
-        mn.setEffect(new Glow(0.3));
+        mn.setEffect(new Glow(0.5));
         return mn;
     }
 
