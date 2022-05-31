@@ -77,6 +77,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     private AnchorPane char_cards_container;
     @FXML
     private VBox coin_container;
+    @FXML
+    private Tab turn_status;
 
 
     @Override
@@ -171,7 +173,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 aligner.disable();
                 TurnStatus.setText("Wait until the other players have finished their turn");
                 TurnStatusBar.setVisible(true);
-            } else if(action.getGamePhase().equals(GamePhase.ERROR_PHASE)){
+                turn_status.setText("Wait for your turn");
+            } else if(action.getGamePhase().equals(GamePhase.ERROR_PHASE) && !action.getErrorMessage().contains("turn")){
                 disabled = false;
                 aligner.enable();
                 PopUpLauncher error_phase = new PopUpLauncher();
@@ -193,6 +196,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     public void notifyResponse(List<GamePhase> gamephases) {
         Platform.runLater(() -> {
             TurnStatus.setText("It's your turn!");
+            turn_status.setText("It's your turn");
             disabled = false;
             aligner.enable();
             TurnStatusBar.setVisible(false);

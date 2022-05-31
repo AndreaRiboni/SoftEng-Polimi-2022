@@ -118,6 +118,11 @@ public class Aligner {
             students.setHgap(2);
             students.setVgap(2);
             clouds[i].getChildren().addAll(cloud_icon, students);
+            clouds[i].setOnMouseClicked(e -> {
+                if(disabled) {
+                    handler.showWrongTurnPopUp();
+                }
+            });
             clouds_container.getChildren().add(clouds[i]);
             //Drain cloud menu
             ContextMenu dc_menu = new ContextMenu();
