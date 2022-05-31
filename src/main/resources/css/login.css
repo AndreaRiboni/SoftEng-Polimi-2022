@@ -2,8 +2,8 @@
     -fx-background-image: url("../graphics/blue_button.png");
     -fx-background-size: stretch;
     -fx-background-color: transparent;
-    -fx-font-family: "Dalek Pinpoint";
-    -fx-font-size: 30px;
+    -fx-font-family: "angrybirds";
+    -fx-font-size: 40px;
 }
 .joinButton:pressed {
     -fx-background-image: url("../graphics/blue_button_pressed.png");
