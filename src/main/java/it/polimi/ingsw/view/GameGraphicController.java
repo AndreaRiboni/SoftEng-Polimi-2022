@@ -137,6 +137,14 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         this.model = model;
         handler.clearMoveStudents();
         Platform.runLater(() -> {
+              if(model.isGameEnded()){
+              PopUpLauncher popUp = new PopUpLauncher();
+              popUp.setTitle("GAME END");
+              String winner = model.getWinner();
+              if(winner.equalsIgnoreCase(username)) popUp.setMessage("You are the winner! Congratulations!");
+              else popUp.setMessage("The winner is "+model.getWinner());
+              popUp.show();
+            }
             //copying my school
             aligner.copySchool(model.getPlayerByUsername(username).getSchool(), true, player_container, username);
             //copying islands and clouds
