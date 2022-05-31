@@ -182,7 +182,7 @@ public class GameHandler implements Runnable {
                 user_response.setUsername(usernames[i]);
                 sendAction(i, user_response);
             }
-            listener = new ServerNetworkListener(ins, this);
+            listener = new ServerNetworkListener(players, ins, this);
             listener.start();
             log.info("New match has started [" + players.length + " players]");
             for (int i = 0; i < players.length; i++) {

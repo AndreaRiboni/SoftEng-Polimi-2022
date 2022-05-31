@@ -75,7 +75,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     private VBox[] vbox_card;
     @FXML
     private AnchorPane char_cards_container;
-    
     @FXML
     private VBox coin_container;
 
@@ -143,7 +142,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
               String winner = model.getWinner();
               if(winner.equalsIgnoreCase(username)) popUp.setMessage("You are the winner! Congratulations!");
               else popUp.setMessage("The winner is "+model.getWinner());
-              popUp.show();
+              popUp.showAndByeBye();
             }
             //copying my school
             aligner.copySchool(model.getPlayerByUsername(username).getSchool(), true, player_container, username, coin_container);
@@ -179,8 +178,13 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 error_phase.setTitle("Something went wrong");
                 error_phase.setMessage(action.getErrorMessage());
                 error_phase.show();
-                setGameBoard(model);
+                resetGameboard();
                 handler.clearMoveStudents();
+            } else if(action.getGamePhase().equals(GamePhase.CONNECTION_ERROR)){
+                PopUpLauncher error_phase = new PopUpLauncher();
+                error_phase.setTitle("Something went wrong");
+                error_phase.setMessage("You lost connection with the server");
+                error_phase.showAndByeBye();
             }
         });
     }
@@ -233,4 +237,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         this.username = username;
     }
 
+    public void resetGameboard() {
+        setGameBoard(model);
+    }
 }

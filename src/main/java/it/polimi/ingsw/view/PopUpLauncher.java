@@ -60,6 +60,20 @@ public class PopUpLauncher {
         });
     }
 
+    public void showAndByeBye(){
+        Platform.runLater(() -> {
+            init();
+            window.setAlwaysOnTop(true);
+            window.setResizable(false);
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.showAndWait();
+            window.setOnCloseRequest(e->{
+                Platform.exit();
+                System.exit(0);
+            });
+        });
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }

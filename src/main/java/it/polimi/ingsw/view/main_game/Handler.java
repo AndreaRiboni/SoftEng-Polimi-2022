@@ -98,9 +98,16 @@ public class Handler {
         Color[] student = new Color[nof_players + 1];
         int[] island_indexes = new int[student.length];
         Places[] destinations = new Places[student.length];
+        PopUpLauncher undefined_error = new PopUpLauncher();
+        if(student.length > nof_players+1){
+            undefined_error.setTitle("Something went wrong");
+            undefined_error.setMessage("Please re-move the students");
+            undefined_error.show();
+            controller.resetGameboard();
+            return;
+        }
         for(int i = 0; i < student.length; i++){
             if(move_students.get(i).getColor() == null){
-                PopUpLauncher undefined_error = new PopUpLauncher();
                 undefined_error.setTitle("Something went wrong");
                 undefined_error.setMessage("Please re-move the students");
                 undefined_error.show();
@@ -243,6 +250,7 @@ public class Handler {
             last_selected = null;
         }
         if(move_students.size() == nof_players + 1 && move_students.get(move_students.size()-1).getIsland_index() != -1){
+            System.out.println("Sending request");
             sendMoveStudentsRequest(nof_players);
         }
         last_selected = node;

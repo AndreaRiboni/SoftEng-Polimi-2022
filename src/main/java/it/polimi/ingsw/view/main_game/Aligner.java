@@ -491,10 +491,6 @@ public class Aligner {
     }
 
     public void copySchool(School school, boolean mine, AnchorPane player_container, String username, VBox coin_container){
-        int coins = model.getPlayerByUsername(username).getCoins();
-        for(int i = 0; i < coins; i++){
-            coin_container.getChildren().add(deliverer.getCoinImage());
-        }
         AnchorPane pane = mine ? player_container : null;
         //removes each non-imageview child
         if(pane.getChildren().size() > 2) pane.getChildren().remove(2);
@@ -509,6 +505,15 @@ public class Aligner {
         drawDiningHall(school_elements, school, sorted_stud_colors, model.getPlayers().length);
         drawEntrance(school_elements, school, model.getPlayers().length);
         pane.getChildren().add(school_elements);
+        /*int coins = model.getPlayerByUsername(username).getCoins();
+        for(int i = 0; i < coins; i++){ //@@COINS@@
+            coin_container.getChildren().add(deliverer.getCoinImage());
+            System.out.println("adding coin");
+            if(i >= 10){
+                coin_container.getChildren().add(getWhiteLabel("and " + (coins-10) + " more"));
+                break;
+            }
+        }*/
     }
 
     public void copyAssistCards(ImageView[] crosses, ImageView[] assistants, String username) { //TODO: FIX blue

@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,9 +110,13 @@ public class NetworkListener extends Thread{
                 e.printStackTrace();
             } catch (IOException | NullPointerException ex){
                 if(!isForGUI){
-                    ex.printStackTrace();
                     System.err.println("An error occurred while communicating with the server. Someone could have had a problem, the server could be unavailable or you're being kicked out from the server");
                     System.exit(0);
+                } else {
+                    Action conn_err = new Action();
+                    conn_err.setGamePhase(GamePhase.CONNECTION_ERROR);
+                    setResponse(conn_err);
+                    return;
                 }
             }
         }
