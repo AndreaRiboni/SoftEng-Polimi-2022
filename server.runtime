@@ -26586,3 +26586,4 @@
 2022-05-31 21:36:15 INFO  root:191 - Getting next (automatic) [keep going: true, follow neutral: false
 2022-05-31 21:36:15 INFO  root:111 - received from: 1, expected from: 0
 2022-05-31 21:36:15 INFO  root:124 - Something went wrong
+2022-06-01 11:40:20 ERROR root:43 - Unable to initialize socket

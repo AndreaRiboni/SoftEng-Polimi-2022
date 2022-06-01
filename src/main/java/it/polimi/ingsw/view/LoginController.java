@@ -8,6 +8,8 @@ import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GameBoardContainer;
 import it.polimi.ingsw.model.utils.GamePhase;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,14 +21,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.URL;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class LoginController implements Initializable, GameBoardContainer {
     private Stage stage;
@@ -52,9 +53,11 @@ public class LoginController implements Initializable, GameBoardContainer {
     private ChoiceBox<String> choiceBox;
     @FXML
     private Label waiting_communication;
+    @FXML
+    private ImageView confetti;
 
     //used for GUI variables
-    private final String[] nof_players = {"2","3"};
+    private final String[] nof_players = {"2","3"}, cool_names = {"cugola", "andrea", "edoardo", "davide"};
 
     private void initializeNetwork(){
         last_sent = null;
@@ -128,11 +131,20 @@ public class LoginController implements Initializable, GameBoardContainer {
         choiceBox.setValue("2");
         waiting_communication.setVisible(false);
 
+        nickname.textProperty().addListener((observableValue, oldValue, newValue) -> checkName());
+
         FXMLLoader fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("waiting.fxml"));
         try {
             SubScene.setRoot(fxmlLoader.load());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void checkName(){
+        if(Arrays.asList(cool_names).contains(nickname.getText().toLowerCase())){
+            confetti.setImage(new Image(String.valueOf(getClass().getResource("/graphics/confetti.gif"))));
         }
     }
 
