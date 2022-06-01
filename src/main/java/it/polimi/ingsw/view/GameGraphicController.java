@@ -79,6 +79,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     private VBox coin_container;
     @FXML
     private Tab turn_status;
+    @FXML
+    private Button play_assistant, cc_play_button;
 
 
     @Override
@@ -171,6 +173,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             if(action.getGamePhase().equals(GamePhase.CORRECT)){
                 disabled = true;
                 aligner.disable();
+                play_assistant.setDisable(true);
+                cc_play_button.setDisable(true);
                 TurnStatus.setText("Wait until the other players have finished their turn");
                 TurnStatusBar.setVisible(true);
                 turn_status.setText("Wait for your turn");
@@ -197,6 +201,8 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         Platform.runLater(() -> {
             TurnStatus.setText("It's your turn!");
             turn_status.setText("It's your turn");
+            play_assistant.setDisable(false);
+            cc_play_button.setDisable(false);
             disabled = false;
             aligner.enable();
             TurnStatusBar.setVisible(false);
