@@ -184,7 +184,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
                 TurnStatus.setText("Wait until the other players have finished their turn");
                 TurnStatusBar.setVisible(true);
                 turn_status.setText("Wait for your turn");
-            } else if(action.getGamePhase().equals(GamePhase.ERROR_PHASE) && !action.getErrorMessage().contains("turn")){
+            } else if(action.getGamePhase().equals(GamePhase.ERROR_PHASE) && !action.getErrorMessage().contains("turn!")){
                 disabled = false;
                 aligner.enable();
                 PopUpLauncher error_phase = new PopUpLauncher();

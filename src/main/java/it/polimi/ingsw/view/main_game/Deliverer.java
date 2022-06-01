@@ -200,7 +200,7 @@ public class Deliverer {
                         getFromCache(String.valueOf(getClass().getResource("/graphics/"+filename+".png")))
                 );
                 gp_viewer.setPreserveRatio(true);
-                gp_viewer.setFitHeight(Positions.DINING_HALL_STUDENTS.getHeight() * 4);
+                gp_viewer.setFitHeight(Positions.DINING_HALL_STUDENTS.getHeight() * 8);
                 gp_container.getChildren().add(gp_viewer);
             }
         }

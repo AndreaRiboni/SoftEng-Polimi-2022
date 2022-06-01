@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -140,19 +141,21 @@ public class Aligner {
     public void createRoot(SubScene subscene, Group islands_container, Group clouds_container) {
         Image water_img = new Image(String.valueOf(getClass().getResource("/Islands/water.gif")));
         GridPane bg = new GridPane();
-        for(int row = 0; row < 12; row++){
-            for(int col = 0; col < 12; col++){
+        for(int row = 0; row < 3; row++){
+            for(int col = 0; col < 3; col++){
                 ImageView water = new ImageView(water_img);
+                water.setPreserveRatio(true);
+                water.setFitHeight(subscene.getHeight() / 3);
                 bg.add(water, row, col);
             }
         }
-        bg.setTranslateX(-1100);
-        bg.setTranslateY(-900);
-        Pane pane = new Pane(bg, islands_container, clouds_container);
-        pane.setBackground(new Background(new BackgroundFill(javafx.scene.paint.Color.web("#0000FF"), CornerRadii.EMPTY, Insets.EMPTY)));
+        //bg.setTranslateX(-1100);
+        //bg.setTranslateY(-900);
+        Pane pane = new Pane(islands_container, clouds_container);
         pane.setTranslateX(-pane.getWidth() / 2);
         pane.setTranslateY(-pane.getHeight() / 2);
-        ScrollPane sp = new ScrollPane(pane);
+        StackPane pane_with_bg = new StackPane(bg, pane);
+        ScrollPane sp = new ScrollPane(pane_with_bg);
         sp.setFitToHeight(true);
         sp.setFitToWidth(true);
         BorderPane bp = new BorderPane(sp);
@@ -180,7 +183,7 @@ public class Aligner {
         }
         double scalex = pane.getScaleX() * zoomFactor;
         double scaley = pane.getScaleY() * zoomFactor;
-        if(!(scalex < 0.28 || scaley < 0.28 || scalex > 0.8 || scaley > 0.8)){
+        if(!(scalex < 0.28 || scaley < 0.28 || scalex > 0.7 || scaley > 0.7)){
             pane.setScaleX(pane.getScaleX() * zoomFactor);
             pane.setScaleY(pane.getScaleY() * zoomFactor);
         }
@@ -195,10 +198,10 @@ public class Aligner {
         pane.setOnMouseDragged(e -> {
             double translatex = e.getSceneX() + start[0];
             double translatey = e.getSceneY() + start[1];
-            if(!(translatex > 60 || translatex < -130)) {
+            if(!(translatex > 350 || translatex < -350)) {
                 pane.setTranslateX(e.getSceneX() + start[0]);
             }
-            if(!(translatey > 40 || translatey < -130)) {
+           if(!(translatey > 350 || translatey < -350)) {
                 pane.setTranslateY(e.getSceneY() + start[1]);
             }
         });
@@ -538,6 +541,7 @@ public class Aligner {
                 available_assist_cards[i] = true;
                 crosses[i].setVisible(false);
                 handler.removeSelectedEffect(assistants[i]);
+                assistants[i].setEffect(new DropShadow());
             }
         }
         //now we calculate the ones that are played in this turn by the other players

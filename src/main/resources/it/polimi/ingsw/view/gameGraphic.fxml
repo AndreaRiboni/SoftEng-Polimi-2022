@@ -12,6 +12,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -52,8 +53,11 @@
                                             <image>
                                                 <Image url="@../../../../graphics/Plancia_DEF3.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
-                              <VBox fx:id="coin_container" layoutX="90.0" layoutY="46.0" prefHeight="591.0" prefWidth="100.0" />
+                              <VBox fx:id="coin_container" alignment="CENTER" layoutX="75.0" layoutY="46.0" prefHeight="591.0" prefWidth="100.0" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>
@@ -84,51 +88,81 @@
                                             <image>
                                                 <Image url="@../../../../Assistenti/Assistente_1.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
                                         <ImageView fx:id="assistant_2" fitHeight="150.0" fitWidth="200.0" layoutX="196.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../../../../Assistenti/Assistente_2.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
                                         <ImageView fx:id="assistant_3" fitHeight="150.0" fitWidth="200.0" layoutX="332.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../../../../Assistenti/Assistente_3.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
                                         <ImageView fx:id="assistant_4" fitHeight="150.0" fitWidth="200.0" layoutX="472.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../../../../Assistenti/Assistente_4.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
                                         <ImageView fx:id="assistant_5" fitHeight="150.0" fitWidth="200.0" layoutX="55.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../../../../Assistenti/Assistente_5.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
                                         <ImageView fx:id="assistant_6" fitHeight="150.0" fitWidth="200.0" layoutX="196.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../../../../Assistenti/Assistente_6.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
                                         <ImageView fx:id="assistant_7" fitHeight="150.0" fitWidth="200.0" layoutX="334.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../../../../Assistenti/Assistente_7.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
                                         <ImageView fx:id="assistant_8" fitHeight="150.0" fitWidth="200.0" layoutX="472.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../../../../Assistenti/Assistente_8.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
                                         <ImageView fx:id="assistant_9" fitHeight="150.0" fitWidth="200.0" layoutX="55.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../../../../Assistenti/Assistente_9.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
                                         <ImageView fx:id="assistant_10" fitHeight="150.0" fitWidth="200.0" layoutX="196.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@../../../../Assistenti/Assistente_10.png" />
                                             </image>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                                         </ImageView>
                                         <ImageView fx:id="cross_1" fitHeight="119.0" fitWidth="102.0" layoutX="54.0" layoutY="58.0" pickOnBounds="true">
                                             <image>
@@ -205,6 +239,9 @@
                                                           <image>
                                                               <Image url="@../../../../characters/character_1.jpg" />
                                                           </image>
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
                                                       </ImageView>
                                           <GridPane fx:id="cc1_coins" alignment="CENTER" prefHeight="90.0" prefWidth="138.0">
                                             <columnConstraints>
@@ -241,6 +278,9 @@
                                                           <image>
                                                               <Image url="@../../../../characters/character_2.jpg" />
                                                           </image>
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
                                                       </ImageView>
                                           <GridPane fx:id="cc2_coins" alignment="CENTER" prefHeight="90.0" prefWidth="138.0">
                                              <columnConstraints>
@@ -277,6 +317,9 @@
                                                           <image>
                                                               <Image url="@../../../../characters/character_3.jpg" />
                                                           </image>
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
                                                       </ImageView>
                                           <GridPane fx:id="cc3_coins" alignment="CENTER" prefHeight="90.0" prefWidth="138.0">
                                              <columnConstraints>
@@ -326,15 +369,15 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                           <children>
-                              <Label fx:id="TurnStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="14.0" prefHeight="80.0" prefWidth="478.0" text="Aspetta il tuo turno" textAlignment="CENTER">
+                              <Label fx:id="TurnStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="14.0" prefHeight="80.0" prefWidth="478.0" text="Wait for your turn" textAlignment="CENTER">
                               <font>
                                   <Font size="21.0" />
                               </font></Label>
                               <ProgressBar fx:id="TurnStatusBar" layoutX="78.0" layoutY="94.0" prefHeight="20.0" prefWidth="479.0" />
                               <Accordion fx:id="turn_info" layoutX="78.0" layoutY="176.0" prefHeight="51.0" prefWidth="481.0">
                                 <panes>
-                                  <TitledPane fx:id="students_to_move_container" animated="false" text="Students to move" />
-                                  <TitledPane fx:id="phase_information" animated="false" text="Do we need other information?" />
+                                  <TitledPane fx:id="students_to_move_container" animated="false" text="Students you're about to move" />
+                                  <TitledPane fx:id="phase_information" animated="false" text="What you can do in this turn" />
                                 </panes>
                               </Accordion>
                               <Label fx:id="TurnStatus1" alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="130.0" prefHeight="46.0" prefWidth="478.0" text="About this turn" textAlignment="CENTER">
