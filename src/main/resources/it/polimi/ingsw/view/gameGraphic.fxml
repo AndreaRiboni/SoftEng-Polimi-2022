@@ -182,7 +182,7 @@
                                         </ImageView>
                                         <ChoiceBox fx:id="assistant_choice" layoutX="393.0" layoutY="456.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="150.0" styleClass="choiceBox" stylesheets="@../../../../css/login.css" />
                                         <Label layoutX="373.0" layoutY="429.0" style="-fx-background-color: BLACK;" text="Which assistant do you want to use?" textFill="WHITE" />
-                                        <Button layoutX="393.0" layoutY="498.0" mnemonicParsing="false" onAction="#sendAssistCardRequest" prefHeight="85.0" prefWidth="150.0" styleClass="joinButton" stylesheets="@../../../../css/login.css" text="PLAY" textFill="#f6f6f6" />
+                                        <Button fx:id="play_assistant" layoutX="393.0" layoutY="498.0" mnemonicParsing="false" onAction="#sendAssistCardRequest" prefHeight="85.0" prefWidth="150.0" styleClass="joinButton" stylesheets="@../../../../css/login.css" text="PLAY" textFill="#f6f6f6" />
 
                                     </children>
                                 </AnchorPane>
