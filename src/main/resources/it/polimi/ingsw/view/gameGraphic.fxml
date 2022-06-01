@@ -331,10 +331,10 @@
                                   <Font size="21.0" />
                               </font></Label>
                               <ProgressBar fx:id="TurnStatusBar" layoutX="78.0" layoutY="94.0" prefHeight="20.0" prefWidth="479.0" />
-                              <Accordion layoutX="78.0" layoutY="176.0" prefHeight="51.0" prefWidth="481.0">
+                              <Accordion fx:id="turn_info" layoutX="78.0" layoutY="176.0" prefHeight="51.0" prefWidth="481.0">
                                 <panes>
-                                  <TitledPane animated="false" text="Students to move" />
-                                  <TitledPane animated="false" text="Do we need other information?" />
+                                  <TitledPane fx:id="students_to_move" animated="false" text="Students to move" />
+                                  <TitledPane fx:id="phase_information" animated="false" text="Do we need other information?" />
                                 </panes>
                               </Accordion>
                               <Label fx:id="TurnStatus1" alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="130.0" prefHeight="46.0" prefWidth="478.0" text="About this turn" textAlignment="CENTER">
