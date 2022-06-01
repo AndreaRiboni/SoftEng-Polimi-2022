@@ -54,8 +54,8 @@ public class LoginController implements Initializable, GameBoardContainer {
     @FXML
     private Label waiting_communication;
     @FXML
-    private ImageView confetti;
-
+    private ImageView confetti_left, confetti_right;
+    private ImageView[] confetti;
     //used for GUI variables
     private final String[] nof_players = {"2","3"}, cool_names = {"cugola", "andrea", "edoardo", "davide"};
 
@@ -130,7 +130,7 @@ public class LoginController implements Initializable, GameBoardContainer {
         choiceBox.getItems().addAll(nof_players);
         choiceBox.setValue("2");
         waiting_communication.setVisible(false);
-
+        confetti = new ImageView[]{confetti_left, confetti_right};
         nickname.textProperty().addListener((observableValue, oldValue, newValue) -> checkName());
 
         FXMLLoader fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("waiting.fxml"));
@@ -144,7 +144,9 @@ public class LoginController implements Initializable, GameBoardContainer {
     @FXML
     private void checkName(){
         if(Arrays.asList(cool_names).contains(nickname.getText().toLowerCase())){
-            confetti.setImage(new Image(String.valueOf(getClass().getResource("/graphics/confetti.gif"))));
+            Image confetti_img = new Image(String.valueOf(getClass().getResource("/graphics/confetti.gif")));
+            for(ImageView iv : confetti)
+                iv.setImage(confetti_img);
         }
     }
 

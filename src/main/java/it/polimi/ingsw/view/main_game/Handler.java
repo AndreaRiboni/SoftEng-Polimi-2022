@@ -9,13 +9,20 @@ import it.polimi.ingsw.model.utils.*;
 import it.polimi.ingsw.model.utils.packets.StudentLocation;
 import it.polimi.ingsw.view.GameGraphicController;
 import it.polimi.ingsw.view.PopUpLauncher;
+import javafx.animation.FadeTransition;
+import javafx.animation.RotateTransition;
+import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.TitledPane;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import it.polimi.ingsw.view.GameGraphicController;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import java.net.SocketException;
 import java.util.ArrayList;
@@ -25,14 +32,16 @@ public class Handler {
     private MessageSender msg;
     private List<StudentLocation> move_students;
     private GameGraphicController controller;
-    private Node last_selected;
+    private Node last_selected, last_container_selected;
     private CharacterCardsHandler cc_handler;
+    private Deliverer deliverer;
 
-    public Handler(MessageSender msg, GameGraphicController controller){
+    public Handler(MessageSender msg, GameGraphicController controller, Deliverer deliverer){
         this.msg = msg;
         this.controller = controller;
         cc_handler = new CharacterCardsHandler();
         move_students = new ArrayList<>();
+        this.deliverer = deliverer;
     }
 
     public void showWrongTurnPopUp(){
@@ -219,13 +228,15 @@ public class Handler {
         controller.setLastSent(usecc);
     }
 
-    public void selectMovingSubject(Node node, int nof_players) {
+    public void selectMovingSubject(Node node, int nof_players, TitledPane moving_studs_container, Rectangle dining_area) {
         System.out.println("SELECT MOVING SUBJECT");
         System.out.println(move_students);
         System.out.println(node.getProperties().get("type"));
+        RotateTransition rt = new RotateTransition();
+        rt.setByAngle(0);
+        rt.setToAngle(360);
         if(move_students.isEmpty()){
             move_students.add(new StudentLocation());             //adding first packet eventually
-            controller.info_turn(move_students);
         }
         if(node.getProperties().get("type").equals("student")){
             if(node instanceof ImageView) applySelectedEffect((ImageView) node);
@@ -236,7 +247,6 @@ public class Handler {
                 }
             } else {
                 move_students.add(new StudentLocation(-1, node));
-                controller.info_turn(move_students);
             }
         } else if(node.getProperties().get("type").equals("island")) {
             //it's an island: create the action and move the student there
@@ -247,12 +257,34 @@ public class Handler {
                     //lock this student
                     move_students.get(move_students.size() - 1).getColor().setOnMouseClicked(e -> {
                     });
+                    //removing old effect
+                    if(last_container_selected != null)
+                        last_container_selected.setEffect(null);
+                    //litle animation
+                    node.setEffect(new Glow(0.5));
+                    rt.setNode(node);
+                    rt.play();
+                    last_container_selected = node;
                 }
             }
             last_selected = null;
         } else { //dining
-            if(last_selected != null) //if we already selected a student we can set its island destination
-                move_students.get(move_students.size()-1).setIsland_index(100);
+            if(last_selected != null) {//if we already selected a student we can set its island destination
+                move_students.get(move_students.size() - 1).setIsland_index(100);
+                dining_area.setOpacity(1);
+                FadeTransition in = new FadeTransition();
+                in.setFromValue(0);
+                in.setByValue(1);
+                in.setNode(dining_area);
+                in.setDuration(Duration.millis(100));
+                in.setAutoReverse(true);
+                in.setCycleCount(2);
+                in.play();
+                last_container_selected = node;
+            }
+            if(last_container_selected != null){
+                last_container_selected.setEffect(null);
+            }
             last_selected = null;
         }
         if(move_students.size() == nof_players + 1 && move_students.get(move_students.size()-1).getIsland_index() != -1){
@@ -260,7 +292,7 @@ public class Handler {
             sendMoveStudentsRequest(nof_players);
         }
         last_selected = node;
-        System.out.println(move_students);
+        moving_studs_container.setContent(deliverer.composeMovingStudent(move_students));
     }
 
     public void clearMoveStudents() {

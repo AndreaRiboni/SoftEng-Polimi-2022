@@ -8,11 +8,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.LoginController">
     <children>
-        <ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.6" pickOnBounds="true">
+        <ImageView fx:id="confetti_right" fitHeight="400.0" fitWidth="600.0" opacity="0.6" pickOnBounds="true">
             <image>
                 <Image url="@../../../../graphics/Copertina.jpg" />
             </image>
         </ImageView>
+      <ImageView fx:id="confetti_left" fitHeight="133.0" fitWidth="189.0" layoutX="293.0" layoutY="62.0" onKeyTyped="#checkName" opacity="0.6" pickOnBounds="true" rotate="-30.0" />
+      <ImageView fx:id="confetti_right" fitHeight="133.0" fitWidth="189.0" layoutX="405.0" layoutY="62.0" onKeyTyped="#checkName" opacity="0.6" pickOnBounds="true" rotate="30.0" />
         <Label layoutX="59.0" layoutY="153.0" text="Insert your nickname">
             <font>
                 <Font name="System Bold" size="19.0" />
@@ -46,6 +48,5 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fx:id="confetti" fitHeight="133.0" fitWidth="189.0" layoutX="358.0" layoutY="22.0" onKeyTyped="#checkName" opacity="0.6" pickOnBounds="true" />
     </children>
 </AnchorPane>

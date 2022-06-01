@@ -23,8 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
+import javafx.scene.paint.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
@@ -40,6 +39,7 @@ public class Aligner {
     private Deliverer deliverer;
     private boolean disabled;
     private GameBoard model;
+    private Rectangle dining_area;
 
     public Aligner(Handler handler, Deliverer deliverer){
         this.handler = handler;
@@ -58,7 +58,7 @@ public class Aligner {
         this.model = model;
     }
 
-    public void createIslandGroup(Group islands_container, Group[] islands){
+    public void createIslandGroup(Group islands_container, Group[] islands, TitledPane moving_studs_container){
         for(int i = 0; i < islands.length; i++){
             islands[i] = new Group();
             ImageView island_icon  = new ImageView(
@@ -93,7 +93,7 @@ public class Aligner {
             islands[i].setOnMouseClicked(e -> {
                 if(!disabled) {
                     if (e.getButton() == MouseButton.PRIMARY) {
-                        handler.selectMovingSubject(islands[finalI1], model.getPlayers().length);
+                        handler.selectMovingSubject(islands[finalI1], model.getPlayers().length, moving_studs_container, dining_area);
                     } else {
                         mn_menu.show(islands[finalI1], e.getScreenX(), e.getScreenY());
                     }
@@ -204,13 +204,13 @@ public class Aligner {
         });
     }
 
-    private Label getWhiteLabel(String text){
+    public static Label getWhiteLabel(String text){
         Label l = new Label(text);
         l.setTextFill(Paint.valueOf("#ffffff"));
         return l;
     }
 
-    private Label getBlackLabel(String text){
+    public static Label getBlackLabel(String text){
         Label l = new Label(text);
         l.setTextFill(Paint.valueOf("#000000"));
         return l;
@@ -312,7 +312,7 @@ public class Aligner {
         }
     }
 
-    public void drawDiningHall(Group school_elements, School school, Color[] sorted_stud_colors, int nof_players) {
+    public void drawDiningHall(Group school_elements, School school, Color[] sorted_stud_colors, int nof_players, TitledPane moving_studs_container) {
         float off = Positions.DINING_HALL_STUDENTS.getXOff();
         float[] xoff = {0, off, 2*off, 3*off, 4*off};
         float[] yoff = new float[5];
@@ -328,19 +328,20 @@ public class Aligner {
             }
             index_col++;
         }
-        Rectangle dining_area = new Rectangle();
+        dining_area = new Rectangle();
         dining_area.setOpacity(0);
+        dining_area.setFill(new ImagePattern(deliverer.getClickImage()));
         dining_area.setX(223);
         dining_area.setY(250);
         dining_area.setWidth(200);
         dining_area.setHeight(290);
         ImageView iv = new ImageView();
         iv.getProperties().put("type", "dining");
-        dining_area.setOnMouseClicked(e -> {if(!disabled) handler.selectMovingSubject(iv, nof_players); else handler.showWrongTurnPopUp();});
+        dining_area.setOnMouseClicked(e -> {if(!disabled) handler.selectMovingSubject(iv, nof_players, moving_studs_container, dining_area); else handler.showWrongTurnPopUp();});
         school_elements.getChildren().add(dining_area);
     }
 
-    public void drawEntrance(Group school_elements, School school, int nof_players){
+    public void drawEntrance(Group school_elements, School school, int nof_players, TitledPane moving_studs_container){
         int xoff = 0, yoff = 0, count = 0;
         Map<Color, Integer> students = school.getEntranceStudents();
         for(Color col : students.keySet()){
@@ -350,9 +351,10 @@ public class Aligner {
                 );
                 student.setFitWidth(Positions.ENTRANCE_STUDENTS.getWidth());
                 student.setFitHeight(Positions.ENTRANCE_STUDENTS.getHeight());
+                student.setEffect(null);
                 student.setTranslateX(Positions.ENTRANCE_STUDENTS.getX() + xoff * Positions.ENTRANCE_STUDENTS.getXOff());
                 student.setTranslateY(Positions.ENTRANCE_STUDENTS.getY() + yoff * Positions.ENTRANCE_STUDENTS.getYOff());
-                student.setOnMouseClicked(e -> {if(!disabled) handler.selectMovingSubject(student, nof_players); else handler.showWrongTurnPopUp();});
+                student.setOnMouseClicked(e -> {if(!disabled) handler.selectMovingSubject(student, nof_players, moving_studs_container, dining_area); else handler.showWrongTurnPopUp();});
                 student.getProperties().put("type", "student");
                 student.getProperties().put("color", col);
                 school_elements.getChildren().add(student);
@@ -495,7 +497,7 @@ public class Aligner {
         alignIslands(island_groups, subscene, islands, mothernature_img);
     }
 
-    public void copySchool(School school, boolean mine, AnchorPane player_container, String username, VBox coin_container){
+    public void copySchool(School school, boolean mine, AnchorPane player_container, String username, VBox coin_container, TitledPane moving_studs_container){
         AnchorPane pane = mine ? player_container : null;
         //removes each non-imageview child
         if(pane.getChildren().size() > 2) pane.getChildren().remove(2);
@@ -507,8 +509,8 @@ public class Aligner {
         //Professors
         drawProfessors(school_elements, sorted_stud_colors, username);
         //Students
-        drawDiningHall(school_elements, school, sorted_stud_colors, model.getPlayers().length);
-        drawEntrance(school_elements, school, model.getPlayers().length);
+        drawDiningHall(school_elements, school, sorted_stud_colors, model.getPlayers().length, moving_studs_container);
+        drawEntrance(school_elements, school, model.getPlayers().length, moving_studs_container);
         pane.getChildren().add(school_elements);
         /*int coins = model.getPlayerByUsername(username).getCoins();
         for(int i = 0; i < coins; i++){ //@@COINS@@
@@ -677,6 +679,7 @@ public class Aligner {
                 }
                 double x = subscene.getWidth() / 2 + Math.cos(angle) * ISLAND_SIZE * 4.4 + xoff - ISLAND_SIZE / 2;
                 double y = subscene.getHeight() / 2 + Math.sin(angle) * ISLAND_SIZE * 4.4 + yoff - ISLAND_SIZE / 2 + temp_yoff;
+                islands[count].setEffect(null);
                 setIslandPos(islands[count], x, y, mothernature_img);
                 count++;
             }
