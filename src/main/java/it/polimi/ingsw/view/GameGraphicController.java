@@ -3,6 +3,7 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.global.MessageSender;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.*;
+import it.polimi.ingsw.model.utils.packets.StudentLocation;
 import it.polimi.ingsw.view.main_game.Aligner;
 import it.polimi.ingsw.view.main_game.Deliverer;
 import it.polimi.ingsw.view.main_game.Handler;
@@ -79,9 +80,15 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     private VBox coin_container;
     @FXML
     private Tab turn_status;
+
     @FXML
     private Button play_assistant, cc_play_button;
 
+    @FXML
+    private TitledPane students_to_move, phase_information;
+
+    @FXML
+    private Accordion turn_info;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -119,6 +126,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         aligner.createCloudsGroup(clouds_container, clouds);
         //creates the root
         aligner.createRoot(subscene, islands_container, clouds_container);
+
     }
 
     /**
@@ -173,8 +181,10 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
             if(action.getGamePhase().equals(GamePhase.CORRECT)){
                 disabled = true;
                 aligner.disable();
+
                 play_assistant.setDisable(true);
                 cc_play_button.setDisable(true);
+
                 TurnStatus.setText("Wait until the other players have finished their turn");
                 TurnStatusBar.setVisible(true);
                 turn_status.setText("Wait for your turn");
@@ -201,14 +211,18 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
         Platform.runLater(() -> {
             TurnStatus.setText("It's your turn!");
             turn_status.setText("It's your turn");
+
             play_assistant.setDisable(false);
             cc_play_button.setDisable(false);
+
             disabled = false;
             aligner.enable();
             TurnStatusBar.setVisible(false);
+
             if(gamephases.contains(GamePhase.PUT_ON_CLOUDS)){
                 handler.sendPutOnCloudsRequest();
             }
+            setPhase_information(gamephases);
             //TODO: assegno last_sent ogni volta + se mando drain_cloud e ricevo correct e ottengo questa lista allora invio put_on_clouds
         });
     }
@@ -249,5 +263,41 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
 
     public void resetGameboard() {
         setGameBoard(model);
+    }
+
+    public void info_turn(List<StudentLocation> move_students){
+        String move_students_string = move_students.toString();
+        String[] split = move_students_string.split(",");
+        String output = "Moving: ";
+        for(int i = 0; i<split.length; i++){
+            output = output.concat(split[i]).concat("\n");
+        }
+        output = output.replaceAll("->", "into");
+        output = output.replaceAll("100", "Dining Hall");
+        output = output.replace("[","");
+        output = output.replace("]","");
+
+        output = output.replace("11","cloud 12");
+        output = output.replace("10","cloud 11");
+        output = output.replace("9","cloud 10");
+        output = output.replace("8","cloud 9");
+        output = output.replace("7","cloud 8");
+        output = output.replace("6","cloud 7");
+        output = output.replace("5","cloud 6");
+        output = output.replace("4","cloud 5");
+        output = output.replace("3","cloud 4");
+        output = output.replace("2","cloud 3");
+        output = output.replace("1","cloud 2");
+        output = output.replace("0","cloud 1");
+
+        students_to_move.setContent(new TextArea(output));
+    }
+
+    public void setPhase_information(List<GamePhase> gamephases){
+        String gamephases_available = gamephases.toString().replaceAll("_", " ");
+        gamephases_available = gamephases_available.replace("[","");
+        gamephases_available = gamephases_available.replace("]","");
+
+        phase_information.setContent(new TextArea("You can choose between these phases:\n" + gamephases_available));
     }
 }
