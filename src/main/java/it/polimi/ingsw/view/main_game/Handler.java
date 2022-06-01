@@ -11,9 +11,11 @@ import it.polimi.ingsw.view.GameGraphicController;
 import it.polimi.ingsw.view.PopUpLauncher;
 import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.control.Accordion;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import it.polimi.ingsw.view.GameGraphicController;
 
 import java.net.SocketException;
 import java.util.ArrayList;
@@ -221,7 +223,10 @@ public class Handler {
         System.out.println("SELECT MOVING SUBJECT");
         System.out.println(move_students);
         System.out.println(node.getProperties().get("type"));
-        if(move_students.isEmpty()) move_students.add(new StudentLocation()); //adding first packet eventually
+        if(move_students.isEmpty()){
+            move_students.add(new StudentLocation());             //adding first packet eventually
+            controller.info_turn(move_students);
+        }
         if(node.getProperties().get("type").equals("student")){
             if(node instanceof ImageView) applySelectedEffect((ImageView) node);
             if(move_students.get(move_students.size()-1).getIsland_index() == -1){ //no island selected yet
@@ -231,6 +236,7 @@ public class Handler {
                 }
             } else {
                 move_students.add(new StudentLocation(-1, node));
+                controller.info_turn(move_students);
             }
         } else if(node.getProperties().get("type").equals("island")) {
             //it's an island: create the action and move the student there
