@@ -49,6 +49,10 @@ public class ClientLogic implements GameBoardContainer {
         return response;
     }
 
+    /**
+     * sets the current gameboard
+     * @param model gameboard representation
+     */
     public synchronized void setGameBoard(GameBoard model){
         this.model = model;
         System.out.println(model);
@@ -397,6 +401,10 @@ public class ClientLogic implements GameBoardContainer {
         return getFeedback(act);
     }
 
+    /**
+     * starts the client logic flow
+     * @throws SocketException network error
+     */
     public void start() throws SocketException {
         System.out.println(StringViewUtility.getViewString("client_started"));
         String username = InputUtils.getString(StringViewUtility.getViewString("username_choice"));

@@ -258,8 +258,10 @@ public class Aligner {
                 Color prof_col = model.getProfessors()[t].getColor();
                 ImageView prof_img = deliverer.getProfessorImage(prof_col);
                 Player detained = model.getProfessors()[t].getPlayer();
-                if(detained == null || !detained.equals(others[i]))
+                if(detained == null || !detained.equals(others[i])) {
                     handler.applyNotPresentEffect(prof_img);
+                    prof_img.setOpacity(0.5);
+                }
                 else prof_img.setEffect(new DropShadow());
                 professors.getChildren().add(prof_img);
             }

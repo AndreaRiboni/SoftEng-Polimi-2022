@@ -19,6 +19,10 @@ public class GameController extends Controller {
         HasPlayed = new ArrayList<>();
     }
 
+    /**
+     * creates the gameboard
+     * @throws EriantysException game-semantic error
+     */
     public void initializeGame() throws EriantysException {
         model.initialize(action.getNOfPlayers(), (int) (Math.random() * GameBoard.NOF_ISLAND));
     }
@@ -45,6 +49,10 @@ public class GameController extends Controller {
         }
     }
 
+    /**
+     * determines wether the match has ended
+     * @return winner's username or null if the game hasn't ended
+     */
     public String checkForEnd(){
         for(Player playing : model.getPlayers()) {
             if (playing.getNumberOfPlacedTowers() == 8 || playing.getNofPlayableCards() == 0) {
@@ -70,17 +78,24 @@ public class GameController extends Controller {
         return null;
     }
 
+    /**
+     * adds the specified player to the history
+     * @param player_id id of the player who has just played
+     */
     public void updatePlayer(int player_id){
         HasPlayed.add(model.getPlayers()[player_id]);
     }
 
+    /**
+     * deletes the history of who has played
+     */
     public void resetOrder(){
         HasPlayed.clear();
     }
 
     /**
      * Verifies that the players are following the neutral order (0->1->2->3)
-     * @throws EriantysException
+     * @throws EriantysException wrong turn
      */
     public void verifyNeutralOrder() throws EriantysException {
         Player playing = model.getPlayers()[action.getPlayerID()];
@@ -97,6 +112,10 @@ public class GameController extends Controller {
         }
     }
 
+    /**
+     * gets who should be playing next given the fact we're following the neutral order (0,1,2...)
+     * @return player id
+     */
     public int getNextNeutralOrder(){
         if(HasPlayed.isEmpty()) return 0; //no one has played it
         for(Player p : HasPlayed){
@@ -131,7 +150,6 @@ public class GameController extends Controller {
                 String.format(EriantysException.WRONG_TURN, lowest, playing.getTurnValue())
             );
         } else log.info("valore ok");
-        //TODO: this implementation can be used only during MOVE_3_STUDENTS, but not during any other phases
     }
 
     private boolean everyoneHasPlayed(){
@@ -144,6 +162,10 @@ public class GameController extends Controller {
         return distinct == model.getNofPlayers();
     }
 
+    /**
+     * gets who should be playing next given the fact we're following the weighted order (sorted by assistcards)
+     * @return player id
+     */
     public int getNextWeightedOrder(){
         //who has the lowest turn_value
         int lowest = Integer.MAX_VALUE;
@@ -185,11 +207,18 @@ public class GameController extends Controller {
         }
     }
 
+    /**
+     * gets the id of the player who has played last
+     * @return last player id
+     */
     public int getLastPlaying(){
         Player last = HasPlayed.get(HasPlayed.size() - 1);
         return last.getID();
     }
 
+    /**
+     * ends the additional effects (given by character cards)
+     */
     public void resetAdditionalEffects() {
         model.unassignProfsTemporaryPlayers();
         for(Player player : model.getPlayers()){

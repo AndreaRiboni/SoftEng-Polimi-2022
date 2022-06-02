@@ -18,7 +18,6 @@ public class FlowChecker {
     private GamePhase[] avoid_edges;
     private static final Logger log = LogManager.getRootLogger();
 
-
     public FlowChecker(){
         last = GamePhase.START;
         count = new HashMap<>();
@@ -27,38 +26,70 @@ public class FlowChecker {
         doNotAvoidConditionEdge();
     }
 
+    /**
+     * specify what gamephases we should avoid playing even if they are theoretically acceptable
+     * @param ce gamephases to avoid
+     */
     public void avoidConditionEdge(GamePhase... ce){
         avoid_edges = ce;
     }
 
+    /**
+     * specify to accept every single acceptable gamephases
+     */
     public void doNotAvoidConditionEdge(){
         avoid_edges = null;
     }
 
+    /**
+     * sets the last played gamephases
+     * @param gp
+     */
     public void setLastGamePhase(GamePhase gp){
         log.info("GamePhase " + gp + " has been processed correctly");
         last = gp;
     }
 
+    /**
+     * returns the value of a specific counter
+     * @param name name of the counter
+     * @return counter value
+     */
     public int getSubCount(String name){
         return count.getOrDefault(name, -1);
     }
 
+    /**
+     * Creates a counter if it doesn't exists (and initializes it with 0)
+     * @param name name of the counter
+     */
     public void addSubCountIfNotPresent(String name){
         if(!count.containsKey(name))
             count.put(name, 0);
     }
 
+    /**
+     * Increments a counter
+     * @param name counter name
+     */
     public void incrementSubCount(String name){
         int temp = getSubCount(name);
         deleteSubCount(name);
         count.put(name, temp + 1);
     }
 
+    /**
+     * Deletes a counter
+     * @param name counter name
+     */
     public void deleteSubCount(String name){
         count.remove(name);
     }
 
+    /**
+     * Resets a counter value. If the counter doesn't exists it will be initialized
+     * @param name counter name
+     */
     public void resetSubCount(String name){
         if(count.containsKey(name)){
             count.remove(name);
@@ -68,6 +99,11 @@ public class FlowChecker {
         }
     }
 
+    /**
+     * Throws an exception if the proposed gamephases can not be accepted
+     * @param gp gamephase to propose
+     * @throws EriantysException invalid gameflow exception
+     */
     public void assertPhase(GamePhase gp) throws EriantysException {
         if(!getAcceptedGamephases().contains(gp)){
             log.error("The received gamephase can not be processed (" + gp + ")");
@@ -81,6 +117,10 @@ public class FlowChecker {
         }
     }
 
+    /**
+     * gets the acceptable gamephases
+     * @return acceptable gamephases list
+     */
     public List<GamePhase> getAcceptedGamephases() {
         return getNextPhases(last);
     }
@@ -116,6 +156,11 @@ public class FlowChecker {
         gamephases.put(GamePhase.USE_CHARACTER_CARD, usecharactercard);
     }
 
+    /**
+     * gets the next acceptable gamephases starting from the proposed gamephase
+     * @param gp proposed gamephase
+     * @return gamephases list
+     */
     public List<GamePhase> getNextPhases(GamePhase gp){
         List<GamePhase> next = new ArrayList<>(gamephases.get(gp));
         if(avoid_edges != null) {

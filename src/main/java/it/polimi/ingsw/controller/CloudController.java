@@ -13,6 +13,10 @@ public class CloudController extends Controller{
         cloud_index = -1;
     }
 
+    /**
+     * re-fills the clouds
+     * @throws EriantysException game-semantic error
+     */
     public void putOnCloud() throws EriantysException {
         int NOF_Players = model.getNofPlayers();
 

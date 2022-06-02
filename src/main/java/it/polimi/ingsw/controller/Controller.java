@@ -11,6 +11,10 @@ public abstract class Controller {
         this.model = model;
     }
 
+    /**
+     * sets the action to be analyzed
+     * @param action action to refer to
+     */
     public void setAction(Action action){
         this.action = action;
     }

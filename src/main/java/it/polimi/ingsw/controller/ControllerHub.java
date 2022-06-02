@@ -44,6 +44,11 @@ public class ControllerHub {
         keep_going = false;
     }
 
+    /**
+     * manages an action during the match
+     * @param action action to perform
+     * @return "true" if everything went right, the error message otherwise
+     */
     public String update(Action action) {
         try {
             log.info("Received an update - Analyzing " + action.getGamePhase());
@@ -172,6 +177,10 @@ public class ControllerHub {
         return "true";
     }
 
+    /**
+     * Returns what are the next (and only acceptable) gamephases
+     * @return
+     */
     public List<GamePhase> getAcceptedGamephases() {
         return flow.getAcceptedGamephases();
     }
@@ -186,12 +195,20 @@ public class ControllerHub {
 
     private int getLastPlaying(){ return g_controller.getLastPlaying(); }
 
+    /**
+     * Determines who's the next player
+     * @return next player's id
+     */
     public int getNextAutomaticOrder(){
         //TODO: dopo il primo turno l'ordine di gioco è una versione modificara di NeutralOrder
         log.info("Getting next (automatic) [keep going: " + keep_going + ", follow neutral: " + follow_neutral_order);
         return keep_going ? getLastPlaying() : follow_neutral_order ? getNextNeutralOrder() : getNextWeightedOrder();
     }
 
+    /**
+     * determines if the game has ended
+     * @return the name of the winner if the game has ended, null otherwise
+     */
     public String hasGameEnded(){
         String str = g_controller.checkForEnd();
         if(str == null) return null;

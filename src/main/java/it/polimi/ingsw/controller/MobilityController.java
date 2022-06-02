@@ -26,6 +26,10 @@ public class MobilityController extends Controller {
         return true;
     }
 
+    /**
+     * moves the selected students from the entrance
+     * @throws EriantysException game-semantic error
+     */
     public void move3Studs() throws EriantysException {
         //get the three students' colors and places
         Player player = model.getPlayers()[action.getPlayerID()];

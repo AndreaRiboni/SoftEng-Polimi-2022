@@ -23,6 +23,10 @@ public class CharacterCardController extends Controller {
         this.card = card;
     }
 
+    /**
+     * orchestrates the game-flow related to a character card (from it being drawn to its effect)
+     * @throws EriantysException game-semantic error
+     */
     public void manage() throws EriantysException {
         System.out.println("Received character card index: " + action.getCharacterCardIndex());
         CharacterCard temp = model.getCharacterCard(action.getCharacterCardIndex());
@@ -45,6 +49,10 @@ public class CharacterCardController extends Controller {
         System.out.println("Performed");
     }
 
+    /**
+     * orchestrates the actual in-turn effect of a character card
+     * @throws EriantysException game-semantic error
+     */
     public void performAction() throws EriantysException {
         switch(card.getBehaviorName()){
             case LOCK:

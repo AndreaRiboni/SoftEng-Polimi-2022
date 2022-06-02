@@ -13,18 +13,19 @@ public class AssistCardController extends Controller {
         super(model);
     }
 
+    /**
+     * set the specified assist card as played
+     * @throws EriantysException game-semantic error
+     */
     public void drawAssistCard() throws EriantysException {
-        /*the assist cards are drawn in order (id) and we can not play a card which has already
-        been played by another player during the same round unless every single card in our hands
-        has already been played. In this case tho we will be playing after the player who played it first
-        this doesn't need any additional control since we're searching the player with the lower turn_value
-        from id 0 to id 3*/
-        //TODO: has this card already been played? then throw the exception
-        //TODO: a check on the turn's order could be useful
         log.info("Requested assist-card: " + action.getAssistCardIndex());
         model.getPlayers()[action.getPlayerID()].playAssistCard(action.getAssistCardIndex()); //code to actually play the card
     }
 
+    /**
+     * determines wether the card can be played (nothing happens) or not (error)
+     * @throws EriantysException game-semantic error
+     */
     public void check() throws EriantysException{
         AssistCard[] cards = model.getPlayers()[action.getPlayerID()].getWizard().getCards();
         AssistCard card = cards[action.getAssistCardIndex()];
@@ -44,6 +45,9 @@ public class AssistCardController extends Controller {
         }
     }
 
+    /**
+     * sets null the last used assist card for each player
+     */
     public void resetPlayed() {
         for(int i = 0; i< model.getNofPlayers(); i++){
             model.getPlayers()[i].resetAssistCard();

@@ -35,10 +35,17 @@ public class NetworkListener extends Thread{
         isForGUI = false;
     }
 
+    /**
+     * sets this networklistener more compatible with the gui (uses the console less)
+     */
     public void setForGUI(){
         isForGUI = true;
     }
 
+    /**
+     * returns the available gamephases if the response is set to be ready-to-read
+     * @return available gamephases list / null
+     */
     public synchronized List<GamePhase> getPhasesIfReady(){
         if(response_ready && gamephases_response != null) {
             response_ready = false;
@@ -47,6 +54,10 @@ public class NetworkListener extends Thread{
         else return null;
     }
 
+    /**
+     * returns the available response if it is set to be ready-to-read
+     * @return response / null
+     */
     public synchronized Action getResponseIfReady(){
         if(response_ready && act_response != null){
             response_ready = false;
@@ -55,6 +66,10 @@ public class NetworkListener extends Thread{
         else return null;
     }
 
+    /**
+     * sets the available gamephases response
+     * @param gamephases available gamephases
+     */
     public synchronized void setGamephasesResponse(List<GamePhase> gamephases){
         if(isForGUI){
             for(GameBoardContainer gbc : client_logic)
@@ -66,6 +81,10 @@ public class NetworkListener extends Thread{
         }
     }
 
+    /**
+     * sets the response
+     * @param detailed_response received response
+     */
     public synchronized void setResponse(Action detailed_response){
         if(isForGUI){
             for(GameBoardContainer gbc : client_logic)
@@ -77,12 +96,19 @@ public class NetworkListener extends Thread{
         }
     }
 
+    /**
+     * sets the gameboard response
+     * @param model received gameboard
+     */
     public synchronized void setGameBoardResponse(GameBoard model){
         for(GameBoardContainer gbc : client_logic)
             if(gbc != null)
                 gbc.setGameBoard(model);
     }
 
+    /**
+     * launches the network listener which keeps listening on the network until the game has ended
+     */
     public void run(){
         boolean game_ended = false;
         while(!game_ended){
@@ -122,6 +148,10 @@ public class NetworkListener extends Thread{
         }
     }
 
+    /**
+     * adds an observer
+     * @param container observer
+     */
     public void addGameBoardContainer(GameBoardContainer container){
         client_logic.add(container);
     }

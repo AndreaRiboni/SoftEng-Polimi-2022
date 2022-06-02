@@ -235,7 +235,7 @@ public class Handler {
         System.out.println(move_students);
         System.out.println(node.getProperties().get("type"));
         RotateTransition rt = new RotateTransition();
-        rt.setByAngle(0);
+        rt.setFromAngle(0);
         rt.setToAngle(360);
         if(move_students.isEmpty()){
             move_students.add(new StudentLocation());             //adding first packet eventually

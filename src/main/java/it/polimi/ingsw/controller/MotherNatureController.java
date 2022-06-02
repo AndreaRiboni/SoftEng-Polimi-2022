@@ -12,6 +12,10 @@ public class MotherNatureController extends Controller {
         super(model);
     }
 
+    /**
+     * moves mother nature by the specified number of steps
+     * @throws EriantysException game-semantic error
+     */
     public void moveMotherNature() throws EriantysException {
         //TODO: posso muovermi di questo numero di passi? Verificare con la carta assistente
         //action.getPlayerID() --> getLastPlayedCard() --> getValue >= mn_increment
