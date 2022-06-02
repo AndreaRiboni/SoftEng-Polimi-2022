@@ -11,16 +11,14 @@ import it.polimi.ingsw.view.GameGraphicController;
 import it.polimi.ingsw.view.PopUpLauncher;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
-import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
+import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import it.polimi.ingsw.view.GameGraphicController;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -152,6 +150,7 @@ public class Handler {
 
     private int getRequiredSteps(GameBoard model, int from, int to){
         Island isl_from = model.getIslands()[from];
+        System.out.println("you're startgin from " + from + " and moving to " + to);
         int steps = 0;
         boolean found = false;
         System.out.println("Moving from " + from + " to " + to);
@@ -174,10 +173,12 @@ public class Handler {
         return -1;
     }
 
-    public void sendMotherNatureRequest(int index, GameBoard model){
+    public void sendMotherNatureRequest(Group island_target, GameBoard model){
         Action movemother = new Action();
         movemother.setGamePhase(GamePhase.MOVE_MOTHERNATURE);
         //calculate the increment
+        int index = (int) island_target.getProperties().get("index");
+        System.out.println("this is send mother nature request of island " + index);
         int increment = getRequiredSteps(model, model.getMotherNature().getIslandIndex(), index);
         movemother.setMothernatureIncrement(increment);
         try {
@@ -221,7 +222,8 @@ public class Handler {
         }
         Action usecc = cc_handler.manageBehavior(chosen_cc.getID());
         try {
-            msg.send(usecc);
+            if(usecc != null)
+                msg.send(usecc);
         } catch (SocketException e) {
             e.printStackTrace();
         }
@@ -251,8 +253,9 @@ public class Handler {
         } else if(node.getProperties().get("type").equals("island")) {
             //it's an island: create the action and move the student there
             int island_index = (Integer) node.getProperties().get("index");
+            System.out.println("Island selected: " + island_index);
             if(last_selected != null) { //if we already selected a student we can set its island destination
-                if(!move_students.isEmpty()) {
+                if(!move_students.isEmpty() && move_students.get(move_students.size()-1).getColor()!=null) {
                     move_students.get(move_students.size() - 1).setIsland_index(island_index);
                     //lock this student
                     move_students.get(move_students.size() - 1).getColor().setOnMouseClicked(e -> {

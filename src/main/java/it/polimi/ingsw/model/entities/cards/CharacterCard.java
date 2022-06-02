@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.entities.cards;
 import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.GenericUtils;
+import javafx.scene.control.Tooltip;
 
 import java.io.Serializable;
 
@@ -80,5 +81,9 @@ public class CharacterCard implements Serializable {
 
     public void getLockBack() {
         behavior.getLockBack();
+    }
+
+    public String getDescription() {
+        return effect;
     }
 }

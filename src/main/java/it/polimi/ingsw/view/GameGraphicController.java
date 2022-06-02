@@ -77,8 +77,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     @FXML
     private AnchorPane char_cards_container;
     @FXML
-    private VBox coin_container;
-    @FXML
     private Tab turn_status;
     @FXML
     private Button play_assistant, cc_play_button;
@@ -152,7 +150,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
               popUp.showAndByeBye();
             }
             //copying my school
-            aligner.copySchool(model.getPlayerByUsername(username).getSchool(), true, player_container, username, coin_container, students_to_move_container);
+            aligner.copySchool(model.getPlayerByUsername(username).getSchool(), true, player_container, username, students_to_move_container);
             //copying islands and clouds
             try {
                 aligner.copyIslands(subscene, islands, mothernature_img);

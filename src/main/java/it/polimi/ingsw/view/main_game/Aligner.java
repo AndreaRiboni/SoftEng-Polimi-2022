@@ -41,10 +41,22 @@ public class Aligner {
     private boolean disabled;
     private GameBoard model;
     private Rectangle dining_area;
+    private Label[] island_indexes;
+    private ImageView[] island_icons;
+    private Group[] islands;
 
     public Aligner(Handler handler, Deliverer deliverer){
         this.handler = handler;
         this.deliverer = deliverer;
+        island_indexes = new Label[12];
+        island_icons = new ImageView[12];
+        islands = new Group[12];
+        for(int i = 0; i < island_indexes.length; i++){
+            island_indexes[i] = getWhiteLabel(" " + (i+1)+ " ");
+            island_indexes[i].setFont(new Font(30)); // set to Label
+            island_indexes[i].setBackground((new Background(new BackgroundFill(javafx.scene.paint.Color.rgb(0, 0, 0), new CornerRadii(0), new Insets(0)))));
+            island_indexes[i].setTranslateY(ISLAND_SIZE * 0.4);
+        }
     }
 
     public void disable(){
@@ -60,50 +72,49 @@ public class Aligner {
     }
 
     public void createIslandGroup(Group islands_container, Group[] islands, TitledPane moving_studs_container){
+        this.islands = islands;
         for(int i = 0; i < islands.length; i++){
             islands[i] = new Group();
-            ImageView island_icon  = new ImageView(
+            island_icons[i]  = new ImageView(
                     new Image(String.valueOf(getClass().getResource("/Islands/island" + i % 2 + ".png")))
             );
-            island_icon.setFitHeight(ISLAND_SIZE);
-            island_icon.setFitWidth(ISLAND_SIZE);
-            island_icon.getProperties().put("type", "island");
-            island_icon.getProperties().put("index", i);
+            island_icons[i].setFitHeight(ISLAND_SIZE);
+            island_icons[i].setFitWidth(ISLAND_SIZE);
+            island_icons[i].getProperties().put("type", "island");
+            island_icons[i].getProperties().put("index", i);
             GridPane students = new GridPane();
             students.getProperties().put("type", "island-students");
             students.setHgap(1);
             students.setVgap(2);
-            Label index = getWhiteLabel(" " + (i+1)+ " ");
-            index.setFont(new Font(30)); // set to Label
-            index.setBackground((new Background(new BackgroundFill(javafx.scene.paint.Color.rgb(0, 0, 0), new CornerRadii(0), new Insets(0)))));
-            index.setTranslateY(ISLAND_SIZE * 0.4);
-            StackPane island_icon_indexed = new StackPane(island_icon, index);
-            islands[i].getChildren().addAll(island_icon_indexed, students, deliverer.getMotherNatureImage());
+            Label index = island_indexes[i];
+            StackPane island_icon_indexed = new StackPane(island_icons[i], index);
+            this.islands[i].getChildren().addAll(island_icon_indexed, students, deliverer.getMotherNatureImage());
             islands_container.getChildren().add(islands[i]);
             //Mother nature menu
             ContextMenu mn_menu = new ContextMenu();
             MenuItem request_mn_item = new MenuItem("Move mother nature here");
             int finalI = i;
             request_mn_item.setOnAction(e -> {
-                handler.sendMotherNatureRequest(finalI, model);
+                System.out.println("clicked on menu of islands " + this.islands[finalI].getProperties().get("index"));
+                handler.sendMotherNatureRequest(this.islands[finalI], model);
             });
             mn_menu.getItems().add(request_mn_item);
-            students.setOnContextMenuRequested(e -> mn_menu.show(island_icon, e.getScreenX(), e.getScreenY()));
+            students.setOnContextMenuRequested(e -> mn_menu.show(island_icons[finalI], e.getScreenX(), e.getScreenY()));
             //adding mouse management to island
-            int finalI1 = i;
-            islands[i].setOnMouseClicked(e -> {
+            this.islands[i].getProperties().put("type", "island");
+            this.islands[i].getProperties().put("index", i);
+            this.islands[i].setOnMouseClicked(e -> {
+                System.out.println("clicked on islands " + this.islands[finalI].getProperties().get("index"));
                 if(!disabled) {
                     if (e.getButton() == MouseButton.PRIMARY) {
-                        handler.selectMovingSubject(islands[finalI1], model.getPlayers().length, moving_studs_container, dining_area);
+                        handler.selectMovingSubject(this.islands[finalI], model.getPlayers().length, moving_studs_container, dining_area);
                     } else {
-                        mn_menu.show(islands[finalI1], e.getScreenX(), e.getScreenY());
+                        mn_menu.show(this.islands[finalI], e.getScreenX(), e.getScreenY());
                     }
                 } else {
                     handler.showWrongTurnPopUp();
                 }
             });
-            islands[i].getProperties().put("type", "island");
-            islands[i].getProperties().put("index", i);
         }
     }
 
@@ -236,7 +247,7 @@ public class Aligner {
                 ImageView tower_img = deliverer.getPlacedTowerImage(others[i].getColor());
                 if(t >= others[i].getNumberOfUnplacedTowers()){
                     handler.applyNotPresentEffect(tower_img);
-                }
+                } else tower_img.setEffect(new DropShadow());
                 towers.getChildren().add(tower_img);
             }
             others_container[i].getChildren().add(towers);
@@ -249,6 +260,7 @@ public class Aligner {
                 Player detained = model.getProfessors()[t].getPlayer();
                 if(detained == null || !detained.equals(others[i]))
                     handler.applyNotPresentEffect(prof_img);
+                else prof_img.setEffect(new DropShadow());
                 professors.getChildren().add(prof_img);
             }
             others_container[i].getChildren().add(professors);
@@ -260,10 +272,13 @@ public class Aligner {
                 if(dining.getOrDefault(col, 0) == 0){
                     ImageView empty_stud = deliverer.getStudentImage(col);
                     handler.applyNotPresentEffect(empty_stud);
+                    empty_stud.setOpacity(0);
                     diningbox.getChildren().add(empty_stud);
                 } else {
                     for (int t = 0; t < dining.getOrDefault(col, 0); t++) {
-                        diningbox.getChildren().add(deliverer.getStudentImage(col));
+                        ImageView din_img = deliverer.getStudentImage(col);
+                        din_img.setEffect(new DropShadow());
+                        diningbox.getChildren().add(din_img);
                     }
                 }
                 others_container[i].getChildren().add(diningbox);
@@ -274,10 +289,23 @@ public class Aligner {
             HBox entrancebox = new HBox();
             for(Color col : Color.getStudentColors()) {
                 for (int t = 0; t < entrance.getOrDefault(col, 0); t++) {
-                    entrancebox.getChildren().add(deliverer.getStudentImage(col));
+                    ImageView ent_img = deliverer.getStudentImage(col);
+                    ent_img.setEffect(new DropShadow());
+                    entrancebox.getChildren().add(ent_img);
                 }
             }
             others_container[i].getChildren().add(entrancebox);
+            //Coins
+            others_container[i].getChildren().add(getWhiteLabel("Coins"));
+            int coins = others[i].getCoins();
+            HBox coins_box = new HBox();
+            for(int c = 0; c < coins; c++){
+                ImageView coin_img = deliverer.getCoinImage();
+                coin_img.setEffect(new DropShadow());
+                coins_box.getChildren().add(coin_img);
+                if(c>=10) break;
+            }
+            others_container[i].getChildren().add(coins_box);
             //Final
             grid.add(others_container[i], i, 0);
         }
@@ -416,6 +444,10 @@ public class Aligner {
                 cc_values.getItems().add(ToRep.getName() + " (" + GenericUtils.getOrdinal(i+1) + ")");
                 //Setting image
                 char_card[i].setImage(deliverer.getCharacterCardImage(ToRep.getID()));
+                Tooltip description = new Tooltip(ToRep.getDescription().replace("\t", ""));
+                Tooltip.install(char_card[i], description);
+                Tooltip.install(cc_coins[i], description);
+                Tooltip.install(cc_content[i], description);
                 //Centering
                 //Setting content
                 int row = 0, colm = 0;
@@ -500,7 +532,7 @@ public class Aligner {
         alignIslands(island_groups, subscene, islands, mothernature_img);
     }
 
-    public void copySchool(School school, boolean mine, AnchorPane player_container, String username, VBox coin_container, TitledPane moving_studs_container){
+    public void copySchool(School school, boolean mine, AnchorPane player_container, String username, TitledPane moving_studs_container){
         AnchorPane pane = mine ? player_container : null;
         //removes each non-imageview child
         if(pane.getChildren().size() > 2) pane.getChildren().remove(2);
@@ -515,15 +547,19 @@ public class Aligner {
         drawDiningHall(school_elements, school, sorted_stud_colors, model.getPlayers().length, moving_studs_container);
         drawEntrance(school_elements, school, model.getPlayers().length, moving_studs_container);
         pane.getChildren().add(school_elements);
-        /*int coins = model.getPlayerByUsername(username).getCoins();
-        for(int i = 0; i < coins; i++){ //@@COINS@@
-            coin_container.getChildren().add(deliverer.getCoinImage());
-            System.out.println("adding coin");
-            if(i >= 10){
-                coin_container.getChildren().add(getWhiteLabel("and " + (coins-10) + " more"));
+        int coins = model.getPlayerByUsername(username).getCoins();
+        VBox coin_container = new VBox();
+        for(int i = 0; i < coins; i++){
+            ImageView coin_img = deliverer.getCoinImage();
+            coin_img.setEffect(new DropShadow());
+            coin_container.getChildren().addAll(coin_img);
+            if(i >= 17){
                 break;
             }
-        }*/
+        }
+        coin_container.setTranslateX(160);
+        coin_container.setTranslateY(110);
+        pane.getChildren().add(coin_container);
     }
 
     public void copyAssistCards(ImageView[] crosses, ImageView[] assistants, String username) { //TODO: FIX blue
@@ -581,24 +617,6 @@ public class Aligner {
                 translate.setToY(y);
                 translate.setNode(child);
                 translate.play();
-                /*if(child.getProperties().get("type")!=null && child.getProperties().get("type").equals("island")){
-                    int index = (int) child.getProperties().get("index");
-                    if(model.getMotherNature().getIslandIndex() == index){
-                        if(index > 6 && index < 12){
-                            handler.mirrorX(mothernature_img);
-                        } else {
-                            handler.unmirrorX(mothernature_img);
-                        }
-                        TranslateTransition tt2 = new TranslateTransition();
-                        tt2.setNode(mothernature_img);
-                        tt2.setFromX(mothernature_img.getTranslateX());
-                        tt2.setFromY(mothernature_img.getTranslateY());
-                        tt2.setDuration(Duration.millis(1600));
-                        tt2.setToX(x);
-                        tt2.setToY(y);
-                        tt2.play();
-                    }
-                }*/
             }
         }
     }
@@ -620,6 +638,9 @@ public class Aligner {
             island_grid.getChildren().clear();
             int new_index = i + offset;
             new_index %= 12;
+            //editing label corresponding to new index
+            island_indexes[i].setText(" " + (new_index+1)+ " ");
+            this.islands[i].getProperties().put("index", new_index);
             Map<Color, Integer> island_studs = model_islands[new_index].getStudents();
             int total = GenericUtils.sumValues(island_studs) + (model_islands[new_index].hasTower() ? 1 : 0);
             if(total == 0) total++;
@@ -657,9 +678,6 @@ public class Aligner {
                 found = true;
             }
         }
-        System.out.println("New start: " + new_start);
-        for(int i = 0; i < islands_groups.length; i++)
-            System.out.println(i + ") " + islands_groups[i]);
         float angle = 0;
         int count = 0;
         int island_number = 0;
@@ -694,6 +712,7 @@ public class Aligner {
 
     //TODO: check that each cc has the correct behavior (#7 hasn't)
     private void addForm(int id, VBox vbox) {
+        System.out.println("adding form for id " + id);
         switch(id){
             case 0:
                 //1 island index array
@@ -702,12 +721,15 @@ public class Aligner {
                 //1 student index array
                 vbox.getChildren().add(getWhiteLabel("This card's students"));
                 vbox.getChildren().add(getIntegerChooser("studentindex-0", 1, 4));
+                System.out.println("added form1");
                 break;
             case 1:
+                System.out.println("added form2");
                 break;
             case 2:
                 vbox.getChildren().add(getWhiteLabel("Chosen island"));
                 vbox.getChildren().add(getIntegerChooser("island-2", 1, 12));
+                System.out.println("added form3");
                 break;
             case 3:
                 break;
@@ -763,6 +785,7 @@ public class Aligner {
     }
 
     private ChoiceBox<Integer> getIntegerChooser(String id, int min, int max){
+        System.out.println("creating choicebox " + id);
         ChoiceBox<Integer> chooser = new ChoiceBox<>();
         chooser.setId(id); //scene.lookup
         chooser.getStyleClass().add("choiceBox");
