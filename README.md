@@ -19,11 +19,10 @@ TBD
 Implemented: complete rules, communication, CLI, GUI, 1 FA
 
 ## Coverage
-| Package |Tested Class | Coverage |
-|:-----------------------|:------------------|:------------------------------------:|
-| Controller | GameController | 86% methods, 73% lines covered
-| Controller | Controller Hub | 70% methods, 75% lines covered
-| Controller | Flow Checker | 93% methods, 95% lines covered
-| Controller | Mobility Controller | 100% methods, 96% lines covered
-| Model | Entities | 100% classes, 76% lines covered
-| Model | Places | 100% classes, 78% lines covered
+Each package has a 100% class coverage
+| Package | Average Line Coverage |
+|:-----------------------|:-----------------------:|
+| Controller | 84% |
+| Model.Entities | 85% |
+| Model.Entities.Cards | 79% |
+| Model.Places | 83% |
