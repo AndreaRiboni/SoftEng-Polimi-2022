@@ -19,7 +19,7 @@ TBD
 Implemented: complete rules, communication, CLI, GUI, 1 FA
 
 ## Coverage
-Each package has a 100% class coverage
+Each package has a 100% class coverage. More details [here](https://github.com/AndreaRiboniPolimi/ing-sw-2022-poidomani-riboni-volpentesta/blob/main/deliverables/full-coverage.md)
 | Package | Average Line Coverage |
 |:-----------------------|:-----------------------:|
 | Controller | 84% |
