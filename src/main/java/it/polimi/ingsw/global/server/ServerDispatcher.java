@@ -37,6 +37,9 @@ public class ServerDispatcher extends Thread {
         }
     }
 
+    /**
+     * dispatches a client into the most appropriate waiting room
+     */
     public void run(){
         try {
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());

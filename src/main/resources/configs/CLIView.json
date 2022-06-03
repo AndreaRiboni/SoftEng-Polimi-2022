@@ -23,9 +23,6 @@
   "other_player_problem": {
     "value": "Someone playing your match has had a problem! The match can not continue"
   },
-  "chosen_cc_index": {
-    "value": "Chosen Character Card index: "
-  },
   "character_index_choice": {
     "value": "Choose the character's index you want to use"
   },

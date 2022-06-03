@@ -99,6 +99,11 @@ public class GameHandler implements Runnable {
         }
     }
 
+    /**
+     * callback to perform after having received an action in order to process it
+     * @param client_action action to process
+     * @throws SocketException network error
+     */
     public synchronized void setAction(Action client_action) throws SocketException {
         String str_response;
         Action response = new Action();
@@ -158,7 +163,9 @@ public class GameHandler implements Runnable {
         }
     }
 
-
+    /**
+     * game-loop
+     */
     @Override
     public void run() {
         try {

@@ -34,6 +34,9 @@ public class ServerNetworkListener extends Thread {
         if(time - timer > 5*60*1000) throw new SocketTimeoutException(); //kicks you out after 5 mins of inactivity
     }
 
+    /**
+     * starts listening on the network
+     */
     public void run(){
         log.info("ServerNetworkListener has started");
         while(true){

@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Action;
 import it.polimi.ingsw.model.utils.GameBoardContainer;
 import it.polimi.ingsw.model.utils.GamePhase;
+import it.polimi.ingsw.model.utils.InputUtils;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -61,7 +62,19 @@ public class LoginController implements Initializable, GameBoardContainer {
 
     private void initializeNetwork(){
         last_sent = null;
-        msg = new MessageSender(ip.getText());
+        boolean is_ip = InputUtils.isIP(ip.getText());
+        String ip_address = InputUtils.isIP(ip.getText()) ? ip.getText() : "localhost";
+        if(!is_ip) {
+            Platform.runLater(
+                    () -> {
+                        PopUpLauncher ip_err = new PopUpLauncher();
+                        ip_err.setTitle("Network error");
+                        ip_err.setMessage("\"" + ip.getText() + "\" isn't a valid IP address. You're being connected to localhost");
+                        ip_err.showAndByeBye();
+                    }
+            );
+        }
+        msg = new MessageSender(ip_address);
         listener = new NetworkListener(msg.getSocket(), msg.getInput(), this);
         listener.setForGUI();
         listener.start();
@@ -106,7 +119,7 @@ public class LoginController implements Initializable, GameBoardContainer {
             initializeNetwork();
         PopUpLauncher alert = new PopUpLauncher();
         String input_user = nickname.getText();
-        if(input_user == null || input_user.isEmpty()){
+        if(InputUtils.isNullOrEmpty(input_user)){
             alert.setTitle("Bad request");
             alert.setMessage("Username can not be empty");
             alert.show();

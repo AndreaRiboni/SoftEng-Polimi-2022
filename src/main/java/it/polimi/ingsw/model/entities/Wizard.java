@@ -47,6 +47,10 @@ public class Wizard implements Serializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * @return this wizard's deck
+     */
     public AssistCard[] getCards() {
         return cards;
     }

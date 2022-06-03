@@ -26,6 +26,10 @@ public class MultiServerLauncher {
         four_players.add(new WaitingRoom(4));
     }
 
+    /**
+     * Starts the multi-server-launcher and forwards the clients to a server dispatcher
+     * @throws IOException
+     */
     public void startServer() throws IOException {
         ServerSocket serverSocket;
         try{

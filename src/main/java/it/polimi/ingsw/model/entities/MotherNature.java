@@ -22,6 +22,11 @@ public class MotherNature implements Serializable {
         avoid_color = null;
     }
 
+    /**
+     * Lets mother nature walk this number of steps
+     * @param steps number of steps
+     * @throws EriantysException game-semantic error
+     */
     public void stepForward(int steps) throws EriantysException {
         int old_island_index = island_index;
         if(steps <= 0 || steps > AssistCard.MAX_STEPS + 2)
@@ -41,38 +46,62 @@ public class MotherNature implements Serializable {
         gameboard.getIsland(old_island_index).unsetMotherNature();
     }
 
+    /**
+     * calculates the islands on which she stands on's influence
+     * @return influent color
+     * @throws EriantysException game-semantic error
+     */
     public Color calculateInfluence() throws EriantysException {
             Island current = gameboard.getIsland(island_index);
             return current.calculateInfluence(avoid_towers, avoid_color);
     }
 
+    /**
+     * resets mother nature's additional effects
+     */
     public void endTurn(){
         avoid_towers = false;
         avoid_color = null;
     }
 
+    /**
+     * sets mother nature to not consider towers when calculating the influence
+     */
     public void avoidTowers(){
         avoid_towers = true;
     }
 
+    /**
+     * sets mother nature to not consider a particular color when calculating the influence
+     * @param col color to avoid
+     */
     public void avoidColor(Color col){
         avoid_color = col;
     }
 
+    /**
+     * @return true if mother nature is avoiding towers
+     */
     public boolean hasToAvoidTowers(){
         return avoid_towers;
     }
 
+    /**
+     * @return the color mother nature is avoiding or null if she isn't avoiding a color
+     */
     public Color hasToAvoidColor(){
         return avoid_color;
     }
 
+    /**
+     * @return index of the island she stands on
+     */
     public int getIslandIndex(){
         return island_index;
     }
 
     /**
-     * @param index
+     * @param index index of the islands to set on
      * @warning only for test
      */
     public void setIslandIndex(int index){

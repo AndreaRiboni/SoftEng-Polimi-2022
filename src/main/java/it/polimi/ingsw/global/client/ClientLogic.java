@@ -26,6 +26,11 @@ public class ClientLogic implements GameBoardContainer {
 
     public ClientLogic(){
         String ip_address = InputUtils.getString(StringViewUtility.getViewString("ask_for_ip"));
+        boolean is_ip = InputUtils.isIP(ip_address);
+        if(!is_ip){
+            ip_address = "localhost";
+            System.out.println("You entered a wrong ip address. You're being connected to localhost");
+        }
         msg = new MessageSender(ip_address);
         model = null;
         username = null;
@@ -339,7 +344,6 @@ public class ClientLogic implements GameBoardContainer {
                 StringViewUtility.getViewString("character_index_choice"), StringViewUtility.getViewString("invalid_index"),
                 new int []{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
         ) - 1;
-        System.out.println( StringViewUtility.getViewString("chosen_cc_index") + chosen_id);
         act.setCharacterCardIndex(chosen_id);
         switch(chosen_id){
             case 0:
@@ -407,7 +411,7 @@ public class ClientLogic implements GameBoardContainer {
      */
     public void start() throws SocketException {
         System.out.println(StringViewUtility.getViewString("client_started"));
-        String username = InputUtils.getString(StringViewUtility.getViewString("username_choice"));
+        String username = InputUtils.getNonEmptyString(StringViewUtility.getViewString("username_choice"), "Username can not be empty!");
         nof_players = InputUtils.getInt(
                 StringViewUtility.getViewString("number_players"),
                 StringViewUtility.getViewString("invalid_number"),
@@ -420,7 +424,7 @@ public class ClientLogic implements GameBoardContainer {
         boolean valid_nick = true;
         do {
             if(!valid_nick){
-                username = InputUtils.getString(StringViewUtility.getViewString("username_choice_after_error"));
+                username = InputUtils.getNonEmptyString(StringViewUtility.getViewString("username_choice_after_error"), "Username can not be empty!");
             }
             start.setUsername(username);
             msg.send(start);

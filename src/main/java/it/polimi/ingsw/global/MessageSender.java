@@ -51,6 +51,11 @@ public class MessageSender {
         input = in;
     }
 
+    /**
+     * sends an action
+     * @param action action to be sent
+     * @throws SocketException network error
+     */
     public void send(Action action) throws SocketException {
         if(disabled) return;
         //log.info("currently sending " + action.getGamePhase());
@@ -75,6 +80,11 @@ public class MessageSender {
         }
     }
 
+    /**
+     * sends a list of gamephases
+     * @param gamephase gamephases list
+     * @throws SocketException network error
+     */
     public void send(List<GamePhase> gamephase) throws SocketException {
         if(disabled) return;
         //log.info("currently sending " + gamephase);
@@ -89,6 +99,11 @@ public class MessageSender {
         }
     }
 
+    /**
+     * sends the whole model
+     * @param model gameboard
+     * @throws SocketException network error
+     */
     public void send(GameBoard model) throws SocketException {
         if(disabled) return;
         //log.info("currently sending the new model representation to " + Printer.socketToString(socket));
@@ -115,10 +130,16 @@ public class MessageSender {
         return ip;
     }
 
+    /**
+     * when disabled the messagesender can't send any request/response
+     */
     public void disable(){
         disabled = true;
     }
 
+    /**
+     * allows the messagesender to communicate
+     */
     public void enable(){
         disabled = false;
     }

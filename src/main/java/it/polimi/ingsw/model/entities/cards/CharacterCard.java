@@ -26,38 +26,65 @@ public class CharacterCard implements Serializable {
         this.effect = effect;
     }
 
+    /**
+     * @return true if the card is on the gameboard
+     */
     public boolean isOnBoard(){
         return onBoard;
     }
 
+    /**
+     * @return card's price
+     */
     public int getPrice(){
         return price;
     }
 
+    /**
+     * increments the price of the card by 1
+     */
     public void incrementPrice(){
         price++;
     }
 
+    /**
+     * sets this card as present on the table
+     */
     public void setActive(){
         onBoard = true;
     }
 
+    /**
+     * sets this card as not present on the table
+     */
     public void setInactive(){
         onBoard = false;
     }
 
+    /**
+     * @return card's unique id
+     */
     public int getID(){
         return id;
     }
 
+    /**
+     * @return card behavior
+     */
     public CardBehavior getBehavior(){
         return behavior;
     }
 
+    /**
+     * @return literal name of this card's behavior
+     */
     public Behaviors getBehaviorName(){
         return behavior.getBehaviorName();
     }
 
+    /**
+     * @return name of the character
+     */
     public String getName() {
         return name;
     }
@@ -79,10 +106,16 @@ public class CharacterCard implements Serializable {
         return sb.toString();
     }
 
+    /**
+     * wrapper of CardBehavior's getLockBack
+     */
     public void getLockBack() {
         behavior.getLockBack();
     }
 
+    /**
+     * @return text explaining what does this card do
+     */
     public String getDescription() {
         return effect;
     }

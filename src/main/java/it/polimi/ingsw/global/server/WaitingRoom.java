@@ -36,6 +36,13 @@ public class WaitingRoom {
         //threads = new ArrayList<>();
     }
 
+    /**
+     * connects a client to the waiting room and waits for other clients to join
+     * @param client client to connect
+     * @param ois client's object input stream
+     * @param oos client's object output stream
+     * @param username client's chosen username
+     */
     public synchronized void connect(Socket client, ObjectInputStream ois, ObjectOutputStream oos, String username){
         clients[connected] = client;
         in[connected] = ois;
@@ -50,10 +57,18 @@ public class WaitingRoom {
         }
     }
 
+    /**
+     * determines how many clients are connected to this waiting room
+     * @return number of connected clients
+     */
     public synchronized int getNofConnected(){
         return connected;
     }
 
+    /**
+     * determines the capacity of the waiting room
+     * @return waiting room capacity
+     */
     public int getCapacity(){
         return usernames.length;
     }

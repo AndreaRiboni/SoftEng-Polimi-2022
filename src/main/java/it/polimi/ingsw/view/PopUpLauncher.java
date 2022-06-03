@@ -68,6 +68,7 @@ public class PopUpLauncher {
             window.initModality(Modality.APPLICATION_MODAL);
             window.showAndWait();
             window.setOnCloseRequest(e->{
+                System.out.println("ciao");
                 Platform.exit();
                 System.exit(0);
             });

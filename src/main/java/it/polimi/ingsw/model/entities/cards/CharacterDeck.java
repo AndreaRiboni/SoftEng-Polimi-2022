@@ -41,13 +41,21 @@ public class CharacterDeck implements Serializable{
         return status_card;
     }
 
+    /**
+     * gets the first / second or third active character card
+     * @param index 0, 1, 2
+     * @return relative character card
+     * @throws EriantysException game-semantic exception
+     */
     public CharacterCard getActiveCard(int index) throws EriantysException {
         if(index < 0 || index > 2) throw new EriantysException(EriantysException.INVALID_CC_INDEX);
         return getCardsByStatus(true).get(index);
     }
 
+    /**
+     * sets 3 cards to be active
+     */
     public void draw3Cards() {
-        /*
         int found = 0;
         do {
             int index = (int)(Math.random() * cards.length);
@@ -57,10 +65,6 @@ public class CharacterDeck implements Serializable{
             }
             System.out.println("Card " + index + " has been chosen!");
         } while(found < 3);
-         */
-        cards[6].setActive();
-        cards[4].setActive();
-        cards[11].setActive();
     }
 
     private void createDeck(){
@@ -131,6 +135,12 @@ public class CharacterDeck implements Serializable{
         }
     }
 
+    /**
+     * gets a character card by its index
+     * @param index character card's index
+     * @return character card
+     * @throws EriantysException game-semantic error
+     */
     public CharacterCard getCharacterCard(int index) throws EriantysException{
         if(index<0 || index>11){
             System.out.println("invalid character card index: " + index);
@@ -139,6 +149,9 @@ public class CharacterDeck implements Serializable{
         return cards[index];
     }
 
+    /**
+     * wrapper of CharacterCard's getLockBack
+     */
     public void getLockBack() {
         cards[4].getLockBack();
     }

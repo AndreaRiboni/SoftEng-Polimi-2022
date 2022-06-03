@@ -59,7 +59,7 @@ public class InputUtils {
         }
     }
 
-    public static String getString(String prompt, String error, String[] accepted_values){
+    public static String getNonEmptyString(String prompt, String error){
         if(!initialized) init();
         String value = null;
         boolean found = false;
@@ -67,7 +67,7 @@ public class InputUtils {
             try {
                 System.out.println(prompt);
                 value = kb_input.readLine();
-                found = accepted_values == null || contains(accepted_values, value);
+                found = !isNullOrEmpty(value);
                 if(!found) System.out.println(error);
             } catch (Exception e){
                 System.out.println(error);
@@ -112,10 +112,18 @@ public class InputUtils {
         return false;
     }
 
-    private static boolean contains(String[] array, String val){
-        for(String s : array)
-            if(s.equals(val)) return true;
-        return false;
+    public static boolean isIP(String str){
+        String[] parts = str.split("\\.");
+        String localhost = "localhost";
+        if(parts.length != 4) return false;
+        for(int i = 0; i < 4; i++){
+            try {
+                Integer.parseInt(parts[i]);
+            } catch (NumberFormatException ex){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -150,6 +158,10 @@ public class InputUtils {
             available_steps[i] = i+1;
         }
         return available_steps;
+    }
+
+    public static boolean isNullOrEmpty(String str){
+        return str.trim().isEmpty();
     }
 
 }
