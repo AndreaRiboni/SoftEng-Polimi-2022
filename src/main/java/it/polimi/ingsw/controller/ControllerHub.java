@@ -96,21 +96,19 @@ public class ControllerHub {
                 case MOVE_3_STUDENTS:
                     //we are in the correct order if no one has entered usecharcard yet AND we have the lowest turn_valeu OR
                     //if the last one entering usecharcard is the same player who is now playing
-                    if(flow.getSubCount("started with usecharcard") > 0){ //we have already entered move3students
+                    if(flow.getSubCount("used usecharcard") > 0){ //we have already entered move3students
                         g_controller.verifyIdentity(); //check that who's playing is the player who was already playing
                     } else {
                         g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
                     }
                     m_controller.setAction(action);
                     m_controller.move3Studs();
-                    if(flow.getSubCount("started with usecharcard") <= 0){
+                    if(flow.getSubCount("used usecharcard") <= 0){
                         flow.addSubCountIfNotPresent("player-turn");
                         flow.incrementSubCount("player-turn");
-                        flow.addSubCountIfNotPresent("started with move3students"); //we have entered this phase
-                        flow.incrementSubCount("started with move3students");
-                    }
+                        flow.doNotAvoidConditionEdge();
+                    } else flow.avoidConditionEdge(GamePhase.USE_CHARACTER_CARD);
                     flow.setLastGamePhase(GamePhase.MOVE_3_STUDENTS);
-                    flow.doNotAvoidConditionEdge();
                     g_controller.updatePlayer(action.getPlayerID());
                     keep_going = true;
                     break;
@@ -120,9 +118,9 @@ public class ControllerHub {
                     mn_controller.moveMotherNature(); //includes the tower-placing and the island-merging
                     flow.setLastGamePhase(GamePhase.MOVE_MOTHERNATURE);
                     keep_going = true;
-                    if(flow.getSubCount("started with usecharcard") > 0){
+                    if(flow.getSubCount("used usecharcard") > 0){
                         flow.avoidConditionEdge(GamePhase.USE_CHARACTER_CARD);
-                    }
+                    } else flow.doNotAvoidConditionEdge();
                     break;
                 case DRAIN_CLOUD:
                     g_controller.verifyIdentity();
@@ -137,34 +135,48 @@ public class ControllerHub {
                     }
                     keep_going = false;
                     follow_neutral_order = false;
-                    flow.deleteSubCount("started with usecharcard");
-                    flow.deleteSubCount("started with move3students");
                     g_controller.resetAdditionalEffects();
+                    flow.deleteSubCount("used usecharcard");
                     break;
                 case USE_CHARACTER_CARD: //problema se uso CC e la sbaglio e poi faccio move3
                     //we are in the correct order if no one has entered move3students yet AND we have the lowest turn_value OR
                     //if the last one entering move3students is the same player who is now playing
-                    if(flow.getSubCount("started with move3students") > 0){ //we have already entered move3students
-                        log.info("Using character card (move3 students already done)");
-                        g_controller.verifyIdentity(); //check that who's playing is the player who was already playing
-                    } else { //we are starting with USE_CHARCARD: the next phase must be MOVE_3STUDS
-                        log.info("Using character card (move3students not done yet)");
-                        g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
+                    switch(flow.getLastGamephase()){
+                        case DRAW_ASSIST_CARD:
+                        case DRAIN_CLOUD:
+                            log.info("Using character card (move3students not done yet)");
+                            g_controller.verifyOrder(); //check that who's playing is the one with the lowest available turn_value
+                            break;
+                        case MOVE_3_STUDENTS:
+                        case MOVE_MOTHERNATURE:
+                            g_controller.verifyIdentity();
+                            break;
+                        default:
+                            throw new EriantysException(EriantysException.INVALID_GAMEFLOW);
                     }
                     cc_controller.setAction(action);
                     cc_controller.manage();
                     //updating next phases
-                    if(flow.getSubCount("started with move3students") > 0){ //we have already entered move3students
-                        flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS); //since i've already entered move3students the next phase MUST be DRAIN CLOUD
-                    } else { //we are starting with USE_CHARCARD: the next phase must be MOVE_3STUDS
-                        flow.avoidConditionEdge(GamePhase.DRAIN_CLOUD);
-                        flow.addSubCountIfNotPresent("player-turn");
-                        flow.incrementSubCount("player-turn"); //turn is starting here
-                        flow.addSubCountIfNotPresent("started with usecharcard"); //we have entered this phase
-                        flow.incrementSubCount("started with usecharcard"); //NOTA BENE: prima c'era "move3students init"
+                    switch(flow.getLastGamephase()){
+                        case DRAW_ASSIST_CARD:
+                        case DRAIN_CLOUD:
+                            flow.avoidConditionEdge(GamePhase.MOVE_MOTHERNATURE, GamePhase.DRAIN_CLOUD);
+                            flow.addSubCountIfNotPresent("player-turn");
+                            flow.incrementSubCount("player-turn"); //turn is starting here
+                            break;
+                        case MOVE_3_STUDENTS:
+                            flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS, GamePhase.DRAIN_CLOUD); //only move mother nature
+                            break;
+                        case MOVE_MOTHERNATURE:
+                            flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS, GamePhase.MOVE_MOTHERNATURE); //only drain cloud
+                            break;
+                        default:
+                            throw new EriantysException(EriantysException.INVALID_GAMEFLOW);
                     }
                     g_controller.updatePlayer(action.getPlayerID());
                     flow.setLastGamePhase(GamePhase.USE_CHARACTER_CARD);
+                    flow.addSubCountIfNotPresent("used usecharcard");
+                    flow.incrementSubCount("used usecharcard");
                     keep_going = true; //turn start -> move3 / turn end -> drain cloud
                     break;
             }

@@ -14,7 +14,7 @@
       "id": 1,
       "name": "Mr. Greedy",
       "type": "prof",
-      "effect": "During this turn, you take control of any number of Professors even if you have\n\t\t\t\tthe same number of Students as the player who currently controls them"
+      "effect": "You take control of a Professor even if you have\n\t\t\t\tthe same number of Students as the player who currently controls it"
     },
     {
       "id": 2,

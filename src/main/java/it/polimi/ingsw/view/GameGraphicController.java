@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
@@ -150,6 +151,10 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
               popUp.showAndByeBye();
             }
             //copying my school
+            Node bg = player_container.getChildren().get(0);
+            Node school = player_container.getChildren().get(1);
+            player_container.getChildren().clear();
+            player_container.getChildren().addAll(bg, school);
             aligner.copySchool(model.getPlayerByUsername(username).getSchool(), true, player_container, username, students_to_move_container);
             //copying islands and clouds
             try {

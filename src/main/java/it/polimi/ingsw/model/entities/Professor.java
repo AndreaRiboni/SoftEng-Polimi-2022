@@ -39,7 +39,7 @@ public class Professor implements Serializable {
         StringBuilder sb = new StringBuilder("prof-");
         sb.append(Color.colorToViewString(color));
         if(temp_player!=null)
-            sb.append(" is (temporarily) in player-").append(player.getUsername()).append("'s school");
+            sb.append(" is (temporarily) in player-").append(temp_player.getUsername()).append("'s school");
         else if(player!=null)
             sb.append(" is in player-").append(player.getUsername()).append("'s school");
         else sb.append(" isn't in a school");

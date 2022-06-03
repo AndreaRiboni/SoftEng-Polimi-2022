@@ -143,6 +143,7 @@ public class FlowChecker {
         drawassistcard.add(GamePhase.DRAW_ASSIST_CARD);
         gamephases.put(GamePhase.DRAW_ASSIST_CARD, drawassistcard);
         move3students.add(GamePhase.MOVE_MOTHERNATURE);
+        move3students.add(GamePhase.USE_CHARACTER_CARD);
         gamephases.put(GamePhase.MOVE_3_STUDENTS, move3students);
         movemothernature.add(GamePhase.USE_CHARACTER_CARD);
         movemothernature.add(GamePhase.DRAIN_CLOUD);
@@ -153,6 +154,7 @@ public class FlowChecker {
         gamephases.put(GamePhase.DRAIN_CLOUD, draincloud);
         usecharactercard.add(GamePhase.DRAIN_CLOUD);
         usecharactercard.add(GamePhase.MOVE_3_STUDENTS);
+        usecharactercard.add(GamePhase.MOVE_MOTHERNATURE);
         gamephases.put(GamePhase.USE_CHARACTER_CARD, usecharactercard);
     }
 
@@ -170,5 +172,9 @@ public class FlowChecker {
         }
         log.info("Calculated next available gamephases (now: " + gp + ") (next: " + next + ")");
         return next;
+    }
+
+    public GamePhase getLastGamephase() {
+        return last;
     }
 }

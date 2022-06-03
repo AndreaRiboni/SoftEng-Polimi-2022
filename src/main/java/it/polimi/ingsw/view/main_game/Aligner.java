@@ -88,7 +88,11 @@ public class Aligner {
             students.setVgap(2);
             Label index = island_indexes[i];
             StackPane island_icon_indexed = new StackPane(island_icons[i], index);
-            this.islands[i].getChildren().addAll(island_icon_indexed, students, deliverer.getMotherNatureImage());
+            ImageView lock = deliverer.getLockImage();
+            lock.setFitHeight(ISLAND_SIZE /  2);
+            lock.setFitWidth(ISLAND_SIZE / 2);
+            lock.setVisible(false);
+            this.islands[i].getChildren().addAll(island_icon_indexed, students, deliverer.getMotherNatureImage(), lock);
             islands_container.getChildren().add(islands[i]);
             //Mother nature menu
             ContextMenu mn_menu = new ContextMenu();
@@ -124,6 +128,7 @@ public class Aligner {
             ImageView cloud_icon  = new ImageView(
                     new Image(String.valueOf(getClass().getResource("/Clouds/cloud" + (clouds.length-2) + ".png")))
             );
+            cloud_icon.setEffect(new DropShadow());
             cloud_icon.setFitHeight(ISLAND_SIZE);
             cloud_icon.setFitWidth(ISLAND_SIZE);
             GridPane students = new GridPane();
@@ -333,16 +338,22 @@ public class Aligner {
         }
     }
 
-    public void drawProfessors(Group school_elements, Color[] sorted_stud_colors, String username){
+    public Group drawProfessors(Color[] sorted_stud_colors, String username){
+        Group school_elements = new Group();
         for(int i = 0; i < sorted_stud_colors.length; i++){
             Player reference = model.getProfFromColor(sorted_stud_colors[i]).getPlayer();
+            System.out.println(model.getProfFromColor(sorted_stud_colors[i]));
             if(reference != null && reference.getUsername().equals(username)) {
+                System.out.println("PROF " + sorted_stud_colors[i] + " IS IN " + reference.getUsername());
                 ImageView prof = deliverer.getProfessorImage(sorted_stud_colors[i]);
+                prof.getProperties().put("type", "prof");
+                System.out.println(reference.getUsername() + "!= null and equals to " + username);
                 prof.setTranslateX(Positions.PROFESSORS.getX() + i * Positions.PROFESSORS.getXOff());
                 prof.setTranslateY(Positions.PROFESSORS.getY() + i * Positions.PROFESSORS.getYOff());
                 school_elements.getChildren().add(prof);
-            }
+            } else System.out.println("prof-" + sorted_stud_colors[i] + " not in my school");
         }
+        return school_elements;
     }
 
     public void drawDiningHall(Group school_elements, School school, Color[] sorted_stud_colors, int nof_players, TitledPane moving_studs_container) {
@@ -544,11 +555,11 @@ public class Aligner {
         //Colors in the correct order
         Color[] sorted_stud_colors = {Color.GREEN, Color.RED, Color.YELLOW, Color.PINK, Color.BLUE};
         //Professors
-        drawProfessors(school_elements, sorted_stud_colors, username);
+        Group prof_container = drawProfessors(sorted_stud_colors, username);
         //Students
         drawDiningHall(school_elements, school, sorted_stud_colors, model.getPlayers().length, moving_studs_container);
         drawEntrance(school_elements, school, model.getPlayers().length, moving_studs_container);
-        pane.getChildren().add(school_elements);
+        pane.getChildren().addAll(school_elements, prof_container);
         int coins = model.getPlayerByUsername(username).getCoins();
         VBox coin_container = new VBox();
         for(int i = 0; i < coins; i++){
@@ -643,6 +654,8 @@ public class Aligner {
             //editing label corresponding to new index
             island_indexes[i].setText(" " + (new_index+1)+ " ");
             this.islands[i].getProperties().put("index", new_index);
+            this.islands[i].setEffect(null);
+            this.islands[i].setEffect(new DropShadow());
             Map<Color, Integer> island_studs = model_islands[new_index].getStudents();
             int total = GenericUtils.sumValues(island_studs) + (model_islands[new_index].hasTower() ? 1 : 0);
             if(total == 0) total++;
@@ -667,6 +680,7 @@ public class Aligner {
                 tower.setFitWidth(ISLAND_SIZE / divisor * 0.8);
                 island_grid.add(tower, count % nof_col, count / nof_col);
             }
+            this.islands[i].getChildren().get(3).setVisible(model_islands[new_index].isLocked()); //lock
         }
     }
 

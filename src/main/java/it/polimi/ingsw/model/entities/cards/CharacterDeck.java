@@ -58,9 +58,9 @@ public class CharacterDeck implements Serializable{
             System.out.println("Card " + index + " has been chosen!");
         } while(found < 3);
          */
-        cards[0].setActive();
-        cards[1].setActive();
-        cards[2].setActive();
+        cards[6].setActive();
+        cards[4].setActive();
+        cards[11].setActive();
     }
 
     private void createDeck(){
