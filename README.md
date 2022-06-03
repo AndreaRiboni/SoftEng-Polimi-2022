@@ -12,12 +12,6 @@ family game in a cute and funny world full of magical creatures, with 12 differe
 
 from [Eriantys' official site](https://craniointernational.com/products/eriantys/)
 
-## Repository index
-TBD
-
-## Features
-Implemented: complete rules, communication, CLI, GUI, 1 FA
-
 ## Coverage
 Each package has a 100% class coverage. More details [here](https://github.com/AndreaRiboniPolimi/ing-sw-2022-poidomani-riboni-volpentesta/blob/main/deliverables/full-coverage.md)
 | Package               | Average Line Coverage |
@@ -45,4 +39,4 @@ Each package has a 100% class coverage. More details [here](https://github.com/A
 Follow [this instructions](https://github.com/AndreaRiboniPolimi/ing-sw-2022-poidomani-riboni-volpentesta/blob/main/deliverables/startup.md)
 
 ## How to play
-Follow [this documentation]()
+Follow [this documentation](https://github.com/AndreaRiboniPolimi/ing-sw-2022-poidomani-riboni-volpentesta/blob/main/deliverables/How_to_play__GC51_Eriantys.pdf)
