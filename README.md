@@ -14,3 +14,15 @@ from [Eriantys' official site](https://craniointernational.com/products/eriantys
 
 ## Repository index
 TBD
+
+## Features
+Implemented: complete rules, communication, CLI, GUI, 1 FA
+
+## Coverage
+Each package has a 100% class coverage
+| Package | Average Line Coverage |
+|:-----------------------|:-----------------------:|
+| Controller | 84% |
+| Model.Entities | 85% |
+| Model.Entities.Cards | 79% |
+| Model.Places | 83% |
