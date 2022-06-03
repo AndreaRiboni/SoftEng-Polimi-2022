@@ -76,21 +76,6 @@ public abstract class CardBehavior implements Serializable {
         return behavior_name;
     }
 
-    public String toString(){
-        return String.format(
-                "\n\t\t" + GenericUtils.toBold("CardBehavior info") + ":\n\t\t\texchange students: %d,\n\t\t\tdrop students: %d,\n\t\t\tnof students: %d,\n\t\t\textra steps: %d,\n\t\t\textra points: %d,\n\t\t\tnof locks: %d\n\t\t\tavoid color: %b,\n\t\t\tpick island: %b,\n\t\t\tavoid tower: %b",
-                exchange_students,
-                drop_students,
-                nof_students,
-                extra_steps,
-                extra_points,
-                nof_locks,
-                avoid_color,
-                pick_island,
-                avoid_towers
-        );
-    }
-
     public void resetStudent(int student_index, Color new_student){}
 
     public boolean canPickIsland() {

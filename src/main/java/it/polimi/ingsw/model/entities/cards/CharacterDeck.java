@@ -138,14 +138,6 @@ public class CharacterDeck implements Serializable{
         }
         return cards[index];
     }
-    
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        if(cards.length > 0){
-            sb.append("Cards remaining: ").append(cards.length);
-        }else{ sb.append("\nEmpty deck!\n");}
-        return sb.toString();
-    }
 
     public void getLockBack() {
         cards[4].getLockBack();

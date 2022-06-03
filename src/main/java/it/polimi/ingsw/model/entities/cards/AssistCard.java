@@ -41,10 +41,4 @@ public class AssistCard implements Serializable {
         }
         return false;
     }
-
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("The value of the card is ").append(value).append(" and Mother Nature can move up to ").append(steps).append(" steps");
-        return sb.toString();
-    }
 }

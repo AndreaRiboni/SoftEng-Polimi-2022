@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.places;
 import static org.junit.jupiter.api.Assertions.*;
 
 import it.polimi.ingsw.model.entities.Player;
+import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 import org.junit.Test;
@@ -124,6 +125,14 @@ public class GameBoardTest {
         assertFalse(model.getActiveCharacterCard(0).toString().isEmpty());
         assertFalse(model.getActiveCharacterCard(0).getBehavior().toString().isEmpty());
         assertFalse(model.getCloud(0).toString().isEmpty());
+        model.setUsernames(new String[]{"test-player", "other"});
+        assertEquals(0, model.getPlayerByUsername("test-player").getID());
+        model.setGameEnded("test-player");
+        assertEquals("test-player", model.getWinner());
+        assertEquals(1, model.getPlayersNotCalledLike("test-player").length);
+        assertEquals(0, model.getCloud(0).getIndex());
+        Bag b = new Bag();
+        assertEquals(26*5, b.getRemaining());
     }
 
 }

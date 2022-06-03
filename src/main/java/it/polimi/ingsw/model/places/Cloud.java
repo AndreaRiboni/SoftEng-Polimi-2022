@@ -18,8 +18,4 @@ public class Cloud extends StudentPlace implements Serializable {
     public int getIndex(){
         return index;
     }
-
-    public boolean getSide(){
-        return side;
-    }
 }

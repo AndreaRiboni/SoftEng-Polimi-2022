@@ -30,9 +30,21 @@ class CharacterCardControllerTest {
         controller = new CharacterCardController(gameBoard);
     }
 
+    @Test
+    public void studentBehaviorTest() throws EriantysException {
+        Player g1 = gameBoard.getPlayers()[0];
+        g1.getSchool().getEntranceStudents().clear();
+        CharacterCard c6 = gameBoard.getCharacterCard(6);
+        c6.getBehavior().exchangeStudent(Color.RED, Color.YELLOW);
+        Color[] students = c6.getBehavior().getAvailableStudents();
+        assertTrue(c6.getBehavior().getStudent(students[0]));
+
+        CharacterCard c4 = gameBoard.getCharacterCard(4);
+        assertTrue(c4.getBehavior().getAvailableLocks() >= 0);
+    }
 
     @Test
-    public void manageTest() throws EriantysException, SocketException {
+    public void manageTest() throws EriantysException {
         //if card isn't on the table, throw Exception
         CharacterCard c = gameBoard.getCharacterCard(0);
         for(int i = 0; i < 12; i++){

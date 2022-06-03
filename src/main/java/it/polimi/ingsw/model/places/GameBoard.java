@@ -362,10 +362,6 @@ public class GameBoard implements Serializable {
         return winner;
     }
 
-    public void setWinner(String user){
-        winner = user;
-    }
-
     public int getNofGroupsOfIslands(){
         int links = 0;
         for(Island island : getIslands()){
