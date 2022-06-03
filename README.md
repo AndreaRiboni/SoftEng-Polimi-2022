@@ -20,9 +20,29 @@ Implemented: complete rules, communication, CLI, GUI, 1 FA
 
 ## Coverage
 Each package has a 100% class coverage. More details [here](https://github.com/AndreaRiboniPolimi/ing-sw-2022-poidomani-riboni-volpentesta/blob/main/deliverables/full-coverage.md)
-| Package | Average Line Coverage |
-|:-----------------------|:-----------------------:|
-| Controller | 84% |
-| Model.Entities | 85% |
-| Model.Entities.Cards | 79% |
-| Model.Places | 83% |
+| Package               | Average Line Coverage |
+|:----------------------|:---------------------:|
+| Controller            | 84%                   |
+| Model.Entities        | 85%                   |
+| Model.Entities.Cards  | 79%                   |
+| Model.Places          | 83%                   |
+
+## Implemented functionalities
+| Functionality             | Implemented           |
+|:--------------------------|:---------------------:|
+| Basic rules               | YES                   |
+| CLI                       | YES                   |
+| Socket                    | YES                   |
+| Complete rules            | YES                   |
+| GUI                       | YES                   |
+| Every character card      | YES                   |
+| 4 players mode            | NO                    |
+| Multiple matches          | YES                   |
+| Persistence               | NO                    |
+| Disconnections resilience | NO                    |
+
+## How to run
+Follow [this instructions](https://github.com/AndreaRiboniPolimi/ing-sw-2022-poidomani-riboni-volpentesta/blob/main/deliverables/startup.md)
+
+## How to play
+Follow [this documentation]()
