@@ -24,6 +24,7 @@ public class GUILauncher extends Application {
         stage.show();
         LoginController loginController = fxmlLoader.getController();
         loginController.setOwnStage(stage);
+        stage.setOnCloseRequest(windowEvent -> System.exit(-1));
 
 /*
         fxmlLoader = new FXMLLoader(GUILauncher.class.getResource("gameGraphic.fxml"));
