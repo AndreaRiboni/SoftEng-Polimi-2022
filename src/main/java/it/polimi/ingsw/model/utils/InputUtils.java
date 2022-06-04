@@ -13,7 +13,7 @@ public class InputUtils {
     private static BufferedReader kb_input;
     private static boolean initialized = false;
 
-    public static final int[] EVERY_ISLAND = {1,2,3,4,5,6,7,8,9,10,11, 12}, EVERY_CLOUD = {1, 2};
+    public static final int[] EVERY_ISLAND = {1,2,3,4,5,6,7,8,9,10,11, 12}, EVERY_CLOUD = {1, 2, 3};
     public static final Color[] EVERY_STUD_COLOR = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PINK}, EVERY_TOWER_COLOR = {Color.BLACK, Color.WHITE, Color.GREY};
 
     private static void init(){
@@ -48,6 +48,11 @@ public class InputUtils {
         return value;
     }
 
+    /**
+     * gets a string with no constraint
+     * @param prompt question to ask the user in order to get the value
+     * @return typed string
+     */
     public static String getString(String prompt){
         try {
             if (!initialized) init();
@@ -59,6 +64,12 @@ public class InputUtils {
         }
     }
 
+    /**
+     * get a non empty string input value from user's keyboard
+     * @param prompt question to ask the user in order to get the value
+     * @param error response when an error occurs
+     * @return non empty string
+     */
     public static String getNonEmptyString(String prompt, String error){
         if(!initialized) init();
         String value = null;
@@ -112,6 +123,11 @@ public class InputUtils {
         return false;
     }
 
+    /**
+     * determines wether a string contains a numeric ip address
+     * @param str string
+     * @return true if it contains an ip address
+     */
     public static boolean isIP(String str){
         String[] parts = str.split("\\.");
         String localhost = "localhost";
@@ -160,8 +176,13 @@ public class InputUtils {
         return available_steps;
     }
 
+    /**
+     * determines wether the string is null or empty
+     * @param str string
+     * @return true if the string is null or empty
+     */
     public static boolean isNullOrEmpty(String str){
-        return str.trim().isEmpty();
+        return str!=null && str.trim().isEmpty();
     }
 
 }

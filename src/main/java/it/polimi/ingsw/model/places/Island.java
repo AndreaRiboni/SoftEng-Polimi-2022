@@ -119,6 +119,10 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
         return count;
     }
 
+    /**
+     * puts a no-entry tile on an island
+     * @throws EriantysException game-semantic error
+     */
     public void lock() throws EriantysException {
         if(!locked){
             locked = true;
@@ -127,6 +131,10 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
         }
     }
 
+    /**
+     * removes a no entry tile from an island
+     * @throws EriantysException game-semantic error
+     */
     public void unlock() throws EriantysException {
         if(locked){
             locked = false;
@@ -170,10 +178,16 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
         }
     }
 
+    /**
+     * @return true if there's a tower on this island
+     */
     public boolean hasTower(){
         return tower!=null;
     }
 
+    /**
+     * @return true if there's a no entry tile on the island
+     */
     public boolean isLocked(){
         return locked;
     }
@@ -195,16 +209,30 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
         return false;
     }
 
+    /**
+     * @return color of the placed tower
+     */
     public Color getTowerColor(){
         return tower;
     }
 
+    /**
+     * @return gets the next linked island
+     */
     public Island getNext(){
         return next;
     }
 
+    /**
+     * @return true if there's a next-linked island
+     */
     public boolean hasNext(){ return next!=null; }
 
+    /**
+     * gets the previous-linked island
+     * @return island whose next is this island
+     * @throws EriantysException game-semantic error
+     */
     public Island getPrevious() throws EriantysException {
         int this_index = getIndex();
         Island maybe_previous;
@@ -216,8 +244,15 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
         return null;
     }
 
+    /**
+     * @return true if there's a previous-linked island
+     * @throws EriantysException game-semantic error
+     */
     public boolean hasPrevious() throws EriantysException { return getPrevious()!=null; }
 
+    /**
+     * @return true if mother nature is on this island
+     */
     public boolean hasMotherNature(){
         return has_mothernature;
     }
@@ -242,14 +277,23 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
         return StringViewUtility.getIsland(this);
     }
 
+    /**
+     * sets mother nature on this island
+     */
     public void setMotherNature() {
         has_mothernature = true;
     }
 
+    /**
+     * removes mother nature from this island
+     */
     public void unsetMotherNature() {
         has_mothernature = false;
     }
 
+    /**
+     * @return this island's index
+     */
     public int getIndex(){ return index; }
 
     /**
@@ -260,6 +304,9 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
         next = island;
     }
 
+    /**
+     * @return number of next-linked island (following the chain)
+     */
     public int countNextLinked(){
         int count = 1;
         Island start = this;

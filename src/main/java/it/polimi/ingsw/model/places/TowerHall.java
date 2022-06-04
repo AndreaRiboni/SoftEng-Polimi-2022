@@ -39,6 +39,10 @@ public class TowerHall implements TowerPlace, Serializable {
         return false;
     }
 
+    /**
+     *
+     * @return number of towers in the dining hall
+     */
     public int getNumberOfTowers(){
         return towers;
     }

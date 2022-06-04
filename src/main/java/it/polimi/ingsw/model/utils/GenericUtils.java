@@ -8,27 +8,40 @@ import java.util.List;
 import java.util.Map;
 
 public class GenericUtils {
+
+    /**
+     * Converts a list of color to an occurrences map
+     * @param list list of color
+     * @return occurrences map
+     */
     public static Map<Color, Integer> listToMap(List<Color> list){
-        System.out.println("converting list to map");
         Map<Color, Integer> map = new HashMap<>();
         for(Color col : Color.values()){
             int occurrence = (int) list.stream().filter(c -> c.equals(col)).count();
             map.put(col, occurrence);
         }
-        System.out.println("done");
         return map;
     }
 
+    /**
+     * determines the difference key-by-key of the two maps
+     * @param map1 first map
+     * @param map2 map to subtract
+     * @return subtraction map
+     */
     public static Map<Color, Integer> subtract(Map<Color, Integer> map1, Map<Color, Integer> map2){
-        System.out.println("subtracting");
         Map<Color, Integer> difference = new HashMap<>();
         for(Color col : Color.values()){
             difference.put(col, map1.getOrDefault(col, 0) - map2.getOrDefault(col, 0));
         }
-        System.out.println("done");
         return difference;
     }
 
+    /**
+     * determines wether each key has a corresponding positive value
+     * @param map map to check
+     * @return true if there aren't negative values
+     */
     public static boolean isAllPositive(Map<Color, Integer> map){
         System.out.println("checking");
         for(Integer i : map.values()){
@@ -37,6 +50,11 @@ public class GenericUtils {
         return true;
     }
 
+    /**
+     * gets the ordinal representation of a cardinal number
+     * @param num cardinal number
+     * @return ordinal representation
+     */
     public static String getOrdinal(int num){
         switch(num){
             case 1:
@@ -64,6 +82,11 @@ public class GenericUtils {
         }
     }
 
+    /**
+     * gets the bold text
+     * @param s text
+     * @return bold text
+     */
     public static String toBold(String s){
         return ConsoleColors.BOLD + s + ConsoleColors.RESET;
     }
@@ -76,6 +99,11 @@ public class GenericUtils {
         return viewcol;
     }
 
+    /**
+     * increments a map value by 1
+     * @param map map
+     * @param key key to increment
+     */
     public static void incrementMapValue(Map<Color, Integer> map, Color key){
         if(map.containsKey(key)){
             int val = map.get(key);
@@ -85,6 +113,11 @@ public class GenericUtils {
         }
     }
 
+    /**
+     * determines the sum of the values
+     * @param map map
+     * @return sum of map's values
+     */
     public static int sumValues(Map<Color, Integer> map){
         int count = 0;
         for(Color c : map.keySet())
@@ -92,10 +125,24 @@ public class GenericUtils {
         return count;
     }
 
+    /**
+     * map function
+     * @param value value to map
+     * @param start minimum value
+     * @param stop maximum value
+     * @param targetStart new minimum value
+     * @param targetStop new maximum value
+     * @return mapped value
+     */
     public static double map(double value, double start, double stop, double targetStart, double targetStop) {
         return targetStart + (targetStop - targetStart) * ((value - start) / (stop - start));
     }
 
+    /**
+     * determines if each username is unique
+     * @param users usernames
+     * @return true if each username is unique
+     */
     public static boolean[] getUsernamesValidity(String[] users){
         boolean[] validity = new boolean[users.length];
         Arrays.fill(validity, true);
@@ -110,6 +157,11 @@ public class GenericUtils {
         return validity;
     }
 
+    /**
+     * and function
+     * @param bools booleans
+     * @return and of bools
+     */
     public static boolean and(boolean[] bools){
         for(boolean b : bools) if(!b) return false;
         return true;

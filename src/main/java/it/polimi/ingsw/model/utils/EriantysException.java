@@ -7,10 +7,6 @@ public class EriantysException extends Exception {
         super(msg);
     }
 
-    public static void throwUnsupportedOperation(){
-        throw new UnsupportedOperationException("Operation not supported");
-    }
-
     public static void throwInvalidIslandIndex(int island_index) throws EriantysException {
         if (island_index < 0 || island_index >= GameBoard.NOF_ISLAND)
             throw new EriantysException(

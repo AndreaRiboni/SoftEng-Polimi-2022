@@ -15,6 +15,9 @@ public class Cloud extends StudentPlace implements Serializable {
         MAX_STUDENTS = side == SIDE_2_4 ? MAX_STUDENTS_2_4 : MAX_STUDENTS_3;
     }
 
+    /**
+     * @return cloud's index
+     */
     public int getIndex(){
         return index;
     }

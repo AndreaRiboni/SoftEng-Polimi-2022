@@ -12,11 +12,19 @@ public abstract class StudentPlace implements Serializable {
     protected final Map<Color, Integer> students;
     protected int MAX_STUDENTS;
 
+    /**
+     * @param max_stud maximum number of allowed students
+     */
     public StudentPlace(int max_stud) {
         students = new HashMap<>();
         MAX_STUDENTS = max_stud;
     }
 
+    /**
+     * adds a student
+     * @param student student to add
+     * @throws EriantysException game-semantic error
+     */
     public void addStudent(Color student) throws EriantysException {
         if (getNofStudent() < MAX_STUDENTS) {
             incrementMapValue(students, student, 1);
@@ -25,6 +33,7 @@ public abstract class StudentPlace implements Serializable {
         }
     }
 
+    //unused
     public boolean popStudent(Color color) {
         if(students.containsKey(color) && students.get(color) > 0){
             incrementMapValue(students, color, -1);
@@ -32,14 +41,27 @@ public abstract class StudentPlace implements Serializable {
         } return false;
     }
 
+    /**
+     * @return students
+     */
     public Map<Color, Integer> getStudents() {
         return students;
     }
 
+    /**
+     * removes every student
+     */
     public void empty() {
         students.clear();
     }
 
+    /**
+     * utility function to increment a map value
+     * @param map map
+     * @param key key
+     * @param increment increment
+     * @return true if the increment was positive
+     */
     public static boolean incrementMapValue(Map<Color, Integer> map, Color key, int increment){
         if(map.containsKey(key)){
             if(increment < 0 && map.get(key) < -increment) return false;
@@ -53,10 +75,18 @@ public abstract class StudentPlace implements Serializable {
         }
     }
 
+    /**
+     * counts the students of a color
+     * @param col color
+     * @return number of students
+     */
     public int countByColor(Color col){
         return students.getOrDefault(col, 0);
     }
 
+    /**
+     * @return total number of students
+     */
     public int getNofStudent(){
         int nof_stud = 0;
         for(Color col : students.keySet())

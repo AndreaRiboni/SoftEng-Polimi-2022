@@ -16,10 +16,12 @@ public class Bag implements Serializable {
         }
     }
 
+    /**
+     * @return draws a random student from the bag
+     */
     public Color getRandomStudent() {
         int value;
         Color randomstudent;
-
         do {
             randomstudent = Color.getRandomStudentColor();
             value = remaining.get(randomstudent);
@@ -29,11 +31,18 @@ public class Bag implements Serializable {
         return randomstudent;
     }
 
+    /**
+     * puts a student in the bag
+     * @param color students to put back in
+     */
     public void putStudentsIn(Color color){
         int value = remaining.get(color);
         remaining.put(color, value+1);
     }
 
+    /**
+     * @return number of students in the bag
+     */
     public int getRemaining(){
         int sum = 0;
         for(int i : remaining.values()){
@@ -42,6 +51,11 @@ public class Bag implements Serializable {
         return sum;
     }
 
+    /**
+     * removes multiple students of a given color from the bag
+     * @param color color to remove
+     * @param qty number of students to remove
+     */
     public void removeStudent(Color color, int qty){
         int remaining = this.remaining.get(color);
         this.remaining.put(color, remaining - qty);

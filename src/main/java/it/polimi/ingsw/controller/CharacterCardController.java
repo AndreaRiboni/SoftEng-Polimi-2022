@@ -79,6 +79,14 @@ public class CharacterCardController extends Controller {
         }
     }
 
+    private void checkIndexesUniqueness(int[] indexes) throws EriantysException {
+        int[] occurrences = new int[12];
+        for(int index : indexes){
+            occurrences[index]++;
+            if(occurrences[index] > 1) throw new EriantysException(EriantysException.CARD_PARAMETER_ERROR);
+        }
+    }
+
     private void studentCardDispatcher() throws EriantysException {
         CardBehavior behavior = card.getBehavior();
         int available_students = behavior.getAvailableStudents().length;
@@ -114,6 +122,7 @@ public class CharacterCardController extends Controller {
                 if(!studentsExist(studs_in_entrance, action.getEntranceColors())){
                     throw new EriantysException(EriantysException.NOT_ENOUGH_STUDENTS);
                 }
+                checkIndexesUniqueness(action.getStudentIndexes());
                 //everything is okay
                 for(int i = 0; i < desired_nof_student; i++){
                     student_index = action.getStudentIndexes()[i]; //index of the student on the card

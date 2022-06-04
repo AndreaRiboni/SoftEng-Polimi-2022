@@ -45,6 +45,12 @@ public class GameBoard implements Serializable {
         winner = null;
     }
 
+    /**
+     * initializes the gameboard
+     * @param nof_players number of players
+     * @param island_index island to put mother nature on
+     * @throws EriantysException game-semantic error
+     */
     public void initialize(int nof_players, int island_index) throws EriantysException {
         setNOFPlayers(nof_players);
         initializeMotherNature(island_index);
@@ -117,24 +123,45 @@ public class GameBoard implements Serializable {
     private void initializeCharacterDeck(){
         character_cards = new CharacterDeck(this);
         character_cards.draw3Cards();
-        //TODO: the game needs only three cards: we could avoid instantiating the whole deck
-        //and we need to specify which 3 cards anyway
+        //we could avoid instantiating the whole deck
     }
 
+    /**
+     * gets an island
+     * @param island_index island's index
+     * @return corresponding island
+     * @throws EriantysException game-semantic error
+     */
     public Island getIsland(int island_index) throws EriantysException {
         EriantysException.throwInvalidIslandIndex(island_index);
         return islands[island_index];
     }
 
+    /**
+     * puts a tower on an island
+     * @param island_index island's index
+     * @param tower tower to put on
+     * @throws EriantysException game-semantic error
+     */
     public void setTowerOn(int island_index, Color tower) throws EriantysException {
         EriantysException.throwInvalidIslandIndex(island_index);
         getIsland(island_index).addTower(tower);
     }
 
+    /**
+     * Wrapper of Bag.getRandomStudent
+     * @return random student from the bag
+     */
     public Color drawFromBag(){
         return bag.getRandomStudent();
     }
 
+    /**
+     * puts a student on a cloud
+     * @param student student to put on
+     * @param cloud_index cloud's index
+     * @throws EriantysException game-semantic error
+     */
     public void putOnCloud(Color student, int cloud_index) throws EriantysException{
         if(cloud_index != 0 && cloud_index!=1) throw new EriantysException(
                 String.format(EriantysException.INVALID_CLOUD_INDEX, cloud_index)
@@ -142,21 +169,38 @@ public class GameBoard implements Serializable {
         clouds[cloud_index].addStudent(student);
     }
 
+    /**
+     * @return this match's players
+     */
     public Player[] getPlayers(){
         return players;
     }
 
+    /**
+     * @return this match's professors
+     */
     public Professor[] getProfessors(){
         return professors;
     }
-    
-     public Professor getProfFromColor(Color col){
+
+    /**
+     * gets the prof corresponding to the argument color
+     * @param col prof's color
+     * @return prof of that color
+     */
+    public Professor getProfFromColor(Color col){
          for(int i = 0; i < professors.length; i++){
              if(professors[i].getColor().equals(col)) return professors[i];
          }
         return null;
     }
 
+    /**
+     * routine method to call whenever a player alters the students in its dining hall
+     * @param col color of the student added / removed
+     * @param last_player_id last one who played
+     * @param removed true if the specified student has been removed, false otherwise
+     */
     public void checkProf(Color col, int last_player_id, boolean removed){
         //who currently has this prof
         Professor prof = getProfFromColor(col);
@@ -193,40 +237,78 @@ public class GameBoard implements Serializable {
         }
     }
 
+    /**
+     * @return number of players
+     */
     public int getNofPlayers(){
         return players.length;
     }
 
+    /**
+     * moves mother nature and calculates the necessary influence
+     * @param steps steps to perform
+     * @throws EriantysException
+     */
     public void moveMotherNature(int steps) throws EriantysException { //TODO: gestire extra points e extra steps
         mother_nature.stepForward(steps);
         mother_nature.calculateInfluence();
     }
 
+    /**
+     * gets a cloud from its index
+     * @param cloud_index cloud's index
+     * @return cloud
+     * @throws EriantysException game-semantic error
+     */
     public Cloud getCloud(int cloud_index) throws EriantysException{
-        //TODO 03-05 : fix
-        if(cloud_index != 0 && cloud_index!=1 && cloud_index!=2) throw new EriantysException(
+        if(cloud_index != 0 && cloud_index!=1 && cloud_index!=2) throw new EriantysException( //2 can be problematic when there are only 2 players
                 String.format(EriantysException.INVALID_CLOUD_INDEX, cloud_index)
         );
         return clouds[cloud_index];
     }
 
+    /**
+     * gets one of the three active character cards
+     * @param index character cards (0, 1 or 2)
+     * @return related character card
+     * @throws EriantysException game-semantic error
+     */
     public CharacterCard getActiveCharacterCard(int index) throws EriantysException {
         return character_cards.getActiveCard(index);
     }
 
+    /**
+     * puts a student on an island
+     * @param student student to put on the island
+     * @param island_index island's index
+     * @throws EriantysException game-semantic error
+     */
     public void putOnIsland(Color student, int island_index) throws EriantysException {
         getIsland(island_index).addStudent(student);
     }
 
+    /**
+     * calculates an island influence
+     * @param island_index island's index
+     * @return influent color
+     * @throws EriantysException game-semantic error
+     */
     public Color calculateInfluence(int island_index) throws EriantysException {
         return getIsland(island_index).calculateInfluence(mother_nature.hasToAvoidTowers(), mother_nature.hasToAvoidColor());
     }
 
+    /**
+     * @return mother nature instance
+     */
     public MotherNature getMotherNature(){
         return mother_nature;
     }
 
-
+    /**
+     * gets the player from its tower color
+     * @param col tower color
+     * @return player
+     */
     public int getPlayerByColor(Color col){
         for(int i = 0; i < players.length; i++){
             if(players[i].getColor().equals(col)) return i;
@@ -234,16 +316,29 @@ public class GameBoard implements Serializable {
         return -1;
     }
 
+    /**
+     * wrapper of charactercard's getlockback
+     */
     public void getLockBack(){
         character_cards.getLockBack();
     }
 
+    /**
+     * @return islands array
+     */
     public Island[] getIslands(){
         return islands;
     }
 
+    /**
+     * @return used bag
+     */
     public Bag getBag() { return bag;}
 
+    /**
+     * assignes the temporary owner to the professors
+     * @param ref proposed temporary owner
+     */
     public void assignProfsTemporaryPlayers(Player ref){
         //assigns each profs' temp-player so that in case of parity you get in control
         Map<Color, Integer> refs_studs = ref.getDiningStudents();
@@ -264,12 +359,20 @@ public class GameBoard implements Serializable {
         }
     }
 
+    /**
+     * resets the professors temporary owner
+     */
     public void unassignProfsTemporaryPlayers(){
         for(Professor p : professors){
             p.setTempPlayer(null);
         }
     }
 
+    /**
+     * returns the number of profs detained by the player
+     * @param p player
+     * @return number of profs
+     */
     public int getNofProfsFromPlayer(Player p){
         int num = 0;
         for(Professor prof : getProfessors()){
@@ -320,12 +423,21 @@ public class GameBoard implements Serializable {
         return rep.toString();
     }
 
+    /**
+     * sets these players' usernames
+     * @param usernames usernames
+     */
     public void setUsernames(String[] usernames) {
         for(int i = 0; i < players.length; i++){
             players[i].setUsername(usernames[i]);
         }
     }
 
+    /**
+     * gets a player from its username
+     * @param username player's username
+     * @return player
+     */
     public Player getPlayerByUsername(String username){
         for(Player player : players)
             if(player.getUsername().equals(username))
@@ -333,6 +445,11 @@ public class GameBoard implements Serializable {
         return null;
     }
 
+    /**
+     * gets the player that aren't called like this
+     * @param username username to avoid
+     * @return other players
+     */
     public Player[] getPlayersNotCalledLike(String username){
         int user = 0;
         if(getPlayerByUsername(username) != null) user++;
@@ -345,23 +462,42 @@ public class GameBoard implements Serializable {
         return others;
     }
 
+    /**
+     * gets a character card from its index
+     * @param index character card's index
+     * @return character card
+     * @throws EriantysException game-semantic error
+     */
     public CharacterCard getCharacterCard(int index) throws EriantysException {
         return character_cards.getCharacterCard(index);
     }
 
+    /**
+     * sets the game-end flag
+     * @param user winner
+     */
     public void setGameEnded(String user){
         game_ended = true;
         winner = user;
     }
 
+    /**
+     * @return true if the game has ended
+     */
     public boolean isGameEnded(){
         return game_ended;
     }
 
+    /**
+     * @return winnner's username
+     */
     public String getWinner(){
         return winner;
     }
 
+    /**
+     * @return number of island groups
+     */
     public int getNofGroupsOfIslands(){
         int links = 0;
         for(Island island : getIslands()){

@@ -10,13 +10,11 @@ public class Action implements Serializable {
     private GamePhase game_phase;
     private final Map<GameParameter, Object> param;
 
+    /**
+     * Creates an empty action that can be filled and be sent through the network to play
+     */
     public Action(){
         param = new HashMap<>();
-    }
-
-    public void printEverything(){
-        for(GameParameter gp : param.keySet())
-            System.out.println(gp);
     }
 
     public int getPlayerID() {
@@ -57,14 +55,6 @@ public class Action implements Serializable {
 
     public void setNOfPlayers(int nof_players) {
         param.put(GameParameter.NOF_PLAYERS, nof_players);
-    }
-
-    public int getPlayerOrder(){
-        return (int)param.get(GameParameter.PLAYER_ORDER);
-    }
-
-    public void setPlayerOrder(int player_order){
-        param.put(GameParameter.PLAYER_ORDER, player_order);
     }
 
     public void setThreeStudents(Color[] students){
@@ -169,14 +159,6 @@ public class Action implements Serializable {
 
     public String getUsername(){
         return (String)param.get(GameParameter.USERNAME);
-    }
-
-    public int getMotherNatureExtraSteps(){
-        return (int)param.get(GameParameter.MOTHERNATURE_EXTRASTEPS);
-    }
-
-    public void setMotherNatureExtraSteps(int extraSteps){
-        param.put(GameParameter.MOTHERNATURE_EXTRASTEPS, extraSteps);
     }
 
 }

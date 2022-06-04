@@ -11,18 +11,22 @@ public enum Color {
     WHITE(7);
 
     private int val;
-    private Color(int val){
+    Color(int val){
         this.val = val;
     }
 
+    /**
+     * @return color's numeric value
+     */
     public int getVal(){
         return val;
     }
 
-    public static Color getRandomColor(){
-        return Color.values()[(int)(Math.random()*(Color.values().length))];
-    }
-
+    /**
+     * gets the corresponding color
+     * @param val numeric value
+     * @return color
+     */
     public static Color getFromInt(int val){
         for(Color c : Color.values()){
             if(c.val == val) return c;
@@ -30,18 +34,32 @@ public enum Color {
         return null;
     }
 
+    /**
+     * @return array of the student colors
+     */
     public static Color[] getStudentColors(){
         return new Color[]{Color.YELLOW, Color.RED, Color.GREEN, Color.BLUE, Color.PINK};
     }
 
+    /**
+     * @return array of the tower colors
+     */
     public static Color[] getTowerColors(){
         return new Color[]{Color.WHITE, Color.GREY, Color.BLACK};
     }
 
+    /**
+     * @return a random student color
+     */
     public static Color getRandomStudentColor(){
         return getFromInt((int)(Math.random() * 5));
     }
 
+    /**
+     * literal representation of a colo
+     * @param col color
+     * @return color's name
+     */
     public static String colorToString(Color col){
         switch(col){
             case YELLOW:
@@ -64,6 +82,11 @@ public enum Color {
         return null;
     }
 
+    /**
+     * literal representation of a color using ANSI colors
+     * @param col color
+     * @return CLI compatible string
+     */
     public static String colorToViewString(Color col){
         switch(col){
             case YELLOW:
@@ -86,6 +109,12 @@ public enum Color {
         return null;
     }
 
+    /**
+     * parse a string to the corresponding color
+     * @param str color name
+     * @return color
+     * @throws Exception invalid name
+     */
     public static Color parseColor(String str) throws Exception {
         for(Color col : Color.values()){
             if(Color.colorToString(col).equals(str.toLowerCase())){
