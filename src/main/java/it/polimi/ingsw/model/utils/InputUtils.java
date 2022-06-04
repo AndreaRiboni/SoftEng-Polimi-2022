@@ -129,8 +129,8 @@ public class InputUtils {
      * @return true if it contains an ip address
      */
     public static boolean isIP(String str){
+        if(str.equals("localhost")) return true;
         String[] parts = str.split("\\.");
-        String localhost = "localhost";
         if(parts.length != 4) return false;
         for(int i = 0; i < 4; i++){
             try {

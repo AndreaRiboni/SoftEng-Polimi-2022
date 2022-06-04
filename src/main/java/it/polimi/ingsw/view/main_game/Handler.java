@@ -141,7 +141,6 @@ public class Handler {
         while(isl.hasNext()){
             isl = isl.getNext();
             if(isl.getIndex() == target) {
-                System.out.println("Target is inside the group");
                 return null;
             }
         }
@@ -150,24 +149,18 @@ public class Handler {
 
     private int getRequiredSteps(GameBoard model, int from, int to){
         Island isl_from = model.getIslands()[from];
-        System.out.println("you're startgin from " + from + " and moving to " + to);
         int steps = 0;
         boolean found = false;
-        System.out.println("Moving from " + from + " to " + to);
         do {
             //going to the end of this group
             isl_from = getLastOfGroup(isl_from, to);
             if(isl_from == null) return steps;
-            System.out.println("Last of this group is " + isl_from.getIndex());
             if(isl_from.getIndex() == to) {
-                System.out.println("Returing steps since we're in " + to);
                 return steps;
             }
             from = isl_from.getIndex() + 1;
-            System.out.println("We're now considering from " + from);
             isl_from = model.getIslands()[from % 12];
             steps++;
-            System.out.println("Steps are now " + steps);
             if(steps > 12) found = true;
         } while (!found);
         return -1;
@@ -178,7 +171,6 @@ public class Handler {
         movemother.setGamePhase(GamePhase.MOVE_MOTHERNATURE);
         //calculate the increment
         int index = (int) island_target.getProperties().get("index");
-        System.out.println("this is send mother nature request of island " + index);
         int increment = getRequiredSteps(model, model.getMotherNature().getIslandIndex(), index);
         movemother.setMothernatureIncrement(increment);
         try {
@@ -231,9 +223,6 @@ public class Handler {
     }
 
     public void selectMovingSubject(Node node, int nof_players, TitledPane moving_studs_container, Rectangle dining_area) {
-        System.out.println("SELECT MOVING SUBJECT");
-        System.out.println(move_students);
-        System.out.println(node.getProperties().get("type"));
         RotateTransition rt = new RotateTransition();
         rt.setFromAngle(0);
         rt.setToAngle(360);
@@ -253,7 +242,6 @@ public class Handler {
         } else if(node.getProperties().get("type").equals("island")) {
             //it's an island: create the action and move the student there
             int island_index = (Integer) node.getProperties().get("index");
-            System.out.println("Island selected: " + island_index);
             if(last_selected != null) { //if we already selected a student we can set its island destination
                 if(!move_students.isEmpty() && move_students.get(move_students.size()-1).getColor()!=null) {
                     move_students.get(move_students.size() - 1).setIsland_index(island_index);
@@ -291,7 +279,6 @@ public class Handler {
             last_selected = null;
         }
         if(move_students.size() == nof_players + 1 && move_students.get(move_students.size()-1).getIsland_index() != -1){
-            System.out.println("Sending request");
             sendMoveStudentsRequest(nof_players);
         }
         last_selected = node;

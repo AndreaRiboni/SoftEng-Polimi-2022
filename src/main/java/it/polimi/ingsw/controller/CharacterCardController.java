@@ -28,9 +28,7 @@ public class CharacterCardController extends Controller {
      * @throws EriantysException game-semantic error
      */
     public void manage() throws EriantysException {
-        System.out.println("Received character card index: " + action.getCharacterCardIndex());
         CharacterCard temp = model.getCharacterCard(action.getCharacterCardIndex());
-        System.out.println(temp.getID()+" "+temp.isOnBoard());
         if(!temp.isOnBoard()){
             throw new EriantysException(EriantysException.INVALID_CC_INDEX);
         }
@@ -44,9 +42,7 @@ public class CharacterCardController extends Controller {
             );
         player.removeCoins(price);
         card.incrementPrice();
-        System.out.println("performing action");
         performAction();
-        System.out.println("Performed");
     }
 
     /**
@@ -103,9 +99,7 @@ public class CharacterCardController extends Controller {
         switch(card.getID()) {
             case 0: //take 1 student and put it on a island
                 island_index = action.getIslandIndexes()[0]; //i-th-student destination
-                System.out.println("Received island index: " + island_index);
                 student_index = action.getStudentIndexes()[0]; //selected student
-                System.out.println("Received student index: " + student_index);
                 model.putOnIsland(students[student_index], island_index);
                 behavior.resetStudent(student_index, model.drawFromBag());
                 break;
@@ -205,8 +199,6 @@ public class CharacterCardController extends Controller {
         int extra_points = behavior.getExtraPoints();
         int extra_steps = behavior.getExtraSteps();
         Player player = model.getPlayers()[action.getPlayerID()];
-
-        System.out.println("Pick island");
 
         if(extra_steps > 0) {
             player.setMotherNatureExtraSteps(extra_steps); //idk

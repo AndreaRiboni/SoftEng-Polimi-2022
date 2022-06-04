@@ -410,14 +410,12 @@ public class ClientLogic implements GameBoardContainer {
      * @throws SocketException network error
      */
     public void start() throws SocketException {
-        System.out.println(StringViewUtility.getViewString("client_started"));
         String username = InputUtils.getNonEmptyString(StringViewUtility.getViewString("username_choice"), "Username can not be empty!");
         nof_players = InputUtils.getInt(
                 StringViewUtility.getViewString("number_players"),
                 StringViewUtility.getViewString("invalid_number"),
                 new int[]{2,3,4}
         );
-        System.out.println( StringViewUtility.getViewString("sending_nofplayers"));
         Action start = new Action();
         start.setGamePhase(GamePhase.START);
         start.setNOfPlayers(nof_players);

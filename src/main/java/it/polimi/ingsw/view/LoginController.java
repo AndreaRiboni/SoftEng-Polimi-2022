@@ -70,7 +70,7 @@ public class LoginController implements Initializable, GameBoardContainer {
                         PopUpLauncher ip_err = new PopUpLauncher();
                         ip_err.setTitle("Network error");
                         ip_err.setMessage("\"" + ip.getText() + "\" isn't a valid IP address. You're being connected to localhost");
-                        ip_err.showAndByeBye();
+                        ip_err.show();
                     }
             );
         }
@@ -105,11 +105,9 @@ public class LoginController implements Initializable, GameBoardContainer {
             }
             game_controller = gameloader.getController();
             listener.addGameBoardContainer(game_controller);
-            System.out.println("Added game controller to listener");
             //Sending the message
             msg.send(act);
             last_sent = act.getGamePhase();
-            System.out.println("Variables set. Initializing graphics");
             already_connected = true;
         }
     }
@@ -166,20 +164,15 @@ public class LoginController implements Initializable, GameBoardContainer {
     @Override
     public void setGameBoard(GameBoard model) {
         if(ignore_network) return;
-        System.out.println("logincontroller has received the gameboard");
     }
 
     @Override
     public void notifyResponse(Action action) {
-        System.out.println("notify response " + action.getGamePhase());
         if(ignore_network) return;
-        System.out.println("LOGINCONTROLLER RECEIVED AN ACTION!");
         PopUpLauncher error = new PopUpLauncher();
         error.setTitle("Error!");
         switch(action.getGamePhase()){
             case CORRECT:
-                System.out.println("Action is CORRECT");
-                System.out.println("Username: " + action.getUsername());
                 game_controller.setUsername(action.getUsername());
                 Platform.runLater(() -> {
                     game_controller.setStarted();

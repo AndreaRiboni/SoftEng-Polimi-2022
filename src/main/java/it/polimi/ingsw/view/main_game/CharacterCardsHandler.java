@@ -11,7 +11,6 @@ public class CharacterCardsHandler {
 
     private Integer getChosenInteger(String id) throws EriantysException {
         ChoiceBox<Integer> choice = (ChoiceBox<Integer>)scene.lookup("#" + id);
-        System.out.println("choice: " + choice);
         if(choice.getValue() == null) throw new EriantysException("incomplete");
         return choice.getValue();
     }

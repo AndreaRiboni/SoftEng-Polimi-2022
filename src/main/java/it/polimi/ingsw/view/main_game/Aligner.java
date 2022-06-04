@@ -99,7 +99,6 @@ public class Aligner {
             MenuItem request_mn_item = new MenuItem("Move mother nature here");
             int finalI = i;
             request_mn_item.setOnAction(e -> {
-                System.out.println("clicked on menu of islands " + this.islands[finalI].getProperties().get("index"));
                 handler.sendMotherNatureRequest(this.islands[finalI], model);
             });
             mn_menu.getItems().add(request_mn_item);
@@ -108,7 +107,6 @@ public class Aligner {
             this.islands[i].getProperties().put("type", "island");
             this.islands[i].getProperties().put("index", i);
             this.islands[i].setOnMouseClicked(e -> {
-                System.out.println("clicked on islands " + this.islands[finalI].getProperties().get("index"));
                 if(!disabled) {
                     if (e.getButton() == MouseButton.PRIMARY) {
                         handler.selectMovingSubject(this.islands[finalI], model.getPlayers().length, moving_studs_container, dining_area);
@@ -342,16 +340,13 @@ public class Aligner {
         Group school_elements = new Group();
         for(int i = 0; i < sorted_stud_colors.length; i++){
             Player reference = model.getProfFromColor(sorted_stud_colors[i]).getPlayer();
-            System.out.println(model.getProfFromColor(sorted_stud_colors[i]));
             if(reference != null && reference.getUsername().equals(username)) {
-                System.out.println("PROF " + sorted_stud_colors[i] + " IS IN " + reference.getUsername());
                 ImageView prof = deliverer.getProfessorImage(sorted_stud_colors[i]);
                 prof.getProperties().put("type", "prof");
-                System.out.println(reference.getUsername() + "!= null and equals to " + username);
                 prof.setTranslateX(Positions.PROFESSORS.getX() + i * Positions.PROFESSORS.getXOff());
                 prof.setTranslateY(Positions.PROFESSORS.getY() + i * Positions.PROFESSORS.getYOff());
                 school_elements.getChildren().add(prof);
-            } else System.out.println("prof-" + sorted_stud_colors[i] + " not in my school");
+            }
         }
         return school_elements;
     }
@@ -453,7 +448,6 @@ public class Aligner {
             try {
                 CharacterCard ToRep = model.getActiveCharacterCard(i);
                 //Setting choice
-                System.out.println("adding " + ToRep.getName() + " who has id " + ToRep.getID());
                 cc_values.getItems().add(ToRep.getName() + " (" + GenericUtils.getOrdinal(i+1) + ")");
                 //Setting image
                 char_card[i].setImage(deliverer.getCharacterCardImage(ToRep.getID()));
@@ -728,7 +722,6 @@ public class Aligner {
 
     //TODO: check that each cc has the correct behavior (#7 hasn't)
     private void addForm(int id, VBox vbox) {
-        System.out.println("adding form for id " + id);
         switch(id){
             case 0:
                 //1 island index array
@@ -737,15 +730,12 @@ public class Aligner {
                 //1 student index array
                 vbox.getChildren().add(getWhiteLabel("This card's students"));
                 vbox.getChildren().add(getIntegerChooser("studentindex-0", 1, 4));
-                System.out.println("added form1");
                 break;
             case 1:
-                System.out.println("added form2");
                 break;
             case 2:
                 vbox.getChildren().add(getWhiteLabel("Chosen island"));
                 vbox.getChildren().add(getIntegerChooser("island-2", 1, 12));
-                System.out.println("added form3");
                 break;
             case 3:
                 break;
@@ -801,7 +791,6 @@ public class Aligner {
     }
 
     private ChoiceBox<Integer> getIntegerChooser(String id, int min, int max){
-        System.out.println("creating choicebox " + id);
         ChoiceBox<Integer> chooser = new ChoiceBox<>();
         chooser.setId(id); //scene.lookup
         chooser.getStyleClass().add("choiceBox");

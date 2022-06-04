@@ -63,7 +63,6 @@ public class CharacterDeck implements Serializable{
                 found++;
                 cards[index].setActive();
             }
-            System.out.println("Card " + index + " has been chosen!");
         } while(found < 3);
     }
 
@@ -143,7 +142,6 @@ public class CharacterDeck implements Serializable{
      */
     public CharacterCard getCharacterCard(int index) throws EriantysException{
         if(index<0 || index>11){
-            System.out.println("invalid character card index: " + index);
             throw new EriantysException(EriantysException.INVALID_CC_INDEX);
         }
         return cards[index];

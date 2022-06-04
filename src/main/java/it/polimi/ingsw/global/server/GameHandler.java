@@ -201,7 +201,6 @@ public class GameHandler implements Runnable {
             }
             sendGameBoard();
             do {
-                System.out.println(); //new turn
                 int player_playing = getWhoIsPlaying();
                 log.info("player " + player_playing + " has to play. Sending the actions");
                 //send the correct client what action we need from him

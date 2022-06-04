@@ -137,7 +137,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     @Override
     public void setGameBoard(GameBoard model){
         aligner.setGameBoard(model);
-        System.out.println("Received gameboard");
         System.out.println(model);
         this.model = model;
         handler.clearMoveStudents();
@@ -148,7 +147,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
               String winner = model.getWinner();
               if(winner.equalsIgnoreCase(username)) popUp.setMessage("You are the winner! Congratulations!");
               else popUp.setMessage("The winner is "+model.getWinner());
-              System.exit(-1);
+              popUp.showAndByeBye();
             }
             //copying my school
             Node bg = player_container.getChildren().get(0);
@@ -174,7 +173,6 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
     @Override
     public void notifyResponse(Action action) {
         if(!started) return;
-        System.out.println("Received action " + action.getGamePhase());
         Platform.runLater(() -> {
             if(action.getGamePhase().equals(GamePhase.CORRECT)){
                 disabled = true;

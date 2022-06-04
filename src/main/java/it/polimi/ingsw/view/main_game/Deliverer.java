@@ -88,7 +88,6 @@ public class Deliverer {
 
     public Image getCharacterCardImage(int id){
         String path = String.valueOf(getClass().getResource("/characters/character_" + (id+1) + ".jpg"));
-        System.out.println("\tgetting cc image of id " + id + " (character_" + (id+1) + ".jpg)");
         //why the hell does character_7 returns character_8
         return new Image(path);
     }
@@ -100,7 +99,6 @@ public class Deliverer {
         );
         lock.setPreserveRatio(true);
         lock.setFitHeight(Positions.DINING_HALL_STUDENTS.getHeight());
-        System.out.println("Lock image downloaded");
         return lock;
     }
 

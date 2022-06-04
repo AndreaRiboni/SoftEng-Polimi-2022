@@ -42,7 +42,6 @@ public class PopUpLauncher {
             controller.setOwnStage(window);
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.out.println("Could not instatiate the pop up window");
         }
         Scene s = new Scene(root, 412, 257);
         controller.forceInitialize();
@@ -63,15 +62,14 @@ public class PopUpLauncher {
     public void showAndByeBye(){
         Platform.runLater(() -> {
             init();
+            window.setOnCloseRequest(e->{
+                Platform.exit();
+                System.exit(0);
+            });
             window.setAlwaysOnTop(true);
             window.setResizable(false);
             window.initModality(Modality.APPLICATION_MODAL);
             window.showAndWait();
-            window.setOnCloseRequest(e->{
-                System.out.println("ciao");
-                Platform.exit();
-                System.exit(0);
-            });
         });
     }
 

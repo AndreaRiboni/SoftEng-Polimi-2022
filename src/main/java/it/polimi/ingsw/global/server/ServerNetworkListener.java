@@ -29,7 +29,7 @@ public class ServerNetworkListener extends Thread {
         timer = System.currentTimeMillis();
     }
 
-    private void checkTimeout(int index) throws SocketTimeoutException {
+    private void checkTimeout() throws SocketTimeoutException {
         long time = System.currentTimeMillis();
         if(time - timer > 5*60*1000) throw new SocketTimeoutException(); //kicks you out after 5 mins of inactivity
     }
@@ -42,7 +42,7 @@ public class ServerNetworkListener extends Thread {
         while(true){
             try {
                 for(int i = 0; i < in.length; i++){
-                    checkTimeout(i);
+                    checkTimeout();
                     if(in[i].available() > 0){
                         in[i].readInt();
                         Object received = in[i].readObject();

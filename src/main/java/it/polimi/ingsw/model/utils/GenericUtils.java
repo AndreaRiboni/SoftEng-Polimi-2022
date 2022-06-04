@@ -43,7 +43,6 @@ public class GenericUtils {
      * @return true if there aren't negative values
      */
     public static boolean isAllPositive(Map<Color, Integer> map){
-        System.out.println("checking");
         for(Integer i : map.values()){
             if(i < 0) return false;
         }
@@ -149,7 +148,6 @@ public class GenericUtils {
         for(int i = validity.length - 1; i >= 0; i--){
             for(int o = 0; o < i; o++){
                 if(users[i].equalsIgnoreCase(users[o])){
-                    System.out.println(users[i] + " (i=" + i + ") is invalid since it's equals to o=" + o);
                     validity[i] = false;
                 }
             }
