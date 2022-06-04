@@ -189,6 +189,7 @@ public class LoginController implements Initializable, GameBoardContainer {
                     stage.setScene(new Scene(gameparent, 1290, 690));
                     stage.setResizable(false);
                     stage.show();
+                    stage.setOnCloseRequest(windowEvent -> System.exit(-1));
                     this.stage.close();
                 });
                 ignore_network = true;
