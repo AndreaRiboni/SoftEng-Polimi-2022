@@ -148,7 +148,7 @@ public class GameGraphicController implements Initializable, GameBoardContainer 
               String winner = model.getWinner();
               if(winner.equalsIgnoreCase(username)) popUp.setMessage("You are the winner! Congratulations!");
               else popUp.setMessage("The winner is "+model.getWinner());
-              popUp.showAndByeBye();
+              System.exit(-1);
             }
             //copying my school
             Node bg = player_container.getChildren().get(0);
