@@ -89,6 +89,10 @@ public class CharacterCard implements Serializable {
         return name;
     }
 
+    /**
+     * Prints what the CharacterCard can do
+     * @return
+     */
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(GenericUtils.toBold("Name") + ":\t").append(name).append("\n");
