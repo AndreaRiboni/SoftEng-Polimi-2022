@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.utils.GenericUtils;
 
 import java.io.Serializable;
 
+/**
+ * Generic behavior of a character card
+ */
 public abstract class CardBehavior implements Serializable {
     protected GameBoard gameboard;
     protected Color color;
@@ -22,6 +25,22 @@ public abstract class CardBehavior implements Serializable {
     protected final Color[] students;
     protected Behaviors behavior_name;
 
+    /**
+     * Defines a behavior
+     * @param gameboard gameboard of reference
+     * @param id card id
+     * @param exchange_students number of students the card can exchange
+     * @param drop_students number of students the card can drop
+     * @param nof_students generic number of students
+     * @param takeable_students number of students that is possible to take away
+     * @param extra_points number of mother nature's extra points
+     * @param nof_locks number of no entry tiles on the card
+     * @param pick_island wether the player can choose an island
+     * @param avoid_towers wether mother nature has to avoid towers
+     * @param avoid_color wether mother nature has to avoid a color
+     * @param behavior_name name of the behavior
+     * @param extra_steps number of extra steps mother nature can perform
+     */
     public CardBehavior(GameBoard gameboard, int id, int exchange_students, int drop_students, int nof_students, int takeable_students, int extra_points, int nof_locks, boolean pick_island, boolean avoid_towers, boolean avoid_color, Behaviors behavior_name, int extra_steps) {
         this.gameboard = gameboard;
         color = null;
@@ -169,6 +188,12 @@ public abstract class CardBehavior implements Serializable {
     public void getLockBack() {
         nof_locks++;
     }
+
+    /**
+     * Resets a student by its index
+     * @param index student index
+     * @param new_student new student to substitute
+     */
     public void invertStudent(int index, Color new_student) {
         students[index] = new_student;
     }

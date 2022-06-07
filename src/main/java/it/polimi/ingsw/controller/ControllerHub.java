@@ -11,9 +11,8 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-TODO: we should avoid accessing directly to the data structures (i.e. the students list)
---> create the related interface functions to improve the code quality
+/**
+ * Hub of every controller. Manages the entire game controllers
  */
 public class ControllerHub {
     private GameBoard model;
@@ -29,6 +28,10 @@ public class ControllerHub {
     private boolean follow_neutral_order, keep_going;
     private static final Logger log = LogManager.getRootLogger();
 
+    /**
+     * Creates the controller
+     * @param model model of reference
+     */
     public ControllerHub(GameBoard model) {
         this.model = model;
         //this.view = view;
@@ -202,7 +205,7 @@ public class ControllerHub {
 
     /**
      * Returns what are the next (and only acceptable) gamephases
-     * @return
+     * @return accepted gamephases
      */
     public List<GamePhase> getAcceptedGamephases() {
         return flow.getAcceptedGamephases();

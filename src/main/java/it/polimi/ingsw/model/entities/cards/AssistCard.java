@@ -2,12 +2,24 @@ package it.polimi.ingsw.model.entities.cards;
 
 import java.io.Serializable;
 
+/**
+ * The assistant card
+ */
 public class AssistCard implements Serializable {
     private final int value, steps, id;
+    /**
+     * maximum number of steps an assistant can give
+     */
     public static final int MAX_STEPS = 5;
     private boolean played;
     private final String name;
 
+    /**
+     * Creates an assistant card
+     * @param value card's value
+     * @param steps card's number of possible steps
+     * @param name card's name
+     */
     public AssistCard(int value, int steps, String name){
         this.id = value - 1;
         this.value = value;

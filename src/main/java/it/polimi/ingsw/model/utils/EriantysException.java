@@ -2,11 +2,23 @@ package it.polimi.ingsw.model.utils;
 
 import it.polimi.ingsw.model.places.GameBoard;
 
+/**
+ * Game-semantic error's exception
+ */
 public class EriantysException extends Exception {
+    /**
+     * Creates the exception
+     * @param msg error message
+     */
     public EriantysException(String msg){
         super(msg);
     }
 
+    /**
+     * Throws an exception if the argument isn't a valid island index
+     * @param island_index island index
+     * @throws EriantysException invalid index
+     */
     public static void throwInvalidIslandIndex(int island_index) throws EriantysException {
         if (island_index < 0 || island_index >= GameBoard.NOF_ISLAND)
             throw new EriantysException(
@@ -15,7 +27,7 @@ public class EriantysException extends Exception {
     }
 
     /**
-     * Reference errors. Might be useful to move them into a specific file.
+     * Reference errors.
      */
     public static final String
             INVALID_ISLAND_INDEX = "Invalid island index: %d",

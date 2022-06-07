@@ -11,11 +11,21 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 
+/**
+ * Dispatches the client into a waiting room
+ */
 public class ServerDispatcher extends Thread {
     private List<WaitingRoom> two_players, three_players, four_players;
     private Socket socket;
     private static final Logger log = LogManager.getRootLogger();
 
+    /**
+     * Creates the server dispatcher
+     * @param two_players waiting room of 2 players
+     * @param three_players waiting room of 3 players
+     * @param four_players waiting room of 4 players
+     * @param socket socket to connect
+     */
     public ServerDispatcher(List<WaitingRoom> two_players, List<WaitingRoom> three_players, List<WaitingRoom> four_players, Socket socket) {
         this.two_players = two_players;
         this.three_players = three_players;

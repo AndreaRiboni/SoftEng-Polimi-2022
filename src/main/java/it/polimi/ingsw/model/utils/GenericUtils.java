@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Generic utility functions
+ */
 public class GenericUtils {
 
     /**
@@ -88,14 +91,6 @@ public class GenericUtils {
      */
     public static String toBold(String s){
         return ConsoleColors.BOLD + s + ConsoleColors.RESET;
-    }
-
-    public static String[] toViewColors(Color[] colors){
-        String[] viewcol = new String[colors.length];
-        for(int i = 0; i < viewcol.length; i++){
-            viewcol[i] = Color.colorToViewString(colors[i]);
-        }
-        return viewcol;
     }
 
     /**

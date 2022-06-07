@@ -19,6 +19,9 @@ import java.net.SocketException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Server's main game manager
+ */
 public class GameHandler implements Runnable {
     private Socket[] players;
     private String[] usernames;
@@ -34,6 +37,13 @@ public class GameHandler implements Runnable {
     private boolean[] valid_nicknames;
     private int received_nicknames = 0;
 
+    /**
+     * Creates the game handler
+     * @param players players of the match
+     * @param inputs players' inputstreams
+     * @param outputs players' outputstreams
+     * @param usernames players' usernames
+     */
     public GameHandler(Socket[] players, ObjectInputStream[] inputs, ObjectOutputStream[] outputs, String[] usernames) {
         this.players = players;
         out = new MessageSender[players.length];

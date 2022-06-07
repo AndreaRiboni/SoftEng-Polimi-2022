@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Determines the flow of the gamephases
+ */
 public class FlowChecker {
     private final Map<String, Integer> count;
     private GamePhase last;
@@ -18,6 +21,9 @@ public class FlowChecker {
     private GamePhase[] avoid_edges;
     private static final Logger log = LogManager.getRootLogger();
 
+    /**
+     * Creates the flowchecker
+     */
     public FlowChecker(){
         last = GamePhase.START;
         count = new HashMap<>();
@@ -43,7 +49,7 @@ public class FlowChecker {
 
     /**
      * sets the last played gamephases
-     * @param gp
+     * @param gp last game phase
      */
     public void setLastGamePhase(GamePhase gp){
         log.info("GamePhase " + gp + " has been processed correctly");
@@ -174,6 +180,9 @@ public class FlowChecker {
         return next;
     }
 
+    /**
+     * @return last played game phase
+     */
     public GamePhase getLastGamephase() {
         return last;
     }

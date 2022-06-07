@@ -12,24 +12,48 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Gameboard representation. Model's main class.
+ */
 public class GameBoard implements Serializable {
     private Cloud[] clouds;
     private Player[] players;
+    /**
+     * Number of players
+     */
     public int NOF_PLAYERS;
     private final Professor[] professors;
     private final Island[] islands;
     private CharacterDeck character_cards;
     private MotherNature mother_nature;
     private final Bag bag;
+    /**
+     * Number of islands
+     */
     public static final int NOF_ISLAND = 12;
+    /**
+     * Number of clouds
+     */
     public static int NOF_CLOUD = 2;
+    /**
+     * Number of student's colors
+     */
     public static final int NOF_STUDENT_COLOR = 5;
+    /**
+     * Number of character cards
+     */
     public static final int NOF_CHAR_CARDS = 12;
+    /**
+     * Number of professors
+     */
     public static final int NOF_PROFS = 5;
     private boolean game_ended;
     private String winner;
     private Action last_performed;
 
+    /**
+     * Creates the gameboard
+     */
     public GameBoard() {
         islands = new Island[NOF_ISLAND];
         professors = new Professor[NOF_PROFS];
@@ -245,7 +269,7 @@ public class GameBoard implements Serializable {
     /**
      * moves mother nature and calculates the necessary influence
      * @param steps steps to perform
-     * @throws EriantysException
+     * @throws EriantysException game-semantic error
      */
     public void moveMotherNature(int steps) throws EriantysException { //TODO: gestire extra points e extra steps
         mother_nature.stepForward(steps);
@@ -486,6 +510,10 @@ public class GameBoard implements Serializable {
         return 12 - links;
     }
 
+    /**
+     * Sets the last performed action
+     * @param act last performed action
+     */
     public void setLastPerfomedAction(Action act){
         last_performed = act;
     }

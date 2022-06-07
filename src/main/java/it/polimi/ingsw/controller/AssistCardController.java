@@ -6,9 +6,16 @@ import it.polimi.ingsw.model.utils.EriantysException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+/**
+ * controller of the assistant cards
+ */
 public class AssistCardController extends Controller {
     private static final Logger log = LogManager.getRootLogger();
 
+    /**
+     * constructor
+     * @param model model of reference
+     */
     public AssistCardController(GameBoard model){
         super(model);
     }

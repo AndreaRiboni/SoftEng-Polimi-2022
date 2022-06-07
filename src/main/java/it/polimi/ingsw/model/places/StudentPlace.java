@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Generalizes a place onto students are placeable
+ */
 public abstract class StudentPlace implements Serializable {
     protected final Map<Color, Integer> students;
     protected int MAX_STUDENTS;
@@ -31,14 +34,6 @@ public abstract class StudentPlace implements Serializable {
         } else {
             throw new EriantysException(EriantysException.STUDENTPLACE_FULL);
         }
-    }
-
-    //unused
-    public boolean popStudent(Color color) {
-        if(students.containsKey(color) && students.get(color) > 0){
-            incrementMapValue(students, color, -1);
-            return true;
-        } return false;
     }
 
     /**

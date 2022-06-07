@@ -6,9 +6,15 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Bag of students
+ */
 public class Bag implements Serializable {
     private Map<Color, Integer> remaining;
 
+    /**
+     * Creates a bag
+     */
     public Bag(){
         remaining = new HashMap<>();
         for(int i=0; i<5; i++){

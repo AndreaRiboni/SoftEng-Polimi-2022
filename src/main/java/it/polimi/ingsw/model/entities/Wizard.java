@@ -11,11 +11,20 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Wrapper of the assistant cards deck
+ */
 public class Wizard implements Serializable {
     private final AssistCard[] cards;
+    /**
+     * Number of assistant cards per deck
+     */
     public static final int NOF_ASSIST_CARDS = 10;
     private final List<String> assistCardNames;
 
+    /**
+     * Creates a wizard
+     */
     public Wizard(){
         cards = new AssistCard[NOF_ASSIST_CARDS];
         assistCardNames = new ArrayList<>();

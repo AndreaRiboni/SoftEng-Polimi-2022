@@ -12,9 +12,16 @@ import it.polimi.ingsw.model.utils.GenericUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller of the character cards
+ */
 public class CharacterCardController extends Controller {
     private CharacterCard card;
 
+    /**
+     * Creates the controller
+     * @param model model of reference
+     */
     public CharacterCardController(GameBoard model){
         super(model);
     }

@@ -14,10 +14,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The full 12 character cards deck
+ */
 public class CharacterDeck implements Serializable{
     private final GameBoard gameboard;
     private final CharacterCard[] cards;
 
+    /**
+     * Creates the deck
+     * @param gameboard model of reference
+     */
     public CharacterDeck(GameBoard gameboard) {
         this.gameboard = gameboard;
         cards = new CharacterCard[GameBoard.NOF_CHAR_CARDS];

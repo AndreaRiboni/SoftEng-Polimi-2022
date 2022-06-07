@@ -7,12 +7,22 @@ import it.polimi.ingsw.model.utils.GenericUtils;
 import java.io.Serializable;
 import java.util.Map;
 
+/**
+ * Player's school
+ */
 public class School implements Serializable {
     private final Entrance entrance;
     private final DiningHall dining_hall;
     private final TowerHall tower_hall;
     private final Color tower_color;
 
+    /**
+     * Creates the school
+     * @param color tower color
+     * @param three_players true if 3 players mode
+     * @param gameboard model of reference
+     * @throws EriantysException game-semantic error
+     */
     public School(Color color, boolean three_players, GameBoard gameboard) throws EriantysException {
         tower_color = color;
         entrance = new Entrance(three_players);

@@ -10,10 +10,17 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller of the game rules
+ */
 public class GameController extends Controller {
     private List<Player> HasPlayed;
     private static final Logger log = LogManager.getRootLogger();
 
+    /**
+     * Creates the controller
+     * @param model model of reference
+     */
     public GameController(GameBoard model){
         super(model);
         HasPlayed = new ArrayList<>();

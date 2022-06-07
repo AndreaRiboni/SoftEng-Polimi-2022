@@ -11,12 +11,21 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Creates the serversocket
+ */
 public class MultiServerLauncher {
+    /**
+     * Port to use
+     */
     public final static int PORT = 60125;
     //public final static int PORT = 4000;
     private final List<WaitingRoom> two_players, three_players, four_players;
     private static final Logger log = LogManager.getRootLogger();
 
+    /**
+     * Creates the launcher
+     */
     public MultiServerLauncher(){
         two_players = new ArrayList<>();
         two_players.add(new WaitingRoom(2));
@@ -28,7 +37,7 @@ public class MultiServerLauncher {
 
     /**
      * Starts the multi-server-launcher and forwards the clients to a server dispatcher
-     * @throws IOException
+     * @throws IOException error
      */
     public void startServer() throws IOException {
         ServerSocket serverSocket;

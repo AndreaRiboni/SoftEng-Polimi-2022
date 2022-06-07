@@ -1,13 +1,40 @@
 package it.polimi.ingsw.model.utils;
 
+/**
+ * Color representation
+ */
 public enum Color {
+    /**
+     * yellow
+     */
     YELLOW(0),
+    /**
+     * blue
+     */
     BLUE(1),
+    /**
+     * green
+     */
     GREEN(2),
+    /**
+     * red
+     */
     RED(3),
+    /**
+     * pink
+     */
     PINK(4),
+    /**
+     * black
+     */
     BLACK(5),
+    /**
+     * grey
+     */
     GREY(6),
+    /**
+     * white
+     */
     WHITE(7);
 
     private int val;

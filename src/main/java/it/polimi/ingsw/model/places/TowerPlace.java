@@ -3,6 +3,9 @@ package it.polimi.ingsw.model.places;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
+/**
+ * Generalizes a place onto which towers are placeable
+ */
 public interface TowerPlace {
     /**
      * adds a tower to the towerplace

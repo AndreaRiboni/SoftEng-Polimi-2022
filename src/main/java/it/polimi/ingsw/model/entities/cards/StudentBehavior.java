@@ -5,8 +5,21 @@ import it.polimi.ingsw.model.utils.Color;
 
 import java.io.Serializable;
 
+/**
+ * Student-like behavior of a character card
+ */
 public class StudentBehavior extends CardBehavior implements Serializable {
 
+    /**
+     * Creates the student behavior
+     * @param gameboard model of reference
+     * @param id card's id
+     * @param nof_student number of students on the card
+     * @param available_students number of students available to retrieve
+     * @param exchange_students number of students available to exchange
+     * @param drop_student number of students available to drop
+     * @param behavior_name name
+     */
     public StudentBehavior(GameBoard gameboard, int id, int nof_student, int available_students, int exchange_students, int drop_student, Behaviors behavior_name) {
         super(gameboard, id, exchange_students, drop_student, nof_student, available_students, 0, 0, false, false, false, behavior_name, 0);
     }

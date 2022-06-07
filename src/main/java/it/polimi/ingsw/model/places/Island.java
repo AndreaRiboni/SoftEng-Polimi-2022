@@ -8,6 +8,9 @@ import it.polimi.ingsw.model.utils.StringViewUtility;
 
 import java.io.Serializable;
 
+/**
+ * An island
+ */
 public class Island extends StudentPlace implements TowerPlace, Serializable {
     private boolean locked;
     private Island next; //da usare quando si ha un gruppo di isole. Se l'isola è singola, viene settato a null
@@ -15,8 +18,13 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
     private final int index;
     private final GameBoard gameboard;
     private Color influent;
-    public boolean has_mothernature;
+    private boolean has_mothernature;
 
+    /**
+     * Creates an island
+     * @param gameboard model of reference
+     * @param index island index
+     */
     public Island(GameBoard gameboard, int index){
         super(Integer.MAX_VALUE);
         locked = false;
@@ -297,8 +305,8 @@ public class Island extends StudentPlace implements TowerPlace, Serializable {
     public int getIndex(){ return index; }
 
     /**
-     * @param island
-     * @warning only for testing
+     * @param island island to set next (no controls)
+     * @deprecated only for testing
      */
     public void setNext(Island island){
         next = island;

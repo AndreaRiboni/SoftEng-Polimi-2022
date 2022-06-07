@@ -9,12 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Input's utility functions
+ */
 public class InputUtils {
     private static BufferedReader kb_input;
     private static boolean initialized = false;
 
-    public static final int[] EVERY_ISLAND = {1,2,3,4,5,6,7,8,9,10,11, 12}, EVERY_CLOUD = {1, 2, 3};
-    public static final Color[] EVERY_STUD_COLOR = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PINK}, EVERY_TOWER_COLOR = {Color.BLACK, Color.WHITE, Color.GREY};
+    /**
+     * Every island index
+     */
+    public static final int[] EVERY_ISLAND = {1,2,3,4,5,6,7,8,9,10,11, 12};
+    /**
+     * Every students color
+     */
+    public static final Color[] EVERY_STUD_COLOR = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PINK};
 
     private static void init(){
         kb_input = new BufferedReader(new InputStreamReader(System.in));
@@ -146,7 +155,7 @@ public class InputUtils {
      * Returns the available students' colors in the school entrance
      * @param gameboard model of reference
      * @param user player's username
-     * @param chosen
+     * @param chosen chosen
      * @return Color array
      */
     public static Color[] getAvailableEntranceColors(GameBoard gameboard, String user, Map<Color, Integer> chosen){

@@ -15,6 +15,9 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
 
+/**
+ * Used to send messages through the network
+ */
 public class MessageSender {
     private Socket socket;
     private ObjectOutputStream output;
@@ -23,6 +26,10 @@ public class MessageSender {
     private String ip;
     private boolean disabled;
 
+    /**
+     * Creates the message sender
+     * @param ip_address ip to connect to
+     */
     public MessageSender(String ip_address){
         disabled = false;
         try {
@@ -45,6 +52,12 @@ public class MessageSender {
         }
     }
 
+    /**
+     * Creates the message sender
+     * @param socket client's socket
+     * @param in client's inputstream
+     * @param out client's outputstream
+     */
     public MessageSender(Socket socket, ObjectInputStream in, ObjectOutputStream out){
         this.socket = socket;
         output = out;
@@ -118,14 +131,23 @@ public class MessageSender {
         }
     }
 
+    /**
+     * @return socket
+     */
     public Socket getSocket(){
         return socket;
     }
 
+    /**
+     * @return input stream
+     */
     public ObjectInputStream getInput(){
         return input;
     }
 
+    /**
+     * @return ip address
+     */
     public String getIP(){
         return ip;
     }

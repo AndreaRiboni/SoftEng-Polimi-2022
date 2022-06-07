@@ -8,12 +8,23 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * School's tower hall
+ */
 public class TowerHall implements TowerPlace, Serializable {
     private int towers;
     private final Color color;
     private static final int MAX_TOWERS_2_4 = 8, MAX_TOWERS_3 = 6;
+    /**
+     * Maximum number of towers
+     */
     public final int MAX_TOWERS;
 
+    /**
+     * Creates the tower hall
+     * @param color towers color
+     * @param three_players true if 3 players mode
+     */
     public TowerHall(Color color, boolean three_players){
         this.color = color;
         MAX_TOWERS = three_players ? MAX_TOWERS_3 : MAX_TOWERS_2_4;

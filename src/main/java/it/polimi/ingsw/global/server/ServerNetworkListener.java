@@ -15,6 +15,9 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Listens to the network server side
+ */
 public class ServerNetworkListener extends Thread {
     private ObjectInputStream[] in;
     private GameHandler game_handler;
@@ -22,6 +25,12 @@ public class ServerNetworkListener extends Thread {
     private static final Logger log = LogManager.getRootLogger();
     private long timer;
 
+    /**
+     * Creates the listener
+     * @param clients participating clients
+     * @param in clients' inputstreams
+     * @param gh clients' outputstreams
+     */
     public ServerNetworkListener(Socket[] clients, ObjectInputStream[] in, GameHandler gh){
         this.in = in;
         this.clients = clients;

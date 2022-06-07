@@ -15,6 +15,9 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Listens to the network client side
+ */
 public class NetworkListener extends Thread{
     private Socket socket;
     private ObjectInputStream in;
@@ -25,6 +28,12 @@ public class NetworkListener extends Thread{
     private List<GameBoardContainer> client_logic;
     private boolean isForGUI;
 
+    /**
+     * Creates the network listener
+     * @param socket client's socket
+     * @param in client's inputstream
+     * @param client_logic client controller
+     */
     public NetworkListener(Socket socket, ObjectInputStream in, GameBoardContainer client_logic){
         this.socket = socket;
         this.in = in;

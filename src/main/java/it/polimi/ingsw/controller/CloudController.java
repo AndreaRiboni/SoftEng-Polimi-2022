@@ -5,9 +5,16 @@ import it.polimi.ingsw.model.places.GameBoard;
 import it.polimi.ingsw.model.utils.Color;
 import it.polimi.ingsw.model.utils.EriantysException;
 
+/**
+ * Controller of the clouds
+ */
 public class CloudController extends Controller{
     private int cloud_index;
 
+    /**
+     * Creates the controller
+     * @param model model of reference
+     */
     public CloudController(GameBoard model){
         super(model);
         cloud_index = -1;
@@ -27,6 +34,10 @@ public class CloudController extends Controller{
         }
     }
 
+    /**
+     * Retrieve the students from a cloud
+     * @throws EriantysException game-semantic error
+     */
     public void drainCloud() throws EriantysException {
         //get every student from a cloud and take them to your entrance
         int cloud_index = action.getCloudIndex();

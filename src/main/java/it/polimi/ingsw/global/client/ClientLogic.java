@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Logical controller of the client
+ */
 public class ClientLogic implements GameBoardContainer {
     private final MessageSender msg;
     private final NetworkListener listener;
@@ -24,6 +27,9 @@ public class ClientLogic implements GameBoardContainer {
     private GameBoard model;
     private String username;
 
+    /**
+     * Creates the client logic
+     */
     public ClientLogic(){
         String ip_address = InputUtils.getString(StringViewUtility.getViewString("ask_for_ip"));
         boolean is_ip = InputUtils.isIP(ip_address);

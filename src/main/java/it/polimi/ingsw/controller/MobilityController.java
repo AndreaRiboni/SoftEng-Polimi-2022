@@ -12,9 +12,16 @@ import org.apache.log4j.Logger;
 import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * Game mobility (students, mother nature) controller
+ */
 public class MobilityController extends Controller {
     private static final Logger log = LogManager.getRootLogger();
 
+    /**
+     * Creates the controller
+     * @param model model of reference
+     */
     public MobilityController(GameBoard model){
         super(model);
     }

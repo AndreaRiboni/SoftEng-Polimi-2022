@@ -8,9 +8,16 @@ import org.apache.log4j.PropertyConfigurator;
 
 import java.net.SocketException;
 
+/**
+ * Launches the client
+ */
 public class ClientLauncher {
     private static final Logger log = LogManager.getRootLogger();
 
+    /**
+     * main
+     * @param args none
+     */
     public static void main(String[] args) {
         PropertyConfigurator.configure(ClientLauncher.class.getResource("/configs/log4j.properties"));
         ClientLogic client = new ClientLogic();

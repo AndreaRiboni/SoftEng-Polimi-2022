@@ -15,6 +15,9 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * A waiting room for the clients. When full, the match will start
+ */
 public class WaitingRoom {
     private Socket[] clients;
     private String[] usernames;
@@ -73,6 +76,9 @@ public class WaitingRoom {
         return usernames.length;
     }
 
+    /**
+     * Shut the game down
+     */
     public void shutdown(){
         executor.shutdown();
     }

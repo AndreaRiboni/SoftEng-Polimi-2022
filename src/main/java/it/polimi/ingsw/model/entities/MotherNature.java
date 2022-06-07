@@ -8,12 +8,21 @@ import it.polimi.ingsw.model.utils.EriantysException;
 
 import java.io.Serializable;
 
+/**
+ * Mother nature
+ */
 public class MotherNature implements Serializable {
     private int island_index;
     private final GameBoard gameboard;
     private boolean avoid_towers;
     private Color avoid_color;
 
+    /**
+     * Creates mother nature
+     * @param gameboard model of reference
+     * @param island_index starting island index
+     * @throws EriantysException game-semantic error
+     */
     public MotherNature(GameBoard gameboard, int island_index) throws EriantysException {
         this.island_index = island_index;
         this.gameboard = gameboard;
@@ -102,7 +111,7 @@ public class MotherNature implements Serializable {
 
     /**
      * @param index index of the islands to set on
-     * @warning only for test
+     * @deprecated only for test
      */
     public void setIslandIndex(int index){
         island_index = index;

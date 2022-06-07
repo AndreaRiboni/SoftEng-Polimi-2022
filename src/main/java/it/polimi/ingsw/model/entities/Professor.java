@@ -4,11 +4,18 @@ import it.polimi.ingsw.model.utils.Color;
 
 import java.io.Serializable;
 
+/**
+ * Professor
+ */
 public class Professor implements Serializable {
     private final Color color;
     private Player player;
     private Player temp_player;
 
+    /**
+     * Creates a professor
+     * @param color prof's color
+     */
     public Professor(Color color){
         this.color = color;
         player = null;
@@ -24,7 +31,7 @@ public class Professor implements Serializable {
 
     /**
      * sets the player who owns this prof
-     * @param player
+     * @param player player
      */
     public void setPlayer(Player player){
         this.player = player;

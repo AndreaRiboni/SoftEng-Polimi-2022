@@ -1,18 +1,58 @@
 package it.polimi.ingsw.model.utils;
 
+/**
+ * A game phase
+ */
 public enum GamePhase {
+    /**
+     * Start of the game
+     */
     START,
+    /**
+     * Puts students on the clouds
+     */
     PUT_ON_CLOUDS,
+    /**
+     * Draws 1 assistant card
+     */
     DRAW_ASSIST_CARD,
+    /**
+     * Moves some students
+     */
     MOVE_3_STUDENTS,
+    /**
+     * Moves mother nature
+     */
     MOVE_MOTHERNATURE,
+    /**
+     * Retrieve students from a cloud
+     */
     DRAIN_CLOUD,
+    /**
+     * Uses a character card
+     */
     USE_CHARACTER_CARD,
+    /**
+     * Error
+     */
     ERROR_PHASE,
+    /**
+     * Correct
+     */
     CORRECT,
+    /**
+     * Game is ended
+     */
     END_GAME,
+    /**
+     * Connection error
+     */
     CONNECTION_ERROR;
 
+    /**
+     * @param gp gamephase
+     * @return string representation
+     */
     public static String gamePhaseToString(GamePhase gp){
         switch(gp){
             case START:

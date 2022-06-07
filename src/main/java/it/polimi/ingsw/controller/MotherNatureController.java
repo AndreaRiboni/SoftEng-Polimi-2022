@@ -5,9 +5,16 @@ import it.polimi.ingsw.model.utils.EriantysException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+/**
+ * Controller of mother nature
+ */
 public class MotherNatureController extends Controller {
     private static final Logger log = LogManager.getRootLogger();
 
+    /**
+     * Creates the controller
+     * @param model model of reference
+     */
     public MotherNatureController(GameBoard model){
         super(model);
     }

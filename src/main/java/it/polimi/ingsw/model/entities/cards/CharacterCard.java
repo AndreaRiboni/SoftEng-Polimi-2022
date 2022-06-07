@@ -7,6 +7,9 @@ import javafx.scene.control.Tooltip;
 
 import java.io.Serializable;
 
+/**
+ * A character card
+ */
 public class CharacterCard implements Serializable {
     private boolean onBoard;
     private int price;
@@ -16,6 +19,15 @@ public class CharacterCard implements Serializable {
     private final GameBoard gameboard;
     private final String effect;
 
+    /**
+     * Creates a character card
+     * @param gameboard model of reference
+     * @param price initial price
+     * @param behavior card's behavior
+     * @param id card's id
+     * @param name card's name
+     * @param effect card's description
+     */
     public CharacterCard(GameBoard gameboard, int price, CardBehavior behavior, int id, String name, String effect){
         this.gameboard = gameboard;
         onBoard = false;
@@ -91,7 +103,7 @@ public class CharacterCard implements Serializable {
 
     /**
      * Prints what the CharacterCard can do
-     * @return
+     * @return literal string
      */
     public String toString(){
         StringBuilder sb = new StringBuilder();

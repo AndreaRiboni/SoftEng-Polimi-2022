@@ -11,6 +11,9 @@ import it.polimi.ingsw.model.utils.GenericUtils;
 import java.io.Serializable;
 import java.util.Map;
 
+/**
+ * Player simulating class
+ */
 public class Player implements Serializable {
     private int turn_value, coins;
     private final Color color;
@@ -24,6 +27,14 @@ public class Player implements Serializable {
     private final int nof_total_towers;
     private int mothernature_extrasteps, mothernature_extrapoints;
 
+    /**
+     * Creates a player
+     * @param gameboard model of reference
+     * @param ID player id
+     * @param color player's tower color
+     * @param three_players true if 3 players mode
+     * @throws EriantysException game-semantic error
+     */
     public Player(GameBoard gameboard, int ID, Color color, boolean three_players) throws EriantysException {
         turn_value = 0;
         coins = 1;

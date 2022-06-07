@@ -5,9 +5,18 @@ import it.polimi.ingsw.model.utils.EriantysException;
 
 import java.io.Serializable;
 
+/**
+ * Dining hall area
+ */
 public class DiningHall extends StudentPlace implements Serializable {
+    /**
+     * How many students for each color maximum
+     */
     public static final int STUDENTS_PER_COLOR = 10;
 
+    /**
+     * Creates the dining hall
+     */
     public DiningHall(){
         super(0);
     }
