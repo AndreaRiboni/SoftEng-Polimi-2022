@@ -1,0 +1,9 @@
+it.polimi.ingsw.controller
+it.polimi.ingsw.global
+it.polimi.ingsw.global.client
+it.polimi.ingsw.global.server
+it.polimi.ingsw.model.entities
+it.polimi.ingsw.model.entities.cards
+it.polimi.ingsw.model.places
+it.polimi.ingsw.model.utils
+it.polimi.ingsw.model.utils.packets
