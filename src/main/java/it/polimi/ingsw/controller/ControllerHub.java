@@ -59,8 +59,8 @@ public class ControllerHub {
                 case START:
                     nof_players = action.getNOfPlayers();
                     g_controller.initializeGame(); //action
-                    for(Player p : model.getPlayers())
-                        p.addCoins(100);
+                    /*for(Player p : model.getPlayers())
+                        p.addCoins(100);*/
                     flow.setLastGamePhase(GamePhase.START); //last gamephase is START -> I can go on PUT_ON_CLOUDS only
                     follow_neutral_order = true;
                     keep_going = false;
