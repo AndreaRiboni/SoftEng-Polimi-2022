@@ -161,4 +161,11 @@ public class Action implements Serializable {
         return (String)param.get(GameParameter.USERNAME);
     }
 
+    public String getDescription() {
+        return (String)param.get(GameParameter.DESCRIPTION);
+    }
+
+    public void setDescription(String description){
+        param.put(GameParameter.DESCRIPTION, description);
+    }
 }

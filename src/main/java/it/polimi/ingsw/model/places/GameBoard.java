@@ -5,10 +5,7 @@ import it.polimi.ingsw.model.entities.Player;
 import it.polimi.ingsw.model.entities.Professor;
 import it.polimi.ingsw.model.entities.cards.CharacterCard;
 import it.polimi.ingsw.model.entities.cards.CharacterDeck;
-import it.polimi.ingsw.model.utils.Color;
-import it.polimi.ingsw.model.utils.EriantysException;
-import it.polimi.ingsw.model.utils.GenericUtils;
-import it.polimi.ingsw.model.utils.Printer;
+import it.polimi.ingsw.model.utils.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,6 +28,7 @@ public class GameBoard implements Serializable {
     public static final int NOF_PROFS = 5;
     private boolean game_ended;
     private String winner;
+    private Action last_performed;
 
     public GameBoard() {
         islands = new Island[NOF_ISLAND];
@@ -385,28 +383,10 @@ public class GameBoard implements Serializable {
 
     public String toString(){
         StringBuilder rep = new StringBuilder();
-        /*for(Player p : players){
-            rep.append(p.toString()).append("\n");
-            rep.append(quarter_line);
-        }
-        */
+        rep.append("Last performed action: " + last_performed.getDescription()).append("\n");
         rep.append(Printer.playersToString(players)).append("\n");
-        /*for(Professor p : professors){
-            rep.append(p.toString()).append("\n");
-        }
-         */
         rep.append(Printer.professorsToString(professors)).append("\n");
         rep.append(Printer.islandsToString(islands)).append("\n");
-
-        /*for(Island i : islands){
-            rep.append(i.toString()).append("\n");
-        }*/
-        /*
-        for(int i = 0; i < clouds.length; i++){
-            rep.append(GenericUtils.toBold("Cloud #" + (i+1))).append("\n")
-                .append(clouds[i].toString());
-        }
-        */
         rep.append(Printer.cloudsToString(clouds));
         rep.append(GenericUtils.toBold("Characters")).append(":\n");
         try {
@@ -504,5 +484,9 @@ public class GameBoard implements Serializable {
             if(island.hasNext()) links++;
         }
         return 12 - links;
+    }
+
+    public void setLastPerfomedAction(Action act){
+        last_performed = act;
     }
 }

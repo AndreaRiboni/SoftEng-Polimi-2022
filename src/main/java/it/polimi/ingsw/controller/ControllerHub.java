@@ -54,6 +54,7 @@ public class ControllerHub {
             log.info("Received an update - Analyzing " + action.getGamePhase());
             flow.assertPhase(action.getGamePhase()); //check that the action's game-phase is coherent with the game-flow
             g_controller.setAction(action);
+            Action description = new Action();
             switch (action.getGamePhase()) {
                 case START:
                     nof_players = action.getNOfPlayers();
@@ -63,6 +64,7 @@ public class ControllerHub {
                     flow.setLastGamePhase(GamePhase.START); //last gamephase is START -> I can go on PUT_ON_CLOUDS only
                     follow_neutral_order = true;
                     keep_going = false;
+                    description.setDescription("game started");
                     break;
                 case PUT_ON_CLOUDS: //new turn
                     c_controller.setAction(action);
@@ -71,6 +73,7 @@ public class ControllerHub {
                     flow.setLastGamePhase(GamePhase.PUT_ON_CLOUDS);
                     g_controller.resetOrder();
                     ac_controller.resetPlayed();
+                    description.setDescription("students put on clouds");
                     break;
                 case DRAW_ASSIST_CARD:
                     g_controller.verifyNeutralOrder(); //are we following the right order?
@@ -92,6 +95,7 @@ public class ControllerHub {
                         follow_neutral_order = true;
                         flow.avoidConditionEdge(GamePhase.MOVE_3_STUDENTS, GamePhase.USE_CHARACTER_CARD); //we can not receive neither MOVE_3_STUDENTS nor USE_CHARACTER_CARD
                     }
+                    description.setDescription("played assistant card (" + (action.getAssistCardIndex()+1) + ")");
                     break;
                 case MOVE_3_STUDENTS:
                     //we are in the correct order if no one has entered usecharcard yet AND we have the lowest turn_valeu OR
@@ -111,6 +115,9 @@ public class ControllerHub {
                     flow.setLastGamePhase(GamePhase.MOVE_3_STUDENTS);
                     g_controller.updatePlayer(action.getPlayerID());
                     keep_going = true;
+                    description.setDescription(
+                            "moved students"
+                    );
                     break;
                 case MOVE_MOTHERNATURE:
                     g_controller.verifyIdentity();
@@ -121,6 +128,7 @@ public class ControllerHub {
                     if(flow.getSubCount("used usecharcard") > 0){
                         flow.avoidConditionEdge(GamePhase.USE_CHARACTER_CARD);
                     } else flow.doNotAvoidConditionEdge();
+                    description.setDescription("moved mother nature");
                     break;
                 case DRAIN_CLOUD:
                     g_controller.verifyIdentity();
@@ -137,6 +145,7 @@ public class ControllerHub {
                     follow_neutral_order = false;
                     g_controller.resetAdditionalEffects();
                     flow.deleteSubCount("used usecharcard");
+                    description.setDescription("retrieved students from a cloud");
                     break;
                 case USE_CHARACTER_CARD: //problema se uso CC e la sbaglio e poi faccio move3
                     //we are in the correct order if no one has entered move3students yet AND we have the lowest turn_value OR
@@ -178,8 +187,10 @@ public class ControllerHub {
                     flow.addSubCountIfNotPresent("used usecharcard");
                     flow.incrementSubCount("used usecharcard");
                     keep_going = true; //turn start -> move3 / turn end -> drain cloud
+                    description.setDescription("used a character card");
                     break;
             }
+            model.setLastPerfomedAction(description);
         } catch (EriantysException erex){
             erex.printStackTrace();
             log.error(erex.getMessage());

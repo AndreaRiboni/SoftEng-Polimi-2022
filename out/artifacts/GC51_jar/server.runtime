@@ -143,3 +143,25 @@
 2022-06-05 17:54:28 INFO  root:205 - player 0 has to play. Sending the actions
 2022-06-05 17:54:28 INFO  root:173 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
 2022-06-05 17:54:28 INFO  root:208 - The available gamephases have been sent to the client (player 0)
+2022-06-07 13:45:48 INFO  root:29 - Created a waiting room of 2 players
+2022-06-07 13:45:48 INFO  root:29 - Created a waiting room of 3 players
+2022-06-07 13:45:48 INFO  root:29 - Created a waiting room of 4 players
+2022-06-07 13:45:48 INFO  root:41 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.187.162, PORT: 60125
+2022-06-07 13:47:02 INFO  root:45 - New client has connected: [/127.0.0.1:57787]
+2022-06-07 13:47:02 INFO  root:49 - ServerDispatcher ready
+2022-06-07 13:47:08 INFO  root:56 - A client has sent a message - [/127.0.0.1:57787] [num_of_players: 2, username: Andrea]
+2022-06-07 13:47:08 INFO  root:59 - Connecting to one of the 2 players waiting room
+2022-06-07 13:47:08 INFO  root:32 - Connecting to waiting room 0
+2022-06-07 13:47:08 INFO  root:52 - Connected: 1, Capacity: 2
+2022-06-07 13:47:08 INFO  root:53 - [/127.0.0.1:57787] has joined a match [1/2]
+2022-06-07 13:53:53 INFO  root:45 - New client has connected: [/127.0.0.1:57817]
+2022-06-07 14:05:08 INFO  root:49 - ServerDispatcher ready
+2022-06-07 14:05:30 ERROR root:43 - Unable to initialize socket
+2022-06-07 14:08:19 ERROR root:43 - Unable to initialize socket
+2022-06-07 14:10:17 ERROR root:43 - Unable to initialize socket
+2022-06-07 14:33:03 INFO  root:29 - Created a waiting room of 2 players
+2022-06-07 14:33:03 INFO  root:29 - Created a waiting room of 3 players
+2022-06-07 14:33:03 INFO  root:29 - Created a waiting room of 4 players
+2022-06-07 14:33:03 INFO  root:41 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.187.162, PORT: 60125
+2022-06-07 14:33:15 INFO  root:45 - New client has connected: [/192.168.187.248:50370]
+2022-06-07 14:33:15 INFO  root:49 - ServerDispatcher ready
