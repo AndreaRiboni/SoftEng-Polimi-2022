@@ -80,14 +80,11 @@ public class NetworkListener extends Thread{
      * @param gamephases available gamephases
      */
     public synchronized void setGamephasesResponse(List<GamePhase> gamephases){
-        if(isForGUI){
-            for(GameBoardContainer gbc : client_logic)
-                if(gbc != null)
-                    gbc.notifyResponse(gamephases);
-        } else {
-            gamephases_response = gamephases;
-            response_ready = true;
-        }
+        for(GameBoardContainer gbc : client_logic)
+            if(gbc != null)
+                gbc.notifyResponse(gamephases);
+        gamephases_response = gamephases;
+        response_ready = true;
     }
 
     /**
@@ -95,14 +92,11 @@ public class NetworkListener extends Thread{
      * @param detailed_response received response
      */
     public synchronized void setResponse(Action detailed_response){
-        if(isForGUI){
-            for(GameBoardContainer gbc : client_logic)
-                if(gbc != null)
-                    gbc.notifyResponse(detailed_response);
-        } else {
-            act_response = detailed_response;
-            response_ready = true;
-        }
+        for(GameBoardContainer gbc : client_logic)
+            if(gbc != null)
+                gbc.notifyResponse(detailed_response);
+        act_response = detailed_response;
+        response_ready = true;
     }
 
     /**

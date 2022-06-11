@@ -44,18 +44,26 @@ public class ClientLogic implements GameBoardContainer {
         listener.start();
     }
 
-    private List<GamePhase> waitForAvailableGamephases() {
+    private synchronized List<GamePhase> waitForAvailableGamephases() {
         List<GamePhase> gamephase = null;
         while((gamephase = listener.getPhasesIfReady()) == null){
-            //do nothing
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         return gamephase;
     }
 
-    private Action waitForResponse(){
+    private synchronized Action waitForResponse(){
         Action response = null;
         while((response = listener.getResponseIfReady()) == null){
-            //do nothing
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         return response;
     }
@@ -71,13 +79,13 @@ public class ClientLogic implements GameBoardContainer {
     }
 
     @Override
-    public void notifyResponse(Action action) {
-        return; //used for gui
+    public synchronized void notifyResponse(Action action) {
+        notifyAll();
     }
 
     @Override
-    public void notifyResponse(List<GamePhase> gamephases) {
-        return; //used for gui
+    public synchronized void notifyResponse(List<GamePhase> gamephases) {
+        notifyAll();
     }
 
     private synchronized GameBoard getGameBoard(){
@@ -117,7 +125,6 @@ public class ClientLogic implements GameBoardContainer {
 
     private String getFeedback(Action action) throws SocketException {
         msg.send(action);
-        System.out.println(StringViewUtility.getViewString("waiting_response"));
         Action response = waitForResponse();
         if(response.getGamePhase().equals(GamePhase.CORRECT)) return "true";
         return response.getErrorMessage();
