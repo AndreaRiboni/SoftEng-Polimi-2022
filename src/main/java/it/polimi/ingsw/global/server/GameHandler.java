@@ -150,14 +150,18 @@ public class GameHandler implements Runnable {
     private synchronized void setReceivedResponse(){
         log.info("Response received");
         received_response = true;
+        notifyAll();
     }
 
-    private synchronized boolean needResponse(){
-        if(received_response){
-            received_response = false;
-            return false;
+    private synchronized void needResponse(){
+        while(!received_response){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        return true;
+        received_response = false;
     }
 
     private Action readAction(int client_index) throws SocketException {
@@ -220,8 +224,7 @@ public class GameHandler implements Runnable {
                 //Action client_action = readAction(player_playing);
                 //client_action.setPlayerID(player_playing);
                 //process the action
-                while(needResponse()){}
-                log.info("Response received. Ending loop");
+                needResponse();
             } while (!isGameEnded());
         } catch (SocketException se){
             se.printStackTrace();
