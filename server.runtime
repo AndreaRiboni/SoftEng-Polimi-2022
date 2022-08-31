@@ -775,3 +775,39 @@
 2022-06-12 00:18:04 INFO  root:219 - player 0 has to play. Sending the actions
 2022-06-12 00:18:04 INFO  root:179 - Calculated next available gamephases (now: MOVE_3_STUDENTS) (next: [MOVE_MOTHERNATURE, USE_CHARACTER_CARD])
 2022-06-12 00:18:04 INFO  root:222 - The available gamephases have been sent to the client (player 0)
+2022-08-31 18:06:51 INFO  root:32 - Created a waiting room of 2 players
+2022-08-31 18:06:51 INFO  root:32 - Created a waiting room of 3 players
+2022-08-31 18:06:51 INFO  root:32 - Created a waiting room of 4 players
+2022-08-31 18:06:51 INFO  root:50 - MultiServerLauncher ready on IP: DESKTOP-S1BLNT4/192.168.1.89, PORT: 60125
+2022-08-31 18:07:04 INFO  root:54 - New client has connected: [/127.0.0.1:55521]
+2022-08-31 18:07:04 INFO  root:59 - ServerDispatcher ready
+2022-08-31 18:07:05 INFO  root:66 - A client has sent a message - [/127.0.0.1:55521] [num_of_players: 2, username: andrea]
+2022-08-31 18:07:05 INFO  root:69 - Connecting to one of the 2 players waiting room
+2022-08-31 18:07:05 INFO  root:42 - Connecting to waiting room 0
+2022-08-31 18:07:05 INFO  root:55 - Connected: 1, Capacity: 2
+2022-08-31 18:07:05 INFO  root:56 - [/127.0.0.1:55521] has joined a match [1/2]
+2022-08-31 18:07:13 INFO  root:54 - New client has connected: [/127.0.0.1:55529]
+2022-08-31 18:07:13 INFO  root:59 - ServerDispatcher ready
+2022-08-31 18:07:14 INFO  root:66 - A client has sent a message - [/127.0.0.1:55529] [num_of_players: 2, username: paolo]
+2022-08-31 18:07:14 INFO  root:69 - Connecting to one of the 2 players waiting room
+2022-08-31 18:07:14 INFO  root:42 - Connecting to waiting room 0
+2022-08-31 18:07:14 INFO  root:55 - Connected: 2, Capacity: 2
+2022-08-31 18:07:14 INFO  root:56 - [/127.0.0.1:55529] has joined a match [2/2]
+2022-08-31 18:07:14 INFO  root:58 - starting a match...
+2022-08-31 18:07:14 INFO  root:57 - Received an update - Analyzing START
+2022-08-31 18:07:14 INFO  root:179 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-08-31 18:07:14 INFO  root:55 - GamePhase START has been processed correctly
+2022-08-31 18:07:14 INFO  root:202 - Returning correct
+2022-08-31 18:07:14 INFO  root:57 - Received an update - Analyzing PUT_ON_CLOUDS
+2022-08-31 18:07:14 INFO  root:179 - Calculated next available gamephases (now: START) (next: [START, PUT_ON_CLOUDS])
+2022-08-31 18:07:14 INFO  root:55 - GamePhase PUT_ON_CLOUDS has been processed correctly
+2022-08-31 18:07:14 INFO  root:202 - Returning correct
+2022-08-31 18:07:14 INFO  root:32 - Created a waiting room of 2 players
+2022-08-31 18:07:14 INFO  root:46 - Added a new waiting room
+2022-08-31 18:07:14 INFO  root:186 - We're in the setup
+2022-08-31 18:07:14 INFO  root:50 - ServerNetworkListener has started
+2022-08-31 18:07:14 INFO  root:208 - New match has started [2 players]
+2022-08-31 18:07:14 INFO  root:230 - Getting next (automatic) [keep going: false, follow neutral: true
+2022-08-31 18:07:14 INFO  root:219 - player 0 has to play. Sending the actions
+2022-08-31 18:07:14 INFO  root:179 - Calculated next available gamephases (now: PUT_ON_CLOUDS) (next: [DRAW_ASSIST_CARD])
+2022-08-31 18:07:14 INFO  root:222 - The available gamephases have been sent to the client (player 0)
