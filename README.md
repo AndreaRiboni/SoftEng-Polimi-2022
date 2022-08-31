@@ -1,5 +1,5 @@
 # Prova finale di Ingegneria del software
-Created by Poidomani Davide, Riboni Andrea and Volpentesta Edoardo
+Created by Poidomani Davide (@DavidePoidomani), Riboni Andrea (@AndreaRiboni) and Volpentesta Edoardo (@EdoardoVolpentesta)
 
 ## Eriantys
 <img src="https://craniointernational.com/2021/wp-content/uploads/2021/06/ERIANTYS-BOX-3D.png" width="150">
