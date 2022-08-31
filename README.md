@@ -40,3 +40,6 @@ Follow [this instructions](https://github.com/AndreaRiboniPolimi/ing-sw-2022-poi
 
 ## How to play
 Follow [this documentation](https://github.com/AndreaRiboniPolimi/ing-sw-2022-poidomani-riboni-volpentesta/blob/main/deliverables/How_to_play__GC51_Eriantys.pdf)
+
+### Side note
+Images under copyright restrictions have been replaced with temporary placeholders
