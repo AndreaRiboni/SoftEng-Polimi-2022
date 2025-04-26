@@ -1,4 +1,7 @@
-# Prova finale di Ingegneria del software
+# Software Engineering Project (Polimi)
+
+This project was created before chatgpt!
+
 Created by Poidomani Davide (@DavidePoidomani), Riboni Andrea (@AndreaRiboni) and Volpentesta Edoardo (@EdoardoVolpentesta)
 
 ## Eriantys
